@@ -87,8 +87,8 @@ class BarangController extends Controller
                 // return DataTables::of($barangs)->make(true);
 
                 // GET DATA BARANG GUDANG BY LOGIN COUNTER/TOKO
-                $query = "SELECT b.barang_gudang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, 
-                (SELECT (SUM(stok_masuk) - SUM(stok_keluar)) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) as quantity
+                $query = "SELECT a.barang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, b.stok_masuk as quantity
+                -- (SELECT (SUM(stok_masuk) - SUM(stok_keluar)) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) as quantity
                 FROM barangs as a
                 JOIN barang_gudangs as b on a.barang_id = b.barang_id
                 GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\PenjualanBarang;
 use Illuminate\Http\Request;
-use App\Models\Admin\Penjualan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -193,5 +193,45 @@ class PenjualanController extends Controller
             ->get();
 
         return DataTables::of($detail_penjualans)->make(true);
+    }
+
+    public function penjualan(Request $request)
+    {
+        $user = $this->userAuth();
+        if ($request->ajax()) {
+            $query = "SELECT invoice_number, nama_pembeli, status,created_at FROM `penjualan_barangs` GROUP BY invoice_number,nama_pembeli,status,created_at";
+            $data = DB::select($query);
+
+            return DataTables::of($data)
+                ->addColumn('action', function ($object) {
+                    $html = '<a href="penjualan/invoice/' . $object->invoice_number . '" class="btn btn-primary waves-effect waves-light btn-add"><i class="bx bx-detail align-middle font-size-18"></i> Cetak Invoice</a>';
+                    return $html;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        // else if ($request->get('invoice')) {
+        //     $invoice = $request->get('invoice');
+        //     $query = "SELECT * FROM `penjualan_barangs` WHERE invoice_number = '$invoice'";
+        //     $data = DB::select($query);
+
+        //     return DataTables::of($data)
+        //         ->addColumn('action', function ($row) {
+        //             $html = '<a href="#" class="btn btn-primary waves-effect waves-light btn-add"><i class="bx bx-detail align-middle font-size-18"></i> awikwok</a>';
+        //             return $html;
+        //         })
+        //         ->rawColumns(['action'])
+        //         ->make(true);
+        // }
+        return view('pages.kasir.penjualan', compact('user'));
+    }
+    public function invoice(Request $request, PenjualanBarang $penjualan)
+    {
+        $data = $penjualan->where('invoice_number', $penjualan->invoice_number)->get();
+        // dump($data);
+        return view('pages.kasir.invoice', compact('data'));
+        // $invoice = $request->get('invoice');
+        // $query = "SELECT * FROM `penjualan_barangs` WHERE invoice_number = '$invoice'";
+        // dump($query);
     }
 }

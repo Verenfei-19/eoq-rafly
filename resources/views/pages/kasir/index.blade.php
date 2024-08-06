@@ -231,7 +231,7 @@
             $('.alert').hide();
         });
 
-        // SIMPAN TRANSAKSI
+        // SIMPAN DITERIMA
         $('#save-transaction').on('click', function() {
             if (keranjang.length > 0) {
                 $.ajax({
@@ -302,13 +302,95 @@
                         $('#telepon_pembeli').val(''),
                         $('#alamat_pembeli').val('')
                         console.log(response);
-                        console.log(JSON.parse(response.keranjang));
+                        // console.log(JSON.parse(response.keranjang));
                         
                     }
                 });
             }
 
         });
+
+        // SIMPAN DIKIRIM
+        $('#simpandikirim').on('click', () => {
+            console.log('ok');
+            if (keranjang.length > 0) {
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('kasir.store') }}",
+                    data: {
+                        '_token': "{{ csrf_token() }}",
+                        'keranjang': JSON.stringify(keranjang),
+                        'grand_total': grandTotal,
+                        'nama_pembeli': $('#nama_pembeli').val(),
+                        'telepon_pembeli': $('#telepon_pembeli').val(),
+                        'alamat_pembeli': $('#alamat_pembeli').val(),
+                        'tanggal_pengiriman': $('#tanggal_pengiriman').val(),
+                    },
+                    success: function(response) {
+                        no = 1;
+                        keranjang = [];
+                        $('.alert-success').show();
+                        viewKeranjangDataTable(keranjang);
+                        grandTotal = 0;
+                        $('#grandTotal').text("Rp 0,00");
+                        mainTable.clear();
+                        mainTable.destroy();
+                        mainTable = $('#datatable').DataTable({
+                            lengthMenu: [5, 10, 20, 50, 100],
+                            ajax: "{{ route('kasir') }}",
+                            "columnDefs": [{
+                                    className: "nama-barang",
+                                    "targets": [1]
+                                },
+                                {
+                                    className: "harga-barang",
+                                    "targets": [2]
+                                },
+                            ],
+                            // order: [
+                            //     [1, 'desc']
+                            // ],
+                            columns: [
+                                {
+                                    data: 'barang_id',
+                                    // data: 'barang_counter_id',
+                                    name: 'ID Barang'
+                                },
+                                {
+                                    data: 'nama_barang',
+                                    name: 'Nama Barang'
+                                },
+                                {
+                                    data: 'harga_barang',
+                                    name: 'Harga Barang',
+                                    render: function(data, type, row) {
+                                        return rupiah(data);
+                                    },
+                                },
+                                {
+                                    data: 'quantity',
+                                    name: 'Quantity'
+                                },
+                                {
+                                    data: 'action',
+                                    name: 'action',
+                                    orderable: false,
+                                    searchable: false
+                                },
+                            ]
+                        });
+                        $('#nama_pembeli').val(''),
+                        $('#telepon_pembeli').val(''),
+                        $('#alamat_pembeli').val('')
+                        console.log(response);
+                        // console.log(JSON.parse(response.keranjang));
+                        
+                    }
+                });
+            }
+            $('#dikirimModal').modal('hide');
+            $('#tanggal_pengiriman').val('');
+        })
     </script>
 @endpush
 
@@ -369,7 +451,7 @@
                         <button class="btn btn-primary waves-effect waves-light" id="save-transaction">
                             <i class="bx bx-save align-middle me-2 font-size-18"></i>Diterima
                         </button>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#dikirimModal" class="btn btn-primary waves-effect waves-light" id="save-transaction">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#dikirimModal" class="btn btn-primary waves-effect waves-light" id="dikirim">
                             <i class="bx bx-box align-middle me-2 font-size-18"></i>Dikirim
                         </a>
                     </div>
@@ -449,12 +531,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <label for="nama_barang" class="form-label font-weight-bold">Tanggal pengiriman barang</label>
-                    <input class="form-control" type="date" value="" id="biaya_penyimpanan">
+                    <label for="tanggal_pengiriman" class="form-label font-weight-bold">Tanggal pengiriman barang</label>
+                    <input class="form-control" type="date" id="tanggal_pengiriman">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-primary" id="btn-save">Simpan</button>
+                    <button type="button" class="btn btn-primary" id="simpandikirim">Simpan</button>
                 </div>
             </div>
         </div>

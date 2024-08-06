@@ -85,15 +85,9 @@ class KasirController extends Controller
 
     public function store(Request $request)
     {
-        // return response()->json($request->all(), 200);
-
-        $penjualan_barang = new PenjualanBarang;
 
         $invoice = 'INV' . strtoupper($request->nama_pembeli) . '' . date('dmYHis');
 
-        $user = $this->userAuth();
-        $counters = DB::table('counters')->where('user_id', $user->user_id)->first();
-        $counter_id = $counters->counter_id;
         $keranjangs = json_decode($request->keranjang);
         DB::beginTransaction();
         try {
@@ -105,7 +99,9 @@ class KasirController extends Controller
                     'alamat_pembeli' => $request->alamat_pembeli,
                     'telepon_pembeli' => $request->telepon_pembeli,
                     'quantity' => $keranjang->jumlah,
-                    'harga_barang' => $keranjang->harga_barang
+                    'harga_barang' => $keranjang->harga_barang,
+                    'status' => ($request->tanggal_pengiriman) ? 'DITERIMA' : 'DIKIRIM',
+                    'tgl_pengiriman' => ($request->tanggal_pengiriman) ? $request->tanggal_pengiriman : NULL,
                 ]);
             }
             foreach ($keranjangs as $keranjang) {
@@ -113,31 +109,7 @@ class KasirController extends Controller
                 $baranggudanng->update([
                     'stok_masuk' => $baranggudanng->stok_masuk - $keranjang->jumlah
                 ]);
-                // $baranggudanng->where('barang_id', $keranjang->id_barang)->update([
-                //     'stok_masuk' => $baranggudanng->+= $keranjang->jumlah
-                // ]);
             }
-            // $penjualan_id = Penjualan::generatePenjualanCounterId($counter_id);
-            // $penjualans = new Penjualan;
-            // $penjualans->penjualan_id = $penjualan_id;
-            // $penjualans->slug = Str::random(16);
-            // $penjualans->counter_id = $counter_id;
-            // $penjualans->grand_total = $request->grand_total;
-            // $penjualans->tanggal_penjualan = Carbon::now();
-            // $penjualans->save();
-
-            // foreach ($keranjangs as $keranjang) {
-            //     $detail_penjualans = new DetailPenjualan;
-            //     $detail_penjualans->penjualan_id = $penjualan_id;
-            //     $detail_penjualans->barang_counter_id = $keranjang->barang_counter_id;
-            //     $detail_penjualans->quantity = $keranjang->jumlah;
-            //     $detail_penjualans->subtotal = $keranjang->subtotal;
-            //     $detail_penjualans->save();
-
-            //     $barang_counters = BarangCounter::where('barang_counter_id', $keranjang->barang_counter_id)->first();
-            //     $barang_counters->stok_keluar += $keranjang->jumlah;
-            //     $barang_counters->save();
-            // }
             DB::commit();
             return response()->json($request->all(), 200);
 

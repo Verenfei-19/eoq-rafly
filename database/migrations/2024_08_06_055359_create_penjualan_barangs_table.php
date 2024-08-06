@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('telepon_pembeli');
             $table->integer('quantity');
             $table->integer('harga_barang');
+            $table->string('status');
+            $table->date('tgl_pengiriman')->nullable();
             $table->timestamps();
         });
     }
