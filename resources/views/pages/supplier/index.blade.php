@@ -26,22 +26,22 @@
     <!-- Datatable init js -->
     <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
     <script>
+        function confirmDelete(event, url) {
+        if (!confirm("Anda yakin ingin menghapus data ini?")) {
+            event.preventDefault();
+            }
+        }
         $('#datatable').DataTable({
             ajax: "{{ route('supplier') }}",
-            columns: [{
-                    data: "counter_id"
+            columns: [
+                {
+                    data: "nama"
                 },
                 {
-                    data: "name"
-                },
-                {
-                    data: "address"
+                    data: "alamat"
                 },
                 {
                     data: "telepon"
-                },
-                {
-                    data: "username"
                 },
                 @if ($user->role == 'gudang')
                     {
@@ -92,11 +92,9 @@
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
                             <tr>
-                                <th>ID Supplier</th>
                                 <th>Nama Supplier</th>
                                 <th>Alamat Supplier</th>
                                 <th>Nomor Telepon</th>
-                                <th>Username</th>
                                 @if ($user->role == 'gudang')
                                     <th>Action</th>
                                 @endif
