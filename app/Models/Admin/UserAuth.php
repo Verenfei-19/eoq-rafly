@@ -18,7 +18,7 @@ class UserAuth extends Authenticatable
     protected $keyType = 'string';
 
     protected $fillable = [
-        'user_id', 'slug', 'username', 'name', 'address', 'password', 'role', 'status'
+        'user_id', 'slug', 'username', 'telepon', 'name', 'address', 'password', 'role', 'status'
     ];
 
     protected $hidden = [

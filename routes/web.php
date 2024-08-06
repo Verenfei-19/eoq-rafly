@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\PersediaanMasukController;
 use App\Http\Controllers\Admin\PermintaanCounterController;
 use App\Http\Controllers\Admin\PengirimanCounterController;
 use App\Http\Controllers\Admin\PenjualanController;
+use App\Http\Controllers\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,6 +124,17 @@ Route::middleware('user')->group(function () {
 
     Route::controller(KasirController::class)->group(function () {
         Route::get('/kasir', 'index')->name('kasir');
+        Route::get('/kasir/tes', 'tes')->name('kasir.tes');
         Route::post('/kasir/store', 'store')->name('kasir.store');
+    });
+
+    // NEWROUTE
+    Route::controller(SupplierController::class)->group(function () {
+        Route::get('/supplier', 'index')->name('supplier');
+        Route::get('/supplier/create', 'create')->name('supplier.create');
+        Route::post('/supplier/store', 'store')->name('supplier.store');
+        Route::get('/supplier/edit/{supplier}', 'edit')->name('supplier.edit');
+        Route::post('/supplier/update/{supplier}', 'update')->name('supplier.update');
+        Route::get('/supplier/destroy/{supplier}', 'destroy')->name('supplier.destroy');
     });
 });

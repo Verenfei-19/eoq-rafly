@@ -155,19 +155,7 @@
                             },
                             {
                                 data: "quantity",
-                            },
-                            // {
-                            //     data: "rop",
-                            //     name: "rop"
-                            // },
-                            // {
-                            //     data: "qty_total",
-                            //     name: "qty_total"
-                            // },
-                            // {
-                            //     data: "action",
-                            //     name: "action"
-                            // }
+                            }
                         ],
                     });
                 }

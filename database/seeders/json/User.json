@@ -3,31 +3,35 @@
         "name": "Gudang Pusat",
         "address": "Jl. Kyai Tambak Deres No.229, Kota Surabaya, Jawa Timur",
         "username": "gudangpusat",
+        "telepon": "081231241241",
         "password": "gudangpusat",
         "role": "gudang",
         "status": "Active"
     },
     {
-        "name": "Counter 1",
+        "name": "Toko 1",
         "address": "Jl. Keputih Tegal No.29, Kota Surabaya, Jawa Timur",
-        "username": "counter1",
-        "password": "counter",
+        "username": "toko1",
+        "telepon": "08224123123",
+        "password": "toko",
         "role": "counter",
         "status": "Active"
     },
     {
-        "name": "Counter 2",
+        "name": "Toko 2",
         "address": "Jl. Raya Wiyung No.674, Kota Surabaya, Jawa Timur",
-        "username": "counter2",
-        "password": "counter",
+        "username": "toko2",
+        "telepon": "08224120802832",
+        "password": "toko",
         "role": "counter",
         "status": "Active"
     },
     {
-        "name": "Counter 3",
+        "name": "Toko 3",
         "address": "Jl. Rungkut Asri Tengah No.21, Kota Surabaya, Jawa Timur",
-        "username": "counter3",
-        "password": "counter",
+        "username": "toko3",
+        "telepon": "0822412412390",
+        "password": "toko",
         "role": "counter",
         "status": "Active"
     },
@@ -35,6 +39,7 @@
         "name": "Owner",
         "address": "-",
         "username": "owner",
+        "telepon": "0812348728372",
         "password": "owner",
         "role": "owner",
         "status": "Active"

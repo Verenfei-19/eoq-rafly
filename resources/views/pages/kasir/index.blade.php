@@ -38,8 +38,11 @@
                     "targets": [2]
                 },
             ],
-            columns: [{
-                    data: 'barang_counter_id',
+            columns: [
+                {
+                    data: 'barang_id',
+                    // data: 'barang_counter_id',
+                    // data: 'barang_gudang_id',
                     name: 'ID Barang'
                 },
                 {
@@ -147,7 +150,8 @@
                     let keranjangTemp = {
                         "no": no++,
                         "id_barang": selectedData.barang_id,
-                        "barang_counter_id": selectedData.barang_counter_id,
+                        // "barang_counter_id": selectedData.barang_counter_id,
+                        // "barang_gudang_id": selectedData.barang_gudang_id,
                         "nama_barang": selectedData.nama_barang,
                         "harga_barang": selectedData.harga_barang,
                         "jumlah": Number(jumlah_pembelian),
@@ -160,7 +164,8 @@
                 let keranjangTemp = {
                     "no": no++,
                     "id_barang": selectedData.barang_id,
-                    "barang_counter_id": selectedData.barang_counter_id,
+                    // "barang_counter_id": selectedData.barang_counter_id,
+                    // "barang_gudang_id": selectedData.barang_gudang_id,
                     "nama_barang": selectedData.nama_barang,
                     "harga_barang": selectedData.harga_barang,
                     "jumlah": Number(jumlah_pembelian),
@@ -226,6 +231,7 @@
             $('.alert').hide();
         });
 
+        // SIMPAN TRANSAKSI
         $('#save-transaction').on('click', function() {
             if (keranjang.length > 0) {
                 $.ajax({
@@ -234,7 +240,10 @@
                     data: {
                         '_token': "{{ csrf_token() }}",
                         'keranjang': JSON.stringify(keranjang),
-                        'grand_total': grandTotal
+                        'grand_total': grandTotal,
+                        'nama_pembeli': $('#nama_pembeli').val(),
+                        'telepon_pembeli': $('#telepon_pembeli').val(),
+                        'alamat_pembeli': $('#alamat_pembeli').val()
                     },
                     success: function(response) {
                         no = 1;
@@ -260,8 +269,10 @@
                             // order: [
                             //     [1, 'desc']
                             // ],
-                            columns: [{
-                                    data: 'barang_counter_id',
+                            columns: [
+                                {
+                                    data: 'barang_id',
+                                    // data: 'barang_counter_id',
                                     name: 'ID Barang'
                                 },
                                 {
@@ -287,6 +298,12 @@
                                 },
                             ]
                         });
+                        $('#nama_pembeli').val(''),
+                        $('#telepon_pembeli').val(''),
+                        $('#alamat_pembeli').val('')
+                        console.log(response);
+                        console.log(JSON.parse(response.keranjang));
+                        
                     }
                 });
             }
@@ -348,10 +365,36 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-3">Keranjang Kasir</h4>
-                    <div class="d-flex justify-content-end mb-4">
+                    <div class="d-flex justify-content-end gap-2 mb-4">
                         <button class="btn btn-primary waves-effect waves-light" id="save-transaction">
-                            <i class="bx bx-save align-middle me-2 font-size-18"></i>Simpan
+                            <i class="bx bx-save align-middle me-2 font-size-18"></i>Diterima
                         </button>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#dikirimModal" class="btn btn-primary waves-effect waves-light" id="save-transaction">
+                            <i class="bx bx-box align-middle me-2 font-size-18"></i>Dikirim
+                        </a>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="">
+                                <label for="nama_pembeli">Nama Pembeli</label>
+                                <input class="form-control" type="text" name="nama_pembeli" id="nama_pembeli" placeholder="Ketikkan Nama Pembeli">
+                            </div>
+                            
+                        </div>
+                        <div class="col">
+                            <div class="">
+                                <label for="telepon_pembeli">Telepon Pembeli</label>
+                                <input class="form-control" type="number" name="telepon_pembeli" id="telepon_pembeli">
+                            </div>
+                            
+                        </div>
+                        <div class="col">
+                            <div class="">
+                                <label for="alamat_pembeli">Alamat Pembeli</label>
+                                <input class="form-control" type="text" name="alamat_pembeli" id="alamat_pembeli" placeholder="Ketikkan Alamat Pembeli">
+                            </div>
+
+                        </div>
                     </div>
                     <table id="datatable-keranjang" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
@@ -392,6 +435,26 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                     <button type="button" class="btn btn-primary" id="btn-save-add">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- dikirim -->
+    <div class="modal fade" id="dikirimModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Barang Dikirim</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="nama_barang" class="form-label font-weight-bold">Tanggal pengiriman barang</label>
+                    <input class="form-control" type="date" value="" id="biaya_penyimpanan">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-primary" id="btn-save">Simpan</button>
                 </div>
             </div>
         </div>

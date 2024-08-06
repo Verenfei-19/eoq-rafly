@@ -79,12 +79,22 @@ class BarangController extends Controller
                 ->where('user_id', $user->user_id)
                 ->first();
             if ($request->ajax()) {
-                $query = 'SELECT a.barang_counter_id as barang_id, b.nama_barang, b.harga_barang, a.slug, (a.stok_masuk-a.stok_keluar) as quantity
-                FROM barang_counters as a
-                JOIN barangs as b on a.barang_id = b.barang_id
-                WHERE a.counter_id = "' . $counters->counter_id  . '" ORDER BY a.barang_counter_id ASC';
-                $barangs = DB::select($query);
-                return DataTables::of($barangs)->make(true);
+                // $query = 'SELECT a.barang_counter_id as barang_id, b.nama_barang, b.harga_barang, a.slug, (a.stok_masuk-a.stok_keluar) as quantity
+                // FROM barang_counters as a
+                // JOIN barangs as b on a.barang_id = b.barang_id
+                // WHERE a.counter_id = "' . $counters->counter_id  . '" ORDER BY a.barang_counter_id ASC';
+                // $barangs = DB::select($query);
+                // return DataTables::of($barangs)->make(true);
+
+                // GET DATA BARANG GUDANG BY LOGIN COUNTER/TOKO
+                $query = "SELECT b.barang_gudang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, 
+                (SELECT (SUM(stok_masuk) - SUM(stok_keluar)) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) as quantity
+                FROM barangs as a
+                JOIN barang_gudangs as b on a.barang_id = b.barang_id
+                GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang
+                ORDER BY b.barang_gudang_id ASC";
+                $data = DB::select($query);
+                return DataTables::of($data)->make(true);
             }
         }
 

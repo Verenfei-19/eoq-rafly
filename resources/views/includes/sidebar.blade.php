@@ -40,7 +40,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('counter') }}" class="waves-effect">
+                        <a href="{{ route('supplier') }}" class="waves-effect">
                             <i class="bx bxs-store-alt"></i>
                             <span key="t-counter">Supplier</span>
                         </a>
@@ -65,12 +65,12 @@
                             <span key="t-kasir">Kasir</span>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('pengiriman-counter.barangDiambil') }}" class="waves-effect">
                             <i class="bx bx-notepad"></i>
                             <span key="t-kasir">Barang Counter Diambil</span>
                         </a>
-                    </li>
+                    </li> --}}
                 @endif
 
                 @if ($user->role == 'counter' || $user->role == 'gudang')

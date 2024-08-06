@@ -27,6 +27,7 @@ class UserSeeder extends Seeder
                 $user->name = $data->name;
                 $user->address = $data->address;
                 $user->username = $data->username;
+                $user->telepon = $data->telepon;
                 $user->password = bcrypt($data->password);
                 $user->role = $data->role;
                 $user->status = $data->status;

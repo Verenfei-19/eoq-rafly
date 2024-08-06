@@ -144,7 +144,7 @@
                                 <script>
                                     document.write(new Date().getFullYear())
                                 </script> Jufer. Crafted with <i class="mdi mdi-heart text-danger"></i>
-                                by Krisna Jufer
+                                by CV.PRASETYA
                             </p>
                         </div>
                     </div>
