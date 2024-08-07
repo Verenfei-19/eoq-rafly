@@ -109,9 +109,16 @@
                 <li class="menu-title" key="t-components">Riwayat</li>
 
                 <li>
-                    <a href="{{ route('penjualan') }}" class="waves-effect">
+                    <a href="{{ route('penjualan.diterima') }}" class="waves-effect">
                         <i class="bx bxs-spreadsheet"></i>
-                        <span key="t-kasir">Transaksi Penjualan</span>
+                        <span key="t-kasir">Transaksi Penjualan Diterima</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('penjualan.dikirim') }}" class="waves-effect">
+                        <i class="bx bxs-spreadsheet"></i>
+                        <span key="t-kasir">Transaksi Penjualan Dikirim</span>
                     </a>
                 </li>
 
