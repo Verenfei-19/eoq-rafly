@@ -115,9 +115,13 @@ Route::middleware('user')->group(function () {
         Route::get('/pengiriman_counter/update/status/{pengiriman_counter_id}/{barang_id}', 'updateStatus')->name('pengiriman-counter.updateStatus');
     });
 
-    Route::controller(PenjualanController::class)->group(function () {
-        Route::get('/penjualan', 'penjualan')->name('penjualan');
-        Route::get('/penjualan/invoice/{penjualan:invoice_number}', 'invoice')->name('invoice');
+    Route::controller(PenjualanController::class)->prefix('penjualan')->group(function () {
+        Route::get('/penjualan-diterima', 'penjualan_diterima')->name('penjualan.diterima');
+        Route::post('/tabel-penjualan-diterima', 'get_tabel_penjualan_diterima')->name('penjualan.tabelditerima');
+        Route::post('/table-single', 'get_single_row')->name('penjualan.singlerow');
+
+        Route::get('/penjualan-dikirim', 'penjualan_dikirim')->name('penjualan.dikirim');
+        Route::get('/invoice/{penjualan:invoice_number}', 'invoice')->name('invoice');
         // Route::get('/penjualan?print_', 'penjualan')->name('penjualan');
         // Route::get('/penjualan', 'index')->name('penjualan');
         // Route::post('/penjualan/filter', 'filter')->name('penjualan.filter');
