@@ -243,7 +243,8 @@
                         'grand_total': grandTotal,
                         'nama_pembeli': $('#nama_pembeli').val(),
                         'telepon_pembeli': $('#telepon_pembeli').val(),
-                        'alamat_pembeli': $('#alamat_pembeli').val()
+                        'alamat_pembeli': $('#alamat_pembeli').val(),
+                        'tanggal_pembelian': $('#tanggal_pembelian').val(),
                     },
                     success: function(response) {
                         no = 1;
@@ -298,9 +299,11 @@
                                 },
                             ]
                         });
-                        $('#nama_pembeli').val(''),
-                        $('#telepon_pembeli').val(''),
-                        $('#alamat_pembeli').val('')
+                        $('#nama_pembeli').val('');
+                        $('#telepon_pembeli').val('');
+                        $('#alamat_pembeli').val('');
+                        $('#tanggal_pembelian').val('');
+
                         console.log(response);
                         // console.log(JSON.parse(response.keranjang));
                         
@@ -325,6 +328,7 @@
                         'telepon_pembeli': $('#telepon_pembeli').val(),
                         'alamat_pembeli': $('#alamat_pembeli').val(),
                         'tanggal_pengiriman': $('#tanggal_pengiriman').val(),
+                        'tanggal_pembelian': $('#tanggal_pembelian').val(),
                     },
                     success: function(response) {
                         no = 1;
@@ -379,9 +383,10 @@
                                 },
                             ]
                         });
-                        $('#nama_pembeli').val(''),
-                        $('#telepon_pembeli').val(''),
-                        $('#alamat_pembeli').val('')
+                        $('#nama_pembeli').val('');
+                        $('#telepon_pembeli').val('');
+                        $('#alamat_pembeli').val('');
+                        $('#tanggal_pembelian').val('');
                         console.log(response);
                         // console.log(JSON.parse(response.keranjang));
                         
@@ -419,11 +424,10 @@
             Jumlah pembelian harus diisi
             <button type="button" class="btn-close" aria-label="Close"></button>
         </div>
-        <div class="col">
+        <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-3">Barang Kasir</h4>
-
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
                             <tr>
@@ -437,13 +441,74 @@
                         <tbody>
                         </tbody>
                     </table>
-
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Keranjang Kasir</h4>
+                    <div class="d-flex justify-content-end gap-2 mb-4">
+                        <button class="btn btn-primary waves-effect waves-light" id="save-transaction">
+                            <i class="bx bx-save align-middle me-2 font-size-18"></i>Diterima
+                        </button>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#dikirimModal" class="btn btn-primary waves-effect waves-light" id="dikirim">
+                            <i class="bx bx-box align-middle me-2 font-size-18"></i>Dikirim
+                        </a>
+                    </div>
+                    <div class="row g-2 mb-3">
+                        <div class="col-lg-4">
+                            <div class="">
+                                <label for="nama_pembeli">Nama Pembeli</label>
+                                <input class="form-control" type="text" name="nama_pembeli" id="nama_pembeli" placeholder="Nama Pembeli">
+                            </div>
+                            
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="">
+                                <label for="telepon_pembeli">Telepon Pembeli</label>
+                                <input class="form-control" type="number" name="telepon_pembeli" id="telepon_pembeli">
+                            </div>
+                            
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="">
+                                <label for="tanggal_pembelian">Tanggal Pembelian</label>
+                                <input class="form-control" type="date" name="tanggal_pembelian" id="tanggal_pembelian">
+                            </div>
+                            
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="">
+                                <label for="alamat_pembeli">Alamat Pembeli</label>
+                                <input class="form-control" type="text" name="alamat_pembeli" id="alamat_pembeli" placeholder="Alamat Pembeli">
+                            </div>
+                        </div>
+                    </div>
+                    <table id="datatable-keranjang" class="table table-bordered dt-responsive  nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Barang</th>
+                                <th class="col-md-2">Harga</th>
+                                <th class="col-md-1">Quantity</th>
+                                <th class="col-md-2">Subtotal</th>
+                                <th class="col-md-1">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tr>
+                            <th colspan="4" class="text-center font-size-18">Grand Total</th>
+                            <th colspan="2" class="font-size-16"><span id="grandTotal">Rp 0,00</span></th>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        {{-- <div class="col">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-3">Keranjang Kasir</h4>
@@ -472,10 +537,16 @@
                         </div>
                         <div class="col">
                             <div class="">
+                                <label for="tanggal_pembelian">Tanggal Pembelian</label>
+                                <input class="form-control" type="date" name="tanggal_pembelian" id="tanggal_pembelian">
+                            </div>
+                            
+                        </div>
+                        <div class="col">
+                            <div class="">
                                 <label for="alamat_pembeli">Alamat Pembeli</label>
                                 <input class="form-control" type="text" name="alamat_pembeli" id="alamat_pembeli" placeholder="Ketikkan Alamat Pembeli">
                             </div>
-
                         </div>
                     </div>
                     <table id="datatable-keranjang" class="table table-bordered dt-responsive  nowrap w-100">
@@ -498,7 +569,7 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
     <!-- Modal -->
