@@ -94,13 +94,14 @@ class KasirController extends Controller
             foreach ($keranjangs as $keranjang) {
                 PenjualanBarang::create([
                     'nama_barang' => $keranjang->nama_barang,
-                    'invoice_number' => $invoice,
+                    'invoice_number' => ($request->tanggal_pengiriman) ? 'DKR' . $invoice : 'DTR' . $invoice,
                     'nama_pembeli' => $request->nama_pembeli,
                     'alamat_pembeli' => $request->alamat_pembeli,
                     'telepon_pembeli' => $request->telepon_pembeli,
                     'quantity' => $keranjang->jumlah,
                     'harga_barang' => $keranjang->harga_barang,
-                    'status' => ($request->tanggal_pengiriman) ? 'DITERIMA' : 'DIKIRIM',
+                    'status' => ($request->tanggal_pengiriman) ? 'DIKIRIM' : 'DITERIMA',
+                    'tgl_pembelian' => ($request->tanggal_pembelian) ? $request->tanggal_pembelian : NULL,
                     'tgl_pengiriman' => ($request->tanggal_pengiriman) ? $request->tanggal_pengiriman : NULL,
                 ]);
             }

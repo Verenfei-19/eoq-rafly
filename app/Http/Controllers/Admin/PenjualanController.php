@@ -195,11 +195,72 @@ class PenjualanController extends Controller
         return DataTables::of($detail_penjualans)->make(true);
     }
 
-    public function penjualan(Request $request)
+    public function penjualan_diterima(Request $request)
     {
         $user = $this->userAuth();
         if ($request->ajax()) {
-            $query = "SELECT invoice_number, nama_pembeli, status,created_at FROM `penjualan_barangs` GROUP BY invoice_number,nama_pembeli,status,created_at";
+            $query = "SELECT invoice_number, nama_pembeli, status,tgl_pembelian,tgl_pengiriman,created_at FROM `penjualan_barangs` WHERE status = 'DITERIMA' GROUP BY invoice_number,nama_pembeli,status,tgl_pembelian,tgl_pengiriman,created_at ORDER BY created_at DESC";
+            $data = DB::select($query);
+
+            return DataTables::of($data)
+
+                ->addColumn('action', function ($object) {
+                    $html = '<a data-bs-toggle="modal" data-bs-target="#lihatdetail" class="btn btn-primary waves-effect waves-light btn-detail"><i class="bx bx-detail align-middle font-size-18"></i> Cetak Invoice</a>';
+                    return $html;
+                })
+
+                ->addColumn('links', function ($data) {
+                    return 'invoice/' . $data->invoice_number;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('pages.kasir.penjualan-diterima', compact('user'));
+    }
+
+    public function get_tabel_penjualan_diterima(Request $request)
+    {
+
+        $detail_penjualans = DB::table('penjualan_barangs')
+            ->selectRaw('invoice_number,nama_pembeli,nama_barang,quantity,harga_barang, (quantity*harga_barang) as total')
+            ->where('invoice_number', $request->invoice)->get();
+
+        return DataTables::of($detail_penjualans)
+            ->editColumn('harga_barang', function ($data) {
+                return 'Rp ' . number_format($data->total, 0, '.');
+            })
+            ->editColumn('total', function ($data) {
+                return 'Rp ' . number_format($data->total, 0, '.');
+            })
+            ->addColumn('total', function ($data) {
+                return $data->quantity * $data->harga_barang;
+            })
+            ->make(true);
+    }
+
+    public function get_single_row(Request $request)
+    {
+        $detail_penjualans = DB::table('penjualan_barangs')
+            ->selectRaw('SUM(quantity*harga_barang) as total')
+            ->where('invoice_number', $request->invoice)->get();
+
+        return DataTables::of($detail_penjualans)
+            ->editColumn('total', function ($data) {
+                return 'Rp ' . number_format($data->total, 0, '.');
+            })
+            ->addColumn('text', function ($object) {
+                $html = '<span><strong>Total</strong></span>';
+                return $html;
+            })
+            ->rawColumns(['text'])
+            ->make(true);
+    }
+
+    public function penjualan_dikirim(Request $request)
+    {
+        $user = $this->userAuth();
+        if ($request->ajax()) {
+            $query = "SELECT invoice_number, nama_pembeli, status,tgl_pembelian,tgl_pengiriman,created_at FROM `penjualan_barangs` WHERE status = 'DIKIRIM' GROUP BY invoice_number,nama_pembeli,status,tgl_pembelian,tgl_pengiriman,created_at";
             $data = DB::select($query);
 
             return DataTables::of($data)
@@ -223,15 +284,11 @@ class PenjualanController extends Controller
         //         ->rawColumns(['action'])
         //         ->make(true);
         // }
-        return view('pages.kasir.penjualan', compact('user'));
+        return view('pages.kasir.penjualan-dikirim', compact('user'));
     }
     public function invoice(Request $request, PenjualanBarang $penjualan)
     {
         $data = $penjualan->where('invoice_number', $penjualan->invoice_number)->get();
-        // dump($data);
         return view('pages.kasir.invoice', compact('data'));
-        // $invoice = $request->get('invoice');
-        // $query = "SELECT * FROM `penjualan_barangs` WHERE invoice_number = '$invoice'";
-        // dump($query);
     }
 }
