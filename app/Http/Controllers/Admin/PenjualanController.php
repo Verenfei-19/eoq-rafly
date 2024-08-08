@@ -265,27 +265,44 @@ class PenjualanController extends Controller
 
             return DataTables::of($data)
                 ->addColumn('action', function ($object) {
-                    $html = '<a href="penjualan/invoice/' . $object->invoice_number . '" class="btn btn-primary waves-effect waves-light btn-add"><i class="bx bx-detail align-middle font-size-18"></i> Cetak Invoice</a>';
+                    $html = '<a data-bs-toggle="modal" data-bs-target="#lihatdetail" class="btn btn-primary waves-effect waves-light btn-detail"><i class="bx bx-detail align-middle font-size-18"></i> Cetak Invoice</a>';
                     return $html;
                 })
+
+                ->addColumn('links', function ($data) {
+                    return 'invoice/' . $data->invoice_number;
+                })
+                // ->addColumn('action', function ($object) {
+                //     $html = '<a href="penjualan/invoice/' . $object->invoice_number . '" class="btn btn-primary waves-effect waves-light btn-add"><i class="bx bx-detail align-middle font-size-18"></i> Cetak Invoice</a>';
+                //     return $html;
+                // })
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        // else if ($request->get('invoice')) {
-        //     $invoice = $request->get('invoice');
-        //     $query = "SELECT * FROM `penjualan_barangs` WHERE invoice_number = '$invoice'";
-        //     $data = DB::select($query);
-
-        //     return DataTables::of($data)
-        //         ->addColumn('action', function ($row) {
-        //             $html = '<a href="#" class="btn btn-primary waves-effect waves-light btn-add"><i class="bx bx-detail align-middle font-size-18"></i> awikwok</a>';
-        //             return $html;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
-        // }
         return view('pages.kasir.penjualan-dikirim', compact('user'));
     }
+
+    public function get_tabel_penjualan_dikirim(Request $request)
+    {
+
+        $detail_penjualans = DB::table('penjualan_barangs')
+            ->selectRaw('invoice_number,nama_pembeli,nama_barang,quantity,harga_barang, (quantity*harga_barang) as total')
+            ->where('invoice_number', $request->invoice)->get();
+
+        return DataTables::of($detail_penjualans)
+            ->editColumn('harga_barang', function ($data) {
+                return 'Rp ' . number_format($data->total, 0, '.');
+            })
+            ->editColumn('total', function ($data) {
+                return 'Rp ' . number_format($data->total, 0, '.');
+            })
+            ->addColumn('total', function ($data) {
+                return $data->quantity * $data->harga_barang;
+            })
+            ->make(true);
+    }
+
+    // FUNGSI CETAK INVOICE
     public function invoice(Request $request, PenjualanBarang $penjualan)
     {
         $data = $penjualan->where('invoice_number', $penjualan->invoice_number)->get();
