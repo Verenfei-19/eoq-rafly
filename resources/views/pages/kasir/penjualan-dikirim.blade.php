@@ -14,6 +14,40 @@
     <!-- Responsive datatable examples -->
     <link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet"
         type="text/css" />
+        <style>
+            .dataTables_paginate {
+                display: none;
+            }
+            table#tabeltotalharga>thead .sorting::before,
+            table#tabeltotalharga>thead .sorting_asc::before,
+            table#tabeltotalharga>thead .sorting_desc::before,
+            table#tabeltotalharga>thead .sorting_asc_disabled::before,
+            table#tabeltotalharga>thead .sorting_desc_disabled::before {
+                right: 0 !important;
+                content: "" !important;
+            }
+            
+            table#tabeltotalharga>thead .sorting::after,
+            table#tabeltotalharga>thead .sorting_asc::after,
+            table#tabeltotalharga>thead .sorting_desc::after,
+            table#tabeltotalharga>thead .sorting_asc_disabled::after,
+            table#tabeltotalharga>thead .sorting_desc_disabled::after {
+                right: 0 !important;
+                content: "" !important;
+            }
+            
+            table#tabeltotalharga>thead>tr>th:not(.sorting_disabled),
+            table#tabeltotalharga>thead>tr>td:not(.sorting_disabled) {
+                padding-right: 0px !important;
+                padding-left: 0px !important;
+            }
+            
+            table#tabeltotalharga>thead>tr>th,
+            table#tabeltotalharga>thead>tr>td {
+                padding-right: 0px !important;
+                padding-left: 0px !important;
+            }
+        </style>
 @endpush
 
 @push('after-app-script')
@@ -57,6 +91,80 @@
                 },
             ]
         });
+
+        $('#datatable').on('click', '.btn-detail', function() {
+            let selectedData = '';
+            let invoice = '';
+            let links = '';
+            let indexRow = mainTable.rows().nodes().to$().index($(this).closest('tr'));
+            selectedData = mainTable.row(indexRow).data();
+            invoice = selectedData.invoice_number;
+            link_print = selectedData.links;
+            $("#invoice_id").text(selectedData.invoice_number);
+            $('#detail-datatable').DataTable().clear();
+            $('#detail-datatable').DataTable().destroy();
+            $('#detail-datatable').DataTable({
+                ajax: {
+                    "type": "POST",
+                    "url": "{{ route('penjualan.tabelditerima') }}",
+                    "data": {
+                        '_token': "{{ csrf_token() }}",
+                        'invoice': invoice
+                    }
+                },
+                lengthMenu: [5],
+                columns: [{
+                        data: "nama_barang",
+                        name: "nama_barang"
+                    },
+                    {
+                        data: "harga_barang",
+                        name: "harga_barang"
+                    },
+                    {
+                        data: "quantity",
+                        name: "quantity"
+                    },
+                    {
+                        data: "total",
+                        name: "total"
+                    }
+                ],
+                "searching": false,
+                "lengthChange": false,
+                "info": false
+            });
+
+            $('#tabeltotalharga').DataTable().clear();
+            $('#tabeltotalharga').DataTable().destroy();
+            $('#tabeltotalharga').DataTable({
+                ajax: {
+                    "type": "POST",
+                    "url": "{{ route('penjualan.singlerow') }}",
+                    "data": {
+                        '_token': "{{ csrf_token() }}",
+                        'invoice': invoice,
+                    }
+                },
+                columns: [
+                    {
+                        data: "text",
+                        name: "subtotal",
+                        orderable: false,
+                    },
+                    {
+                        data: "total",
+                        name: "subtotal",
+                        orderable: false,
+                    }
+                ],
+                "info": false,
+                "searching": false,
+                "lengthChange": false,
+            });
+            
+            $('#linkcetak').attr('href', link_print)
+        });
     </script>
 @endpush
 
@@ -88,6 +196,46 @@
                         </tbody>
                     </table>
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- diterima -->
+    <div class="modal modal-lg fade" id="lihatdetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">INVOICE <span id="invoice_id"></span> </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table id="detail-datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th>Nama Item</th>
+                                <th>Harga Item</th>
+                                <th>Jumlah Item</th>
+                                <th>Total Harga</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <table id="tabeltotalharga" class="table dt-responsive nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody style="text-align: right">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" id="linkcetak" type="button" class="btn btn-primary">Cetak</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>

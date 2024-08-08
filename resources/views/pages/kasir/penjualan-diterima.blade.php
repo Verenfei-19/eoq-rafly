@@ -16,37 +16,37 @@
         type="text/css" />
         <style>
             .dataTables_paginate {
-            display: none;
-        }
-        table#tabeltotalharga>thead .sorting::before,
-        table#tabeltotalharga>thead .sorting_asc::before,
-        table#tabeltotalharga>thead .sorting_desc::before,
-        table#tabeltotalharga>thead .sorting_asc_disabled::before,
-        table#tabeltotalharga>thead .sorting_desc_disabled::before {
-            right: 0 !important;
-            content: "" !important;
-        }
-        
-        table#tabeltotalharga>thead .sorting::after,
-        table#tabeltotalharga>thead .sorting_asc::after,
-        table#tabeltotalharga>thead .sorting_desc::after,
-        table#tabeltotalharga>thead .sorting_asc_disabled::after,
-        table#tabeltotalharga>thead .sorting_desc_disabled::after {
-            right: 0 !important;
-            content: "" !important;
-        }
-        
-        table#tabeltotalharga>thead>tr>th:not(.sorting_disabled),
-        table#tabeltotalharga>thead>tr>td:not(.sorting_disabled) {
-            padding-right: 0px !important;
-            padding-left: 0px !important;
-        }
-        
-        table#tabeltotalharga>thead>tr>th,
-        table#tabeltotalharga>thead>tr>td {
-            padding-right: 0px !important;
-            padding-left: 0px !important;
-        }
+                display: none;
+            }
+            table#tabeltotalharga>thead .sorting::before,
+            table#tabeltotalharga>thead .sorting_asc::before,
+            table#tabeltotalharga>thead .sorting_desc::before,
+            table#tabeltotalharga>thead .sorting_asc_disabled::before,
+            table#tabeltotalharga>thead .sorting_desc_disabled::before {
+                right: 0 !important;
+                content: "" !important;
+            }
+            
+            table#tabeltotalharga>thead .sorting::after,
+            table#tabeltotalharga>thead .sorting_asc::after,
+            table#tabeltotalharga>thead .sorting_desc::after,
+            table#tabeltotalharga>thead .sorting_asc_disabled::after,
+            table#tabeltotalharga>thead .sorting_desc_disabled::after {
+                right: 0 !important;
+                content: "" !important;
+            }
+            
+            table#tabeltotalharga>thead>tr>th:not(.sorting_disabled),
+            table#tabeltotalharga>thead>tr>td:not(.sorting_disabled) {
+                padding-right: 0px !important;
+                padding-left: 0px !important;
+            }
+            
+            table#tabeltotalharga>thead>tr>th,
+            table#tabeltotalharga>thead>tr>td {
+                padding-right: 0px !important;
+                padding-left: 0px !important;
+            }
         </style>
 @endpush
 
@@ -161,7 +161,6 @@
                 "lengthChange": false,
             });
             
-            $('td#subtotal').text();
             $('#linkcetak').attr('href', link_print)
         });
 
