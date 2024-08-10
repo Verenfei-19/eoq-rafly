@@ -232,7 +232,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" id="linkcetak" type="button" class="btn btn-primary">Cetak</a>
+                    <a target="_blank" href="#" id="linkcetak" type="button" class="btn btn-primary">Cetak</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
