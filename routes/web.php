@@ -121,7 +121,8 @@ Route::middleware('user')->group(function () {
         Route::post('/table-single', 'get_single_row')->name('penjualan.singlerow');
 
         Route::get('/penjualan-dikirim', 'penjualan_dikirim')->name('penjualan.dikirim');
-        Route::get('/invoice/{penjualan:invoice_number}', 'invoice')->name('invoice');
+        Route::get('/invoice-diterima/{penjualan:invoice_number}', 'invoice_diterima')->name('invoice.diterima');
+        Route::get('/invoice-dikirim/{penjualan:invoice_number}', 'invoice_dikirim')->name('invoice.dikirim');
         // Route::get('/penjualan?print_', 'penjualan')->name('penjualan');
         // Route::get('/penjualan', 'index')->name('penjualan');
         // Route::post('/penjualan/filter', 'filter')->name('penjualan.filter');
