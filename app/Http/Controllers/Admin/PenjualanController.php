@@ -205,12 +205,12 @@ class PenjualanController extends Controller
             return DataTables::of($data)
 
                 ->addColumn('action', function ($object) {
-                    $html = '<a data-bs-toggle="modal" data-bs-target="#lihatdetail" class="btn btn-primary waves-effect waves-light btn-detail"><i class="bx bx-detail align-middle font-size-18"></i> Cetak Invoice</a>';
+                    $html = '<a data-bs-toggle="modal" data-bs-target="#lihatdetail" class="btn btn-primary waves-effect waves-light btn-detail"><i class="bx bx-detail align-middle font-size-18"></i> Detail Invoice</a>';
                     return $html;
                 })
 
                 ->addColumn('links', function ($data) {
-                    return 'invoice/' . $data->invoice_number;
+                    return 'invoice-diterima/' .  $data->invoice_number;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -265,12 +265,12 @@ class PenjualanController extends Controller
 
             return DataTables::of($data)
                 ->addColumn('action', function ($object) {
-                    $html = '<a data-bs-toggle="modal" data-bs-target="#lihatdetail" class="btn btn-primary waves-effect waves-light btn-detail"><i class="bx bx-detail align-middle font-size-18"></i> Cetak Invoice</a>';
+                    $html = '<a data-bs-toggle="modal" data-bs-target="#lihatdetail" class="btn btn-primary waves-effect waves-light btn-detail"><i class="bx bx-detail align-middle font-size-18"></i> Detail Invoice</a>';
                     return $html;
                 })
 
                 ->addColumn('links', function ($data) {
-                    return 'invoice/' . $data->invoice_number;
+                    return 'invoice-dikirim/' . $data->invoice_number;
                 })
                 // ->addColumn('action', function ($object) {
                 //     $html = '<a href="penjualan/invoice/' . $object->invoice_number . '" class="btn btn-primary waves-effect waves-light btn-add"><i class="bx bx-detail align-middle font-size-18"></i> Cetak Invoice</a>';
@@ -303,9 +303,14 @@ class PenjualanController extends Controller
     }
 
     // FUNGSI CETAK INVOICE
-    public function invoice(Request $request, PenjualanBarang $penjualan)
+    public function invoice_diterima(Request $request, PenjualanBarang $penjualan)
     {
         $data = $penjualan->where('invoice_number', $penjualan->invoice_number)->get();
-        return view('pages.kasir.invoice', compact('data'));
+        return view('pages.kasir.invoice-diterima', compact('data'));
+    }
+    public function invoice_dikirim(Request $request, PenjualanBarang $penjualan)
+    {
+        $data = $penjualan->where('invoice_number', $penjualan->invoice_number)->get();
+        return view('pages.kasir.invoice-dikirim', compact('data'));
     }
 }
