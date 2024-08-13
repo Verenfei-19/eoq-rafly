@@ -199,12 +199,30 @@ class PenjualanController extends Controller
     {
         $user = $this->userAuth();
         if ($request->ajax()) {
-            $query = "SELECT invoice_number, nama_pembeli,alamat_pembeli,telepon_pembeli, status,tgl_pembelian,created_at, sum(harga_barang*quantity) as total_penjualan  FROM `penjualan_barangs` WHERE status = 'DITERIMA' GROUP BY invoice_number,nama_pembeli,alamat_pembeli,telepon_pembeli,status,tgl_pembelian,created_at ORDER BY created_at DESC";
-            $data = DB::select($query);
 
+            if ($request->filled('start_date') && $request->filled('end_date')) {
+                $startdate = $request->start_date;
+                $enddate = $request->end_date;
+                // $data = PenjualanBarang::query("SELECT invoice_number, nama_pembeli,alamat_pembeli,telepon_pembeli, status,tgl_pembelian,created_at, sum(harga_barang*quantity) as total_penjualan  FROM `penjualan_barangs` WHERE status = 'DITERIMA' AND tgl_pembelian BETWEEN '$startdate' AND '$enddate' GROUP BY invoice_number,nama_pembeli,alamat_pembeli,telepon_pembeli,status,tgl_pembelian,created_at ORDER BY created_at DESC");
+                $data = PenjualanBarang::select(['invoice_number', 'nama_pembeli', 'alamat_pembeli', 'telepon_pembeli', 'status', 'tgl_pembelian', 'created_at'])
+                    ->selectRaw('sum(harga_barang*quantity) as total_penjualan')
+                    ->where('status', 'DITERIMA')
+                    ->whereBetween('tgl_pembelian', [$request->start_date, $request->end_date])
+                    ->groupBy(['invoice_number', 'nama_pembeli', 'alamat_pembeli', 'telepon_pembeli', 'status', 'tgl_pembelian', 'created_at'])
+                    ->orderBy('created_at', 'DESC');
+            } else {
+                $data = PenjualanBarang::select(['invoice_number', 'nama_pembeli', 'alamat_pembeli', 'telepon_pembeli', 'status', 'tgl_pembelian', 'created_at'])
+                    ->selectRaw('sum(harga_barang*quantity) as total_penjualan')
+                    ->where('status', 'DITERIMA')
+                    ->groupBy(['invoice_number', 'nama_pembeli', 'alamat_pembeli', 'telepon_pembeli', 'status', 'tgl_pembelian', 'created_at'])
+                    ->orderBy('created_at', 'DESC');
+                // $data = PenjualanBarang::query("
+                // SELECT invoice_number, nama_pembeli,alamat_pembeli,telepon_pembeli, status,tgl_pembelian,created_at, sum(harga_barang*quantity) as total_penjualan  FROM `penjualan_barangs` WHERE status = 'DITERIMA' GROUP BY invoice_number,nama_pembeli,alamat_pembeli,telepon_pembeli,status,tgl_pembelian,created_at ORDER BY created_at DESC");
+            }
+            // $data = DB::select($query);
             $count = 0;
-            foreach ($data as $key => $value) {
-                $count += $value->total_penjualan;
+            foreach ($data->get() as $key => $value) {
+                $count += $value['total_penjualan'];
             }
 
             return DataTables::of($data)
@@ -215,6 +233,9 @@ class PenjualanController extends Controller
                 })
                 ->addColumn('total_penjualan_diterima', function ($object) use ($count) {
                     return $count;
+                })
+                ->addColumn('req', function () use ($request) {
+                    return $request->all();
                 })
 
                 ->addColumn('links', function ($data) {
