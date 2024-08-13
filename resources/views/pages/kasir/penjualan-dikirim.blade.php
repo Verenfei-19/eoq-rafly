@@ -100,6 +100,19 @@
             selectedData = mainTable.row(indexRow).data();
             invoice = selectedData.invoice_number;
             link_print = selectedData.links;
+
+            let nama_pembeli, tgl_pembelian,tgl_pengiriman,telepon_pembeli,alamat_pembeli;  
+            nama_pembeli = selectedData.nama_pembeli;
+            tgl_pembelian = selectedData.tgl_pembelian;
+            telepon_pembeli = selectedData.telepon_pembeli;
+            alamat_pembeli = selectedData.alamat_pembeli;
+            link_print = selectedData.links;
+            $("#get_nama_pembeli").text(selectedData.nama_pembeli);
+            $("#get_tgl_pembelian").text(selectedData.tgl_pembelian);
+            $("#get_tgl_pengiriman").text(selectedData.tgl_pengiriman);
+            $("#get_alamat_pembeli").text(selectedData.alamat_pembeli);
+            $("#get_telepon_pembeli").text(selectedData.telepon_pembeli);
+
             $("#invoice_id").text(selectedData.invoice_number);
             $('#detail-datatable').DataTable().clear();
             $('#detail-datatable').DataTable().destroy();
@@ -210,6 +223,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <h6>Nama Pembeli : <span id="get_nama_pembeli"></span></h6>
+                    <h6>Tanggal Pembelian : <span id="get_tgl_pembelian"></span></h6>
+                    <h6>Tanggal Pengiriman : <span id="get_tgl_pengiriman"></span></h6>
+                    <h6>Alamat : <span id="get_alamat_pembeli"></span></h6>
+                    <h6>Telepon : <span id="get_telepon_pembeli"></span></h6>
                     <table id="detail-datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
                             <tr>
