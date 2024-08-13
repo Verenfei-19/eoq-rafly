@@ -474,7 +474,7 @@
                         <div class="col-lg-4">
                             <div class="">
                                 <label for="tanggal_pembelian">Tanggal Pembelian</label>
-                                <input class="form-control" type="date" name="tanggal_pembelian" id="tanggal_pembelian">
+                                <input class="form-control" type="date" value="{{ date('Y-m-d') }}" name="tanggal_pembelian" id="tanggal_pembelian">
                             </div>
                             
                         </div>
