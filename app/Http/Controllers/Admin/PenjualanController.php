@@ -199,14 +199,22 @@ class PenjualanController extends Controller
     {
         $user = $this->userAuth();
         if ($request->ajax()) {
-            $query = "SELECT invoice_number, nama_pembeli, status,tgl_pembelian,tgl_pengiriman,created_at FROM `penjualan_barangs` WHERE status = 'DITERIMA' GROUP BY invoice_number,nama_pembeli,status,tgl_pembelian,tgl_pengiriman,created_at ORDER BY created_at DESC";
+            $query = "SELECT invoice_number, nama_pembeli,alamat_pembeli,telepon_pembeli, status,tgl_pembelian,created_at, sum(harga_barang*quantity) as total_penjualan  FROM `penjualan_barangs` WHERE status = 'DITERIMA' GROUP BY invoice_number,nama_pembeli,alamat_pembeli,telepon_pembeli,status,tgl_pembelian,created_at ORDER BY created_at DESC";
             $data = DB::select($query);
+
+            $count = 0;
+            foreach ($data as $key => $value) {
+                $count += $value->total_penjualan;
+            }
 
             return DataTables::of($data)
 
                 ->addColumn('action', function ($object) {
                     $html = '<a data-bs-toggle="modal" data-bs-target="#lihatdetail" class="btn btn-primary waves-effect waves-light btn-detail"><i class="bx bx-detail align-middle font-size-18"></i> Detail Invoice</a>';
                     return $html;
+                })
+                ->addColumn('total_penjualan_diterima', function ($object) use ($count) {
+                    return $count;
                 })
 
                 ->addColumn('links', function ($data) {
@@ -260,7 +268,7 @@ class PenjualanController extends Controller
     {
         $user = $this->userAuth();
         if ($request->ajax()) {
-            $query = "SELECT invoice_number, nama_pembeli, status,tgl_pembelian,tgl_pengiriman,created_at FROM `penjualan_barangs` WHERE status = 'DIKIRIM' GROUP BY invoice_number,nama_pembeli,status,tgl_pembelian,tgl_pengiriman,created_at";
+            $query = "SELECT invoice_number, nama_pembeli,alamat_pembeli,telepon_pembeli, status,tgl_pembelian,tgl_pengiriman,created_at FROM `penjualan_barangs` WHERE status = 'DIKIRIM' GROUP BY invoice_number,nama_pembeli,alamat_pembeli,telepon_pembeli,status,tgl_pembelian,tgl_pengiriman,created_at";
             $data = DB::select($query);
 
             return DataTables::of($data)
