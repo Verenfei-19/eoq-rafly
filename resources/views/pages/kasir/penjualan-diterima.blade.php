@@ -89,6 +89,23 @@
                 },
             ]
         });
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR'
+            }).format(angka);
+        }
+            
+        $(document).ready(function() {
+            mainTable.on('xhr', function() {
+                var json = mainTable.ajax.json();
+                let total_penjualan_diterima = json.data[0].total_penjualan_diterima;
+                // let total_penjualan_dikirim = json.data[0].total_penjualan_dikirim;
+                $('#total_transaksi_penjualan_diterima').text(formatRupiah(total_penjualan_diterima)); 
+                // $('#total_transaksi_penjualan_dikirim').text(formatRupiah(total_penjualan_dikirim)); 
+                
+            });
+        });
 
         $('#datatable').on('click', '.btn-detail', function() {
             let selectedData = '';
@@ -97,8 +114,19 @@
             let indexRow = mainTable.rows().nodes().to$().index($(this).closest('tr'));
             selectedData = mainTable.row(indexRow).data();
             invoice = selectedData.invoice_number;
+            let nama_pembeli, tgl_pembelian,telepon_pembeli,alamat_pembeli;  
+            nama_pembeli = selectedData.nama_pembeli;
+            tgl_pembelian = selectedData.tgl_pembelian;
+            telepon_pembeli = selectedData.telepon_pembeli;
+            alamat_pembeli = selectedData.alamat_pembeli;
+            alamat_pembeli = selectedData.alamat_pembeli;
             link_print = selectedData.links;
-            $("#invoice_id").text(selectedData.invoice_number);
+            $("#invoice_id").text(invoice);
+            $("#get_nama_pembeli").text(nama_pembeli);
+            $("#get_tgl_pembelian").text(tgl_pembelian);
+            $("#get_alamat_pembeli").text(alamat_pembeli);
+            $("#get_telepon_pembeli").text(telepon_pembeli);
+
             $('#detail-datatable').DataTable().clear();
             $('#detail-datatable').DataTable().destroy();
             $('#detail-datatable').DataTable({
@@ -193,7 +221,16 @@
                         <tbody>
                         </tbody>
                     </table>
-
+                    <div class="mt-5 vstack gap-3">
+                        <div class="d-flex justify-content-between">
+                            <h3>Total Transaksi Penjualan Diterima </h3>
+                            <span class="fs-3" id="total_transaksi_penjualan_diterima"></span>
+                        </div>
+                        {{-- <div class="d-flex justify-content-between">
+                            <h3>Total Transaksi Penjualan Dikirim</h3>
+                            <span class="fs-3" id="total_transaksi_penjualan_dikirim">Rp. 25.000</span>
+                        </div> --}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -208,6 +245,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <h6>Nama Pembeli : <span id="get_nama_pembeli"></span></h6>
+                    <h6>Tanggal Pembelian : <span id="get_tgl_pembelian"></span></h6>
+                    <h6>Alamat : <span id="get_alamat_pembeli"></span></h6>
+                    <h6>Telepon : <span id="get_telepon_pembeli"></span></h6>
                     <table id="detail-datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
                             <tr>
