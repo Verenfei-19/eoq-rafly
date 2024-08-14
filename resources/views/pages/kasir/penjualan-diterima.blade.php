@@ -61,7 +61,6 @@
     <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
     <script>
         let mainTable = $('#datatable').DataTable({
-            // processing: true,
             serverSide: true,
             ajax: {
                 url: "{{ route('penjualan.diterima') }}",
@@ -70,7 +69,6 @@
                     d.end_date = $('#end_date').val();
                 }
             },
-            // ajax: "{{ route('penjualan.diterima') }}",
             columns: [
                 {
                     data: 'invoice_number',
@@ -116,67 +114,17 @@
         });
 
         $("#filter_table").click(function(){
-            // mainTable.destroy();
-            $('#filter_table').attr('disabled',true)
-            mainTable.draw();
-            setTimeout(() => {
-                $('#filter_table').attr('disabled',false)
-            }, 2000);
-            $('#start_date').val(null);
-            $('#end_date').val(null);
-    });
+                // mainTable.destroy();
+                $('#filter_table').attr('disabled',true)
+                mainTable.draw();
+                setTimeout(() => {
+                    $('#filter_table').attr('disabled',false)
+                }, 2000);
+                $('#start_date').val(null);
+                $('#end_date').val(null);
+        });
         $('#filter_stable').on('click', (e) => {
-            // mainTable.clear();
-            // mainTable.destroy();
-            // mainTable.draw();
-            // $('#filter_table').attr('disabled',true)
-            // let date_start = $('#start_date').val();
-            // let date_end = $('#end_date').val();
-            // console.log(date_start,date_end);
-            
-            
-            // $('#datatable').DataTable({
-            //     ajax: {
-            //         "type": "GET",
-            //         "url": "{{ route('penjualan.diterima') }}",
-            //         "data": {
-            //             '_token': "{{ csrf_token() }}",
-            //             'startdate': date_start,
-            //             'enddate': date_end,
-            //         }
-            //     },
-            //     columns: [
-            //         {
-            //             data: 'invoice_number',
-            //             name: 'Invoice Barang',
-            //         },
-            //         {
-            //             data: 'nama_pembeli',
-            //             name: 'Nama pembeli'
-            //         },
-                    
-            //         {
-            //             data: 'tgl_pembelian',
-            //             name: 'Created at'
-            //         },
-            //         {
-            //             data: 'status',
-            //             name: 'Status'
-            //         },
-            //         {
-            //             data: 'action',
-            //             name: 'action',
-            //             orderable: false,
-            //             searchable: false
-            //         },
-            //     ]
-            // });
-            // awee.draw()
-            // mainTable.ajax.reload(function () {
-            //     $('#filter_table').attr('disabled', false);
-            //     $('#start_date').val(null);
-            //     $('#end_date').val(null);
-            // }, false); // false to prevent reordering or searching resetting
+
             $('#filter_table').attr('disabled',false)
             $('#start_date').val(null);
             $('#end_date').val(null);
@@ -316,10 +264,6 @@
                             <h3>Total Transaksi Penjualan Diterima </h3>
                             <span class="fs-3" id="total_transaksi_penjualan_diterima"></span>
                         </div>
-                        {{-- <div class="d-flex justify-content-between">
-                            <h3>Total Transaksi Penjualan Dikirim</h3>
-                            <span class="fs-3" id="total_transaksi_penjualan_dikirim">Rp. 25.000</span>
-                        </div> --}}
                     </div>
                 </div>
             </div>

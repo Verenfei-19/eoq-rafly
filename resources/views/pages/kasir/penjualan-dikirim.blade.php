@@ -61,11 +61,18 @@
     <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
     <script>
         let mainTable = $('#datatable').DataTable({
-            ajax: "{{ route('penjualan.dikirim') }}",
+            serverSide: true,
+            ajax: {
+                url: "{{ route('penjualan.dikirim') }}",
+                data:function (d) {
+                    d.start_date = $('#start_date').val();
+                    d.end_date = $('#end_date').val();
+                }
+            },
             columns: [
                 {
                     data: 'invoice_number',
-                    name: 'Invoice Barang'
+                    name: 'invoice_number'
                 },
                 {
                     data: 'nama_pembeli',
@@ -91,6 +98,40 @@
                 },
             ]
         });
+
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR'
+            }).format(angka);
+        }
+            
+        $(document).ready(function() {
+            mainTable.on('xhr', function() {
+                var json = mainTable.ajax.json();
+                let total_penjualan_dikirim = json.data[0].total_penjualan_dikirim;
+                $('#total_transaksi_penjualan_dikirim').text(formatRupiah(total_penjualan_dikirim)); 
+                
+            });
+        });
+
+
+        $("#filter_table").click(function(){
+                // mainTable.destroy();
+                $('#filter_table').attr('disabled',true)
+                mainTable.draw();
+                setTimeout(() => {
+                    $('#filter_table').attr('disabled',false)
+                }, 2000);
+                $('#start_date').val(null);
+                $('#end_date').val(null);
+        });
+        $('#filter_stable').on('click', (e) => {
+
+            $('#filter_table').attr('disabled',false)
+            $('#start_date').val(null);
+            $('#end_date').val(null);
+        })
 
         $('#datatable').on('click', '.btn-detail', function() {
             let selectedData = '';
@@ -194,6 +235,21 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
+                    <div class="mb-3 hstack gap-3 align-items-end">
+                        <div class="">
+                            <label for="start_date">Tanggal Awal</label>
+                            <input type="date" class="form-control" name="start_date" id="start_date">
+                        </div>
+                        <div class="">
+                            <label for="end_date">Tanggal Akhir</label>
+                            <input type="date" class="form-control" name="end_date" id="end_date">
+                        </div>
+                        <div>
+                            <button class="btn btn-primary waves-effect waves-light" id="filter_table">
+                                <i class="bx bx-search align-middle me-2 font-size-18"></i>Filter
+                            </button>
+                        </div>
+                    </div>
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
                             <tr>
@@ -208,7 +264,12 @@
                         <tbody>
                         </tbody>
                     </table>
-
+                    <div class="mt-5 vstack gap-3">
+                        <div class="d-flex justify-content-between">
+                            <h3>Total Transaksi Penjualan Dikirim</h3>
+                            <span class="fs-3" id="total_transaksi_penjualan_dikirim"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -182,6 +182,7 @@
             selectedData = mainTable.row(indexRow).data();
             $('#label-barang').text(selectedData.nama_barang);
             $('#jumlah_pembelian').val("");
+            console.log(keranjang);
         });
 
         $('#btn-save-add').on('click', function(e) {
