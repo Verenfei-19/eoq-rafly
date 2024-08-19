@@ -91,6 +91,13 @@
                     name: 'Tanggal dikirim'
                 },
                 {
+                    data: 'total_penjualan',
+                    name: 'Total Penjualan',
+                    render: function(data, type, row) {
+                        return formatRupiah(data);
+                    }
+                },
+                {
                     data: 'action',
                     name: 'action',
                     orderable: false,
@@ -238,7 +245,7 @@
                     <div class="mb-3 hstack gap-3 align-items-end">
                         <div class="">
                             <label for="start_date">Tanggal Awal</label>
-                            <input type="date" class="form-control" name="start_date" id="start_date">
+                            <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="start_date" id="start_date">
                         </div>
                         <div class="">
                             <label for="end_date">Tanggal Akhir</label>
@@ -258,6 +265,7 @@
                                 <th>Tanggal Beli</th>
                                 <th>Status</th>
                                 <th>Tanggal Dikirim</th>
+                                <th>Total Harga</th>
                                 <th class="col-md-1">Action</th>
                             </tr>
                         </thead>
@@ -284,11 +292,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <h6>Nama Pembeli : <span id="get_nama_pembeli"></span></h6>
-                    <h6>Tanggal Pembelian : <span id="get_tgl_pembelian"></span></h6>
-                    <h6>Tanggal Pengiriman : <span id="get_tgl_pengiriman"></span></h6>
-                    <h6>Alamat : <span id="get_alamat_pembeli"></span></h6>
-                    <h6>Telepon : <span id="get_telepon_pembeli"></span></h6>
+                    <div class="hstack justify-content-between align-items-start">
+                        <div>
+                            <h5>Nama Kasir : {{ $user->name }}</h5>
+                        </div>
+                        <div>
+                            <h6>Nama Pembeli : <span id="get_nama_pembeli"></span></h6>
+                            <h6>Tanggal Pembelian : <span id="get_tgl_pembelian"></span></h6>
+                            <h6>Tanggal Pengiriman : <span id="get_tgl_pengiriman"></span></h6>
+                            <h6>Alamat : <span id="get_alamat_pembeli"></span></h6>
+                            <h6>Telepon : <span id="get_telepon_pembeli"></span></h6>
+                        </div>
+                    </div>
                     <table id="detail-datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
                             <tr>
