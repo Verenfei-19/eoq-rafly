@@ -353,12 +353,14 @@ class PenjualanController extends Controller
     // FUNGSI CETAK INVOICE
     public function invoice_diterima(Request $request, PenjualanBarang $penjualan)
     {
+        $user = $this->userAuth();
         $data = $penjualan->where('invoice_number', $penjualan->invoice_number)->get();
-        return view('pages.kasir.invoice-diterima', compact('data'));
+        return view('pages.kasir.invoice-diterima', compact('data', 'user'));
     }
     public function invoice_dikirim(Request $request, PenjualanBarang $penjualan)
     {
+        $user = $this->userAuth();
         $data = $penjualan->where('invoice_number', $penjualan->invoice_number)->get();
-        return view('pages.kasir.invoice-dikirim', compact('data'));
+        return view('pages.kasir.invoice-dikirim', compact('data', 'user'));
     }
 }
