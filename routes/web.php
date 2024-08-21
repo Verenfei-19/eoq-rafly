@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\PersediaanMasukController;
 use App\Http\Controllers\Admin\PermintaanCounterController;
 use App\Http\Controllers\Admin\PengirimanCounterController;
 use App\Http\Controllers\Admin\PenjualanController;
+use App\Http\Controllers\Admin\RekapPenjualanController;
 use App\Http\Controllers\SupplierController;
 
 /*
@@ -144,5 +145,9 @@ Route::middleware('user')->group(function () {
         Route::get('/supplier/edit/{supplier}', 'edit')->name('supplier.edit');
         Route::post('/supplier/update/{supplier}', 'update')->name('supplier.update');
         Route::get('/supplier/destroy/{supplier}', 'destroy')->name('supplier.destroy');
+    });
+
+    Route::controller(RekapPenjualanController::class)->group(function () {
+        Route::get('/rekap', 'index')->name('rekap.index');
     });
 });
