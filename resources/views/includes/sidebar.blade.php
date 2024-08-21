@@ -122,6 +122,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{ route('rekap.index') }}" class="waves-effect">
+                        <i class="bx bxs-spreadsheet"></i>
+                        <span key="t-kasir">Rekap Penjualan Bulanan</span>
+                    </a>
+                </li>
+
                 {{-- <li>
                     <a href="{{ route('permintaan-counter.history') }}" class="waves-effect">
                         <i class="bx bx-notepad"></i>
