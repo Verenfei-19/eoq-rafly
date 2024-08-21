@@ -251,6 +251,7 @@
                             <button class="btn btn-primary waves-effect waves-light" id="filter_table">
                                 <i class="bx bx-search align-middle me-2 font-size-18"></i>Filter
                             </button>
+                            <a href="{{ route('rekap.index') }}" class="btn btn-info waves-effect waves-light" id="filter_table">Rekap Penjualan Bulanan</a>
                         </div>
                     </div>
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">

@@ -33,7 +33,7 @@ function penyebut($nilai) {
 		} else {
 			$hasil = trim(penyebut($nilai));
 		}     		
-		return $hasil;
+		return $hasil.' rupiah';
 	}
 @endphp
 <!DOCTYPE html>
