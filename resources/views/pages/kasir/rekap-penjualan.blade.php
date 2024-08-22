@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('title')
-    Rekapitulasi Penjualan Bulan {{ \Carbon\Carbon::parse(date('F'))->locale('id')->isoFormat('MMMM') }}
+    Rekapitulasi Penjualan 
+    {{-- {{ \Carbon\Carbon::parse(date('F'))->locale('id')->isoFormat('MMMM') }} --}}
 @endsection
 
 @push('before-app-style')
@@ -80,17 +81,20 @@
                     data: 'nama_barang',
                     name: 'nama_barang',
                 },
-                
                 {
-                    data: 'item_terjual',
+                    data: 'quantity',
                     name: 'item_terjual'
                 },
+                
                 {
                     data: 'harga_barang',
                     name: 'harga_barang',
                     render: function(data, type, row) {
                         return formatRupiah(data);
                     }
+                },{
+                    data: 'tgl_pembelian',
+                    name: 'tgl_pembelian'
                 },
                 {
                     data: 'total_penjualan',
@@ -175,6 +179,7 @@
                                 <th>Nama Barang</th>
                                 <th>Total Item Terjual</th>
                                 <th>Harga Item</th>
+                                <th>Tanggal Pembelian</th>
                                 <th>Total Penjualan</th>
                             </tr>
                         </thead>
