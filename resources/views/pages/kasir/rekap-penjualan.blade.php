@@ -127,9 +127,19 @@
         $("#filter_table").click(function(){
                 // mainTable.destroy();
                 $('#filter_table').attr('disabled',true)
+                $('#reset_table').toggleClass('d-none');
                 mainTable.draw();
                 setTimeout(() => {
                     $('#filter_table').attr('disabled',false)
+                }, 2000);
+                $('#start_date').val(null);
+                $('#end_date').val(null);
+        });
+        $("#reset_table").click(function(){
+                mainTable.draw();
+                $('#reset_table').toggleClass('d-none');
+                setTimeout(() => {
+                    $('#reset_table').attr('disabled',false)
                 }, 2000);
                 $('#start_date').val(null);
                 $('#end_date').val(null);
@@ -169,6 +179,9 @@
                         <div>
                             <button class="btn btn-primary waves-effect waves-light" id="filter_table">
                                 <i class="bx bx-search align-middle me-2 font-size-18"></i>Rekap
+                            </button>
+                            <button type="reset" class="btn btn-warning waves-effect waves-light d-none" id="reset_table">
+                               Reset
                             </button>
                         </div>
                     </div>
