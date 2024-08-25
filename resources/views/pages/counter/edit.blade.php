@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Edit Counter
+    Edit Toko
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="">Counter</a></li>
+                        <li class="breadcrumb-item"><a href="">Toko</a></li>
                         <li class="breadcrumb-item active">@yield('title')</li>
                     </ol>
                 </div>

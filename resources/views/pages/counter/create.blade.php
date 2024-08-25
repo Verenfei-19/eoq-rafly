@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Tambah Counter
+    Tambah Toko
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('counter') }}">Counter</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('counter') }}">Toko</a></li>
                         <li class="breadcrumb-item active">@yield('title')</li>
                     </ol>
                 </div>

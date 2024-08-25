@@ -4,10 +4,10 @@
     textual HTML5 <code>&lt;input&gt;</code> <code>type</code>.</p> --}}
 
 <div class="mt-4 mb-3 row">
-    <label for="id_counter" class="col-md-2 col-form-label">ID Counter</label>
+    {{-- <label for="id_counter" class="col-md-2 col-form-label">ID Counter</label> --}}
     <div class="col-md-10">
         <input class="form-control" type="text" value="{{ !empty($counters) ? $counters->counter_id : $counter_id }}"
-            id="id_counter" name="counter_id" readonly>
+            id="id_counter" name="counter_id" hidden>
     </div>
 </div>
 

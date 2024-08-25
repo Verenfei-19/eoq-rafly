@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Counter
+    Toko
 @endsection
 
 @push('before-app-style')
@@ -28,9 +28,10 @@
     <script>
         $('#datatable').DataTable({
             ajax: "{{ route('counter') }}",
-            columns: [{
-                    data: "counter_id"
-                },
+            columns: [
+                // {
+                //     data: "counter_id"
+                // },
                 {
                     data: "name"
                 },
@@ -89,9 +90,9 @@
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
                             <tr>
-                                <th>ID Counter</th>
-                                <th>Nama Counter</th>
-                                <th>Alamat Counter</th>
+                                {{-- <th>ID Toko</th> --}}
+                                <th>Nama Toko</th>
+                                <th>Alamat Toko</th>
                                 <th>Username</th>
                                 @if ($user->role == 'gudang')
                                     <th>Action</th>
