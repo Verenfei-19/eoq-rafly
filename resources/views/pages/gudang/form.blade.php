@@ -4,9 +4,9 @@
     textual HTML5 <code>&lt;input&gt;</code> <code>type</code>.</p> --}}
 
 <div class="mt-4 mb-3 row">
-    <label for="id_gudang" class="col-md-2 col-form-label">ID Gudang</label>
+    {{-- <label for="id_gudang" class="col-md-2 col-form-label">ID Gudang</label> --}}
     <div class="col-md-10">
-        <input class="form-control" type="text" value="{{ $gudangs->gudang_id }}" id="id_gudang" readonly>
+        <input class="form-control" type="text" value="{{ $gudangs->gudang_id }}" id="id_gudang" hidden readonly>
     </div>
 </div>
 

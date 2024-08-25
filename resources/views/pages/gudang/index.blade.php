@@ -28,9 +28,10 @@
     <script>
         $('#datatable').DataTable({
             ajax: "{{ route('gudang') }}",
-            columns: [{
-                    data: "gudang_id"
-                },
+            columns: [
+                // {
+                //     data: "gudang_id"
+                // },
                 {
                     data: "name"
                 },
@@ -81,7 +82,7 @@
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
                             <tr>
-                                <th>ID Gudang</th>
+                                {{-- <th>ID Gudang</th> --}}
                                 <th>Nama Gudang</th>
                                 <th>Alamat Gudang</th>
                                 <th>Username</th>
