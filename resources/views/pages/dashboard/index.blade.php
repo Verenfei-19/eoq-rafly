@@ -138,7 +138,7 @@
                         <div class="card-body">
                             <div class="d-flex flex-wrap">
                                 <div class="me-3">
-                                    <p class="text-muted mb-2">Jumlah Counter</p>
+                                    <p class="text-muted mb-2">Jumlah Toko</p>
                                     <h5 class="mb-0">{{ $jumlah_counter }}</h5>
                                 </div>
                             </div>
