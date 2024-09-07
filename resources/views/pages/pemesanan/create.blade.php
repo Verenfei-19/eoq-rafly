@@ -203,61 +203,6 @@
             pemesananDatatable = viewPemesananDataTable(pemesanan);
         });
 
-        // $('.check-eoq').each(function(index, element) {
-        //     // element == this
-        //     $(this).click(function(el) {
-        //         if ($(this).prop('checked') == true) {
-        //             // tkiCheck.push($(this).val());
-        //             // noCheck.push($(this).closest('tr').find('.no').html());
-        //             alert($(this).closest('tr'));
-        //         } else {
-        //             // let indexTkiCheck = tkiCheck.indexOf($(this).val());
-        //             // let indexNoCheck = noCheck.indexOf($(this).closest('tr').find('.no').html());
-        //             // tkiCheck.splice(indexTkiCheck, 1);
-        //             // noCheck.splice(indexNoCheck, 1);
-        //             alert($(this).closest('tr'));
-        //         }
-        //         propHitung();
-        //     });
-        // });
-
-        // $('#datatable-pemesanan').on('click', '.check-eoq', function() {
-        //     let indexRow = pemesananDatatable.rows().nodes().to$().index($(this).closest('tr'));
-        //     if ($(this).prop('checked') == true) {
-        //         // $(this).attr('checked');
-        //         pemesanan[indexRow].jumlah = pemesanan[indexRow].eoq;
-        //         // selectedKeranjang = '';
-        //         // selectedKeranjang = pemesananDatatable.row(indexRow).data();
-        //         // pemesanan[indexRow].eoq;S
-        //         // console.log(pemesanan[indexRow].eoq);
-        //         // console.log(indexRow + " checked");
-        //         pemesananDatatable = viewPemesananDataTable(pemesanan);
-        //     } else {
-        //         pemesanan[indexRow].jumlah = 0;
-        //         // console.log(pemesanan[indexRow].eoq);
-        //         // console.log(indexRow + " unchecked");
-        //         pemesananDatatable = viewPemesananDataTable(pemesanan);
-        //     }
-
-        // });
-
-        // $('.check-eoq').each(function(index, element) {
-        //     // element == this
-        //     $(this).on('click', function(e) {
-        //         let indexRow = pemesananDatatable.rows().nodes().to$().index($(this).closest('tr'));
-        //         if ($(this).prop('checked') == true) {
-        //             selectedKeranjang = '';
-        //             selectedKeranjang = pemesananDatatable.row(indexRow).data();
-        //             console.log(selectedData);
-        //         } else {
-        //             // let indexTkiCheck = tkiCheck.indexOf($(this).val());
-        //             // let indexNoCheck = noCheck.indexOf($(this).closest('tr').find('.no').html());
-        //             // tkiCheck.splice(indexTkiCheck, 1);
-        //             // noCheck.splice(indexNoCheck, 1);
-        //             console.log(0);
-        //         }
-        //     });
-        // });
 
         $('.btn-close').on('click', function() {
             $('.alert').hide();
