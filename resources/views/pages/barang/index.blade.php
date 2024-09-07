@@ -59,6 +59,9 @@
                         data: "rop",
                         name: "rop"
                     }, {
+                        data: "rop",
+                        name: "rop"
+                    }, {
                         data: "qty_total",
                         name: "qty_total"
                     },
@@ -110,6 +113,10 @@
                                 render: function(data, type, row) {
                                     return rupiah(data);
                                 }
+                            },
+                            {
+                                data: "rop",
+                                name: "rop"
                             },
                             {
                                 data: "rop",
@@ -319,7 +326,7 @@
                                     Biaya Penyimpanan
                                 </button>
                             </div>
-                            <div class="col-5 d-flex justify-content-end">
+                            {{-- <div class="col-5 d-flex justify-content-end">
                                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                     <input type="radio" class="btn-check" name="btnradio" value="master" id="btnradio4"
                                         autocomplete="off" checked>
@@ -328,12 +335,8 @@
                                     <input type="radio" class="btn-check" name="btnradio" value="gudang" id="btnradio5"
                                         autocomplete="off">
                                     <label class="btn btn-outline-primary" for="btnradio5">Barang Gudang</label>
-                                    {{-- 
-                                    <input type="radio" class="btn-check" name="btnradio" value="counter" id="btnradio6"
-                                        autocomplete="off">
-                                    <label class="btn btn-outline-primary" for="btnradio6">Barang Counter</label> --}}
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="col">
                                 <div class="d-flex justify-content-end">
@@ -355,6 +358,7 @@
                                 @if ($user->role == 'gudang' || $user->role == 'owner')
                                     <th>Biaya Penyimpanan</th>
                                     <th>ROP</th>
+                                    <th>SS</th>
                                     <th>Quantity Total</th>
                                     @if ($user->role == 'gudang' || $user->role == 'owner')
                                         <th>Action</th>
