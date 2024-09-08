@@ -59,8 +59,8 @@
                         data: "rop",
                         name: "rop"
                     }, {
-                        data: "rop",
-                        name: "rop"
+                        data: "ss",
+                        name: "ss"
                     }, {
                         data: "qty_total",
                         name: "qty_total"
@@ -69,7 +69,7 @@
                         {
                             data: "action",
                             name: "action"
-                        }
+                        },
                     @endif
                 @else
                     {
@@ -81,93 +81,93 @@
             ],
         });
 
-        $('input[name=btnradio]').each(function(index, element) {
-            // element == this
-            $(this).on('change', function(e) {
-                $('#datatable').DataTable().clear();
-                $('#datatable').DataTable().destroy();
-                const target = $(e.target).val();
-                if (target == 'master') {
-                    barangDatatable.columns(4).visible(true);
-                    barangDatatable.columns(5).visible(true);
-                    barangDatatable.columns(6).visible(true);
-                    $(barangDatatable.columns(3).header()).text('Biaya Penyimpanan');
-                    $('#datatable').DataTable({
-                        ajax: "{{ route('barang') }}",
-                        columns: [{
-                                data: "barang_id",
-                                name: "barang_id"
-                            },
-                            {
-                                data: "nama_barang",
-                                name: "nama_barang",
-                            },
-                            {
-                                data: "harga_barang",
-                                render: function(data, type, row) {
-                                    return rupiah(data);
-                                }
-                            },
-                            {
-                                data: "biaya_penyimpanan",
-                                render: function(data, type, row) {
-                                    return rupiah(data);
-                                }
-                            },
-                            {
-                                data: "rop",
-                                name: "rop"
-                            },
-                            {
-                                data: "rop",
-                                name: "rop"
-                            },
-                            {
-                                data: "qty_total",
-                                name: "qty_total"
-                            },
-                            {
-                                data: "action",
-                                name: "action"
-                            }
-                        ],
-                    });
-                } else {
-                    barangDatatable.columns(4).visible(false);
-                    barangDatatable.columns(5).visible(false);
-                    barangDatatable.columns(6).visible(false);
-                    $(barangDatatable.columns(3).header()).text('Quantity');
-                    $('#datatable').DataTable({
-                        ajax: {
-                            "type": "GET",
-                            "url": "{{ route('barang') }}",
-                            "data": {
-                                '_token': "{{ csrf_token() }}",
-                                'target': target
-                            }
-                        },
-                        columns: [{
-                                data: "barang_id",
-                                name: "barang_id"
-                            },
-                            {
-                                data: "nama_barang",
-                                name: "nama_barang"
-                            },
-                            {
-                                data: "harga_barang",
-                                render: function(data, type, row) {
-                                    return rupiah(data);
-                                }
-                            },
-                            {
-                                data: "quantity",
-                            }
-                        ],
-                    });
-                }
-            });
-        });
+        // $('input[name=btnradio]').each(function(index, element) {
+        //     // element == this
+        //     $(this).on('change', function(e) {
+        //         $('#datatable').DataTable().clear();
+        //         $('#datatable').DataTable().destroy();
+        //         const target = $(e.target).val();
+        //         if (target == 'master') {
+        //             barangDatatable.columns(4).visible(true);
+        //             barangDatatable.columns(5).visible(true);
+        //             barangDatatable.columns(6).visible(true);
+        //             $(barangDatatable.columns(3).header()).text('Biaya Penyimpanan');
+        //             $('#datatable').DataTable({
+        //                 ajax: "{{ route('barang') }}",
+        //                 columns: [{
+        //                         data: "barang_id",
+        //                         name: "barang_id"
+        //                     },
+        //                     {
+        //                         data: "nama_barang",
+        //                         name: "nama_barang",
+        //                     },
+        //                     {
+        //                         data: "harga_barang",
+        //                         render: function(data, type, row) {
+        //                             return rupiah(data);
+        //                         }
+        //                     },
+        //                     {
+        //                         data: "biaya_penyimpanan",
+        //                         render: function(data, type, row) {
+        //                             return rupiah(data);
+        //                         }
+        //                     },
+        //                     {
+        //                         data: "rop",
+        //                         name: "rop"
+        //                     },
+        //                     {
+        //                         data: "rop",
+        //                         name: "rop"
+        //                     },
+        //                     {
+        //                         data: "qty_total",
+        //                         name: "qty_total"
+        //                     },
+        //                     {
+        //                         data: "action",
+        //                         name: "action"
+        //                     }
+        //                 ],
+        //             });
+        //         } else {
+        //             barangDatatable.columns(4).visible(false);
+        //             barangDatatable.columns(5).visible(false);
+        //             barangDatatable.columns(6).visible(false);
+        //             $(barangDatatable.columns(3).header()).text('Quantity');
+        //             $('#datatable').DataTable({
+        //                 ajax: {
+        //                     "type": "GET",
+        //                     "url": "{{ route('barang') }}",
+        //                     "data": {
+        //                         '_token': "{{ csrf_token() }}",
+        //                         'target': target
+        //                     }
+        //                 },
+        //                 columns: [{
+        //                         data: "barang_id",
+        //                         name: "barang_id"
+        //                     },
+        //                     {
+        //                         data: "nama_barang",
+        //                         name: "nama_barang"
+        //                     },
+        //                     {
+        //                         data: "harga_barang",
+        //                         render: function(data, type, row) {
+        //                             return rupiah(data);
+        //                         }
+        //                     },
+        //                     {
+        //                         data: "quantity",
+        //                     }
+        //                 ],
+        //             });
+        //         }
+        //     });
+        // });
 
         $("#biaya_penyimpanan").keypress(function(evt) {
             var key = String.fromCharCode(evt.which);
@@ -177,6 +177,8 @@
         });
         $('.alert-penyimpanan').hide();
         $('.alert-warning').hide();
+
+        // SAVE BIAYA PENYIMPANAN
         $('#btn-save').on('click', function() {
             let total_biaya = $('#biaya_penyimpanan').val();
             if (total_biaya != "") {
@@ -192,10 +194,10 @@
                         $('.alert-penyimpanan').show();
                         $('#datatable').DataTable().clear();
                         $('#datatable').DataTable().destroy();
-                        barangDatatable.columns(4).visible(true);
-                        barangDatatable.columns(5).visible(true);
-                        barangDatatable.columns(6).visible(true);
-                        $(barangDatatable.columns(3).header()).text('Biaya Penyimpanan');
+                        // barangDatatable.columns(4).visible(true);
+                        // barangDatatable.columns(5).visible(true);
+                        // barangDatatable.columns(6).visible(true);
+                        // $(barangDatatable.columns(3).header()).text('Biaya Penyimpanan');
                         $('#datatable').DataTable({
                             ajax: "{{ route('barang') }}",
                             columns: [{
@@ -223,6 +225,10 @@
                                     name: "rop"
                                 },
                                 {
+                                    data: "ss",
+                                    name: "ss"
+                                },
+                                {
                                     data: "qty_total",
                                     name: "qty_total"
                                 },
@@ -233,7 +239,7 @@
                             ],
                         });
                         $('#biaya_penyimpanan').val("");
-                        $('input[name=btnradio][value="master"]').prop('checked', true);
+                        // $('input[name=btnradio][value="master"]').prop('checked', true);
                     }
                 });
             } else {
@@ -243,36 +249,36 @@
             }
         });
 
-        $('#datatable').on('click', '.btn-detail', function() {
-            let selectedData = '';
-            let slug = '';
-            let indexRow = barangDatatable.rows().nodes().to$().index($(this).closest('tr'));
-            selectedData = barangDatatable.row(indexRow).data();
-            slug = selectedData.slug;
-            $("#nama-barang").text(selectedData.nama_barang);
-            $('#detail-datatable').DataTable().clear();
-            $('#detail-datatable').DataTable().destroy();
-            $('#detail-datatable').DataTable({
-                ajax: {
-                    "type": "POST",
-                    "url": "{{ route('barang.detail') }}",
-                    "data": {
-                        '_token': "{{ csrf_token() }}",
-                        'slug': slug
-                    }
-                },
-                lengthMenu: [5],
-                columns: [{
-                        data: "nama",
-                        name: "nama"
-                    },
-                    {
-                        data: "quantity",
-                        name: "quantity"
-                    }
-                ],
-            });
-        });
+        // $('#datatable').on('click', '.btn-detail', function() {
+        //     let selectedData = '';
+        //     let slug = '';
+        //     let indexRow = barangDatatable.rows().nodes().to$().index($(this).closest('tr'));
+        //     selectedData = barangDatatable.row(indexRow).data();
+        //     slug = selectedData.slug;
+        //     $("#nama-barang").text(selectedData.nama_barang);
+        //     $('#detail-datatable').DataTable().clear();
+        //     $('#detail-datatable').DataTable().destroy();
+        //     $('#detail-datatable').DataTable({
+        //         ajax: {
+        //             "type": "POST",
+        //             "url": "{{ route('barang.detail') }}",
+        //             "data": {
+        //                 '_token': "{{ csrf_token() }}",
+        //                 'slug': slug
+        //             }
+        //         },
+        //         lengthMenu: [5],
+        //         columns: [{
+        //                 data: "nama",
+        //                 name: "nama"
+        //             },
+        //             {
+        //                 data: "quantity",
+        //                 name: "quantity"
+        //             }
+        //         ],
+        //     });
+        // });
 
         $('.btn-close').on('click', function() {
             $('.alert').hide();
@@ -318,6 +324,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
+
                     @if ($user->role == 'gudang')
                         <div class="row mb-4 mt-1">
                             <div class="col-3">
@@ -326,18 +333,6 @@
                                     Biaya Penyimpanan
                                 </button>
                             </div>
-                            {{-- <div class="col-5 d-flex justify-content-end">
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                    <input type="radio" class="btn-check" name="btnradio" value="master" id="btnradio4"
-                                        autocomplete="off" checked>
-                                    <label class="btn btn-outline-primary" for="btnradio4">Master Barang</label>
-
-                                    <input type="radio" class="btn-check" name="btnradio" value="gudang" id="btnradio5"
-                                        autocomplete="off">
-                                    <label class="btn btn-outline-primary" for="btnradio5">Barang Gudang</label>
-                                </div>
-                            </div> --}}
-
                             <div class="col">
                                 <div class="d-flex justify-content-end">
                                     <a href="{{ route('barang.create') }}"
@@ -397,7 +392,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -421,5 +416,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
