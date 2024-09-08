@@ -27,57 +27,60 @@ class BarangController extends Controller
         $path = 'barang';
 
         if ($user->role == 'gudang' || $user->role == 'owner') {
-            if ($request->ajax() && empty($request->target)) {
-                $query = "SELECT a.barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop,((SELECT SUM(stok_awal) + SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = a.barang_id GROUP BY barang_id) + (SELECT SUM(stok_awal) + SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = a.barang_id GROUP BY barang_id)) as qty_total
+            // if ($request->ajax() && empty($request->target)) {
+            if ($request->ajax()) {
+                $query = "SELECT a.barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop,a.ss,((SELECT SUM(stok_awal) + SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = a.barang_id GROUP BY barang_id) + (SELECT SUM(stok_awal) + SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = a.barang_id GROUP BY barang_id)) as qty_total
                 FROM barangs as a
                 JOIN barang_gudangs as b on a.barang_id = b.barang_id
                 JOIN barang_counters as c on a.barang_id = c.barang_id
-                GROUP BY a.barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop ORDER BY a.barang_id ASC;";
+                GROUP BY a.barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop,a.ss ORDER BY a.barang_id ASC;";
                 $barangs = DB::select($query);
 
                 return DataTables::of($barangs)
                     ->addColumn('action', function ($object) use ($path, $user) {
                         $html = '';
-                        if ($user->role == 'gudang') {
-                            $html .= ' <a href="' . route($path . ".edit", ["slug" => $object->slug]) . '" class="btn btn-success waves-effect waves-light">'
-                                . ' <i class="bx bx-edit align-middle me-2 font-size-18"></i></a>';
-                            $html .= ' <a href="' . route($path . ".destroy", ["slug" => $object->slug]) . '" class="btn btn-danger waves-effect waves-light">'
-                                . ' <i class="bx bx-trash align-middle me-2 font-size-18"></i></a>';
-                            $html .= ' <button type="button" class="btn btn-info waves-effect waves-light btn-detail" data-bs-toggle="modal" data-bs-target="#detailModal">
-                                <i class="bx bx-detail font-size-18 align-middle me-2"></i></button>';
-                        } else {
-                            $html .= '<button type="button" class="btn btn-info waves-effect waves-light btn-detail" data-bs-toggle="modal" data-bs-target="#detailModal">
-                        <i class="bx bx-detail font-size-18 align-middle me-2"></i></button>';
-                        }
+                        // if ($user->role == 'gudang') {
+                        $html .= ' <a href="' . route($path . ".edit", ["slug" => $object->slug]) . '" class="btn btn-success waves-effect waves-light">'
+                            . ' <i class="bx bx-edit align-middle me-2 font-size-18"></i></a>';
+                        $html .= ' <a href="' . route($path . ".destroy", ["slug" => $object->slug]) . '" class="btn btn-danger waves-effect waves-light">'
+                            . ' <i class="bx bx-trash align-middle me-2 font-size-18"></i></a>';
+                        // $html .= ' <button type="button" class="btn btn-info waves-effect waves-light btn-detail" data-bs-toggle="modal" data-bs-target="#detailModal">
+                        //     <i class="bx bx-detail font-size-18 align-middle me-2"></i></button>';
+                        // }
+                        // else {
+                        //     $html .= '<button type="button" class="btn btn-info waves-effect waves-light btn-detail" data-bs-toggle="modal" data-bs-target="#detailModal">
+                        // <i class="bx bx-detail font-size-18 align-middle me-2"></i></button>';
+                        // }
                         return $html;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
-            } else if ($request->ajax() && !empty($request->target)) {
-                $data = '';
-                if ($request->target == 'gudang') {
-                    $query = "SELECT b.barang_gudang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, (SELECT (SUM(stok_masuk) - SUM(stok_keluar)) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) as quantity
-                    FROM barangs as a
-                    JOIN barang_gudangs as b on a.barang_id = b.barang_id
-                    GROUP BY b.barang_gudang_id, b.slug,a.nama_barang, a.harga_barang
-                    ORDER BY b.barang_gudang_id ASC";
-                    $data = DB::select($query);
-                    return DataTables::of($data)->make(true);
-                } else if ($request->target == 'counter') {
-                    $query = "SELECT b.barang_counter_id as barang_id, b.slug, a.nama_barang, a.harga_barang, (SUM(b.stok_masuk) - SUM(b.stok_keluar)) as quantity
-                    FROM barangs as a
-                    JOIN barang_counters as b on a.barang_id = b.barang_id
-                    GROUP BY b.barang_counter_id, b.slug,a.nama_barang, a.harga_barang
-                    ORDER BY b.barang_counter_id ASC";
-                    $data = DB::select($query);
-                    return DataTables::of($data)->make(true);
-                }
             }
+            // } else if ($request->ajax() && !empty($request->target)) {
+            //     $data = '';
+            //     if ($request->target == 'gudang') {
+            //         $query = "SELECT b.barang_gudang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, (SELECT (SUM(stok_masuk) - SUM(stok_keluar)) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) as quantity
+            //         FROM barangs as a
+            //         JOIN barang_gudangs as b on a.barang_id = b.barang_id
+            //         GROUP BY b.barang_gudang_id, b.slug,a.nama_barang, a.harga_barang
+            //         ORDER BY b.barang_gudang_id ASC";
+            //         $data = DB::select($query);
+            //         return DataTables::of($data)->make(true);
+            //     } else if ($request->target == 'counter') {
+            //         $query = "SELECT b.barang_counter_id as barang_id, b.slug, a.nama_barang, a.harga_barang, (SUM(b.stok_masuk) - SUM(b.stok_keluar)) as quantity
+            //         FROM barangs as a
+            //         JOIN barang_counters as b on a.barang_id = b.barang_id
+            //         GROUP BY b.barang_counter_id, b.slug,a.nama_barang, a.harga_barang
+            //         ORDER BY b.barang_counter_id ASC";
+            //         $data = DB::select($query);
+            //         return DataTables::of($data)->make(true);
+            //     }
+            // }
         } elseif ($user->role == 'counter') {
-            $counters = DB::table('counters')
-                ->select('counter_id')
-                ->where('user_id', $user->user_id)
-                ->first();
+            // $counters = DB::table('counters')
+            //     ->select('counter_id')
+            //     ->where('user_id', $user->user_id)
+            //     ->first();
             if ($request->ajax()) {
                 // $query = 'SELECT a.barang_counter_id as barang_id, b.nama_barang, b.harga_barang, a.slug, (a.stok_masuk-a.stok_keluar) as quantity
                 // FROM barang_counters as a
@@ -238,25 +241,41 @@ class BarangController extends Controller
         }
     }
 
+    // public function biayaPenyimpanan(Request $request)
+    // {
+    //     $query = 'SELECT ((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters)) as qty_total
+    //     FROM barangs as a
+    //     JOIN barang_gudangs as b on a.barang_id = b.barang_id
+    //     JOIN barang_counters as c on a.barang_id = c.barang_id LIMIT 1';
+    //     $data = DB::select($query);
+    //     $biaya_penyimpanan_perunit = $request->total_biaya / $data[0]->qty_total;
+
+    //     DB::beginTransaction();
+    //     try {
+    //         //code... 
+    //         DB::table('barangs')->update(array('biaya_penyimpanan' => $biaya_penyimpanan_perunit));
+    //         DB::commit();
+    //         return response()->json([], 200);
+    //     } catch (\Exception $ex) {
+    //         //throw $th;
+    //         echo $ex->getMessage();
+    //         DB::rollBack();
+    //     }
+    // }
+
     public function biayaPenyimpanan(Request $request)
     {
-        $query = 'SELECT ((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters)) as qty_total
-        FROM barangs as a
-        JOIN barang_gudangs as b on a.barang_id = b.barang_id
-        JOIN barang_counters as c on a.barang_id = c.barang_id LIMIT 1';
+        // rumus = (biaya penyimpanan / quantity item tiap barang)/total jumlah barang
+        $query = 'SELECT bg.barang_id,nama_barang,harga_barang,biaya_penyimpanan,rop,ss,bg.stok_masuk FROM `barangs` JOIN barang_gudangs as bg ON bg.barang_id = barangs.barang_id;';
         $data = DB::select($query);
-        $biaya_penyimpanan_perunit = $request->total_biaya / $data[0]->qty_total;
-
-        DB::beginTransaction();
-        try {
-            //code... 
-            DB::table('barangs')->update(array('biaya_penyimpanan' => $biaya_penyimpanan_perunit));
-            DB::commit();
-            return response()->json([], 200);
-        } catch (\Exception $ex) {
-            //throw $th;
-            echo $ex->getMessage();
-            DB::rollBack();
+        $jumlahBarang = BarangGudang::all()->count();
+        $allBarang = Barang::all();
+        foreach ($allBarang as $key => $value) {
+            Barang::where('barang_id', $value['barang_id'])->update(
+                [
+                    'biaya_penyimpanan' => ($request->total_biaya / $data[$key]->stok_masuk) / $jumlahBarang
+                ]
+            );
         }
     }
 

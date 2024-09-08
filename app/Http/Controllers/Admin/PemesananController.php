@@ -105,6 +105,7 @@ class PemesananController extends Controller
 
     public function hitungEOQ(Request $request)
     {
+        //
         $bulan_tahun = DB::table('penjualans')
             ->selectRaw('DATE_FORMAT(MAX(tanggal_penjualan),"%m-%Y") as bulan')
             ->whereRaw('DATE_FORMAT(tanggal_penjualan, "%m-%Y") < DATE_FORMAT(now(), "%m-%Y")')
