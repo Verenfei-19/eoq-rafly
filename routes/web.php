@@ -51,7 +51,10 @@ Route::middleware('user')->group(function () {
         Route::post('/barang/store', 'store')->name('barang.store');
         Route::post('/barang/update/{slug}', 'update')->name('barang.update');
         Route::get('/barang/destroy/{slug}', 'destroy')->name('barang.destroy');
+
         Route::post('/barang/biayapenyimpanan', 'biayaPenyimpanan')->name('barang.biayapenyimpanan');
+        Route::get('/barang/tesbiayapenyimpanan', 'tesbiayaPenyimpanan')->name('barang.tesbiayapenyimpanan');
+
         Route::post('/barang/detail', 'detailQuantity')->name('barang.detail');
         Route::get('/barang/checkrop', 'checkROP')->name('barang.checkROP');
     });
@@ -76,8 +79,10 @@ Route::middleware('user')->group(function () {
         Route::get('/pemesanan', 'index')->name('pemesanan');
         Route::get('/pemesanan/persediaan-baru', 'createNewPersediaan')->name('pemesanan.create.new-persediaan');
         Route::get('/pemesanan/create', 'create')->name('pemesanan.create');
+
         Route::post('/pemesanan/store', 'store')->name('pemesanan.store');
         Route::post('/pemesanan/hitung', 'hitungEOQ')->name('pemesanan.hitung');
+
         Route::get('/pemesanan/detail/{slug}', 'detail')->name('pemesanan.detail');
         Route::post('/pemesanan/persetujuan', 'persetujuan')->name('pemesanan.persetujuan');
         Route::get('/pemesanan/dipesan/{slug}', 'dipesan')->name('pemesanan.dipesan');
