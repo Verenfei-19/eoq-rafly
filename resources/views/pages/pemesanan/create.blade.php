@@ -263,7 +263,7 @@
         });
 
         $('#btn-save-biaya').on('click', function() {
-            biaya = $('#biaya_pemesanan').val();
+            let biaya = $('#biaya_pemesanan').val();
             $('#biayaModal').modal('toggle');
             if (pemesanan.length > 0) {
                 $('#biaya').text(rupiah(biaya));
@@ -387,7 +387,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="quantityModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="quantityModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -405,7 +405,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="modal fade" id="biayaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
