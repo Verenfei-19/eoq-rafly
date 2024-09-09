@@ -93,6 +93,7 @@ class KasirController extends Controller
         try {
             foreach ($keranjangs as $keranjang) {
                 PenjualanBarang::create([
+                    'id_barang' => $keranjang->id_barang,
                     'nama_barang' => $keranjang->nama_barang,
                     'invoice_number' => ($request->tanggal_pengiriman) ? 'DKR' . $invoice : 'DTR' . $invoice,
                     'nama_pembeli' => $request->nama_pembeli,
