@@ -95,7 +95,8 @@
                         },
                         {
                             data: 'jumlah'
-                        },
+                        }
+                        ,
                         {
                             data: 'id_barang',
                             render: function(data, type, row) {
@@ -224,35 +225,6 @@
                         $('.alert-success').show();
                         pemesananDatatable = viewPemesananDataTable(pemesanan);
                         $('#biaya').text('');
-                        // mainTable.clear();
-                        // mainTable.destroy();
-                        // mainTable = $('#datatable').DataTable({
-                        //     lengthMenu: [5, 10, 20, 50, 100],
-                        //     ajax: "{{ route('kasir') }}",
-                        //     "columnDefs": [{
-                        //         className: "nama-barang",
-                        //         "targets": [1]
-                        //     }],
-                        //     columns: [{
-                        //             data: 'barang_counter_id',
-                        //             name: 'ID Barang'
-                        //         },
-                        //         {
-                        //             data: 'nama_barang',
-                        //             name: 'Nama Barang'
-                        //         },
-                        //         {
-                        //             data: 'quantity',
-                        //             name: 'Quantity'
-                        //         },
-                        //         {
-                        //             data: 'action',
-                        //             name: 'action',
-                        //             orderable: false,
-                        //             searchable: false
-                        //         },
-                        //     ]
-                        // });
                     }
                 });
             }
@@ -263,7 +235,7 @@
         });
 
         $('#btn-save-biaya').on('click', function() {
-            let biaya = $('#biaya_pemesanan').val();
+            biaya = $('#biaya_pemesanan').val();
             $('#biayaModal').modal('toggle');
             if (pemesanan.length > 0) {
                 $('#biaya').text(rupiah(biaya));
@@ -373,7 +345,6 @@
                                 <th>No</th>
                                 <th>Nama Barang</th>
                                 <th>EOQ</th>
-                                {{-- <th>Pilih EOQ</th> --}}
                                 <th>Jumlah Pemesanan</th>
                                 <th>Action</th>
                             </tr>
@@ -387,7 +358,7 @@
     </div>
 
     <!-- Modal -->
-    {{-- <div class="modal fade" id="quantityModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="quantityModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -405,7 +376,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
     <div class="modal fade" id="biayaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
