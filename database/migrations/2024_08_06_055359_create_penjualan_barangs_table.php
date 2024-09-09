@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('penjualan_barangs', function (Blueprint $table) {
             $table->id();
             // $table->foreign('id_barang')->references('barang_id')->on('barangs');
+            $table->string('id_barang');
             $table->string('nama_barang');
             $table->string('invoice_number');
             $table->string('nama_pembeli');
