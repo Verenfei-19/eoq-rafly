@@ -265,7 +265,7 @@ class BarangController extends Controller
 
     public function biayaPenyimpanan(Request $request)
     {
-        // rumus = (biaya penyimpanan / quantity item tiap barang)/total jumlah barang
+        // rumus = (biaya penyimpanan / quantity item tiap barang)/total barang
         $query = 'SELECT bg.barang_id,nama_barang,harga_barang,biaya_penyimpanan,rop,ss,bg.stok_masuk FROM `barangs` JOIN barang_gudangs as bg ON bg.barang_id = barangs.barang_id;';
         $data = DB::select($query);
         $jumlahBarang = BarangGudang::all()->count();
