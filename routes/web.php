@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\PengirimanCounterController;
 use App\Http\Controllers\Admin\PenjualanController;
 use App\Http\Controllers\Admin\RekapPenjualanController;
 use App\Http\Controllers\SupplierController;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -156,4 +157,10 @@ Route::middleware('user')->group(function () {
     Route::controller(RekapPenjualanController::class)->group(function () {
         Route::get('/rekap', 'index')->name('rekap.index');
     });
+});
+Route::get('/aw', function () {
+    $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('d-m-Y');
+    $endOfMonth = Carbon::now()->today();
+    // $total = Penjualan::whereBetween('tanggal', [$startOfMonth, $endOfMonth])->sum('jumlah_item');
+    echo $startOfMonth . '<Br>' . $endOfMonth;
 });
