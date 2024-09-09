@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 use App\Models\Admin\DetailPemesanan;
+use App\Models\PenjualanBarang;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -103,40 +104,69 @@ class PemesananController extends Controller
         return view('pages.pemesanan.create', compact('user'));
     }
 
+    // public function hitungEOQ(Request $request)
+    // {
+    //     //
+    //     $bulan_tahun = DB::table('penjualans')
+    //         ->selectRaw('DATE_FORMAT(MAX(tanggal_penjualan),"%m-%Y") as bulan')
+    //         ->whereRaw('DATE_FORMAT(tanggal_penjualan, "%m-%Y") < DATE_FORMAT(now(), "%m-%Y")')
+    //         ->first();
+    //     $hasil_hitung = [];
+    //     $pemesanans = json_decode($request->pemesanan);
+    //     $s = $request->biaya;
+    //     $no = 1;
+
+    //     foreach ($pemesanans as $pemesanan) {
+    //         $data = DB::table('detail_penjualans as dp')
+    //             ->join('penjualans as p', 'dp.penjualan_id', '=', 'p.penjualan_id')
+    //             ->join('barang_counters as bc', 'dp.barang_counter_id', '=', 'bc.barang_counter_id')
+    //             ->join('barangs as b', 'bc.barang_id', '=', 'b.barang_id')
+    //             ->selectRaw('max(dp.quantity) as max, round(avg(dp.quantity)) as avg, sum(dp.quantity) as total')
+    //             ->whereRaw("b.barang_id = '" . $pemesanan->id_barang . "' AND DATE_FORMAT(p.tanggal_penjualan, '%m-%Y') = '" . $bulan_tahun->bulan . "'")->first();
+    //         $barang = DB::table('barangs')->where('barang_id', $pemesanan->id_barang)->first();
+
+    //         $h = $barang->biaya_penyimpanan;
+    //         $eoq = $data->total > 0 ? round(sqrt((2 * $data->total * $s) / $h)) : 0;
+    //         $hasil_eoq = [
+    //             'no' => $no++,
+    //             'id_barang' => $pemesanan->id_barang,
+    //             'nama_barang' => $pemesanan->nama_barang,
+    //             'eoq' => $eoq,
+    //             'jumlah' => 0
+    //         ];
+
+    //         array_push($hasil_hitung, $hasil_eoq);
+    //     }
+    //     return response()->json(['pemesanan' => $hasil_hitung], 200);
+    // }
+
     public function hitungEOQ(Request $request)
     {
-        //
-        $bulan_tahun = DB::table('penjualans')
-            ->selectRaw('DATE_FORMAT(MAX(tanggal_penjualan),"%m-%Y") as bulan')
-            ->whereRaw('DATE_FORMAT(tanggal_penjualan, "%m-%Y") < DATE_FORMAT(now(), "%m-%Y")')
-            ->first();
-        $hasil_hitung = [];
         $pemesanans = json_decode($request->pemesanan);
-        $s = $request->biaya;
         $no = 1;
+        $biayaPemesanan = $request->biaya;
 
-        foreach ($pemesanans as $pemesanan) {
-            $data = DB::table('detail_penjualans as dp')
-                ->join('penjualans as p', 'dp.penjualan_id', '=', 'p.penjualan_id')
-                ->join('barang_counters as bc', 'dp.barang_counter_id', '=', 'bc.barang_counter_id')
-                ->join('barangs as b', 'bc.barang_id', '=', 'b.barang_id')
-                ->selectRaw('max(dp.quantity) as max, round(avg(dp.quantity)) as avg, sum(dp.quantity) as total')
-                ->whereRaw("b.barang_id = '" . $pemesanan->id_barang . "' AND DATE_FORMAT(p.tanggal_penjualan, '%m-%Y') = '" . $bulan_tahun->bulan . "'")->first();
-            $barang = DB::table('barangs')->where('barang_id', $pemesanan->id_barang)->first();
+        $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
+        $endOfMonth = Carbon::now()->today()->translatedFormat('Y-m-d');
 
-            $h = $barang->biaya_penyimpanan;
-            $eoq = $data->total > 0 ? round(sqrt((2 * $data->total * $s) / $h)) : 0;
+        $data_eoq = [];
+        foreach ($pemesanans as $key) {
+            $barangAll = Barang::where('barang_id', $key->id_barang)->get(['nama_barang', 'biaya_penyimpanan'])->first();
+            $totalBarangTerjualSebulan = PenjualanBarang::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->sum('quantity');
+            $rumusEOQ = round(sqrt((2 * $biayaPemesanan * $totalBarangTerjualSebulan) /  $barangAll->biaya_penyimpanan));
             $hasil_eoq = [
                 'no' => $no++,
-                'id_barang' => $pemesanan->id_barang,
-                'nama_barang' => $pemesanan->nama_barang,
-                'eoq' => $eoq,
-                'jumlah' => 0
+                'id_barang' => $key->id_barang,
+                'nama_barang' => $barangAll->nama_barang,
+                'eoq' => $rumusEOQ,
+                'jumlah' => 0,
             ];
-
-            array_push($hasil_hitung, $hasil_eoq);
+            array_push($data_eoq, $hasil_eoq);
         }
-        return response()->json(['pemesanan' => $hasil_hitung], 200);
+        return response()->json([
+            'pemesanan' => $data_eoq,
+            'cart' => $pemesanans
+        ], 200);
     }
 
     public function store(Request $request)
@@ -181,6 +211,7 @@ class PemesananController extends Controller
     {
         $user = $this->userAuth();
         $detail_persetujuans = [];
+        // dd($slug);
         $no = 1;
         $pemesanan = DB::table('pemesanans')
             ->where('slug', $slug)
