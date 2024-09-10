@@ -37,7 +37,7 @@
             pemesanan_id = $('#pemesanan_id').text();
             // console.log(pemesanan_id);
             $('#answer').text(persetujuan);
-            $('#confirmModal').modal('toggle');
+            // $('#confirmModal').modal('toggle');
 
         });
 
@@ -85,36 +85,40 @@
             @endif
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-3">Detail Pemesanan <span
-                            id="pemesanan_id">{{ $pemesanan->pemesanan_id }}</span></h4>
-                    <div class="row mb-4 mt-1">
-                        <div class="col-2">
-                            <a href="{{ route('pemesanan') }}" class="btn btn-secondary waves-effect waves-light">
-                                <i class="bx bx-caret-left align-middle me-2 font-size-18"></i>Kembali
-                            </a>
+                    <h4 class="card-title mb-3">Detail Pemesanan <span id="pemesanan_id">{{ $pemesanan[0]->invoice }}</span></h4>
+                    <form action="{{ route('pemesanan.persetujuan') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="pemesanan_id" value="{{ $pemesanan[0]->invoice }}">
+                        <div class="row mb-4 mt-1">
+                            <div class="col-2">
+                                <a href="{{ route('pemesanan') }}" class="btn btn-secondary waves-effect waves-light">
+                                    <i class="bx bx-caret-left align-middle me-2 font-size-18"></i>Kembali
+                                </a>
+                            </div>
+                            @if ($user->role == 'owner' && $pemesanan[0]->status_pemesanan == 'Menunggu Persetujuan')
+                                <div class="col-5 d-flex justify-content-end">
+                                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                        <input type="radio" class="btn-check" name="persetujuan" value="Disetujui" id="disetujui"
+                                            autocomplete="off" checked>
+                                        <label class="btn btn-outline-primary" for="disetujui">Disetujui</label>
+    
+                                        <input type="radio" class="btn-check" name="persetujuan" value="Ditolak" id="ditolak"
+                                            autocomplete="off">
+                                        <label class="btn btn-outline-primary" for="ditolak">Ditolak</label>
+                                    </div>
+                                </div>
+    
+                                <div class="col">
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light" id="save-persetujuan">
+                                            <i class="bx bx-save align-middle me-2 font-size-18"></i>Simpan
+                                        </button>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
-                        @if ($user->role == 'owner' && $pemesanan->status_pemesanan == 'Menunggu Persetujuan')
-                            <div class="col-5 d-flex justify-content-end">
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                    <input type="radio" class="btn-check" name="btnradio" value="Disetujui" id="btnradio4"
-                                        autocomplete="off" checked>
-                                    <label class="btn btn-outline-primary" for="btnradio4">Disetujui</label>
-
-                                    <input type="radio" class="btn-check" name="btnradio" value="Ditolak" id="btnradio5"
-                                        autocomplete="off">
-                                    <label class="btn btn-outline-primary" for="btnradio5">Ditolak</label>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="d-flex justify-content-end">
-                                    <button class="btn btn-primary waves-effect waves-light" id="save-persetujuan">
-                                        <i class="bx bx-save align-middle me-2 font-size-18"></i>Simpan
-                                    </button>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
+                    </form>
+                    {{-- @dump($pemesanan) --}}
                     <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                         <thead>
                             <tr>
@@ -126,23 +130,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($detail_persetujuans as $detail_persetujuan)
+                            @foreach ($pemesanan as $data)
                                 <tr>
-                                    <td>
-                                        {{ $detail_persetujuan->nama_barang }}
-                                    </td>
-                                    <td>
-                                        {{ $detail_persetujuan->stok }}
-                                    </td>
-                                    <td>
-                                        {{ $detail_persetujuan->eoq }}
-                                    </td>
-                                    <td>
-                                        {{ $detail_persetujuan->rop }}
-                                    </td>
-                                    <td>
-                                        {{ $detail_persetujuan->jumlah_pemesanan }}
-                                    </td>
+                                    <td>{{ $data->nama_barang }}</td>
+                                    <td>{{ $data->stok_masuk }}</td>
+                                    <td>{{ $data->eoq }}</td>
+                                    <td>{{ $data->rop }}</td>
+                                    <td>{{ $data->jumlah_pemesanan }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -153,7 +147,7 @@
         </div> <!-- end col -->
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -170,5 +164,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
