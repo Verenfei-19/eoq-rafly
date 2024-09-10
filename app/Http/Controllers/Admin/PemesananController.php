@@ -49,8 +49,8 @@ class PemesananController extends Controller
                     } elseif ($user->role == 'gudang' && $object->status_pemesanan == 'Disetujui') {
                         $html = ' <a href="' . route($path . '.detail', ["slug" => $object->invoice]) . '" class="btn btn-info waves-effect waves-light btn-detail">
                         <i class="bx bx-detail font-size-18 align-middle me-2"></i> Detail</a>';
-                        $html .= ' <a href="' . route($path . '.dipesan', ["slug" => $object->invoice]) . '" class="btn btn-success waves-effect waves-light btn-detail">
-                        <i class="bx bxs-send font-size-18 align-middle me-2"></i> Dipesan</a>';
+                        // $html .= ' <a href="' . route($path . '.dipesan', ["slug" => $object->invoice]) . '" class="btn btn-success waves-effect waves-light btn-detail">
+                        // <i class="bx bxs-send font-size-18 align-middle me-2"></i> Dipesan</a>';
                         return $html;
                     } else {
                         $html = ' <a href="' . route($path . '.detail', ["slug" => $object->invoice]) . '" class="btn btn-info waves-effect waves-light btn-detail">
