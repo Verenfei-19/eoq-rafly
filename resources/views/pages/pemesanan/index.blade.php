@@ -37,7 +37,7 @@
             "ordering": false,
             ajax: "{{ route('pemesanan') }}",
             columns: [{
-                    data: "pemesanan_id"
+                    data: "invoice"
                 },
                 {
                     data: "status_pemesanan",
@@ -60,7 +60,7 @@
                     }
                 },
                 {
-                    data: "tanggal_pemesanan",
+                    data: "created_at",
                     render: function(data, type, row) {
                         let date = new Date(data);
                         let tanggal_pemesanan = new Intl.DateTimeFormat(['ban', 'id'], {
