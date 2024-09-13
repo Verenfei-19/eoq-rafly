@@ -86,13 +86,14 @@
                     name: 'item_terjual'
                 },
                 
+                // {
+                //     data: 'harga_barang',
+                //     name: 'harga_barang',
+                //     render: function(data, type, row) {
+                //         return formatRupiah(data);
+                //     }
+                // }
                 {
-                    data: 'harga_barang',
-                    name: 'harga_barang',
-                    render: function(data, type, row) {
-                        return formatRupiah(data);
-                    }
-                },{
                     data: 'tgl_pembelian',
                     name: 'tgl_pembelian'
                 },
@@ -117,9 +118,9 @@
         $(document).ready(function() {
             mainTable.on('xhr', function() {
                 var json = mainTable.ajax.json();
-                let total_harga_item = json.data[0].total_harga_item;
+                // let total_harga_item = json.data[0].total_harga_item;
                 let total_harga_penjualan = json.data[0].total_harga_penjualan;
-                $('#total_harga_item').text(formatRupiah(total_harga_item)); 
+                // $('#total_harga_item').text(formatRupiah(total_harga_item)); 
                 $('#total_penjualan').text(formatRupiah(total_harga_penjualan));    
             });
         });
@@ -191,7 +192,7 @@
                                 <th>No</th>
                                 <th>Nama Barang</th>
                                 <th>Total Item Terjual</th>
-                                <th>Harga Item</th>
+                                {{-- <th>Harga Item</th> --}}
                                 <th>Tanggal Pembelian</th>
                                 <th>Total Penjualan</th>
                             </tr>
@@ -200,10 +201,10 @@
                         </tbody>
                     </table>
                     <div class="mt-5 vstack gap-3">
-                        <div class="d-flex justify-content-between">
+                        {{-- <div class="d-flex justify-content-between">
                             <h3>Total Harga Item</h3>
                             <span class="fs-3" id="total_harga_item"></span>
-                        </div>
+                        </div> --}}
                         <div class="d-flex justify-content-between">
                             <h3>Total Harga Penjualan</h3>
                             <span class="fs-3" id="total_penjualan"></span>
