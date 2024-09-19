@@ -28,17 +28,36 @@ class RekapPenjualanController extends Controller
                 $enddate = $request->end_date;
 
                 $data = PenjualanBarang::all([
+                    'id_barang',
                     'nama_barang',
                     'tgl_pembelian',
                     'harga_barang',
                     'quantity',
-                ])->whereBetween('tgl_pembelian', [$request->start_date, $request->end_date]);
+                ])->whereBetween('tgl_pembelian', [$startdate, $request->end_date]);
+            } else if ($request->filled('start_date')) {
+                $data = PenjualanBarang::all([
+                    'id_barang',
+                    'nama_barang',
+                    'tgl_pembelian',
+                    'harga_barang',
+                    'quantity',
+                ])->where('tgl_pembelian', "$request->start_date");
             } else {
-                $query = '
-                SELECT nama_barang, SUM(quantity) as quantity, tgl_pembelian,harga_barang, SUM(quantity*harga_barang) as total FROM `penjualan_barangs` 
-                WHERE tgl_pembelian = "' . date('Y-m-d') . '" GROUP BY nama_barang,harga_barang
-                ';
-                $data = DB::select($query);
+                // $query = '
+                // SELECT nama_barang, SUM(quantity) as quantity, tgl_pembelian,harga_barang, SUM(quantity*harga_barang) as total FROM `penjualan_barangs` 
+                // WHERE tgl_pembelian = "' . date('Y-m-d') . '" GROUP BY nama_barang,harga_barang
+                // ';
+                $data = PenjualanBarang::all([
+                    'id_barang',
+                    'nama_barang',
+                    'tgl_pembelian',
+                    'harga_barang',
+                    'quantity',
+                ]);
+                // $query = '
+                // SELECT nama_barang, SUM(quantity) as quantity, harga_barang, SUM(quantity*harga_barang) as total FROM `penjualan_barangs` GROUP BY nama_barang,harga_barang;
+                // ';
+                // $data = DB::select($query);
             }
             // SELECT nama_barang, SUM(quantity) as item_terjual, harga_barang, tgl_pembelian, SUM(quantity*harga_barang) as total_penjualan FROM `penjualan_barangs` WHERE MONTH(tgl_pembelian) = 8 AND YEAR(tgl_pembelian) = 2024 GROUP BY nama_barang,harga_barang,tgl_pembelian;
             $total_harga_item = 0;
@@ -49,7 +68,7 @@ class RekapPenjualanController extends Controller
                 // $total_harga_penjualan += $value['harga_barang'] * $value['quantity'];
                 $total_harga_penjualan += $value->harga_barang * $value->quantity;
             }
-            // die;
+
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('total_penjualan', function ($object) {
