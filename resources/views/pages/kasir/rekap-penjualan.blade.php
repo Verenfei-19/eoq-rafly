@@ -72,8 +72,8 @@
             },
             columns: [
                 {
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex',
+                    data: 'id_barang',
+                    name: 'id_barang',
                     orderable: false,
                     searchable: false
                 },
@@ -93,10 +93,10 @@
                 //         return formatRupiah(data);
                 //     }
                 // }
-                {
-                    data: 'tgl_pembelian',
-                    name: 'tgl_pembelian'
-                },
+                // {
+                //     data: 'tgl_pembelian',
+                //     name: 'tgl_pembelian'
+                // },
                 {
                     data: 'total_penjualan',
                     name: 'Total Penjualan',
@@ -181,19 +181,19 @@
                             <button class="btn btn-primary waves-effect waves-light" id="filter_table">
                                 <i class="bx bx-search align-middle me-2 font-size-18"></i>Rekap
                             </button>
-                            <button type="reset" class="btn btn-warning waves-effect waves-light d-none" id="reset_table">
+                            <a type="reset" class="btn btn-warning waves-effect waves-light d-none" id="reset_table">
                                Reset
-                            </button>
+                            </a>
                         </div>
                     </div>
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
                             <tr>
-                                <th>No</th>
+                                <th>ID Barang</th>
                                 <th>Nama Barang</th>
                                 <th>Total Item Terjual</th>
                                 {{-- <th>Harga Item</th> --}}
-                                <th>Tanggal Pembelian</th>
+                                {{-- <th>Tanggal Pembelian</th> --}}
                                 <th>Total Penjualan</th>
                             </tr>
                         </thead>
