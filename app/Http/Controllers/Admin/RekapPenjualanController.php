@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Barang;
 use App\Models\PenjualanBarang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -83,5 +84,69 @@ class RekapPenjualanController extends Controller
                 ->make(true);
         }
         return view('pages.kasir.rekap-penjualan', compact('user'));
+    }
+
+    public function eaea()
+    {
+        // $array_barang = [];
+        // $barang = Barang::all();
+        // foreach ($barang as $key => $value) {
+        //     array_push($array_barang, [
+        //         'id_barang' => $value['barang_id'],
+        //         'nama_barang' => $value['nama_barang'],
+        //         'harga_barang' => $value['harga_barang'],
+        //     ]);
+        // }
+
+
+        // $array_penjualanbarang = [];
+        // $penjualanBarang = PenjualanBarang::all();
+        // $result_penjualanbarang = [];
+        // foreach ($penjualanBarang as $key => $value) {
+        //     array_push(
+        //         $array_penjualanbarang,
+        //         [
+        //             'id_barang' => $value['id_barang'],
+        //             'quantity' => $value['quantity']
+        //         ]
+        //     );
+        // }
+
+        // $result = [];
+        // $barang_lookup = [];
+        // foreach ($array_barang as $item) {
+        //     $barang_lookup[$item['id_barang']] = $item;
+        // }
+
+
+        // // Merge arrays based on id_barang
+        // foreach ($array_penjualanbarang as $sale) {
+        //     $id_barang = $sale['id_barang'];
+
+        //     if (isset($barang_lookup[$id_barang])) {
+        //         $merged_item = $barang_lookup[$id_barang]; // Get the corresponding barang item
+        //         $merged_item['quantity'] = $sale['quantity']; // Add the quantity
+        //         $result[] = $merged_item; // Add to result
+        //     }
+        // }
+
+        // $newresult = [];
+        // foreach ($result as $item) {
+        //     $id_barang = $item['id_barang'];
+
+        //     if (isset($result[$id_barang])) {
+        //         $newresult[$id_barang]['quantity'] += $item['quantity']; // Increase quantity
+        //     } else {
+        //         $newresult[$id_barang] = $item; // Initialize the entry
+        //     }
+        // }
+
+        // dump(
+        //     // $array_barang, 
+        //     // $array_penjualanbarang, 
+        //     $result,
+        //     $newresult,
+        // );
+        // die;
     }
 }
