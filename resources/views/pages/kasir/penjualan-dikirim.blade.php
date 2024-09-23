@@ -72,7 +72,8 @@
             columns: [
                 {
                     data: 'invoice_number',
-                    name: 'invoice_number'
+                    name: 'invoice_number',
+                    orderable: false
                 },
                 {
                     data: 'nama_pembeli',
@@ -266,7 +267,8 @@
                                 <th>Tanggal Beli</th>
                                 <th>Status</th>
                                 <th>Tanggal Dikirim</th>
-                                <th>Total Harga</th>
+                                {{-- <th>Total Harga</th> --}}
+                                <th>Total Penjualan</th>
                                 <th class="col-md-1">Action</th>
                             </tr>
                         </thead>
