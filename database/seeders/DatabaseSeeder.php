@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
             BarangSeeder::class,
             UserSeeder::class,
             GudangSeeder::class,
-            CounterSeeder::class,
+            // CounterSeeder::class,
             BarangGudangSeeder::class,
-            BarangCounterSeeder::class,
-            PenjualanSeeder::class,
+            // BarangCounterSeeder::class,
+            // PenjualanSeeder::class,
         ]);
     }
 }
