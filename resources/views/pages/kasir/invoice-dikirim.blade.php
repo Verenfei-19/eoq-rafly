@@ -78,7 +78,7 @@ function penyebut($nilai) {
         @php
             $subtotal = 0;
         @endphp
-        @foreach ($data as $item)
+        @foreach ($dataProduk as $item)
             <tr>
                 <td style="text-align: center">{{ $loop->iteration }}</td>
                 <td>{{ $item->nama_barang }}</td>
