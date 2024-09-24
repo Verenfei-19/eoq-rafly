@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Admin\Penjualan;
 use App\Models\Admin\DetailPenjualan;
 use App\Models\PenjualanBarang;
+use App\Models\PenjualanBarangDetail;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -89,21 +90,27 @@ class KasirController extends Controller
         $invoice = 'INV' . strtoupper($request->nama_pembeli) . '' . date('dmYHis');
 
         $keranjangs = json_decode($request->keranjang);
+
         DB::beginTransaction();
+        PenjualanBarang::create([
+            'invoice_number' => ($request->tanggal_pengiriman) ? 'DKR' . $invoice : 'DTR' . $invoice,
+            'nama_pembeli' => $request->nama_pembeli,
+            'alamat_pembeli' => $request->alamat_pembeli,
+            'telepon_pembeli' => $request->telepon_pembeli,
+            'status' => ($request->tanggal_pengiriman) ? 'DIKIRIM' : 'DITERIMA',
+            'tgl_pembelian' => ($request->tanggal_pembelian) ? $request->tanggal_pembelian : NULL,
+            'tgl_pengiriman' => ($request->tanggal_pengiriman) ? $request->tanggal_pengiriman : NULL,
+        ]);
         try {
             foreach ($keranjangs as $keranjang) {
-                PenjualanBarang::create([
+                PenjualanBarangDetail::create([
+                    'invoice_number' => ($request->tanggal_pengiriman) ? 'DKR' . $invoice : 'DTR' . $invoice,
                     'id_barang' => $keranjang->id_barang,
                     'nama_barang' => $keranjang->nama_barang,
-                    'invoice_number' => ($request->tanggal_pengiriman) ? 'DKR' . $invoice : 'DTR' . $invoice,
-                    'nama_pembeli' => $request->nama_pembeli,
-                    'alamat_pembeli' => $request->alamat_pembeli,
-                    'telepon_pembeli' => $request->telepon_pembeli,
                     'quantity' => $keranjang->jumlah,
                     'harga_barang' => $keranjang->harga_barang,
-                    'status' => ($request->tanggal_pengiriman) ? 'DIKIRIM' : 'DITERIMA',
                     'tgl_pembelian' => ($request->tanggal_pembelian) ? $request->tanggal_pembelian : NULL,
-                    'tgl_pengiriman' => ($request->tanggal_pengiriman) ? $request->tanggal_pengiriman : NULL,
+                    'tgl_pengiriman' => ($request->tanggal_pengiriman) ? $request->tanggal_pengiriman : NULL
                 ]);
             }
             foreach ($keranjangs as $keranjang) {
