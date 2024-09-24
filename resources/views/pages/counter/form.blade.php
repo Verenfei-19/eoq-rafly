@@ -12,20 +12,20 @@
 </div>
 
 <div class="mt-4 mb-3 row">
-    <label for="nama_counter" class="col-md-2 col-form-label">Nama Counter</label>
+    <label for="nama_counter" class="col-md-2 col-form-label">Nama Toko</label>
     <div class="col-md-10">
         <input class="form-control" type="text" id="nama_counter"
             value="{{ !empty($counters) ? $counters->name : '' }}" name="nama_counter"
-            placeholder="Ketikkan Nama Counter">
+            placeholder="Ketikkan Nama Toko">
     </div>
 </div>
 
 <div class="mt-4 mb-3 row">
-    <label for="alamat_counter" class="col-md-2 col-form-label">Alamat Counter</label>
+    <label for="alamat_counter" class="col-md-2 col-form-label">Alamat Toko</label>
     <div class="col-md-10">
         <input class="form-control" type="text" id="alamat_counter"
             value="{{ !empty($counters) ? $counters->address : '' }}" name="alamat_counter"
-            placeholder="Ketikkan Alamat Counter">
+            placeholder="Ketikkan Alamat Toko">
     </div>
 </div>
 
