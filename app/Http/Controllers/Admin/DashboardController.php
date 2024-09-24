@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\PenjualanBarang;
+use App\Models\PenjualanBarangDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
 use Yajra\DataTables\DataTables;
 
 class DashboardController extends Controller
@@ -42,16 +45,21 @@ class DashboardController extends Controller
 
         $jumlah_jenis = DB::table('barangs')->count();
 
-        $total_transaksi = DB::table('penjualans')
-            ->whereMonth('tanggal_penjualan', Carbon::now()->format('m'))
-            ->whereYear('tanggal_penjualan', Carbon::now()->format('Y'))
-            ->count();
-
-        $penjualan = DB::table('penjualans')
-            ->selectRaw('SUM(grand_total) as total_pendapatan')
-            ->whereMonth('tanggal_penjualan', Carbon::now()->format('m'))
-            ->whereYear('tanggal_penjualan', Carbon::now()->format('Y'))
-            ->first();
+        $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
+        $endOfMonth = Carbon::now()->endOfMonth()->translatedFormat('Y-m-d');
+        $total_transaksi = PenjualanBarangDetail::whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->get()->count();
+        // $total_transaksi = DB::table('penjualans')
+        //     ->whereMonth('tanggal_penjualan', Carbon::now()->format('m'))
+        //     ->whereYear('tanggal_penjualan', Carbon::now()->format('Y'))
+        //     ->count();
+        $penjualan = DB::table('penjualan_barang_details')
+            ->selectRaw('SUM(quantity*harga_barang) as total_pendapatan')
+            ->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->first();
+        // $penjualan = DB::table('penjualans')
+        //     ->selectRaw('SUM(grand_total) as total_pendapatan')
+        //     ->whereMonth('tanggal_penjualan', Carbon::now()->format('m'))
+        //     ->whereYear('tanggal_penjualan', Carbon::now()->format('Y'))
+        //     ->first();
 
         $jumlah_counter = DB::table('counters')->count();
         setlocale(LC_ALL, 'IND');
