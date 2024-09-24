@@ -82,7 +82,7 @@
                     name: 'nama_barang',
                 },
                 {
-                    data: 'quantity',
+                    data: 'total_quantity',
                     name: 'item_terjual'
                 },
                 
@@ -98,7 +98,7 @@
                 //     name: 'tgl_pembelian'
                 // },
                 {
-                    data: 'total_penjualan',
+                    data: 'total_harga',
                     name: 'Total Penjualan',
                     render: function(data, type, row) {
                         return formatRupiah(data);
@@ -119,7 +119,7 @@
             mainTable.on('xhr', function() {
                 var json = mainTable.ajax.json();
                 // let total_harga_item = json.data[0].total_harga_item;
-                let total_harga_penjualan = json.data[0].total_harga_penjualan;
+                let total_harga_penjualan = json.data[0].total_harga_item;
                 // $('#total_harga_item').text(formatRupiah(total_harga_item)); 
                 $('#total_penjualan').text(formatRupiah(total_harga_penjualan));    
             });
