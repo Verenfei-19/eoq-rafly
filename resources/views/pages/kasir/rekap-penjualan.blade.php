@@ -128,28 +128,28 @@
         $("#filter_table").click(function(){
                 // mainTable.destroy();
                 $('#filter_table').attr('disabled',true)
-                $('#reset_table').toggleClass('d-none');
+                $('#reset_btn').removeClass('d-none');
                 mainTable.draw();
                 setTimeout(() => {
                     $('#filter_table').attr('disabled',false)
                 }, 2000);
-                $('#start_date').val(null);
-                $('#end_date').val(null);
+                // $('#start_date').val(null);
+                // $('#end_date').val(null);
         });
-        $("#reset_table").click(function(){
+        $("#reset_btn").click(function(){
                 mainTable.draw();
-                $('#reset_table').toggleClass('d-none');
+                $('#reset_btn').addClass('d-none');
                 setTimeout(() => {
-                    $('#reset_table').attr('disabled',false)
+                    $('#reset_btn').attr('disabled',false)
                 }, 2000);
                 $('#start_date').val(null);
                 $('#end_date').val(null);
         });
-        $('#filter_stable').on('click', (e) => {
+        $('#filter_table').on('click', (e) => {
 
             $('#filter_table').attr('disabled',false)
-            $('#start_date').val(null);
-            $('#end_date').val(null);
+            // $('#start_date').val(null);
+            // $('#end_date').val(null);
         })
 
     </script>
@@ -181,7 +181,7 @@
                             <button class="btn btn-primary waves-effect waves-light" id="filter_table">
                                 <i class="bx bx-search align-middle me-2 font-size-18"></i>Rekap
                             </button>
-                            <a type="reset" class="btn btn-warning waves-effect waves-light d-none" id="reset_table">
+                            <a type="reset" class="btn btn-warning waves-effect waves-light d-none" id="reset_btn">
                                Reset
                             </a>
                         </div>
