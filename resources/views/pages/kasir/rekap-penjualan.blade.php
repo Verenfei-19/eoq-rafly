@@ -137,7 +137,8 @@
                 // $('#end_date').val(null);
         });
         $("#reset_btn").click(function(){
-                mainTable.draw();
+                // mainTable.destroy();
+                mainTable.ajax.reload();
                 $('#reset_btn').addClass('d-none');
                 setTimeout(() => {
                     $('#reset_btn').attr('disabled',false)
