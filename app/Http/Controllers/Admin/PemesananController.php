@@ -13,6 +13,7 @@ use Yajra\DataTables\DataTables;
 use App\Models\Admin\DetailPemesanan;
 use App\Models\PemesananBarang;
 use App\Models\PenjualanBarang;
+use App\Models\PenjualanBarangDetail;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -157,7 +158,7 @@ class PemesananController extends Controller
         $data_eoq = [];
         foreach ($pemesanans as $key) {
             $barangAll = Barang::where('barang_id', $key->id_barang)->get(['nama_barang', 'biaya_penyimpanan'])->first();
-            $totalBarangTerjualSebulan = PenjualanBarang::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->sum('quantity');
+            $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->sum('quantity');
             $rumusEOQ = round(sqrt((2 * $biayaPemesanan * $totalBarangTerjualSebulan) /  $barangAll->biaya_penyimpanan));
             $hasil_eoq = [
                 'no' => $no++,
