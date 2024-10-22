@@ -29,12 +29,28 @@ class BarangController extends Controller
         if ($user->role == 'gudang' || $user->role == 'owner') {
             // if ($request->ajax() && empty($request->target)) {
             if ($request->ajax()) {
-                $query = "SELECT a.barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop,a.ss,((SELECT SUM(stok_awal) + SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = a.barang_id GROUP BY barang_id) + (SELECT SUM(stok_awal) + SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = a.barang_id GROUP BY barang_id)) as qty_total
+                // $query = "SELECT a.barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop,a.ss,((SELECT SUM(stok_awal) + SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = a.barang_id GROUP BY barang_id) + (SELECT SUM(stok_awal) + SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = a.barang_id GROUP BY barang_id)) as qty_total
+                // FROM barangs as a
+                // JOIN barang_gudangs as b on a.barang_id = b.barang_id
+                // JOIN barang_counters as c on a.barang_id = c.barang_id
+                // GROUP BY a.barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop,a.ss ORDER BY a.barang_id ASC;";
+                // $barangs = DB::select($query);
+                $query = "SELECT a.barang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop, a.ss, b.stok_masuk as qty_total
                 FROM barangs as a
                 JOIN barang_gudangs as b on a.barang_id = b.barang_id
-                JOIN barang_counters as c on a.barang_id = c.barang_id
-                GROUP BY a.barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop,a.ss ORDER BY a.barang_id ASC;";
+                GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang
+                ORDER BY b.barang_gudang_id ASC";
                 $barangs = DB::select($query);
+
+                // $query = "SELECT b.slug,bg.barang_id, b.nama_barang, b.harga_barang, 
+                //             CASE WHEN bg.stok_masuk > 0 THEN (b.biaya_penyimpanan / bg.stok_masuk) / total.total_barang 
+                //                 ELSE 0 
+                //                 END AS biaya_penyimpanan, 
+                //             b.rop, b.ss, bg.stok_masuk as qty_total
+                //             FROM `barangs` as b
+                //             JOIN barang_gudangs AS bg 
+                //             ON bg.barang_id = b.barang_id, (SELECT COUNT(*) AS total_barang FROM `barangs`) as total";
+                // $barangs = DB::select($query);
 
                 return DataTables::of($barangs)
                     ->addColumn('action', function ($object) use ($path, $user) {
@@ -44,13 +60,6 @@ class BarangController extends Controller
                             . ' <i class="bx bx-edit align-middle me-2 font-size-18"></i></a>';
                         $html .= ' <a href="' . route($path . ".destroy", ["slug" => $object->slug]) . '" class="btn btn-danger waves-effect waves-light">'
                             . ' <i class="bx bx-trash align-middle me-2 font-size-18"></i></a>';
-                        // $html .= ' <button type="button" class="btn btn-info waves-effect waves-light btn-detail" data-bs-toggle="modal" data-bs-target="#detailModal">
-                        //     <i class="bx bx-detail font-size-18 align-middle me-2"></i></button>';
-                        // }
-                        // else {
-                        //     $html .= '<button type="button" class="btn btn-info waves-effect waves-light btn-detail" data-bs-toggle="modal" data-bs-target="#detailModal">
-                        // <i class="bx bx-detail font-size-18 align-middle me-2"></i></button>';
-                        // }
                         return $html;
                     })
                     ->rawColumns(['action'])
@@ -270,6 +279,7 @@ class BarangController extends Controller
         $data = DB::select($query);
         $jumlahBarang = BarangGudang::all()->count();
         $allBarang = Barang::all();
+
         foreach ($allBarang as $key => $value) {
             Barang::where('barang_id', $value['barang_id'])->update(
                 [
