@@ -6,7 +6,7 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                @if ($user->role == 'gudang' || $user->role == 'owner')
+                {{-- @if ($user->role == 'gudang' || $user->role == 'owner') --}}
                     <li class="menu-title" key="t-menu">Menu</li>
 
                     <li>
@@ -15,7 +15,7 @@
                             <span key="t-dashboards">Dashboards</span>
                         </a>
                     </li>
-                @endif
+                {{-- @endif --}}
 
                 <li class="menu-title" key="t-apps">Master Data</li>
                 @if ($user->role == 'gudang' || $user->role == 'owner')
