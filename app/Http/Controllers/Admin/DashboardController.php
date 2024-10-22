@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\PenjualanBarang;
 use App\Models\PenjualanBarangDetail;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -55,6 +56,8 @@ class DashboardController extends Controller
         $penjualan = DB::table('penjualan_barang_details')
             ->selectRaw('SUM(quantity*harga_barang) as total_pendapatan')
             ->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->first();
+        $total_item_terjual = PenjualanBarangDetail::whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->get()->sum('quantity');
+        $total_supplier = Supplier::all()->count();
         // $penjualan = DB::table('penjualans')
         //     ->selectRaw('SUM(grand_total) as total_pendapatan')
         //     ->whereMonth('tanggal_penjualan', Carbon::now()->format('m'))
@@ -66,6 +69,26 @@ class DashboardController extends Controller
         $bulan_tahun = strftime('%B %Y');
 
 
-        return view('pages.dashboard.index', compact('user', 'jumlah_jenis', 'total_transaksi', 'penjualan', 'jumlah_counter', 'bulan_tahun'));
+        return view('pages.dashboard.index', compact('user', 'jumlah_jenis', 'total_transaksi', 'penjualan', 'jumlah_counter', 'bulan_tahun', 'total_item_terjual', 'total_supplier'));
+    }
+
+    public function stokPersediaan(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = "SELECT bg.barang_id, b.nama_barang, b.harga_barang, bg.stok_masuk FROM `barangs` as b JOIN barang_gudangs AS bg ON bg.barang_id = b.barang_id";
+            $barangs = DB::select($query);
+
+            return DataTables::of($barangs)
+                ->editColumn('stok_masuk', function ($object) {
+                    if ($object->stok_masuk < 100) {
+                        $html = '<a href="#" class="btn btn-danger waves-effect waves-light"> Barang hampir habis (' . $object->stok_masuk . ')</a>';
+                    } else {
+                        $html = '<a href="#" class="btn btn-success waves-effect waves-light"> Stok aman</a>';
+                    }
+                    return $html;
+                })
+                ->rawColumns(['stok_masuk'])
+                ->make(true);
+        }
     }
 }
