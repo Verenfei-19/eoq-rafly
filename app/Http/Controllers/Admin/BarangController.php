@@ -35,7 +35,7 @@ class BarangController extends Controller
                 // JOIN barang_counters as c on a.barang_id = c.barang_id
                 // GROUP BY a.barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop,a.ss ORDER BY a.barang_id ASC;";
                 // $barangs = DB::select($query);
-                $query = "SELECT a.barang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop, a.ss, b.stok_masuk as qty_total
+                $query = "SELECT a.barang_id as barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop, a.ss, b.stok_masuk as qty_total
                 FROM barangs as a
                 JOIN barang_gudangs as b on a.barang_id = b.barang_id
                 GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang
