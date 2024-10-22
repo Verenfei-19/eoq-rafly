@@ -239,7 +239,6 @@
                             ],
                         });
                         $('#biaya_penyimpanan').val("");
-                        // $('input[name=btnradio][value="master"]').prop('checked', true);
                     }
                 });
             } else {
@@ -325,7 +324,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    @if ($user->role == 'gudang')
+                    {{-- @if ($user->role == 'gudang')
                         <div class="row mb-4 mt-1">
                             <div class="col-3">
                                 <button class="btn btn-pink" data-bs-toggle="modal" data-bs-target="#biayaModal">
@@ -342,7 +341,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
 
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
