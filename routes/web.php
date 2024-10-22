@@ -43,6 +43,7 @@ Route::middleware('user')->group(function () {
 
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/', 'index')->name('dashboard');
+        Route::get('/stok-persediaan', 'stokPersediaan')->name('stoktersisa');
     });
 
     Route::controller(BarangController::class)->group(function () {
