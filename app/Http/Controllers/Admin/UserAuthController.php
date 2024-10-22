@@ -35,7 +35,8 @@ class UserAuthController extends Controller
 
         if (Auth::guard('user')->attempt(['username' => $request->username, 'password' => $request->password])) {
             if (Auth::guard('user')->user()->role == 'counter') {
-                return redirect()->route('barang');
+                // return redirect()->route('barang');
+                return redirect()->intended('/');
             } else {
                 return redirect()->intended('/');
             }
