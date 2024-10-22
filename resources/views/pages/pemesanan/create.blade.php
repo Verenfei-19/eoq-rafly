@@ -95,8 +95,21 @@
                         },
                         {
                             data: 'jumlah'
-                        }
-                        ,
+                        },
+                        // {
+                        //     data: 'supplier',
+                        //     render: function (data, type, row) {
+                        //         return 'hi';
+                                
+                        //         // row.forEach(element => { 
+                        //         //     return `
+                        //         //     <select class="form-control" name="supplier" id="supplier">';
+                        //         //         <option value="${element.id}">${element.name}</option>
+                        //         //     </select>
+                        //         //     `;
+                        //         // });
+                        //     }
+                        // },
                         {
                             data: 'id_barang',
                             render: function(data, type, row) {
@@ -346,6 +359,7 @@
                                 <th>Nama Barang</th>
                                 <th>EOQ</th>
                                 <th>Jumlah Pemesanan</th>
+                                <th>Supplier</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

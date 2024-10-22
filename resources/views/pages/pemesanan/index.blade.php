@@ -55,6 +55,10 @@
                             html = '<span class="badge rounded-pill badge-soft-success font-size-14">' +
                                 data +
                                 '</span>';
+                        } else {
+                            html = '<span class="badge rounded-pill badge-soft-danger font-size-14">' +
+                                data +
+                                '</span>';
                         }
                         return html;
                     }
