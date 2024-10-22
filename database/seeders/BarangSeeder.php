@@ -27,6 +27,7 @@ class BarangSeeder extends Seeder
                 $barang->slug = Str::random(16);
                 $barang->nama_barang = $data->nama_barang;
                 $barang->harga_barang = $data->harga_barang;
+                $barang->biaya_penyimpanan = 10000;
                 $barang->save();
                 DB::commit();
             } catch (\Exception $ex) {
