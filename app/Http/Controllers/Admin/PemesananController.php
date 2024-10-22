@@ -14,6 +14,7 @@ use App\Models\Admin\DetailPemesanan;
 use App\Models\PemesananBarang;
 use App\Models\PenjualanBarang;
 use App\Models\PenjualanBarangDetail;
+use App\Models\Supplier;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -39,6 +40,7 @@ class PemesananController extends Controller
             $pemesanans = PemesananBarang::select(['invoice', 'status_pemesanan', 'biaya_pemesanan', 'created_at'])
                 ->where('status_pemesanan', 'Menunggu Persetujuan')
                 ->orWhere('status_pemesanan', 'Disetujui')
+                ->orWhere('status_pemesanan', 'Ditolak')
                 ->groupBy(['invoice', 'status_pemesanan', 'biaya_pemesanan', 'created_at'])->get();
 
             return DataTables::of($pemesanans)
@@ -90,14 +92,27 @@ class PemesananController extends Controller
     public function create(Request $request)
     {
         $user = $this->userAuth();
+        // dump(Supplier::all());
         if ($request->ajax()) {
-            $query = "SELECT a.barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop,((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = a.barang_id GROUP BY barang_id) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = a.barang_id GROUP BY barang_id)) as qty_total
+            // $query = "SELECT a.barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop,((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = a.barang_id GROUP BY barang_id) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = a.barang_id GROUP BY barang_id)) as qty_total
+            // FROM barangs as a
+            // JOIN barang_gudangs as b on a.barang_id = b.barang_id
+            // JOIN barang_counters as c on a.barang_id = c.barang_id
+            // GROUP BY a.barang_id, a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop ORDER BY ((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = a.barang_id GROUP BY barang_id) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = a.barang_id GROUP BY barang_id)) <= a.rop desc, a.barang_id asc";
+            // $barangs = DB::select($query);
+
+            $query = "SELECT a.barang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop, a.ss, b.stok_masuk as qty_total
             FROM barangs as a
             JOIN barang_gudangs as b on a.barang_id = b.barang_id
-            JOIN barang_counters as c on a.barang_id = c.barang_id
-            GROUP BY a.barang_id, a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop ORDER BY ((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = a.barang_id GROUP BY barang_id) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = a.barang_id GROUP BY barang_id)) <= a.rop desc, a.barang_id asc";
+            GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang
+            ORDER BY b.barang_gudang_id ASC";
             $barangs = DB::select($query);
+
             return DataTables::of($barangs)
+                // ->addColumn('supplier', function () {
+                //     $supplier = Supplier::all(['id', 'nama'])->toArray();
+                //     return $supplier;
+                // })
                 ->addColumn('action', function ($object) {
                     $html = '<button class="btn btn-success waves-effect waves-light btn-add"' .
                         '><i class="bx bx-plus-circle align-middle font-size-18"></i></button>';
@@ -158,7 +173,8 @@ class PemesananController extends Controller
         $data_eoq = [];
         foreach ($pemesanans as $key) {
             $barangAll = Barang::where('barang_id', $key->id_barang)->get(['nama_barang', 'biaya_penyimpanan'])->first();
-            $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->sum('quantity');
+            // $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->sum('quantity');
+            $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', ['2024-09-09', '2024-09-30'])->sum('quantity');
             $rumusEOQ = round(sqrt((2 * $biayaPemesanan * $totalBarangTerjualSebulan) /  $barangAll->biaya_penyimpanan));
             $hasil_eoq = [
                 'no' => $no++,
