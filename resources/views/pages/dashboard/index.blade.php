@@ -55,6 +55,37 @@
                 }
             ],
         });
+        $('#stokPersediaan').DataTable({
+            // lengthMenu: [5, 10, 20, 50, 100],
+            ordering: false,
+            ajax: "{{ route('stoktersisa') }}",
+            columns: [
+                {
+                    data: "barang_id"
+                },
+                {
+                    data: "nama_barang"
+                },
+                {
+                    data: "stok_masuk"
+                }
+                // {
+                //     data: "avg",
+                //     render: function(data, type, row) {
+                //         if (parseInt(row.qty_total) <= parseInt(row.rop)) {
+                //             return '<div class="alert alert-danger d-flex align-items-center" role="alert">' +
+                //                 '</div>';
+                //         } else if (parseInt(row.qty_total) <= parseInt(data)) {
+                //             return '<div class="alert alert-warning d-flex align-items-center" role="alert">' +
+                //                 '</div>';
+                //         } else {
+                //             return '<div class="alert alert-success d-flex align-items-center" role="alert">' +
+                //                 '</div>';
+                //         }
+                //     }
+                // }
+            ],
+        });
     </script>
 @endpush
 
@@ -81,7 +112,7 @@
 
         <div class="col-xl">
             <div class="row">
-                <div class="col-lg-3">
+                {{-- <div class="col-lg-3">
                     <div class="card mini-stats-wid">
                         <div class="card-body">
 
@@ -138,11 +169,114 @@
                             </div>
                         </div>
                     </div>
+                </div> --}}
+
+                @if ($user->role == 'counter')
+                <div class="col-lg-6">
+                    <div class="card blog-stats-wid">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <p class="text-muted mb-2">Total Pendapatan ({{ $bulan_tahun }})</p>
+                                    <h5 class="mb-0">
+                                        @php
+                                            $hasil_rupiah = 'Rp ' . number_format($penjualan->total_pendapatan, 0, ',', '.');
+                                            echo $hasil_rupiah;
+                                        @endphp
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-lg-6">
+                    <div class="card blog-stats-wid">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <p class="text-muted mb-2">Total Penjualan Item ({{ $bulan_tahun }})</p>
+                                    <h5 class="mb-0">
+                                        {{ $total_item_terjual }}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+                @if ($user->role == 'gudang')
+                <div class="col-lg-6">
+                    <div class="card blog-stats-wid">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <p class="text-muted mb-2">Total Supplier</p>
+                                    <h5 class="mb-0">
+                                        {{ $total_supplier }}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card blog-stats-wid">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <p class="text-muted mb-2">Total Penjualan Item ({{ $bulan_tahun }})</p>
+                                    <h5 class="mb-0">
+                                        {{ $total_item_terjual }}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+                
+
+                {{-- OWNER --}}
+                @if ($user->role == 'owner')
+                <div class="col-lg-6">
+                    <div class="card blog-stats-wid">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <p class="text-muted mb-2">Total Pendapatan ({{ $bulan_tahun }})</p>
+                                    <h5 class="mb-0">
+                                        @php
+                                            $hasil_rupiah = 'Rp ' . number_format($penjualan->total_pendapatan, 0, ',', '.');
+                                            echo $hasil_rupiah;
+                                        @endphp
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card blog-stats-wid">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <p class="text-muted mb-2">Total Supplier</p>
+                                    <h5 class="mb-0">
+                                        {{ $total_supplier }}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
             </div>
             <!-- end row -->
 
-            <div class="card">
+            {{-- <div class="card">
                 <div class="card-body">
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
@@ -153,6 +287,22 @@
                                 <th>ROP</th>
                                 <th>Rata-Rata Penjualan</th>
                                 <th>Label</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div> --}}
+            
+            <div class="card">
+                <div class="card-body">
+                    <table id="stokPersediaan" class="table table-bordered dt-responsive  nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th>ID Barang</th>
+                                <th>Nama Barang</th>
+                                <th style="width: 20%">Stok</th>
                             </tr>
                         </thead>
                         <tbody>
