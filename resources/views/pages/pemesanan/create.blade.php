@@ -79,10 +79,10 @@
         function viewPemesananDataTable(paramOne) {
             $('#datatable-pemesanan').DataTable().clear();
             $('#datatable-pemesanan').DataTable().destroy();
-            if (paramOne.length > 0) {
+            // if (paramOne.length > 0) {
                 // $('#grandTotal').text(rupiah(grandTotal));
                 return $('#datatable-pemesanan').DataTable({
-                    lengthMenu: [5, 10, 20, 50, 100],
+                    // lengthMenu: [5, 10, 20, 50, 100],
                     data: paramOne,
                     columns: [{
                             data: 'no'
@@ -96,20 +96,22 @@
                         {
                             data: 'jumlah'
                         },
-                        // {
-                        //     data: 'supplier',
-                        //     render: function (data, type, row) {
-                        //         return 'hi';
+                        {
+                            data: 'supplier',
+                            // render: function (data, type, row) {
+                            //     // return 'hi';
                                 
-                        //         // row.forEach(element => { 
-                        //         //     return `
-                        //         //     <select class="form-control" name="supplier" id="supplier">';
-                        //         //         <option value="${element.id}">${element.name}</option>
-                        //         //     </select>
-                        //         //     `;
-                        //         // });
-                        //     }
-                        // },
+                            //     // row.forEach(element => { 
+                            //         // return `
+                            //         // <select class="form-control" name="supplier" id="supplier">';
+                            //         //     <option value="1">Pilih Supplier</option>
+                            //         //     <option value="1">saty</option>
+                            //         //     <option value="1">da</option>
+                            //         // </select>
+                            //         //  `;
+                            //     // });
+                            // }
+                        },
                         {
                             data: 'id_barang',
                             render: function(data, type, row) {
@@ -118,11 +120,11 @@
                         }
                     ],
                 });
-            } else {
-                return $('#datatable-pemesanan').DataTable({
-                    lengthMenu: [5, 10, 20, 50, 100],
-                });
-            }
+            // } else {
+            //     return $('#datatable-pemesanan').DataTable({
+            //         lengthMenu: [5, 10, 20, 50, 100],
+            //     });
+            // }
         }
 
         function changeBarangAfterAddKasir(id_barang) {
@@ -141,6 +143,7 @@
                         "id_barang": selectedData.barang_id,
                         "nama_barang": selectedData.nama_barang,
                         "jumlah": 0,
+                        "supplier": selectedData.supplier,
                         "eoq": 0,
                     }
                     pemesanan.push(keranjangTemp);
@@ -151,6 +154,7 @@
                     "id_barang": selectedData.barang_id,
                     "nama_barang": selectedData.nama_barang,
                     "jumlah": 0,
+                    "supplier": selectedData.supplier,
                     "eoq": 0,
                 }
                 pemesanan.push(keranjangTemp);
@@ -164,7 +168,7 @@
             let id_barang = selectedData.barang_id;
             changeBarangAfterAddKasir(id_barang);
             pemesananDatatable = viewPemesananDataTable(pemesanan);
-            // console.log(pemesanan);
+            console.log(pemesanan);
         });
 
         $('#btn-save-add').on('click', function(e) {
@@ -272,6 +276,7 @@
                                 "id_barang": element.id_barang,
                                 "nama_barang": element.nama_barang,
                                 "jumlah": element.eoq,
+                                "supplier": element.supplier,
                                 "eoq": element.eoq
                             };
                             pemesanan.push(pemesananTemp);
