@@ -101,7 +101,8 @@ class PemesananController extends Controller
             // GROUP BY a.barang_id, a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop ORDER BY ((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = a.barang_id GROUP BY barang_id) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = a.barang_id GROUP BY barang_id)) <= a.rop desc, a.barang_id asc";
             // $barangs = DB::select($query);
 
-            $query = "SELECT a.barang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop, a.ss, b.stok_masuk as qty_total
+            $query = "SELECT a.barang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, 
+            a.biaya_penyimpanan, a.rop, a.ss, b.stok_masuk as qty_total
             FROM barangs as a
             JOIN barang_gudangs as b on a.barang_id = b.barang_id
             GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang
@@ -110,7 +111,7 @@ class PemesananController extends Controller
 
             return DataTables::of($barangs)
                 // ->addColumn('supplier', function () {
-                //     $supplier = Supplier::all(['id', 'nama'])->toArray();
+                //     $supplier = 'HELLO';
                 //     return $supplier;
                 // })
                 ->addColumn('action', function ($object) {
@@ -170,17 +171,24 @@ class PemesananController extends Controller
         $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
         $endOfMonth = Carbon::now()->today()->translatedFormat('Y-m-d');
 
+        $supplier = Supplier::all();
+        $htmlSupplier = '<select class="form-control" name="supplier" id="supplier">';
+        foreach ($supplier as $key => $value) {
+            $htmlSupplier .= '<option value="' . $value->id . '">' . $value->nama . '</option>';
+        }
+        $select = $htmlSupplier . '</select>';
         $data_eoq = [];
         foreach ($pemesanans as $key) {
             $barangAll = Barang::where('barang_id', $key->id_barang)->get(['nama_barang', 'biaya_penyimpanan'])->first();
-            // $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->sum('quantity');
-            $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', ['2024-09-09', '2024-09-30'])->sum('quantity');
+            $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->sum('quantity');
+            // $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', ['2024-09-09', '2024-09-30'])->sum('quantity');
             $rumusEOQ = round(sqrt((2 * $biayaPemesanan * $totalBarangTerjualSebulan) /  $barangAll->biaya_penyimpanan));
             $hasil_eoq = [
                 'no' => $no++,
                 'id_barang' => $key->id_barang,
                 'nama_barang' => $barangAll->nama_barang,
                 'eoq' => $rumusEOQ,
+                'supplier' => $select,
                 'jumlah' => 0,
             ];
             array_push($data_eoq, $hasil_eoq);
