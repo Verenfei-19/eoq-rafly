@@ -30,7 +30,7 @@ class Supplier extends Model
             $addZero = "0";
         }
 
-        $newGudangId = "G" . $addZero . $incrementSupplierId;
+        $newGudangId = "S" . $addZero . $incrementSupplierId;
         return $newGudangId;
     }
 }
