@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('nama');
             $table->string('telepon');
             $table->string('alamat');
+            $table->string('id_barang');
+            $table->integer('waktu');
             $table->timestamps();
         });
     }
