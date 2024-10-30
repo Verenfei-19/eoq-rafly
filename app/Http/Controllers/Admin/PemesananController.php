@@ -101,19 +101,26 @@ class PemesananController extends Controller
             // GROUP BY a.barang_id, a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop ORDER BY ((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = a.barang_id GROUP BY barang_id) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = a.barang_id GROUP BY barang_id)) <= a.rop desc, a.barang_id asc";
             // $barangs = DB::select($query);
 
+            // $queryLama = "SELECT a.barang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, 
+            // a.biaya_penyimpanan, a.rop, a.ss, b.stok_masuk as qty_total
+            // FROM barangs as a
+            // JOIN barang_gudangs as b on a.barang_id = b.barang_id
+            // GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang
+            // ORDER BY b.barang_gudang_id ASC";
+
             $query = "SELECT a.barang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, 
-            a.biaya_penyimpanan, a.rop, a.ss, b.stok_masuk as qty_total
+            a.biaya_penyimpanan, a.rop, a.ss, sp.nama, sp.waktu, b.stok_masuk as qty_total
             FROM barangs as a
             JOIN barang_gudangs as b on a.barang_id = b.barang_id
-            GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang
+            JOIN suppliers as sp on a.barang_id = sp.id_barang
+            GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang, sp.nama, sp.waktu
             ORDER BY b.barang_gudang_id ASC";
             $barangs = DB::select($query);
 
             return DataTables::of($barangs)
-                // ->addColumn('supplier', function () {
-                //     $supplier = 'HELLO';
-                //     return $supplier;
-                // })
+                ->editColumn('nama', function ($object) {
+                    return $object->nama . ', Estimasi barang ' . $object->waktu . ' Hari';
+                })
                 ->addColumn('action', function ($object) {
                     $html = '<button class="btn btn-success waves-effect waves-light btn-add"' .
                         '><i class="bx bx-plus-circle align-middle font-size-18"></i></button>';
@@ -171,12 +178,12 @@ class PemesananController extends Controller
         $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
         $endOfMonth = Carbon::now()->today()->translatedFormat('Y-m-d');
 
-        $supplier = Supplier::all();
-        $htmlSupplier = '<select class="form-control" name="supplier" id="supplier">';
-        foreach ($supplier as $key => $value) {
-            $htmlSupplier .= '<option value="' . $value->id . '">' . $value->nama . '</option>';
-        }
-        $select = $htmlSupplier . '</select>';
+        // $supplier = Supplier::all();
+        // $htmlSupplier = '<select class="form-control" name="supplier" id="supplier">';
+        // foreach ($supplier as $key => $value) {
+        //     $htmlSupplier .= '<option value="' . $value->id . '">' . $value->nama . '</option>';
+        // }
+        // $select = $htmlSupplier . '</select>';
         $data_eoq = [];
         foreach ($pemesanans as $key) {
             $barangAll = Barang::where('barang_id', $key->id_barang)->get(['nama_barang', 'biaya_penyimpanan'])->first();
@@ -188,7 +195,7 @@ class PemesananController extends Controller
                 'id_barang' => $key->id_barang,
                 'nama_barang' => $barangAll->nama_barang,
                 'eoq' => $rumusEOQ,
-                'supplier' => $select,
+                // 'supplier' => $select,
                 'jumlah' => 0,
             ];
             array_push($data_eoq, $hasil_eoq);
