@@ -43,6 +43,10 @@
                     name: 'Nama Barang'
                 },
                 {
+                    data: 'nama',
+                    name: 'Nama Supplier'
+                },
+                {
                     data: 'qty_total',
                     name: 'Quantity'
                 },
@@ -79,8 +83,67 @@
         function viewPemesananDataTable(paramOne) {
             $('#datatable-pemesanan').DataTable().clear();
             $('#datatable-pemesanan').DataTable().destroy();
-            // if (paramOne.length > 0) {
-                // $('#grandTotal').text(rupiah(grandTotal));
+            console.log('pemesanandatatable');
+
+            // if (paramOne[0].supplier === undefined) {
+            //     return $('#datatable-pemesanan').DataTable({
+            //         data: paramOne,
+            //         columns: [{
+            //                 data: 'no'
+            //             },
+            //             {
+            //                 data: 'nama_barang'
+            //             },
+            //             {
+            //                 data: 'eoq'
+            //             },
+            //             {
+            //                 data: 'jumlah'
+            //             },
+            //             // {
+            //             //     data: 'jumlah',
+            //             //     render: function (data, type, row) {
+            //             //         return 'Input biaya pemesanan dahulu!';
+            //             //     }
+            //             // },
+            //             {
+            //                 data: 'id_barang',
+            //                 render: function(data, type, row) {
+            //                     return '<button class="btn btn-success waves-effect waves-light btn-jumlah-pemesanan" data-bs-toggle="modal" data-bs-target="#quantityModal"><i class="bx bx-edit align-middle me-2 font-size-18"></i></button> <button class="btn btn-danger waves-effect waves-light btn-remove"><i class="bx bxs-trash align-middle font-size-18"></i></button>';
+            //                 }
+            //             }
+            //         ],
+            //     });
+                
+            // }else{
+            //     // console.log('aman');
+            //     return $('#datatable-pemesanan').DataTable({
+            //         data: paramOne,
+            //         columns: [{
+            //                 data: 'no'
+            //             },
+            //             {
+            //                 data: 'nama_barang'
+            //             },
+            //             {
+            //                 data: 'eoq'
+            //             },
+            //             {
+            //                 data: 'jumlah'
+            //             },
+            //             // {
+            //             //     data: 'supplier',
+            //             // },
+            //             {
+            //                 data: 'id_barang',
+            //                 render: function(data, type, row) {
+            //                     return '<button class="btn btn-success waves-effect waves-light btn-jumlah-pemesanan" data-bs-toggle="modal" data-bs-target="#quantityModal"><i class="bx bx-edit align-middle me-2 font-size-18"></i></button> <button class="btn btn-danger waves-effect waves-light btn-remove"><i class="bx bxs-trash align-middle font-size-18"></i></button>';
+            //                 }
+            //             }
+            //         ],
+            //     });
+            // }
+            if (paramOne.length > 0) {
                 return $('#datatable-pemesanan').DataTable({
                     // lengthMenu: [5, 10, 20, 50, 100],
                     data: paramOne,
@@ -96,22 +159,12 @@
                         {
                             data: 'jumlah'
                         },
-                        {
-                            data: 'supplier',
-                            // render: function (data, type, row) {
-                            //     // return 'hi';
+                        // {
+                        //     data: 'supplier',
+                        //     // render: function (data, type, row) {
+                        //         // return 'Input biaya pemesanan dahulu!';
                                 
-                            //     // row.forEach(element => { 
-                            //         // return `
-                            //         // <select class="form-control" name="supplier" id="supplier">';
-                            //         //     <option value="1">Pilih Supplier</option>
-                            //         //     <option value="1">saty</option>
-                            //         //     <option value="1">da</option>
-                            //         // </select>
-                            //         //  `;
-                            //     // });
-                            // }
-                        },
+                        // },
                         {
                             data: 'id_barang',
                             render: function(data, type, row) {
@@ -120,11 +173,11 @@
                         }
                     ],
                 });
-            // } else {
-            //     return $('#datatable-pemesanan').DataTable({
-            //         lengthMenu: [5, 10, 20, 50, 100],
-            //     });
-            // }
+            } else {
+                return $('#datatable-pemesanan').DataTable({
+                    lengthMenu: [5, 10, 20, 50, 100],
+                });
+            }
         }
 
         function changeBarangAfterAddKasir(id_barang) {
@@ -168,7 +221,6 @@
             let id_barang = selectedData.barang_id;
             changeBarangAfterAddKasir(id_barang);
             pemesananDatatable = viewPemesananDataTable(pemesanan);
-            console.log(pemesanan);
         });
 
         $('#btn-save-add').on('click', function(e) {
@@ -226,6 +278,7 @@
             $('.alert').hide();
         });
 
+        // simpan transaksi
         $('#save-transaction').on('click', function() {
             if (pemesanan.length > 0) {
                 $.ajax({
@@ -251,6 +304,7 @@
             $('#biaya_pemesanan').val('');
         });
 
+        // simpan biaya pemesanan
         $('#btn-save-biaya').on('click', function() {
             biaya = $('#biaya_pemesanan').val();
             $('#biayaModal').modal('toggle');
@@ -324,6 +378,7 @@
                             <tr>
                                 <th>ID Barang</th>
                                 <th>Nama Barang</th>
+                                <th>Supplier & Estimasi barang</th>
                                 <th class="col-md-1">Quantity</th>
                                 <th class="col-md-1">ROP</th>
                                 <th class="col-md-1">Action</th>
@@ -364,7 +419,7 @@
                                 <th>Nama Barang</th>
                                 <th>EOQ</th>
                                 <th>Jumlah Pemesanan</th>
-                                <th>Supplier</th>
+                                {{-- <th>Supplier</th> --}}
                                 <th>Action</th>
                             </tr>
                         </thead>
