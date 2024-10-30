@@ -43,6 +43,12 @@
                 {
                     data: "telepon"
                 },
+                {
+                    data: "nama_barang"
+                },
+                {
+                    data: "waktu"
+                },
                 @if ($user->role == 'gudang')
                     {
                         data: "action"
@@ -95,6 +101,8 @@
                                 <th>Nama Supplier</th>
                                 <th>Alamat Supplier</th>
                                 <th>Nomor Telepon</th>
+                                <th>Barang yang disupply</th>
+                                <th>Estimasi proses barang</th>
                                 @if ($user->role == 'gudang')
                                     <th>Action</th>
                                 @endif

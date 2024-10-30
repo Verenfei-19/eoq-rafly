@@ -31,6 +31,35 @@
 </div>
 
 <div class="mt-4 mb-3 row">
+    <label for="id_barang" class="col-md-2 col-form-label">Barang Supplier</label>
+    <div class="col-md-10">
+        <select class="form-control" name="id_barang" id="id_barang">
+            <option value="" style="display: none">-- Pilih barang --</option>
+            
+            @if (empty($supplier))
+                @foreach ($barang as $item)
+                <option value="{{ $item->barang_id }}">{{ $item->nama_barang }}</option>
+                @endforeach
+            @else 
+                @foreach ($barang as $item)
+                <option value="{{ $item->barang_id }}" {{ ($item->barang_id === $supplier->id_barang) ? 'selected' : ''}}>{{ $item->nama_barang }}</option>
+                @endforeach
+
+            @endif
+        </select>
+    </div>
+</div>
+
+<div class="mt-4 mb-3 row">
+    <label for="waktu" class="col-md-2 col-form-label">Estimasi pengiriman dalam hari</label>
+    <div class="col-md-10">
+        <input class="form-control" type="text" id="waktu"
+            name="waktu" value="{{ !empty($supplier) ? $supplier->waktu : '' }}"
+            placeholder="3">
+    </div>
+</div>
+
+<div class="mt-4 mb-3 row">
     <div class="col-md-2"></div>
     <div class="col-md-10">
         <a href="{{ route('supplier') }}" class="btn btn-secondary waves-effect waves-light">
