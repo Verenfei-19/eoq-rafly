@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('invoice');
             $table->string('id_barang');
+            $table->string('id_supplier');
+            $table->string('tgl_datang');
             $table->string('status_pemesanan');
             $table->integer('biaya_pemesanan');
             $table->integer('eoq');
