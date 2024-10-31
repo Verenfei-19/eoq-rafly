@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 30, 2024 at 01:01 PM
+-- Generation Time: Oct 31, 2024 at 03:22 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.22
 
@@ -44,15 +44,15 @@ CREATE TABLE `barangs` (
 --
 
 INSERT INTO `barangs` (`barang_id`, `slug`, `nama_barang`, `harga_barang`, `biaya_penyimpanan`, `rop`, `ss`, `created_at`, `updated_at`) VALUES
-('B00001', 'tasTegVsbVpk5Fpo', 'Oxford putih', 3750, 20000, 0, 0, '2024-10-30 03:24:04', '2024-10-30 03:24:04'),
-('B00002', 'keZTZtBqS8upSmVq', 'Oxford coklat', 4000, 20000, 0, 0, '2024-10-30 03:24:04', '2024-10-30 03:24:04'),
-('B00003', 'Di5EWsY6J15a92Hk', 'Allino kopi susu', 3000, 20000, 0, 0, '2024-10-30 03:24:04', '2024-10-30 03:24:04'),
-('B00004', 'ArB3HSkHOVnxTH9D', 'Cemani merah', 2700, 20000, 0, 0, '2024-10-30 03:24:05', '2024-10-30 03:24:05'),
-('B00005', 'U7sBAhnQJ8YoZejS', 'Cemani coklat', 2500, 20000, 0, 0, '2024-10-30 03:24:05', '2024-10-30 03:24:05'),
-('B00006', 'vsFyBLME82EVpTox', 'Cemani dongker', 1000, 20000, 0, 0, '2024-10-30 03:24:05', '2024-10-30 03:24:05'),
-('B00007', '4A0PCCTzIujlyrd7', 'Cemani abu', 6000, 20000, 0, 0, '2024-10-30 03:24:05', '2024-10-30 03:24:05'),
-('B00008', 'uQTEurbfPwRMUSH9', 'Cemani putih', 5500, 20000, 0, 0, '2024-10-30 03:24:05', '2024-10-30 03:24:05'),
-('B00009', 'H6vJKqU4K2SPZUpT', 'Cemani hijau', 5500, 20000, 0, 0, '2024-10-30 03:24:05', '2024-10-30 03:24:05');
+('B00001', '5TslfQyjAmEuqiUV', 'Oxford putih', 3750, 20000, 0, 0, '2024-10-30 19:19:29', '2024-10-30 19:19:29'),
+('B00002', 'AUyraP25ju81B2UV', 'Oxford coklat', 4000, 20000, 0, 0, '2024-10-30 19:19:29', '2024-10-30 19:19:29'),
+('B00003', 'PvExI0ehbdrcDN33', 'Allino kopi susu', 3000, 20000, 0, 0, '2024-10-30 19:19:29', '2024-10-30 19:19:29'),
+('B00004', 'k02oQfhvD6kl65Ym', 'Cemani merah', 2700, 20000, 0, 0, '2024-10-30 19:19:29', '2024-10-30 19:19:29'),
+('B00005', 'RuzacWrem4iQehxB', 'Cemani coklat', 2500, 20000, 0, 0, '2024-10-30 19:19:29', '2024-10-30 19:19:29'),
+('B00006', 'l6cXqwzr2Z8EhbNd', 'Cemani dongker', 1000, 20000, 0, 0, '2024-10-30 19:19:29', '2024-10-30 19:19:29'),
+('B00007', 'ZT7Ns7sPQQckwV2x', 'Cemani abu', 6000, 20000, 0, 0, '2024-10-30 19:19:29', '2024-10-30 19:19:29'),
+('B00008', 'HQJDhFJclr2a14SR', 'Cemani putih', 5500, 20000, 0, 0, '2024-10-30 19:19:29', '2024-10-30 19:19:29'),
+('B00009', 'uxvsY0YipuTwergn', 'Cemani hijau', 5500, 20000, 0, 0, '2024-10-30 19:19:29', '2024-10-30 19:19:29');
 
 -- --------------------------------------------------------
 
@@ -71,48 +71,6 @@ CREATE TABLE `barang_counters` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `barang_counters`
---
-
-INSERT INTO `barang_counters` (`barang_counter_id`, `slug`, `counter_id`, `barang_id`, `stok_awal`, `stok_masuk`, `stok_keluar`, `created_at`, `updated_at`) VALUES
-('C00001B00001', 'zQ8l5NSOr9YCn85b', 'C00001', 'B00001', 0, 0, 0, '2024-10-30 03:26:51', '2024-10-30 03:26:51'),
-('C00001B00002', 'uIIQqceCthzOxiI3', 'C00001', 'B00002', 0, 0, 0, '2024-10-30 03:26:51', '2024-10-30 03:26:51'),
-('C00001B00003', '7e5ztiQMwmxP63KU', 'C00001', 'B00003', 0, 0, 0, '2024-10-30 03:26:51', '2024-10-30 03:26:51'),
-('C00001B00004', 'XmuyTqLg2WhsZCci', 'C00001', 'B00004', 0, 0, 0, '2024-10-30 03:26:51', '2024-10-30 03:26:51'),
-('C00001B00005', 'dGS7qk6KTE2ZycnE', 'C00001', 'B00005', 0, 0, 0, '2024-10-30 03:26:51', '2024-10-30 03:26:51'),
-('C00001B00006', 'hLiucKzlwF1FA25g', 'C00001', 'B00006', 0, 0, 0, '2024-10-30 03:26:51', '2024-10-30 03:26:51'),
-('C00001B00007', 'n5Hpd6PZEC1LqfCJ', 'C00001', 'B00007', 0, 0, 0, '2024-10-30 03:26:51', '2024-10-30 03:26:51'),
-('C00001B00008', 'KfYp7LGhHKpEgdkw', 'C00001', 'B00008', 0, 0, 0, '2024-10-30 03:26:51', '2024-10-30 03:26:51'),
-('C00001B00009', '2u74Z16LxpxfyfQZ', 'C00001', 'B00009', 0, 0, 0, '2024-10-30 03:26:51', '2024-10-30 03:26:51'),
-('C00002B00001', 'Onz5ja6GeydTa4vR', 'C00002', 'B00001', 0, 0, 0, '2024-10-30 03:27:11', '2024-10-30 03:27:11'),
-('C00002B00002', 'B3T4BE0NgZxH02yL', 'C00002', 'B00002', 0, 0, 0, '2024-10-30 03:27:11', '2024-10-30 03:27:11'),
-('C00002B00003', 'RqzJwMNEafCJ5r6h', 'C00002', 'B00003', 0, 0, 0, '2024-10-30 03:27:11', '2024-10-30 03:27:11'),
-('C00002B00004', 'dooRVSQl7Or1jVjx', 'C00002', 'B00004', 0, 0, 0, '2024-10-30 03:27:11', '2024-10-30 03:27:11'),
-('C00002B00005', 'qLLldK0TxUOezmqD', 'C00002', 'B00005', 0, 0, 0, '2024-10-30 03:27:12', '2024-10-30 03:27:12'),
-('C00002B00006', 'wCzlX1KpWKku9Qqb', 'C00002', 'B00006', 0, 0, 0, '2024-10-30 03:27:12', '2024-10-30 03:27:12'),
-('C00002B00007', 'DTKW1ys85VjiP1rB', 'C00002', 'B00007', 0, 0, 0, '2024-10-30 03:27:12', '2024-10-30 03:27:12'),
-('C00002B00008', 'DVCvrhotGUKlJhoR', 'C00002', 'B00008', 0, 0, 0, '2024-10-30 03:27:12', '2024-10-30 03:27:12'),
-('C00002B00009', 'UAcq5TPnUNHvX9qX', 'C00002', 'B00009', 0, 0, 0, '2024-10-30 03:27:12', '2024-10-30 03:27:12'),
-('C00003B00001', '5FhjBpanJDKflGTR', 'C00003', 'B00001', 0, 0, 0, '2024-10-30 03:27:25', '2024-10-30 03:27:25'),
-('C00003B00002', 'Rg55P5zShxlkMFIL', 'C00003', 'B00002', 0, 0, 0, '2024-10-30 03:27:25', '2024-10-30 03:27:25'),
-('C00003B00003', 'R3SOUZlsDWmFcBGL', 'C00003', 'B00003', 0, 0, 0, '2024-10-30 03:27:25', '2024-10-30 03:27:25'),
-('C00003B00004', 'GmxDRNGzJojI1ikJ', 'C00003', 'B00004', 0, 0, 0, '2024-10-30 03:27:25', '2024-10-30 03:27:25'),
-('C00003B00005', 'HfGhBzj1gi3kH1Mh', 'C00003', 'B00005', 0, 0, 0, '2024-10-30 03:27:25', '2024-10-30 03:27:25'),
-('C00003B00006', 'j4Aep2u34L2GIpQc', 'C00003', 'B00006', 0, 0, 0, '2024-10-30 03:27:25', '2024-10-30 03:27:25'),
-('C00003B00007', '47qOknOJc2FwP9MY', 'C00003', 'B00007', 0, 0, 0, '2024-10-30 03:27:25', '2024-10-30 03:27:25'),
-('C00003B00008', 'GKQwver27sdoca98', 'C00003', 'B00008', 0, 0, 0, '2024-10-30 03:27:25', '2024-10-30 03:27:25'),
-('C00003B00009', 'SZhlX9TF3Ei7NhM6', 'C00003', 'B00009', 0, 0, 0, '2024-10-30 03:27:25', '2024-10-30 03:27:25'),
-('C00004B00001', 'OG2E9hUlJwb4Uz6t', 'C00004', 'B00001', 0, 0, 0, '2024-10-30 03:27:42', '2024-10-30 03:27:42'),
-('C00004B00002', 'skjremJdX9PWkVDe', 'C00004', 'B00002', 0, 0, 0, '2024-10-30 03:27:42', '2024-10-30 03:27:42'),
-('C00004B00003', 'dC22dPLfI0WCJnJl', 'C00004', 'B00003', 0, 0, 0, '2024-10-30 03:27:42', '2024-10-30 03:27:42'),
-('C00004B00004', 'kKDgPabN3vDSsAPd', 'C00004', 'B00004', 0, 0, 0, '2024-10-30 03:27:42', '2024-10-30 03:27:42'),
-('C00004B00005', 'SVHpeqKK2k2VLbD7', 'C00004', 'B00005', 0, 0, 0, '2024-10-30 03:27:42', '2024-10-30 03:27:42'),
-('C00004B00006', 'UX9HDIUONsR2lQ6V', 'C00004', 'B00006', 0, 0, 0, '2024-10-30 03:27:42', '2024-10-30 03:27:42'),
-('C00004B00007', 'OHxAjUBCInIu2j2k', 'C00004', 'B00007', 0, 0, 0, '2024-10-30 03:27:42', '2024-10-30 03:27:42'),
-('C00004B00008', 'DHZd1dj0P82FWq3e', 'C00004', 'B00008', 0, 0, 0, '2024-10-30 03:27:42', '2024-10-30 03:27:42'),
-('C00004B00009', 'Hnj20DqqkuxvSLkh', 'C00004', 'B00009', 0, 0, 0, '2024-10-30 03:27:42', '2024-10-30 03:27:42');
 
 -- --------------------------------------------------------
 
@@ -137,15 +95,15 @@ CREATE TABLE `barang_gudangs` (
 --
 
 INSERT INTO `barang_gudangs` (`barang_gudang_id`, `slug`, `barang_id`, `gudang_id`, `stok_awal`, `stok_masuk`, `stok_keluar`, `created_at`, `updated_at`) VALUES
-('G00001B00001', 'OH51YCVwedm0Skiw', 'B00001', 'G00001', 0, 55, 45, '2024-10-30 03:24:06', '2024-10-30 03:25:36'),
-('G00001B00002', 'x9BqKgZMIjHhV1As', 'B00002', 'G00001', 0, 53, 45, '2024-10-30 03:24:06', '2024-10-30 03:25:36'),
-('G00001B00003', 'sgoIgnMfTAHNKlK8', 'B00003', 'G00001', 0, 55, 45, '2024-10-30 03:24:06', '2024-10-30 03:25:15'),
-('G00001B00004', 'aH3CNzswFlASQVLZ', 'B00004', 'G00001', 0, 60, 45, '2024-10-30 03:24:06', '2024-10-30 03:24:06'),
-('G00001B00005', '2FZhX09W2zbcNm0h', 'B00005', 'G00001', 0, 60, 45, '2024-10-30 03:24:06', '2024-10-30 03:24:06'),
-('G00001B00006', 'oflJMhbzhBx4XRyC', 'B00006', 'G00001', 0, 60, 45, '2024-10-30 03:24:06', '2024-10-30 03:24:06'),
-('G00001B00007', 'hYF7z4wouqOKDWbu', 'B00007', 'G00001', 0, 60, 45, '2024-10-30 03:24:06', '2024-10-30 03:24:06'),
-('G00001B00008', 'mYaSIqlo2hu8dA0a', 'B00008', 'G00001', 0, 60, 45, '2024-10-30 03:24:06', '2024-10-30 03:24:06'),
-('G00001B00009', 'nSrao1jtWc8VruRP', 'B00009', 'G00001', 0, 60, 45, '2024-10-30 03:24:06', '2024-10-30 03:24:06');
+('G00001B00001', 'mKXGboFzPqjGspTd', 'B00001', 'G00001', 0, 57, 45, '2024-10-30 19:19:30', '2024-10-30 19:20:21'),
+('G00001B00002', 'LzFNP2IGcstqOrHG', 'B00002', 'G00001', 0, 55, 45, '2024-10-30 19:19:30', '2024-10-30 19:20:21'),
+('G00001B00003', 'zuofqvMd5YRJqrql', 'B00003', 'G00001', 0, 53, 45, '2024-10-30 19:19:30', '2024-10-30 19:20:35'),
+('G00001B00004', 'q2W90D0PfBELiW2o', 'B00004', 'G00001', 0, 50, 45, '2024-10-30 19:19:30', '2024-10-30 19:21:22'),
+('G00001B00005', 'qwZsB1WSJrh8Ykv6', 'B00005', 'G00001', 0, 52, 45, '2024-10-30 19:19:30', '2024-10-30 19:20:57'),
+('G00001B00006', 'ypxdXH34R5PeHh2c', 'B00006', 'G00001', 0, 60, 45, '2024-10-30 19:19:30', '2024-10-30 19:19:30'),
+('G00001B00007', 'QTeiU2uaqmYdOn4k', 'B00007', 'G00001', 0, 60, 45, '2024-10-30 19:19:30', '2024-10-30 19:19:30'),
+('G00001B00008', 'HnVpXzGSaTrQgMZu', 'B00008', 'G00001', 0, 60, 45, '2024-10-30 19:19:30', '2024-10-30 19:19:30'),
+('G00001B00009', 'L2ulozrf2zURSZFA', 'B00009', 'G00001', 0, 60, 45, '2024-10-30 19:19:30', '2024-10-30 19:19:30');
 
 -- --------------------------------------------------------
 
@@ -160,16 +118,6 @@ CREATE TABLE `counters` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `counters`
---
-
-INSERT INTO `counters` (`counter_id`, `slug`, `user_id`, `created_at`, `updated_at`) VALUES
-('C00001', '9pkh5WPMKrWQjdy1', 'U00006', '2024-10-30 03:26:51', '2024-10-30 03:26:51'),
-('C00002', 'xR7Cza9L4vt1YCLG', 'U00007', '2024-10-30 03:27:11', '2024-10-30 03:27:11'),
-('C00003', 'gO4De1hFRZrRlRon', 'U00008', '2024-10-30 03:27:25', '2024-10-30 03:27:25'),
-('C00004', '0p0SIaMOaj2VYawe', 'U00009', '2024-10-30 03:27:42', '2024-10-30 03:27:42');
 
 -- --------------------------------------------------------
 
@@ -272,7 +220,7 @@ CREATE TABLE `gudangs` (
 --
 
 INSERT INTO `gudangs` (`gudang_id`, `slug`, `user_id`, `created_at`, `updated_at`) VALUES
-('G00001', 'Nt22f3LqH2bnCDrR', 'U00001', '2024-10-30 03:24:06', '2024-10-30 03:24:06');
+('G00001', 'kODhwhE5qMeMuZZe', 'U00001', '2024-10-30 19:19:30', '2024-10-30 19:19:30');
 
 -- --------------------------------------------------------
 
@@ -352,6 +300,8 @@ CREATE TABLE `pemesanan_barangs` (
   `id` bigint UNSIGNED NOT NULL,
   `invoice` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_barang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_supplier` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tgl_datang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status_pemesanan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `biaya_pemesanan` int NOT NULL,
   `eoq` int NOT NULL,
@@ -360,6 +310,15 @@ CREATE TABLE `pemesanan_barangs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `pemesanan_barangs`
+--
+
+INSERT INTO `pemesanan_barangs` (`id`, `invoice`, `id_barang`, `id_supplier`, `tgl_datang`, `status_pemesanan`, `biaya_pemesanan`, `eoq`, `rop`, `jumlah_pemesanan`, `created_at`, `updated_at`) VALUES
+(1, 'PMP-20241031022859', 'B00001', '1', '5', 'Disetujui', 5000, 1, 0, 1, '2024-10-30 19:28:59', '2024-10-30 20:10:53'),
+(2, 'PMP-20241031022859', 'B00002', '4', '3', 'Disetujui', 5000, 2, 0, 2, '2024-10-30 19:28:59', '2024-10-30 20:10:53'),
+(3, 'PMP-20241031022859', 'B00004', '5', '5', 'Disetujui', 5000, 2, 0, 2, '2024-10-30 19:28:59', '2024-10-30 20:10:53');
 
 -- --------------------------------------------------------
 
@@ -417,8 +376,10 @@ CREATE TABLE `penjualan_barangs` (
 --
 
 INSERT INTO `penjualan_barangs` (`id`, `invoice_number`, `nama_pembeli`, `alamat_pembeli`, `telepon_pembeli`, `status`, `tgl_pembelian`, `tgl_pengiriman`, `created_at`, `updated_at`) VALUES
-(1, 'DTRINVCITRA30102024102515', 'Citra', 'wad', '123', 'DITERIMA', '2024-10-30', NULL, '2024-10-30 03:25:15', '2024-10-30 03:25:15'),
-(2, 'DTRINVWAHYU30102024102536', 'Wahyu', 'oo', '3321', 'DITERIMA', '2024-10-28', NULL, '2024-10-30 03:25:36', '2024-10-30 03:25:36');
+(1, 'DTRINVCAHYA31102024022021', 'Cahya', 'cahya', '123', 'DITERIMA', '2024-10-29', NULL, '2024-10-30 19:20:21', '2024-10-30 19:20:21'),
+(2, 'DTRINVRINA31102024022035', 'Rina', 'rina', '123', 'DITERIMA', '2024-10-30', NULL, '2024-10-30 19:20:35', '2024-10-30 19:20:35'),
+(3, 'DTRINVWAHYU31102024022057', 'Wahyu', 'wahyu', '321', 'DITERIMA', '2024-10-27', NULL, '2024-10-30 19:20:57', '2024-10-30 19:20:57'),
+(4, 'DTRINVTIO31102024022122', 'Tio', 'tio', '332', 'DITERIMA', '2024-10-28', NULL, '2024-10-30 19:21:22', '2024-10-30 19:21:22');
 
 -- --------------------------------------------------------
 
@@ -444,10 +405,12 @@ CREATE TABLE `penjualan_barang_details` (
 --
 
 INSERT INTO `penjualan_barang_details` (`id`, `invoice_number`, `id_barang`, `nama_barang`, `quantity`, `harga_barang`, `tgl_pembelian`, `tgl_pengiriman`, `created_at`, `updated_at`) VALUES
-(1, 'DTRINVCITRA30102024102515', 'B00001', 'Oxford putih', 3, 3750, '2024-10-30', NULL, '2024-10-30 03:25:15', '2024-10-30 03:25:15'),
-(2, 'DTRINVCITRA30102024102515', 'B00003', 'Allino kopi susu', 5, 3000, '2024-10-30', NULL, '2024-10-30 03:25:15', '2024-10-30 03:25:15'),
-(3, 'DTRINVWAHYU30102024102536', 'B00001', 'Oxford putih', 2, 3750, '2024-10-28', NULL, '2024-10-30 03:25:36', '2024-10-30 03:25:36'),
-(4, 'DTRINVWAHYU30102024102536', 'B00002', 'Oxford coklat', 7, 4000, '2024-10-28', NULL, '2024-10-30 03:25:36', '2024-10-30 03:25:36');
+(1, 'DTRINVCAHYA31102024022021', 'B00001', 'Oxford putih', 3, 3750, '2024-10-29', NULL, '2024-10-30 19:20:21', '2024-10-30 19:20:21'),
+(2, 'DTRINVCAHYA31102024022021', 'B00002', 'Oxford coklat', 5, 4000, '2024-10-29', NULL, '2024-10-30 19:20:21', '2024-10-30 19:20:21'),
+(3, 'DTRINVRINA31102024022035', 'B00003', 'Allino kopi susu', 7, 3000, '2024-10-30', NULL, '2024-10-30 19:20:35', '2024-10-30 19:20:35'),
+(4, 'DTRINVWAHYU31102024022057', 'B00004', 'Cemani merah', 2, 2700, '2024-10-27', NULL, '2024-10-30 19:20:57', '2024-10-30 19:20:57'),
+(5, 'DTRINVWAHYU31102024022057', 'B00005', 'Cemani coklat', 8, 2500, '2024-10-27', NULL, '2024-10-30 19:20:57', '2024-10-30 19:20:57'),
+(6, 'DTRINVTIO31102024022122', 'B00004', 'Cemani merah', 8, 2700, '2024-10-28', NULL, '2024-10-30 19:21:22', '2024-10-30 19:21:22');
 
 -- --------------------------------------------------------
 
@@ -521,15 +484,15 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`id`, `nama`, `telepon`, `alamat`, `id_barang`, `waktu`, `created_at`, `updated_at`) VALUES
-(1, 'PT SRITEX', '088', 'SOLO', 'B00001', 5, '2024-10-30 03:37:05', '2024-10-30 05:51:07'),
-(2, 'PT SRITEX', '088', 'SOLO', 'B00003', 8, '2024-10-30 04:21:24', '2024-10-30 05:50:54'),
-(4, 'PT SRITEX', '088', 'SOLO', 'B00002', 3, '2024-10-30 05:46:19', '2024-10-30 05:51:18'),
-(5, 'CITRA TEXTILE', '132', 'MALANG', 'B00004', 5, '2024-10-30 05:46:47', '2024-10-30 05:46:47'),
-(6, 'CITRA TEXTILE', '123', 'MALANG', 'B00005', 3, '2024-10-30 05:47:19', '2024-10-30 05:47:33'),
-(7, 'CITRA TEXTILE', '123', 'MALANG', 'B00007', 5, '2024-10-30 05:48:14', '2024-10-30 05:49:47'),
-(8, 'CITRA TEXTILE', '123', 'MALANG', 'B00008', 4, '2024-10-30 05:48:46', '2024-10-30 05:50:00'),
-(9, 'CITRA TEXTILE', '123', 'MALANG', 'B00009', 5, '2024-10-30 05:49:04', '2024-10-30 05:50:11'),
-(10, 'CITRA TEXTILE', '123', 'MALANG', 'B00006', 2, '2024-10-30 05:51:56', '2024-10-30 05:51:56');
+(1, 'PT SRITEX', '088', 'SOLO', 'B00001', 5, '2024-10-29 20:37:05', '2024-10-29 22:51:07'),
+(2, 'PT SRITEX', '088', 'SOLO', 'B00003', 8, '2024-10-29 21:21:24', '2024-10-29 22:50:54'),
+(4, 'PT SRITEX', '088', 'SOLO', 'B00002', 3, '2024-10-29 22:46:19', '2024-10-29 22:51:18'),
+(5, 'CITRA TEXTILE', '132', 'MALANG', 'B00004', 5, '2024-10-29 22:46:47', '2024-10-29 22:46:47'),
+(6, 'CITRA TEXTILE', '123', 'MALANG', 'B00005', 3, '2024-10-29 22:47:19', '2024-10-29 22:47:33'),
+(7, 'CITRA TEXTILE', '123', 'MALANG', 'B00007', 5, '2024-10-29 22:48:14', '2024-10-29 22:49:47'),
+(8, 'CITRA TEXTILE', '123', 'MALANG', 'B00008', 4, '2024-10-29 22:48:46', '2024-10-29 22:50:00'),
+(9, 'CITRA TEXTILE', '123', 'MALANG', 'B00009', 5, '2024-10-29 22:49:04', '2024-10-29 22:50:11'),
+(10, 'CITRA TEXTILE', '123', 'MALANG', 'B00006', 2, '2024-10-29 22:51:56', '2024-10-29 22:51:56');
 
 -- --------------------------------------------------------
 
@@ -556,15 +519,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `slug`, `telepon`, `name`, `address`, `username`, `password`, `role`, `status`, `created_at`, `updated_at`) VALUES
-('U00001', 'nAEwz0hWhgfwyx29', '081231241241', 'Gudang Pusat', 'Jl. Kyai Tambak Deres No.229, Kota Surabaya, Jawa Timur', 'gudangpusat', '$2y$10$I1aYfCJLYusz70Gg6UWpDOXc5g.Xl3o0Wd7FwgDOrYDDCGnnKfPu6', 'gudang', 'Active', '2024-10-30 03:24:05', '2024-10-30 03:24:05'),
-('U00002', 'JbyXm0Z2sTcqwiW2', '08224123123', 'Toko 1', 'Jl. Keputih Tegal No.29, Kota Surabaya, Jawa Timur', 'toko1', '$2y$10$Z/NeSxAiXMEQUvQd8CxequR1bJjA863sie1So4rM2AfRrmotoMp7i', 'counter', 'Active', '2024-10-30 03:24:05', '2024-10-30 03:24:05'),
-('U00003', 'j3TbBYLOH5Nc0xCP', '08224120802832', 'Toko 2', 'Jl. Raya Wiyung No.674, Kota Surabaya, Jawa Timur', 'toko2', '$2y$10$ZPyI7AnfAx/4WVN4Ap8UhOvLMJzHl2dwupUZpMAhm/CAwoPwUdRIy', 'counter', 'Active', '2024-10-30 03:24:05', '2024-10-30 03:24:05'),
-('U00004', '1CRvhLUQ11ISThN3', '0822412412390', 'Toko 3', 'Jl. Rungkut Asri Tengah No.21, Kota Surabaya, Jawa Timur', 'toko3', '$2y$10$7DnZbxxJgpWGiyLUqu9Zb.weGqrp7LMioLAA2BjuLbwetARn/XXQa', 'counter', 'Active', '2024-10-30 03:24:06', '2024-10-30 03:24:06'),
-('U00005', 'jp2N1EmwiQa6zLqj', '0812348728372', 'Owner', '-', 'owner', '$2y$10$euc3brMW4l60DjN9lRJnLuY4mkw4jpu0H.2shLC/X6TEEttMuUimG', 'owner', 'Active', '2024-10-30 03:24:06', '2024-10-30 03:24:06'),
-('U00006', 'ao8YNXaCZnhmOE2o', NULL, 'Toko Sejahtera', 'sejahtera', 'sejahtera', '$2y$10$oluhpdUAN83D7xEcutAwv.fpERlgIjCWgIR5lAqsVYKex2OV2eXde', 'counter', 'Active', '2024-10-30 03:26:51', '2024-10-30 03:26:51'),
-('U00007', '1BzDdI5oFzCCN0fl', NULL, 'Toko Baharu', 'baharu', 'baharu', '$2y$10$d6x/q/RIwnYtfCy8cV2OtuzY0ZOKd0IeSyoVRaVZQC3SulIMXmx8a', 'counter', 'Active', '2024-10-30 03:27:11', '2024-10-30 03:27:11'),
-('U00008', 'c130mw6L4g9N00Sl', NULL, 'Toko Cina', 'cina', 'cina', '$2y$10$X6FDNzUGUBMvIJqhIlhEdeXexPkQoDaTY3MAfKqU9zCmtzLKqPZvu', 'counter', 'Active', '2024-10-30 03:27:25', '2024-10-30 03:27:25'),
-('U00009', 'Co9wDjf8UkLaAPpp', NULL, 'Toko Jawir', 'jawir', 'jawir', '$2y$10$p53DgDJc5YJCdO4UXghjvuHWBoP1u6Lngaraae.MLFsuPar5FNEvu', 'counter', 'Active', '2024-10-30 03:27:42', '2024-10-30 03:27:42');
+('U00001', 'UTZBYuOyABJWnn89', '081231241241', 'Gudang Pusat', 'Jl. Kyai Tambak Deres No.229, Kota Surabaya, Jawa Timur', 'gudangpusat', '$2y$10$ROjdKBeMQdUODZqlz45zTOVCrgyz0BkiayrNakyxZe0n3mJfy5Kwa', 'gudang', 'Active', '2024-10-30 19:19:29', '2024-10-30 19:19:29'),
+('U00002', 'fcDes6tuLGWHJuJr', '08224123123', 'Toko 1', 'Jl. Keputih Tegal No.29, Kota Surabaya, Jawa Timur', 'toko1', '$2y$10$RizpN4Q94Jn.y/Nw6xslT.I/iIfZodYEfNgL.2vcu0JCyBac8vG8O', 'counter', 'Active', '2024-10-30 19:19:30', '2024-10-30 19:19:30'),
+('U00003', 'RwT0dJLeDUuZEdpK', '08224120802832', 'Toko 2', 'Jl. Raya Wiyung No.674, Kota Surabaya, Jawa Timur', 'toko2', '$2y$10$8JaUyymYNVoUZeaAf2xKS.yiGnzcCox.grdGus5y/Kjl/oKuzO/HC', 'counter', 'Active', '2024-10-30 19:19:30', '2024-10-30 19:19:30'),
+('U00004', 'dkm4kYbLfvBOpC92', '0822412412390', 'Toko 3', 'Jl. Rungkut Asri Tengah No.21, Kota Surabaya, Jawa Timur', 'toko3', '$2y$10$JivgNw72KSjiLC93vbQRrOUt0Swi3LX3zA.DEpUfHueAlV0w./Y5y', 'counter', 'Active', '2024-10-30 19:19:30', '2024-10-30 19:19:30'),
+('U00005', 'wfkxWKkBSxuQYp1n', '0812348728372', 'Owner', '-', 'owner', '$2y$10$OjUk3qtD9lNPI5.6cn9Tm.X0VOhvPT95yHWG950iDkpCAv3zF7VIu', 'owner', 'Active', '2024-10-30 19:19:30', '2024-10-30 19:19:30');
 
 --
 -- Indexes for dumped tables
@@ -790,19 +749,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pemesanan_barangs`
 --
 ALTER TABLE `pemesanan_barangs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `penjualan_barangs`
 --
 ALTER TABLE `penjualan_barangs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `penjualan_barang_details`
 --
 ALTER TABLE `penjualan_barang_details`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
