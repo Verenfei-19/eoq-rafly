@@ -36,9 +36,13 @@
         $('#datatable').DataTable({
             "ordering": false,
             ajax: "{{ route('pemesanan') }}",
-            columns: [{
+            columns: [
+                {
                     data: "invoice"
                 },
+                // {
+                //     data: "nama"
+                // },
                 {
                     data: "status_pemesanan",
                     render: function(data, type, row) {
@@ -74,6 +78,9 @@
                         return tanggal_pemesanan;
                     }
                 },
+                // {
+                //     data: "waktu_proses"
+                // },
                 {
                     data: "biaya_pemesanan",
                     render: function(data, type, row) {
@@ -127,8 +134,10 @@
                         <thead>
                             <tr>
                                 <th>ID Pemesanan</th>
+                                {{-- <th>Nama Supplier</th> --}}
                                 <th>Status Pemesanan</th>
                                 <th>Tanggal Pemesanan</th>
+                                {{-- <th>Tanggal Datang</th> --}}
                                 <th>Biaya Pemesanan</th>
                                 <th>Action</th>
                             </tr>
