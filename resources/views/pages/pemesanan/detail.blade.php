@@ -123,6 +123,8 @@
                         <thead>
                             <tr>
                                 <th>Nama Barang</th>
+                                <th>Nama Supplier</th>
+                                <th>Tanggal Datang</th>
                                 <th>Stok Sekarang</th>
                                 <th>EOQ</th>
                                 <th>ROP</th>
@@ -133,6 +135,8 @@
                             @foreach ($pemesanan as $data)
                                 <tr>
                                     <td>{{ $data->nama_barang }}</td>
+                                    <td>{{ $data->nama }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($data->created_at)->addDays($data->tgl_datang)->translatedFormat('d F Y') }}</td>
                                     <td>{{ $data->stok_masuk }}</td>
                                     <td>{{ $data->eoq }}</td>
                                     <td>{{ $data->rop }}</td>
