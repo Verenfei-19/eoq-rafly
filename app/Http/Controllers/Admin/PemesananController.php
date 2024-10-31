@@ -37,11 +37,17 @@ class PemesananController extends Controller
             //     ->orWhere('status_pemesanan', 'Disetujui')
             //     ->orderBy('tanggal_pemesanan', 'desc')
             //     ->get();
-            $pemesanans = PemesananBarang::select(['invoice', 'status_pemesanan', 'biaya_pemesanan', 'created_at'])
-                ->where('status_pemesanan', 'Menunggu Persetujuan')
-                ->orWhere('status_pemesanan', 'Disetujui')
-                ->orWhere('status_pemesanan', 'Ditolak')
-                ->groupBy(['invoice', 'status_pemesanan', 'biaya_pemesanan', 'created_at'])->get();
+            // $pemesanans = PemesananBarang::select(['id_supplier', 'tgl_datang', 'invoice', 'status_pemesanan', 'biaya_pemesanan', 'created_at'])
+            //     ->where('status_pemesanan', 'Menunggu Persetujuan')
+            //     ->orWhere('status_pemesanan', 'Disetujui')
+            //     ->orWhere('status_pemesanan', 'Ditolak')
+            //     ->groupBy(['id_supplier', 'tgl_datang', 'invoice', 'status_pemesanan', 'biaya_pemesanan', 'created_at'])->get();
+            $query = "SELECT pb.invoice, pb.status_pemesanan, pb.created_at, pb.biaya_pemesanan
+                    FROM `pemesanan_barangs` AS pb
+                    JOIN suppliers AS sp ON sp.id = pb.id_supplier
+                    WHERE pb.status_pemesanan IN ('Menunggu Persetujuan', 'Disetujui', 'Ditolak')
+                    GROUP BY pb.invoice, pb.status_pemesanan, pb.created_at, pb.biaya_pemesanan";
+            $pemesanans = DB::select($query);
 
             return DataTables::of($pemesanans)
                 ->addColumn('action', function ($object) use ($path, $user) {
@@ -109,11 +115,11 @@ class PemesananController extends Controller
             // ORDER BY b.barang_gudang_id ASC";
 
             $query = "SELECT a.barang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, 
-            a.biaya_penyimpanan, a.rop, a.ss, sp.nama, sp.waktu, b.stok_masuk as qty_total
+            a.biaya_penyimpanan, a.rop, a.ss, sp.id as supplier_id, sp.nama, sp.waktu, b.stok_masuk as qty_total
             FROM barangs as a
             JOIN barang_gudangs as b on a.barang_id = b.barang_id
             JOIN suppliers as sp on a.barang_id = sp.id_barang
-            GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang, sp.nama, sp.waktu
+            GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang, sp.nama, sp.waktu, supplier_id
             ORDER BY b.barang_gudang_id ASC";
             $barangs = DB::select($query);
 
@@ -178,15 +184,10 @@ class PemesananController extends Controller
         $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
         $endOfMonth = Carbon::now()->today()->translatedFormat('Y-m-d');
 
-        // $supplier = Supplier::all();
-        // $htmlSupplier = '<select class="form-control" name="supplier" id="supplier">';
-        // foreach ($supplier as $key => $value) {
-        //     $htmlSupplier .= '<option value="' . $value->id . '">' . $value->nama . '</option>';
-        // }
-        // $select = $htmlSupplier . '</select>';
         $data_eoq = [];
         foreach ($pemesanans as $key) {
             $barangAll = Barang::where('barang_id', $key->id_barang)->get(['nama_barang', 'biaya_penyimpanan'])->first();
+            $supplierAll = Supplier::where('id_barang', $key->id_barang)->get(['id', 'waktu'])->first();
             $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->sum('quantity');
             // $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', ['2024-09-09', '2024-09-30'])->sum('quantity');
             $rumusEOQ = round(sqrt((2 * $biayaPemesanan * $totalBarangTerjualSebulan) /  $barangAll->biaya_penyimpanan));
@@ -195,14 +196,15 @@ class PemesananController extends Controller
                 'id_barang' => $key->id_barang,
                 'nama_barang' => $barangAll->nama_barang,
                 'eoq' => $rumusEOQ,
-                // 'supplier' => $select,
+                'id_supplier' => $supplierAll->id,
+                'waktu_proses' => $supplierAll->waktu,
                 'jumlah' => 0,
             ];
             array_push($data_eoq, $hasil_eoq);
         }
         return response()->json([
             'pemesanan' => $data_eoq,
-            'cart' => $pemesanans
+            // 'cart' => $pemesanans
         ], 200);
     }
 
@@ -222,25 +224,27 @@ class PemesananController extends Controller
             // $pemesanan->tanggal_pemesanan = Carbon::now();
             // $pemesanan->biaya_pemesanan = $biaya_pemesanan;
             // $pemesanan->save();
+            // $detail_pemesanan = new DetailPemesanan;
+            // $detail_pemesanan->pemesanan_id = $pemesanan_id;
+            // $detail_pemesanan->barang_id = $detail->id_barang;
+            // $detail_pemesanan->eoq = $detail->eoq;
+            // $detail_pemesanan->jumlah_pemesanan = $detail->jumlah;
+            // $detail_pemesanan->save();
             foreach ($details as $detail) {
                 PemesananBarang::create([
                     'invoice' => $invoice_id,
                     'id_barang' => $detail->id_barang,
+                    'id_supplier' => $detail->id_supplier,
+                    'tgl_datang' => $detail->waktu_proses,
                     'status_pemesanan' => 'Menunggu Persetujuan',
                     'biaya_pemesanan' => $biaya_pemesanan,
                     'eoq' => $detail->eoq,
                     'rop' => 0,
                     'jumlah_pemesanan' => $detail->jumlah
                 ]);
-                // $detail_pemesanan = new DetailPemesanan;
-                // $detail_pemesanan->pemesanan_id = $pemesanan_id;
-                // $detail_pemesanan->barang_id = $detail->id_barang;
-                // $detail_pemesanan->eoq = $detail->eoq;
-                // $detail_pemesanan->jumlah_pemesanan = $detail->jumlah;
-                // $detail_pemesanan->save();
             }
             DB::commit();
-            return response()->json(200);
+            return response()->json(['datas' => $details], 200);
         } catch (\Exception $ex) {
             DB::rollBack();
             return response()->json($ex->getMessage(), 400);
@@ -261,8 +265,9 @@ class PemesananController extends Controller
         // $pemesanan = PemesananBarang::where('invoice', $slug)->get();
         $pemesanan = DB::table('pemesanan_barangs as pb')->where('invoice', $slug)
             ->join('barang_gudangs as bg', 'bg.barang_id', '=', 'pb.id_barang')
-            ->join('barangs as b as b', 'b.barang_id', '=', 'pb.id_barang')
-            ->selectRaw('pb.id,pb.invoice,b.nama_barang,pb.status_pemesanan, bg.stok_masuk,pb.eoq,pb.rop,pb.jumlah_pemesanan,pb.created_at')->get();
+            ->join('barangs as b', 'b.barang_id', '=', 'pb.id_barang')
+            ->join('suppliers as sp', 'sp.id', '=', 'pb.id_supplier')
+            ->selectRaw('pb.id,pb.invoice,sp.nama,b.nama_barang,pb.tgl_datang,pb.status_pemesanan, bg.stok_masuk,pb.eoq,pb.rop,pb.jumlah_pemesanan,pb.created_at')->get();
         // dd($tes);
         $no = 1;
         // $pemesanan = DB::table('pemesanans')
