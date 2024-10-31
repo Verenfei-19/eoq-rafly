@@ -83,66 +83,9 @@
         function viewPemesananDataTable(paramOne) {
             $('#datatable-pemesanan').DataTable().clear();
             $('#datatable-pemesanan').DataTable().destroy();
-            console.log('pemesanandatatable');
-
-            // if (paramOne[0].supplier === undefined) {
-            //     return $('#datatable-pemesanan').DataTable({
-            //         data: paramOne,
-            //         columns: [{
-            //                 data: 'no'
-            //             },
-            //             {
-            //                 data: 'nama_barang'
-            //             },
-            //             {
-            //                 data: 'eoq'
-            //             },
-            //             {
-            //                 data: 'jumlah'
-            //             },
-            //             // {
-            //             //     data: 'jumlah',
-            //             //     render: function (data, type, row) {
-            //             //         return 'Input biaya pemesanan dahulu!';
-            //             //     }
-            //             // },
-            //             {
-            //                 data: 'id_barang',
-            //                 render: function(data, type, row) {
-            //                     return '<button class="btn btn-success waves-effect waves-light btn-jumlah-pemesanan" data-bs-toggle="modal" data-bs-target="#quantityModal"><i class="bx bx-edit align-middle me-2 font-size-18"></i></button> <button class="btn btn-danger waves-effect waves-light btn-remove"><i class="bx bxs-trash align-middle font-size-18"></i></button>';
-            //                 }
-            //             }
-            //         ],
-            //     });
-                
-            // }else{
-            //     // console.log('aman');
-            //     return $('#datatable-pemesanan').DataTable({
-            //         data: paramOne,
-            //         columns: [{
-            //                 data: 'no'
-            //             },
-            //             {
-            //                 data: 'nama_barang'
-            //             },
-            //             {
-            //                 data: 'eoq'
-            //             },
-            //             {
-            //                 data: 'jumlah'
-            //             },
-            //             // {
-            //             //     data: 'supplier',
-            //             // },
-            //             {
-            //                 data: 'id_barang',
-            //                 render: function(data, type, row) {
-            //                     return '<button class="btn btn-success waves-effect waves-light btn-jumlah-pemesanan" data-bs-toggle="modal" data-bs-target="#quantityModal"><i class="bx bx-edit align-middle me-2 font-size-18"></i></button> <button class="btn btn-danger waves-effect waves-light btn-remove"><i class="bx bxs-trash align-middle font-size-18"></i></button>';
-            //                 }
-            //             }
-            //         ],
-            //     });
-            // }
+            console.log('DARI VIEW PEMESANAN TABLE');
+            console.log(paramOne);
+            
             if (paramOne.length > 0) {
                 return $('#datatable-pemesanan').DataTable({
                     // lengthMenu: [5, 10, 20, 50, 100],
@@ -159,12 +102,6 @@
                         {
                             data: 'jumlah'
                         },
-                        // {
-                        //     data: 'supplier',
-                        //     // render: function (data, type, row) {
-                        //         // return 'Input biaya pemesanan dahulu!';
-                                
-                        // },
                         {
                             data: 'id_barang',
                             render: function(data, type, row) {
@@ -196,7 +133,8 @@
                         "id_barang": selectedData.barang_id,
                         "nama_barang": selectedData.nama_barang,
                         "jumlah": 0,
-                        "supplier": selectedData.supplier,
+                        "id_supplier": selectedData.id_supplier,
+                        "waktu_proses": selectedData.waktu_proses,
                         "eoq": 0,
                     }
                     pemesanan.push(keranjangTemp);
@@ -207,13 +145,15 @@
                     "id_barang": selectedData.barang_id,
                     "nama_barang": selectedData.nama_barang,
                     "jumlah": 0,
-                    "supplier": selectedData.supplier,
+                    "id_supplier": selectedData.id_supplier,
+                    "waktu_proses": selectedData.waktu_proses,
                     "eoq": 0,
                 }
                 pemesanan.push(keranjangTemp);
             }
         }
 
+        // ADD TO LIST PEMESANAN
         $('#datatable').on('click', '.btn-add', function(e) {
             selectedData = '';
             let indexRow = mainTable.rows().nodes().to$().index($(this).closest('tr'));
@@ -249,13 +189,6 @@
             }
         }
 
-        $("#biaya_pemesanan").keypress(function(evt) {
-            var key = String.fromCharCode(evt.which);
-            if (!(/[0-9]/.test(key))) {
-                evt.preventDefault();
-            }
-        });
-
         $('#datatable-pemesanan').on('click', '.btn-jumlah-pemesanan', function(e) {
             $('#jumlah_pemesanan').val("");
             selectedKeranjang = '';
@@ -274,10 +207,6 @@
         });
 
 
-        $('.btn-close').on('click', function() {
-            $('.alert').hide();
-        });
-
         // simpan transaksi
         $('#save-transaction').on('click', function() {
             if (pemesanan.length > 0) {
@@ -290,6 +219,8 @@
                         'biaya': biaya
                     },
                     success: function(response) {
+                        console.log('SiIMPAN TRANSAKSI');
+                        console.log(response);
                         no = 1;
                         pemesanan = [];
                         $('.alert-success').show();
@@ -320,7 +251,8 @@
                     },
                     dataType: "json",
                     success: function(response) {
-                        // console.log(response.pemesanan);
+                        console.log('SIMPAN BIAYA PEMESANAN');
+                        console.log(response);
                         pemesanan = [];
                         let data = response.pemesanan;
                         data.forEach(element => {
@@ -330,7 +262,8 @@
                                 "id_barang": element.id_barang,
                                 "nama_barang": element.nama_barang,
                                 "jumlah": element.eoq,
-                                "supplier": element.supplier,
+                                "id_supplier": element.id_supplier,
+                                "waktu_proses": element.waktu_proses,
                                 "eoq": element.eoq
                             };
                             pemesanan.push(pemesananTemp);
