@@ -54,35 +54,6 @@ class KasirController extends Controller
         }
         return view('pages.kasir.index', compact('user'));
     }
-    public function tes(Request $request)
-    {
-        // $query = "SELECT b.barang_gudang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, 
-        //         (SELECT (SUM(stok_masuk) - SUM(stok_keluar)) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) as quantity
-        //         FROM barangs as a
-        //         JOIN barang_gudangs as b on a.barang_id = b.barang_id
-        //         GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang
-        //         ORDER BY b.barang_gudang_id ASC";
-        // $data = DB::select($query);
-
-        // return DataTables::of($data)
-        //     ->addColumn('action', function ($object) {
-        //         $html = '<button class="btn btn-success waves-effect waves-light btn-add" data-bs-toggle="modal"' .
-        //             'data-bs-target="#quantityModal"><i class="bx bxs-cart align-middle font-size-18"></i></button>';
-        //         return $html;
-        //     })
-        //     ->rawColumns(['action'])
-        //     ->make(true);
-
-        // GET DATA BARANG GUDANG BY LOGIN COUNTER/TOKO
-        // $query = "SELECT b.barang_gudang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, 
-        //         (SELECT (SUM(stok_masuk) - SUM(stok_keluar)) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) as quantity
-        //         FROM barangs as a
-        //         JOIN barang_gudangs as b on a.barang_id = b.barang_id
-        //         GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang
-        //         ORDER BY b.barang_gudang_id ASC";
-        // $data = DB::select($query);
-        // return DataTables::of($data)->make(true);
-    }
 
     public function store(Request $request)
     {
