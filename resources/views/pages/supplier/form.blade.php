@@ -53,7 +53,7 @@
 <div class="mt-4 mb-3 row">
     <label for="waktu" class="col-md-2 col-form-label">Estimasi pengiriman dalam hari</label>
     <div class="col-md-10">
-        <input class="form-control" type="text" id="waktu"
+        <input class="form-control" type="number" id="waktu"
             name="waktu" value="{{ !empty($supplier) ? $supplier->waktu : '' }}"
             placeholder="3">
     </div>

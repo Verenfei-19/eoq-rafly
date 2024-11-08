@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 08, 2024 at 11:42 AM
+-- Generation Time: Nov 08, 2024 at 12:09 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.22
 
@@ -698,6 +698,21 @@ CREATE TABLE `suppliers` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `suppliers`
+--
+
+INSERT INTO `suppliers` (`id`, `nama`, `telepon`, `alamat`, `id_barang`, `waktu`, `created_at`, `updated_at`) VALUES
+(1, 'CITRA TEXTILE', '085501697174', 'MALANG', 'B00004', 5, '2024-11-08 05:03:15', '2024-11-08 05:03:15'),
+(2, 'CITRA TEXTILE', '085501697174', 'MALANG', 'B00005', 4, '2024-11-08 05:04:08', '2024-11-08 05:04:08'),
+(3, 'CITRA TEXTILE', '085501697174', 'MALANG', 'B00006', 4, '2024-11-08 05:04:32', '2024-11-08 05:04:32'),
+(4, 'CITRA TEXTILE', '085501697174', 'MALANG', 'B00007', 6, '2024-11-08 05:04:53', '2024-11-08 05:04:53'),
+(5, 'CITRA TEXTILE', '085501697174', 'MALANG', 'B00008', 2, '2024-11-08 05:05:17', '2024-11-08 05:05:17'),
+(6, 'CITRA TEXTILE', '085501697174', 'MALANG', 'B00009', 3, '2024-11-08 05:05:36', '2024-11-08 05:05:36'),
+(7, 'PT SRITEX', '089283655249', 'SOLO', 'B00001', 5, '2024-11-08 05:06:06', '2024-11-08 05:06:06'),
+(8, 'PT SRITEX', '089283655249', 'SOLO', 'B00002', 4, '2024-11-08 05:06:40', '2024-11-08 05:06:40'),
+(9, 'PT SRITEX', '089283655249', 'SOLO', 'B00003', 5, '2024-11-08 05:06:58', '2024-11-08 05:06:58');
+
 -- --------------------------------------------------------
 
 --
@@ -977,7 +992,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

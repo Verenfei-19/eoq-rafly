@@ -181,8 +181,11 @@ class PemesananController extends Controller
         $no = 1;
         $biayaPemesanan = $request->biaya;
 
-        $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
-        $endOfMonth = Carbon::now()->today()->translatedFormat('Y-m-d');
+        // $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
+        // $endOfMonth = Carbon::now()->today()->translatedFormat('Y-m-d');
+
+        $startOfMonth = Carbon::now()->subMonth()->startOfMonth()->translatedFormat('Y-m-d');
+        $endOfMonth = Carbon::now()->subMonth()->today()->translatedFormat('Y-m-d');
 
         $data_eoq = [];
         foreach ($pemesanans as $key) {
