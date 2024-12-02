@@ -27,9 +27,9 @@
     <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
     <script>
         let mainTable = $('#datatable').DataTable({
-            lengthMenu: [5, 10, 20, 50, 100],
-            // lengthMenu: false,
-            // searching: false,
+            lengthMenu: [10, 20, 50, 100],
+            lengthMenu: false,
+            searching: false,
             ajax: "{{ route('kasir') }}",
             "columnDefs": [{
                     className: "nama-barang",
@@ -95,7 +95,8 @@
             if (paramOne.length > 0) {
                 $('#grandTotal').text(rupiah(grandTotal));
                 return $('#datatable-keranjang').DataTable({
-                    lengthMenu: [5, 10, 20, 50, 100],
+                    lengthMenu: [10, 20, 50, 100],
+                    // searching: false,
                     data: paramOne,
                     columns: [{
                             data: 'no'
@@ -259,7 +260,9 @@
                         mainTable.clear();
                         mainTable.destroy();
                         mainTable = $('#datatable').DataTable({
-                            lengthMenu: [5, 10, 20, 50, 100],
+                            lengthMenu: [10, 20, 50, 100],
+                            // searching: false,
+                            // lengthMenu: false,
                             ajax: "{{ route('kasir') }}",
                             "columnDefs": [{
                                     className: "nama-barang",
@@ -270,9 +273,9 @@
                                     "targets": [2]
                                 },
                             ],
-                            // order: [
-                            //     [1, 'desc']
-                            // ],
+                            order: [
+                                [1, 'desc']
+                            ],
                             columns: [
                                 {
                                     data: 'barang_id',
@@ -470,13 +473,14 @@
                         <div class="col-lg-4">
                             <div class="">
                                 <label for="telepon_pembeli">Telepon Pembeli</label>
-                                <input class="form-control" type="number" name="telepon_pembeli" id="telepon_pembeli">
+                                <input class="form-control" type="tel" name="telepon_pembeli" id="telepon_pembeli">
                             </div>
                             
                         </div>
                         <div class="col-lg-4">
                             <div class="">
                                 <label for="tanggal_pembelian">Tanggal Pembelian</label>
+                                {{-- <input class="form-control" type="date" name="tanggal_pembelian" id="tanggal_pembelian"> --}}
                                 <input class="form-control" type="date" value="{{ date('Y-m-d') }}" name="tanggal_pembelian" id="tanggal_pembelian">
                             </div>
                             
