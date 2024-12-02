@@ -30,10 +30,10 @@
             ordering: false,
             lengthMenu: [5, 10, 20, 50, 100],
             ajax: "{{ route('pemesanan.create') }}",
-            "columnDefs": [{
-                className: "nama-barang",
-                "targets": [1]
-            }],
+            // "columnDefs": [{
+            //     className: "nama-barang",
+            //     "targets": [1]
+            // }],
             columns: [{
                     data: 'barang_id',
                     name: 'ID Barang'
@@ -50,10 +50,10 @@
                     data: 'qty_total',
                     name: 'Quantity'
                 },
-                {
-                    data: 'rop',
-                    name: 'rop'
-                },
+                // {
+                //     data: 'rop',
+                //     name: 'rop'
+                // },
                 {
                     data: 'action',
                     name: 'action',
@@ -89,6 +89,7 @@
             if (paramOne.length > 0) {
                 return $('#datatable-pemesanan').DataTable({
                     // lengthMenu: [5, 10, 20, 50, 100],
+                    // ordering: false,
                     data: paramOne,
                     columns: [{
                             data: 'no'
@@ -312,8 +313,8 @@
                                 <th>ID Barang</th>
                                 <th>Nama Barang</th>
                                 <th>Supplier & Estimasi barang</th>
-                                <th class="col-md-1">Quantity</th>
-                                <th class="col-md-1">ROP</th>
+                                <th class="col-md-1">Total Penjualan/bulan</th>
+                                {{-- <th class="col-md-1">ROP</th> --}}
                                 <th class="col-md-1">Action</th>
                             </tr>
                         </thead>
