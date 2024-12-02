@@ -114,13 +114,47 @@ class PemesananController extends Controller
             // GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang
             // ORDER BY b.barang_gudang_id ASC";
 
-            $query = "SELECT a.barang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, 
-            a.biaya_penyimpanan, a.rop, a.ss, sp.id as supplier_id, sp.nama, sp.waktu, b.stok_masuk as qty_total
-            FROM barangs as a
-            JOIN barang_gudangs as b on a.barang_id = b.barang_id
-            JOIN suppliers as sp on a.barang_id = sp.id_barang
-            GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang, sp.nama, sp.waktu, supplier_id
-            ORDER BY b.barang_gudang_id ASC";
+            // $query = "SELECT a.barang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, 
+            // a.biaya_penyimpanan, a.rop, a.ss, sp.id as supplier_id, sp.nama, sp.waktu, b.stok_masuk as qty_total
+            // FROM barangs as a
+            // JOIN barang_gudangs as b on a.barang_id = b.barang_id
+            // JOIN suppliers as sp on a.barang_id = sp.id_barang
+            // GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang, sp.nama, sp.waktu, supplier_id
+            // ORDER BY b.barang_gudang_id ASC";
+
+            $query = "SELECT 
+                        a.barang_id AS barang_id, 
+                        b.slug, 
+                        a.nama_barang, 
+                        a.harga_barang, 
+                        a.biaya_penyimpanan, 
+                        a.rop, 
+                        a.ss, 
+                        sp.id AS supplier_id, 
+                        sp.nama, 
+                        sp.waktu, 
+                        -- b.stok_masuk AS qty_total,
+                        IFNULL(SUM(pbd.quantity), 0) AS qty_total
+                    FROM 
+                        barangs AS a
+                    JOIN 
+                        barang_gudangs AS b ON a.barang_id = b.barang_id
+                    JOIN 
+                        suppliers AS sp ON a.barang_id = sp.id_barang
+                    LEFT JOIN 
+                        penjualan_barang_details AS pbd ON a.barang_id = pbd.id_barang 
+                        AND pbd.tgl_pembelian BETWEEN '2024-10-01' AND '2024-10-31'
+                    GROUP BY 
+                        b.barang_gudang_id, 
+                        b.slug, 
+                        a.nama_barang, 
+                        a.harga_barang, 
+                        sp.nama, 
+                        sp.waktu, 
+                        supplier_id
+                    ORDER BY 
+                        b.barang_gudang_id ASC";
+
             $barangs = DB::select($query);
 
             return DataTables::of($barangs)
@@ -191,9 +225,11 @@ class PemesananController extends Controller
         foreach ($pemesanans as $key) {
             $barangAll = Barang::where('barang_id', $key->id_barang)->get(['nama_barang', 'biaya_penyimpanan'])->first();
             $supplierAll = Supplier::where('id_barang', $key->id_barang)->get(['id', 'waktu'])->first();
-            $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->sum('quantity');
-            // $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', ['2024-09-09', '2024-09-30'])->sum('quantity');
+            // $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->sum('quantity');
+            $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', ['2024-10-01', '2024-10-31'])->sum('quantity');
+            // $totalMaxBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', ['2024-10-01', '2024-10-31'])->max('quantity');
             $rumusEOQ = round(sqrt((2 * $biayaPemesanan * $totalBarangTerjualSebulan) /  $barangAll->biaya_penyimpanan));
+            // $rumusEOQ = sqrt((2 * $biayaPemesanan * $totalBarangTerjualSebulan) /  $barangAll->biaya_penyimpanan);
             $hasil_eoq = [
                 'no' => $no++,
                 'id_barang' => $key->id_barang,
@@ -202,6 +238,8 @@ class PemesananController extends Controller
                 'id_supplier' => $supplierAll->id,
                 'waktu_proses' => $supplierAll->waktu,
                 'jumlah' => 0,
+                // 'penjualan_tertinggi' => $totalMaxBarangTerjualSebulan,
+                // 'total_terjual' => $totalBarangTerjualSebulan
             ];
             array_push($data_eoq, $hasil_eoq);
         }
@@ -219,21 +257,21 @@ class PemesananController extends Controller
         DB::beginTransaction();
         $invoice_id = 'PMP-' . date('YmdHis');
         try {
-            // $pemesanan_id = Pemesanan::generatePemesananId();
-            // $pemesanan = new Pemesanan;
-            // $pemesanan->pemesanan_id = $pemesanan_id;
-            // $pemesanan->slug = Str::random(16);
-            // $pemesanan->status_pemesanan = 'Menunggu Persetujuan';
-            // $pemesanan->tanggal_pemesanan = Carbon::now();
-            // $pemesanan->biaya_pemesanan = $biaya_pemesanan;
-            // $pemesanan->save();
-            // $detail_pemesanan = new DetailPemesanan;
-            // $detail_pemesanan->pemesanan_id = $pemesanan_id;
-            // $detail_pemesanan->barang_id = $detail->id_barang;
-            // $detail_pemesanan->eoq = $detail->eoq;
-            // $detail_pemesanan->jumlah_pemesanan = $detail->jumlah;
-            // $detail_pemesanan->save();
+
+            // QUERY MENCARI TOTAL ITEM PENJUALAN TERTINGGI PERIODE TERTENTU
+            // SELECT MAX(quantity) FROM `penjualan_barang_details` WHERE id_barang = 'B00001' AND tgl_pembelian BETWEEN '2024-10-01' AND '2024-10-31';
+
             foreach ($details as $detail) {
+                $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)
+                    ->whereBetween('tgl_pembelian', ['2024-10-01', '2024-10-31'])->sum('quantity');
+                $totalMaxBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)
+                    ->whereBetween('tgl_pembelian', ['2024-10-01', '2024-10-31'])->max('quantity');
+
+                $d = $totalBarangTerjualSebulan / 30;
+
+                $hasil_ss = round(($totalMaxBarangTerjualSebulan - $d) * $detail->waktu_proses);
+                $hasil_rop = ($d * $detail->waktu_proses) + $hasil_ss;
+
                 PemesananBarang::create([
                     'invoice' => $invoice_id,
                     'id_barang' => $detail->id_barang,
@@ -242,7 +280,9 @@ class PemesananController extends Controller
                     'status_pemesanan' => 'Menunggu Persetujuan',
                     'biaya_pemesanan' => $biaya_pemesanan,
                     'eoq' => $detail->eoq,
-                    'rop' => 0,
+                    // 'rop' => 0,
+                    'ss' => $hasil_ss,
+                    'rop' => $hasil_rop,
                     'jumlah_pemesanan' => $detail->jumlah
                 ]);
             }
@@ -270,7 +310,7 @@ class PemesananController extends Controller
             ->join('barang_gudangs as bg', 'bg.barang_id', '=', 'pb.id_barang')
             ->join('barangs as b', 'b.barang_id', '=', 'pb.id_barang')
             ->join('suppliers as sp', 'sp.id', '=', 'pb.id_supplier')
-            ->selectRaw('pb.id,pb.invoice,sp.nama,b.nama_barang,pb.tgl_datang,pb.status_pemesanan, bg.stok_masuk,pb.eoq,pb.rop,pb.jumlah_pemesanan,pb.created_at')->get();
+            ->selectRaw('pb.id,pb.invoice,sp.nama,b.nama_barang,pb.tgl_datang,pb.status_pemesanan, bg.stok_masuk,pb.eoq,pb.rop,pb.ss,pb.jumlah_pemesanan,pb.created_at')->get();
         // dd($tes);
         $no = 1;
         // $pemesanan = DB::table('pemesanans')
