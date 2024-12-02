@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('biaya_pemesanan');
             $table->integer('eoq');
             $table->integer('rop');
+            $table->integer('ss');
             $table->integer('jumlah_pemesanan');
             $table->timestamps();
         });
