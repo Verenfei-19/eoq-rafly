@@ -127,6 +127,7 @@
                                 <th>Tanggal Datang</th>
                                 <th>Stok Sekarang</th>
                                 <th>EOQ</th>
+                                <th>SS</th>
                                 <th>ROP</th>
                                 <th>Jumlah Pemesanan</th>
                             </tr>
@@ -139,6 +140,7 @@
                                     <td>{{ \Carbon\Carbon::parse($data->created_at)->addDays($data->tgl_datang)->translatedFormat('d F Y') }}</td>
                                     <td>{{ $data->stok_masuk }}</td>
                                     <td>{{ $data->eoq }}</td>
+                                    <td>{{ $data->ss }}</td>
                                     <td>{{ $data->rop }}</td>
                                     <td>{{ $data->jumlah_pemesanan }}</td>
                                 </tr>
