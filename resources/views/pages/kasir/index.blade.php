@@ -28,7 +28,8 @@
     <script>
         let mainTable = $('#datatable').DataTable({
             lengthMenu: [10, 20, 50, 100],
-            lengthMenu: false,
+            // lengthMenu: false,
+            ordering: false,
             searching: false,
             ajax: "{{ route('kasir') }}",
             "columnDefs": [{
@@ -96,7 +97,7 @@
                 $('#grandTotal').text(rupiah(grandTotal));
                 return $('#datatable-keranjang').DataTable({
                     lengthMenu: [10, 20, 50, 100],
-                    // searching: false,
+                    searching: false,
                     data: paramOne,
                     columns: [{
                             data: 'no'
@@ -245,7 +246,7 @@
                         '_token': "{{ csrf_token() }}",
                         'keranjang': JSON.stringify(keranjang),
                         'grand_total': grandTotal,
-                        'nama_pembeli': $('#nama_pembeli').val(),
+                        'nama_pembeli': $('#name').val(),
                         'telepon_pembeli': $('#telepon_pembeli').val(),
                         'alamat_pembeli': $('#alamat_pembeli').val(),
                         'tanggal_pembelian': $('#tanggal_pembelian').val(),
@@ -261,7 +262,8 @@
                         mainTable.destroy();
                         mainTable = $('#datatable').DataTable({
                             lengthMenu: [10, 20, 50, 100],
-                            // searching: false,
+                            searching: false,
+                            ordering: false,
                             // lengthMenu: false,
                             ajax: "{{ route('kasir') }}",
                             "columnDefs": [{
@@ -305,10 +307,10 @@
                                 },
                             ]
                         });
-                        $('#nama_pembeli').val('');
+                        $('#name').val('');
                         $('#telepon_pembeli').val('');
                         $('#alamat_pembeli').val('');
-                        $('#tanggal_pembelian').val('');
+                        // $('#tanggal_pembelian').val('');
 
                         console.log(response);
                         // console.log(JSON.parse(response.keranjang));
@@ -465,8 +467,8 @@
                     <div class="row g-2 mb-3">
                         <div class="col-lg-4">
                             <div class="">
-                                <label for="nama_pembeli">Nama Pembeli</label>
-                                <input class="form-control" type="text" name="nama_pembeli" id="nama_pembeli" placeholder="Nama Pembeli">
+                                <label for="name">Nama Pembeli</label>
+                                <input class="form-control" type="text" name="nama_pembeli" id="name" placeholder="Nama Pembeli">
                             </div>
                             
                         </div>
@@ -480,8 +482,8 @@
                         <div class="col-lg-4">
                             <div class="">
                                 <label for="tanggal_pembelian">Tanggal Pembelian</label>
-                                {{-- <input class="form-control" type="date" name="tanggal_pembelian" id="tanggal_pembelian"> --}}
-                                <input class="form-control" type="date" value="{{ date('Y-m-d') }}" name="tanggal_pembelian" id="tanggal_pembelian">
+                                <input class="form-control" type="date" name="tanggal_pembelian" id="tanggal_pembelian">
+                                {{-- <input class="form-control" type="date" value="{{ date('Y-m-d') }}" name="tanggal_pembelian" id="tanggal_pembelian"> --}}
                             </div>
                             
                         </div>
