@@ -33,23 +33,32 @@
             }).format(number);
         }
         $('#datatable').DataTable({
-            ordering: false,
+            "ordering": false,
             ajax: "{{ route('persediaan-masuk') }}",
-            columns: [{
-                    data: "pemesanan_id"
+            columns: [
+                {
+                    data: "invoice"
                 },
                 {
-                    data: "status_pemesanan"
+                    data: "status_pemesanan",
+                    render: function(data, type, row) {
+                        let html = '';
+                        html = '<span class="badge rounded-pill badge-soft-primary font-size-14">' +
+                                data +
+                                '</span>';
+                        
+                        return html;
+                    }
                 },
                 {
-                    data: "tanggal_pemesanan",
+                    data: "created_at",
                     render: function(data, type, row) {
                         let date = new Date(data);
-                        let tanggal_permintaan = new Intl.DateTimeFormat(['ban', 'id'], {
+                        let tanggal_pemesanan = new Intl.DateTimeFormat(['ban', 'id'], {
                             dateStyle: 'long',
                             timeZone: 'Asia/Jakarta'
                         }).format(date);
-                        return tanggal_permintaan;
+                        return tanggal_pemesanan;
                     }
                 },
                 {
@@ -59,10 +68,42 @@
                     }
                 },
                 {
-                    data: "action"
+                    data: "action",
                 }
             ],
         });
+        // $('#datatable').DataTable({
+        //     ordering: false,
+        //     ajax: "{{ route('persediaan-masuk') }}",
+        //     columns: [{
+        //             data: "pemesanan_id"
+        //             // data: "invoice"
+        //         },
+        //         {
+        //             data: "status_pemesanan"
+        //         },
+        //         {
+        //             data: "tanggal_pemesanan",
+        //             render: function(data, type, row) {
+        //                 let date = new Date(data);
+        //                 let tanggal_permintaan = new Intl.DateTimeFormat(['ban', 'id'], {
+        //                     dateStyle: 'long',
+        //                     timeZone: 'Asia/Jakarta'
+        //                 }).format(date);
+        //                 return tanggal_permintaan;
+        //             }
+        //         },
+        //         {
+        //             data: "biaya_pemesanan",
+        //             render: function(data, type, row) {
+        //                 return rupiah(data);
+        //             }
+        //         },
+        //         {
+        //             data: "action"
+        //         }
+        //     ],
+        // });
     </script>
 @endpush
 
