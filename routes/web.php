@@ -97,7 +97,7 @@ Route::middleware('user')->group(function () {
         Route::get('/persediaan-masuk', 'index')->name('persediaan-masuk');
         Route::get('/persediaan-masuk/detail/{slug}', 'detail')->name('persediaan-masuk.detail');
         Route::get('/persediaan-masuk/diterima/{slug}/{id}', 'addDiterimaTemporary')->name('persediaan-masuk.add');
-        Route::get('/persediaan-masuk/store/{slug}', 'store')->name('persediaan-masuk.store');
+        Route::post('/persediaan-masuk/store/', 'store')->name('persediaan-masuk.store');
     });
 
     Route::controller(PermintaanCounterController::class)->group(function () {
