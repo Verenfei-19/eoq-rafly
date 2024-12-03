@@ -27,7 +27,9 @@
     <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
     <script>
         $('#datatable').DataTable(
-            //     {
+                {
+                    searching:false,
+                    // lengthMenu: false,
             //     ajax: "{{ route('gudang') }}",
             //     columns: [{
             //             data: "gudang_id"
@@ -47,7 +49,7 @@
             //             }
             //         @endif
             //     ],
-            // }
+            }
         );
     </script>
 @endpush
@@ -80,8 +82,26 @@
             @endif
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-3">Detail Pemesanan {{ $pemesanan->pemesanan_id }}</h4>
-                    <div class="row mb-4 mt-2">
+                    <h4 class="card-title mb-3">Detail Pemesanan {{ $pemesanan[0]->invoice }}</h4>
+                    <form action="{{ route('persediaan-masuk.store') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="pemesanan_id" value="{{ $pemesanan[0]->invoice }}">
+                        <div class="row mb-4 mt-1">
+                            <div class="col-2">
+                                <a href="{{ route('pemesanan') }}" class="btn btn-secondary waves-effect waves-light">
+                                    <i class="bx bx-caret-left align-middle me-2 font-size-18"></i>Kembali
+                                </a>
+                            </div>
+                                <div class="col">
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light" id="save-persetujuan">
+                                            <i class="bx bx-save align-middle me-2 font-size-18"></i>Tambah ke Stok Barang
+                                        </button>
+                                    </div>
+                                </div>
+                        </div>
+                    </form>
+                    {{-- <div class="row mb-4 mt-2">
                         <div class="col d-flex justify-content-start ">
                             <a href="{{ route('pemesanan') }}" class="btn btn-secondary waves-effect waves-light">
                                 <i class="bx bx-caret-left align-middle me-2 font-size-18"></i>Kembali
@@ -95,8 +115,8 @@
                                 </a>
                             @endif
                         </div>
-                    </div>
-                    <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                    </div> --}}
+                    {{-- <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
                             <tr>
                                 <th>Nama Barang</th>
@@ -127,6 +147,34 @@
                                                 class="btn btn-primary">Diterima</a>
                                         @endif
                                     </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table> --}}
+                    <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th>Nama Barang</th>
+                                <th>Nama Supplier</th>
+                                <th>Tanggal Datang</th>
+                                <th>Stok Sekarang</th>
+                                {{-- <th>EOQ</th> --}}
+                                {{-- <th>SS</th> --}}
+                                {{-- <th>ROP</th> --}}
+                                <th>Jumlah Pemesanan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($pemesanan as $data)
+                                <tr>
+                                    <td>{{ $data->nama_barang }}</td>
+                                    <td>{{ $data->nama }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($data->created_at)->addDays($data->tgl_datang)->translatedFormat('d F Y') }}</td>
+                                    <td>{{ $data->stok_masuk }}</td>
+                                    {{-- <td>{{ $data->eoq }}</td> --}}
+                                    {{-- <td>{{ $data->ss }}</td> --}}
+                                    {{-- <td>{{ $data->rop }}</td> --}}
+                                    <td>{{ $data->jumlah_pemesanan }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
