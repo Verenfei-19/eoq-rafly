@@ -81,94 +81,6 @@
             ],
         });
 
-        // $('input[name=btnradio]').each(function(index, element) {
-        //     // element == this
-        //     $(this).on('change', function(e) {
-        //         $('#datatable').DataTable().clear();
-        //         $('#datatable').DataTable().destroy();
-        //         const target = $(e.target).val();
-        //         if (target == 'master') {
-        //             barangDatatable.columns(4).visible(true);
-        //             barangDatatable.columns(5).visible(true);
-        //             barangDatatable.columns(6).visible(true);
-        //             $(barangDatatable.columns(3).header()).text('Biaya Penyimpanan');
-        //             $('#datatable').DataTable({
-        //                 ajax: "{{ route('barang') }}",
-        //                 columns: [{
-        //                         data: "barang_id",
-        //                         name: "barang_id"
-        //                     },
-        //                     {
-        //                         data: "nama_barang",
-        //                         name: "nama_barang",
-        //                     },
-        //                     {
-        //                         data: "harga_barang",
-        //                         render: function(data, type, row) {
-        //                             return rupiah(data);
-        //                         }
-        //                     },
-        //                     {
-        //                         data: "biaya_penyimpanan",
-        //                         render: function(data, type, row) {
-        //                             return rupiah(data);
-        //                         }
-        //                     },
-        //                     {
-        //                         data: "rop",
-        //                         name: "rop"
-        //                     },
-        //                     {
-        //                         data: "rop",
-        //                         name: "rop"
-        //                     },
-        //                     {
-        //                         data: "qty_total",
-        //                         name: "qty_total"
-        //                     },
-        //                     {
-        //                         data: "action",
-        //                         name: "action"
-        //                     }
-        //                 ],
-        //             });
-        //         } else {
-        //             barangDatatable.columns(4).visible(false);
-        //             barangDatatable.columns(5).visible(false);
-        //             barangDatatable.columns(6).visible(false);
-        //             $(barangDatatable.columns(3).header()).text('Quantity');
-        //             $('#datatable').DataTable({
-        //                 ajax: {
-        //                     "type": "GET",
-        //                     "url": "{{ route('barang') }}",
-        //                     "data": {
-        //                         '_token': "{{ csrf_token() }}",
-        //                         'target': target
-        //                     }
-        //                 },
-        //                 columns: [{
-        //                         data: "barang_id",
-        //                         name: "barang_id"
-        //                     },
-        //                     {
-        //                         data: "nama_barang",
-        //                         name: "nama_barang"
-        //                     },
-        //                     {
-        //                         data: "harga_barang",
-        //                         render: function(data, type, row) {
-        //                             return rupiah(data);
-        //                         }
-        //                     },
-        //                     {
-        //                         data: "quantity",
-        //                     }
-        //                 ],
-        //             });
-        //         }
-        //     });
-        // });
-
         $("#biaya_penyimpanan").keypress(function(evt) {
             var key = String.fromCharCode(evt.which);
             if (!(/[0-9]/.test(key))) {
@@ -194,10 +106,6 @@
                         $('.alert-penyimpanan').show();
                         $('#datatable').DataTable().clear();
                         $('#datatable').DataTable().destroy();
-                        // barangDatatable.columns(4).visible(true);
-                        // barangDatatable.columns(5).visible(true);
-                        // barangDatatable.columns(6).visible(true);
-                        // $(barangDatatable.columns(3).header()).text('Biaya Penyimpanan');
                         $('#datatable').DataTable({
                             ajax: "{{ route('barang') }}",
                             columns: [{
@@ -248,37 +156,6 @@
             }
         });
 
-        // $('#datatable').on('click', '.btn-detail', function() {
-        //     let selectedData = '';
-        //     let slug = '';
-        //     let indexRow = barangDatatable.rows().nodes().to$().index($(this).closest('tr'));
-        //     selectedData = barangDatatable.row(indexRow).data();
-        //     slug = selectedData.slug;
-        //     $("#nama-barang").text(selectedData.nama_barang);
-        //     $('#detail-datatable').DataTable().clear();
-        //     $('#detail-datatable').DataTable().destroy();
-        //     $('#detail-datatable').DataTable({
-        //         ajax: {
-        //             "type": "POST",
-        //             "url": "{{ route('barang.detail') }}",
-        //             "data": {
-        //                 '_token': "{{ csrf_token() }}",
-        //                 'slug': slug
-        //             }
-        //         },
-        //         lengthMenu: [5],
-        //         columns: [{
-        //                 data: "nama",
-        //                 name: "nama"
-        //             },
-        //             {
-        //                 data: "quantity",
-        //                 name: "quantity"
-        //             }
-        //         ],
-        //     });
-        // });
-
         $('.btn-close').on('click', function() {
             $('.alert').hide();
         });
@@ -323,25 +200,6 @@
             </div>
             <div class="card">
                 <div class="card-body">
-
-                    {{-- @if ($user->role == 'gudang')
-                        <div class="row mb-4 mt-1">
-                            <div class="col-3">
-                                <button class="btn btn-pink" data-bs-toggle="modal" data-bs-target="#biayaModal">
-                                    <i class="bx bx-money align-middle me-2 font-size-18"></i>
-                                    Biaya Penyimpanan
-                                </button>
-                            </div>
-                            <div class="col">
-                                <div class="d-flex justify-content-end">
-                                    <a href="{{ route('barang.create') }}"
-                                        class="btn btn-primary waves-effect waves-light">
-                                        <i class="bx bx-list-plus align-middle me-2 font-size-18"></i>Tambah
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    @endif --}}
 
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
@@ -391,29 +249,5 @@
             </div>
         </div>
     </div>
-    {{-- <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Detail <span id="nama-barang"></span></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-bordered dt-responsive  nowrap w-100" id="detail-datatable">
-                        <thead>
-                            <tr>
-                                <th>Sumber</th>
-                                <th>Quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                </div>
-            </div>
-        </div>
-    </div> --}}
+
 @endsection
