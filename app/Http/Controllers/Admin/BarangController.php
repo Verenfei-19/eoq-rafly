@@ -29,28 +29,45 @@ class BarangController extends Controller
         if ($user->role == 'gudang' || $user->role == 'owner') {
             // if ($request->ajax() && empty($request->target)) {
             if ($request->ajax()) {
-                // $query = "SELECT a.barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop,a.ss,((SELECT SUM(stok_awal) + SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = a.barang_id GROUP BY barang_id) + (SELECT SUM(stok_awal) + SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = a.barang_id GROUP BY barang_id)) as qty_total
+                // $query = "SELECT a.barang_id as barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop, a.ss, b.stok_masuk as qty_total
                 // FROM barangs as a
                 // JOIN barang_gudangs as b on a.barang_id = b.barang_id
-                // JOIN barang_counters as c on a.barang_id = c.barang_id
-                // GROUP BY a.barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop,a.ss ORDER BY a.barang_id ASC;";
-                // $barangs = DB::select($query);
-                $query = "SELECT a.barang_id as barang_id, a.slug,a.nama_barang, a.harga_barang, a.biaya_penyimpanan, a.rop, a.ss, b.stok_masuk as qty_total
-                FROM barangs as a
-                JOIN barang_gudangs as b on a.barang_id = b.barang_id
-                GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang
-                ORDER BY b.barang_gudang_id ASC";
-                $barangs = DB::select($query);
+                // GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang
+                // ORDER BY b.barang_gudang_id ASC";
 
-                // $query = "SELECT b.slug,bg.barang_id, b.nama_barang, b.harga_barang, 
-                //             CASE WHEN bg.stok_masuk > 0 THEN (b.biaya_penyimpanan / bg.stok_masuk) / total.total_barang 
-                //                 ELSE 0 
-                //                 END AS biaya_penyimpanan, 
-                //             b.rop, b.ss, bg.stok_masuk as qty_total
-                //             FROM `barangs` as b
-                //             JOIN barang_gudangs AS bg 
-                //             ON bg.barang_id = b.barang_id, (SELECT COUNT(*) AS total_barang FROM `barangs`) as total";
-                // $barangs = DB::select($query);
+                $query = 'SELECT 
+                            a.barang_id AS barang_id, 
+                            a.slug, 
+                            a.nama_barang, 
+                            a.harga_barang, 
+                            a.biaya_penyimpanan, 
+                            pb.rop, 
+                            pb.ss, 
+                            sp.id AS supplier_id, 
+                            b.stok_masuk AS qty_total,
+                            IFNULL(SUM(pbd.quantity), 0) AS quantity_sum_total
+                        FROM 
+                            barangs AS a
+                        JOIN 
+                            barang_gudangs AS b ON a.barang_id = b.barang_id
+                        JOIN
+                            pemesanan_barangs AS pb ON a.barang_id = pb.id_barang
+                        JOIN 
+                            suppliers AS sp ON a.barang_id = sp.id_barang
+                        LEFT JOIN 
+                            penjualan_barang_details AS pbd ON a.barang_id = pbd.id_barang 
+                            AND pbd.tgl_pembelian BETWEEN "2024-10-01" AND "2024-10-31"
+                        GROUP BY 
+                            b.barang_gudang_id, 
+                            a.slug, 
+                            a.nama_barang, 
+                            a.harga_barang, 
+                            pb.rop,
+                            pb.ss,
+                            supplier_id
+                        ORDER BY 
+                            b.barang_gudang_id ASC';
+                $barangs = DB::select($query);
 
                 return DataTables::of($barangs)
                     ->addColumn('action', function ($object) use ($path, $user) {
@@ -65,38 +82,8 @@ class BarangController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            // } else if ($request->ajax() && !empty($request->target)) {
-            //     $data = '';
-            //     if ($request->target == 'gudang') {
-            //         $query = "SELECT b.barang_gudang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, (SELECT (SUM(stok_masuk) - SUM(stok_keluar)) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) as quantity
-            //         FROM barangs as a
-            //         JOIN barang_gudangs as b on a.barang_id = b.barang_id
-            //         GROUP BY b.barang_gudang_id, b.slug,a.nama_barang, a.harga_barang
-            //         ORDER BY b.barang_gudang_id ASC";
-            //         $data = DB::select($query);
-            //         return DataTables::of($data)->make(true);
-            //     } else if ($request->target == 'counter') {
-            //         $query = "SELECT b.barang_counter_id as barang_id, b.slug, a.nama_barang, a.harga_barang, (SUM(b.stok_masuk) - SUM(b.stok_keluar)) as quantity
-            //         FROM barangs as a
-            //         JOIN barang_counters as b on a.barang_id = b.barang_id
-            //         GROUP BY b.barang_counter_id, b.slug,a.nama_barang, a.harga_barang
-            //         ORDER BY b.barang_counter_id ASC";
-            //         $data = DB::select($query);
-            //         return DataTables::of($data)->make(true);
-            //     }
-            // }
         } elseif ($user->role == 'counter') {
-            // $counters = DB::table('counters')
-            //     ->select('counter_id')
-            //     ->where('user_id', $user->user_id)
-            //     ->first();
             if ($request->ajax()) {
-                // $query = 'SELECT a.barang_counter_id as barang_id, b.nama_barang, b.harga_barang, a.slug, (a.stok_masuk-a.stok_keluar) as quantity
-                // FROM barang_counters as a
-                // JOIN barangs as b on a.barang_id = b.barang_id
-                // WHERE a.counter_id = "' . $counters->counter_id  . '" ORDER BY a.barang_counter_id ASC';
-                // $barangs = DB::select($query);
-                // return DataTables::of($barangs)->make(true);
 
                 // GET DATA BARANG GUDANG BY LOGIN COUNTER/TOKO
                 $query = "SELECT a.barang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, b.stok_masuk as quantity
@@ -249,28 +236,6 @@ class BarangController extends Controller
             DB::rollBack();
         }
     }
-
-    // public function biayaPenyimpanan(Request $request)
-    // {
-    //     $query = 'SELECT ((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters)) as qty_total
-    //     FROM barangs as a
-    //     JOIN barang_gudangs as b on a.barang_id = b.barang_id
-    //     JOIN barang_counters as c on a.barang_id = c.barang_id LIMIT 1';
-    //     $data = DB::select($query);
-    //     $biaya_penyimpanan_perunit = $request->total_biaya / $data[0]->qty_total;
-
-    //     DB::beginTransaction();
-    //     try {
-    //         //code... 
-    //         DB::table('barangs')->update(array('biaya_penyimpanan' => $biaya_penyimpanan_perunit));
-    //         DB::commit();
-    //         return response()->json([], 200);
-    //     } catch (\Exception $ex) {
-    //         //throw $th;
-    //         echo $ex->getMessage();
-    //         DB::rollBack();
-    //     }
-    // }
 
     public function biayaPenyimpanan(Request $request)
     {
