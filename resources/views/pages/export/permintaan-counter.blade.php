@@ -33,7 +33,6 @@
     <center>
         <table width="100%">
             <tr>
-                {{-- <td><img src="{{ public_path('assets/images/logo-yms.png') }}" width="100%" height="130"></td> --}}
                 <td style="padding-right: 4rem;">
                     <center>
                         <font size="6"><b>CV. PRASETYA</b></font><br>
@@ -41,7 +40,6 @@
                         </font>
                     </center>
                 </td>
-                {{-- <td></td> --}}
             </tr>
         </table>
         <hr>
