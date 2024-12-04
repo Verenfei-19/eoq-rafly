@@ -69,21 +69,6 @@
                 {
                     data: "stok_masuk"
                 }
-                // {
-                //     data: "avg",
-                //     render: function(data, type, row) {
-                //         if (parseInt(row.qty_total) <= parseInt(row.rop)) {
-                //             return '<div class="alert alert-danger d-flex align-items-center" role="alert">' +
-                //                 '</div>';
-                //         } else if (parseInt(row.qty_total) <= parseInt(data)) {
-                //             return '<div class="alert alert-warning d-flex align-items-center" role="alert">' +
-                //                 '</div>';
-                //         } else {
-                //             return '<div class="alert alert-success d-flex align-items-center" role="alert">' +
-                //                 '</div>';
-                //         }
-                //     }
-                // }
             ],
         });
     </script>
@@ -112,64 +97,6 @@
 
         <div class="col-xl">
             <div class="row">
-                {{-- <div class="col-lg-3">
-                    <div class="card mini-stats-wid">
-                        <div class="card-body">
-
-                            <div class="d-flex flex-wrap">
-                                <div class="me-3">
-                                    <p class="text-muted mb-2">Total Jenis Barang</p>
-                                    <h5 class="mb-0">{{ $jumlah_jenis }}</h5>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3">
-                    <div class="card blog-stats-wid">
-                        <div class="card-body">
-
-                            <div class="d-flex flex-wrap">
-                                <div class="me-3">
-                                    <p class="text-muted mb-2">Total Transaksi ({{ $bulan_tahun }})</p>
-                                    <h5 class="mb-0">{{ $total_transaksi }}</h5>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="card blog-stats-wid">
-                        <div class="card-body">
-                            <div class="d-flex flex-wrap">
-                                <div class="me-3">
-                                    <p class="text-muted mb-2">Total Pendapatan ({{ $bulan_tahun }})</p>
-                                    <h5 class="mb-0">
-                                        @php
-                                            $hasil_rupiah = 'Rp ' . number_format($penjualan->total_pendapatan, 0, ',', '.');
-                                            echo $hasil_rupiah;
-                                        @endphp
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="card blog-stats-wid">
-                        <div class="card-body">
-                            <div class="d-flex flex-wrap">
-                                <div class="me-3">
-                                    <p class="text-muted mb-2">Jumlah Toko</p>
-                                    <h5 class="mb-0">{{ $jumlah_counter }}</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
 
                 @if ($user->role == 'counter')
                 <div class="col-lg-6">
@@ -236,8 +163,6 @@
                 </div>
                 @endif
 
-                
-
                 {{-- OWNER --}}
                 @if ($user->role == 'owner')
                 <div class="col-lg-6">
@@ -275,25 +200,6 @@
 
             </div>
             <!-- end row -->
-
-            {{-- <div class="card">
-                <div class="card-body">
-                    <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
-                        <thead>
-                            <tr>
-                                <th>ID Barang</th>
-                                <th>Nama Barang</th>
-                                <th>Stok</th>
-                                <th>ROP</th>
-                                <th>Rata-Rata Penjualan</th>
-                                <th>Label</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div> --}}
             
             <div class="card">
                 <div class="card-body">
