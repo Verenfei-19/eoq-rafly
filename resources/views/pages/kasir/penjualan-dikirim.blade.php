@@ -246,11 +246,11 @@
                     <div class="mb-3 hstack gap-3 align-items-end">
                         <div class="">
                             <label for="start_date">Tanggal Awal</label>
-                            <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="start_date" id="start_date">
+                            <input type="date" class="form-control" name="start_date" id="start_date">
                         </div>
                         <div class="">
                             <label for="end_date">Tanggal Akhir</label>
-                            <input type="date" class="form-control" name="end_date" id="end_date">
+                            <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="end_date" id="end_date">
                         </div>
                         <div>
                             <button class="btn btn-primary waves-effect waves-light" id="filter_table">
