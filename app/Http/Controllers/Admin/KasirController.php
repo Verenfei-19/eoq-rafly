@@ -32,15 +32,13 @@ class KasirController extends Controller
                 ->select('counter_id')
                 ->where('user_id', $user->user_id)
                 ->first();
-            // $query = 'SELECT a.barang_counter_id, b.barang_id, b.nama_barang, b.harga_barang, a.slug, (a.stok_masuk-a.stok_keluar) as quantity
-            // FROM barang_counters as a
-            // JOIN barangs as b on a.barang_id = b.barang_id
-            // WHERE a.counter_id = "' . $counters->counter_id . '" ORDER BY a.barang_counter_id ASC';
-            // NEW
+
             $query = 'SELECT bg.slug, bg.barang_id, bg.stok_masuk AS quantity,b.slug,b.nama_barang,b.harga_barang
-            FROM barang_gudangs as bg
-            INNER JOIN barangs as b
-            ON b.barang_id = bg.barang_id';
+                        FROM barang_gudangs as bg
+                        INNER JOIN 
+                            barangs as b
+                        ON 
+                            b.barang_id = bg.barang_id';
             $data = DB::select($query);
 
             return DataTables::of($data)
@@ -57,9 +55,7 @@ class KasirController extends Controller
 
     public function store(Request $request)
     {
-
         $invoice = 'INV' . strtoupper($request->nama_pembeli) . '' . date('dmYHis');
-
         $keranjangs = json_decode($request->keranjang);
 
         DB::beginTransaction();
@@ -72,6 +68,7 @@ class KasirController extends Controller
             'tgl_pembelian' => ($request->tanggal_pembelian) ? $request->tanggal_pembelian : NULL,
             'tgl_pengiriman' => ($request->tanggal_pengiriman) ? $request->tanggal_pengiriman : NULL,
         ]);
+
         try {
             foreach ($keranjangs as $keranjang) {
                 PenjualanBarangDetail::create([
@@ -92,10 +89,7 @@ class KasirController extends Controller
             }
             DB::commit();
             return response()->json($request->all(), 200);
-
-            // return response()->json([], 200);
         } catch (\Exception $ex) {
-            //throw $th;
             echo $ex->getMessage();
             DB::rollBack();
         }
