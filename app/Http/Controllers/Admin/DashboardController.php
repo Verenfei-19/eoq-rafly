@@ -49,20 +49,12 @@ class DashboardController extends Controller
         $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
         $endOfMonth = Carbon::now()->endOfMonth()->translatedFormat('Y-m-d');
         $total_transaksi = PenjualanBarangDetail::whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->get()->count();
-        // $total_transaksi = DB::table('penjualans')
-        //     ->whereMonth('tanggal_penjualan', Carbon::now()->format('m'))
-        //     ->whereYear('tanggal_penjualan', Carbon::now()->format('Y'))
-        //     ->count();
+
         $penjualan = DB::table('penjualan_barang_details')
             ->selectRaw('SUM(quantity*harga_barang) as total_pendapatan')
             ->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->first();
         $total_item_terjual = PenjualanBarangDetail::whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->get()->sum('quantity');
         $total_supplier = Supplier::all()->count();
-        // $penjualan = DB::table('penjualans')
-        //     ->selectRaw('SUM(grand_total) as total_pendapatan')
-        //     ->whereMonth('tanggal_penjualan', Carbon::now()->format('m'))
-        //     ->whereYear('tanggal_penjualan', Carbon::now()->format('Y'))
-        //     ->first();
 
         $jumlah_counter = DB::table('counters')->count();
         setlocale(LC_ALL, 'IND');
@@ -81,9 +73,9 @@ class DashboardController extends Controller
             return DataTables::of($barangs)
                 ->editColumn('stok_masuk', function ($object) {
                     if ($object->stok_masuk < 100) {
-                        $html = '<a href="#" class="btn btn-danger waves-effect waves-light"> Barang hampir habis (' . $object->stok_masuk . ')</a>';
+                        $html = '<span class="btn btn-danger waves-effect waves-light"> Barang hampir habis (' . $object->stok_masuk . ')</span>';
                     } else {
-                        $html = '<a href="#" class="btn btn-success waves-effect waves-light"> Stok aman</a>';
+                        $html = '<span class="btn btn-success waves-effect waves-light"> Stok aman</span>';
                     }
                     return $html;
                 })
