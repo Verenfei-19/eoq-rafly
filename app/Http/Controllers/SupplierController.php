@@ -25,8 +25,10 @@ class SupplierController extends Controller
         $user = $this->userAuth();
         $path = 'supplier';
         if ($request->ajax()) {
-            // $suppliers = Supplier::all();
-            $query = "SELECT sp.id, sp.nama, sp.telepon, sp.alamat, bg.nama_barang ,sp.waktu FROM `suppliers` as sp JOIN barangs as bg ON bg.barang_id = sp.id_barang";
+            $query = "SELECT sp.id, sp.nama, sp.telepon, sp.alamat, bg.nama_barang ,sp.waktu 
+                    FROM `suppliers` as sp 
+                    JOIN 
+                        barangs as bg ON bg.barang_id = sp.id_barang";
             $suppliers = DB::select($query);
 
             return DataTables::of($suppliers)
@@ -44,9 +46,6 @@ class SupplierController extends Controller
         return view('pages.supplier.index', compact('user'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $user = $this->userAuth();
@@ -56,7 +55,6 @@ class SupplierController extends Controller
 
     public function store(Request $request)
     {
-        // dump($request->all());
         Supplier::create([
             'nama' => $request->nama_supplier,
             'telepon' => $request->telepon_supplier,
@@ -68,17 +66,6 @@ class SupplierController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Supplier $supplier)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Supplier $supplier)
     {
         $user = $this->userAuth();
@@ -86,9 +73,6 @@ class SupplierController extends Controller
         return view('pages.supplier.edit', ['supplier' => $supplier, 'user' => $user, 'barang' => $barang]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Supplier $supplier)
     {
         $supplier->update([
@@ -99,12 +83,8 @@ class SupplierController extends Controller
         return redirect()->route('supplier')->with('msg', 'Data supplier berhasil diubah');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Supplier $supplier)
     {
-        //
         $supplier->delete();
         return redirect()->route('supplier')->with('msg', 'Data supplier berhasil dihapus');
     }
