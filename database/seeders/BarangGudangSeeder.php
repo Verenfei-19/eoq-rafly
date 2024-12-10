@@ -30,7 +30,7 @@ class BarangGudangSeeder extends Seeder
                 //     $barang_gudang->stok_masuk = 80;
                 //     $barang_gudang->stok_keluar = 60;
                 // } else {
-                $barang_gudang->stok_masuk = 2500;
+                $barang_gudang->stok_masuk = 600;
                 // $barang_gudang->stok_keluar = 45;
                 // }
 
