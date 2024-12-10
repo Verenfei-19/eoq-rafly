@@ -100,29 +100,29 @@ Route::middleware('user')->group(function () {
         Route::post('/persediaan-masuk/store/', 'store')->name('persediaan-masuk.store');
     });
 
-    Route::controller(PermintaanCounterController::class)->group(function () {
-        Route::get('/permintaan-counter', 'index')->name('permintaan-counter');
-        Route::get('/permintaan-counter/create', 'create')->name('permintaan-counter.create');
-        Route::post('/permintaan-counter/store', 'store')->name('permintaan-counter.store');
-        Route::post('/permintaan-counter/detail', 'detail')->name('permintaan-counter.detail');
-        Route::get('/permintaan-counter/detail/{slug}', 'detailByGudang')->name('permintaan-counter.detailByGudang');
-        Route::get('/permintaan-counter/persetujuan/{slug}/{id}', 'createPersetujuan')->name('permintaan-counter.persetujuan');
-        Route::post('/permintaan-counter/temp/persetujuan', 'temporaryPersetujuan')->name('permintaan-counter.tmpPersetujuan');
-        Route::get('/permintaan-counter/pengiriman/store/{slug}', 'storePengiriman')->name('permintaan-counter.storePersetujuan');
-        Route::get('/permintaan-counter/history', 'indexHistory')->name('permintaan-counter.history');
-        Route::get('/permintaan-counter/exportPDF/{slug}', 'exportPDF')->name('permintaan-counter.exportPDF');
-    });
+    // Route::controller(PermintaanCounterController::class)->group(function () {
+    //     Route::get('/permintaan-counter', 'index')->name('permintaan-counter');
+    //     Route::get('/permintaan-counter/create', 'create')->name('permintaan-counter.create');
+    //     Route::post('/permintaan-counter/store', 'store')->name('permintaan-counter.store');
+    //     Route::post('/permintaan-counter/detail', 'detail')->name('permintaan-counter.detail');
+    //     Route::get('/permintaan-counter/detail/{slug}', 'detailByGudang')->name('permintaan-counter.detailByGudang');
+    //     Route::get('/permintaan-counter/persetujuan/{slug}/{id}', 'createPersetujuan')->name('permintaan-counter.persetujuan');
+    //     Route::post('/permintaan-counter/temp/persetujuan', 'temporaryPersetujuan')->name('permintaan-counter.tmpPersetujuan');
+    //     Route::get('/permintaan-counter/pengiriman/store/{slug}', 'storePengiriman')->name('permintaan-counter.storePersetujuan');
+    //     Route::get('/permintaan-counter/history', 'indexHistory')->name('permintaan-counter.history');
+    //     Route::get('/permintaan-counter/exportPDF/{slug}', 'exportPDF')->name('permintaan-counter.exportPDF');
+    // });
 
-    Route::controller(PengirimanCounterController::class)->group(function () {
-        Route::get('/pengiriman-counter', 'index')->name('pengiriman-counter');
-        Route::get('/pengiriman-counter/detail/{slug}', 'show')->name('pengiriman-counter.detail');
-        Route::get('/pengiriman-counter/store/penerimaan/{slug}', 'storePenerimaan')->name('pengiriman-counter.penerimaan');
-        Route::get('/pengiriman-counter/keep/counter', 'indexBarangDiambil')->name('pengiriman-counter.barangDiambil');
-        Route::get('/pengiriman-counter/history', 'indexHistory')->name('pengiriman-counter.history');
-        Route::post('/pengiriman-counter/history/detail', 'detailHistory')->name('pengiriman-counter.detailHistory');
-        Route::get('/pengiriman-counter/exportPDF/{slug}', 'exportPDF')->name('pengiriman-counter.exportPDF');
-        Route::get('/pengiriman_counter/update/status/{pengiriman_counter_id}/{barang_id}', 'updateStatus')->name('pengiriman-counter.updateStatus');
-    });
+    // Route::controller(PengirimanCounterController::class)->group(function () {
+    //     Route::get('/pengiriman-counter', 'index')->name('pengiriman-counter');
+    //     Route::get('/pengiriman-counter/detail/{slug}', 'show')->name('pengiriman-counter.detail');
+    //     Route::get('/pengiriman-counter/store/penerimaan/{slug}', 'storePenerimaan')->name('pengiriman-counter.penerimaan');
+    //     Route::get('/pengiriman-counter/keep/counter', 'indexBarangDiambil')->name('pengiriman-counter.barangDiambil');
+    //     Route::get('/pengiriman-counter/history', 'indexHistory')->name('pengiriman-counter.history');
+    //     Route::post('/pengiriman-counter/history/detail', 'detailHistory')->name('pengiriman-counter.detailHistory');
+    //     Route::get('/pengiriman-counter/exportPDF/{slug}', 'exportPDF')->name('pengiriman-counter.exportPDF');
+    //     Route::get('/pengiriman_counter/update/status/{pengiriman_counter_id}/{barang_id}', 'updateStatus')->name('pengiriman-counter.updateStatus');
+    // });
 
     Route::controller(PenjualanController::class)->prefix('penjualan')->group(function () {
         Route::get('/penjualan-diterima', 'penjualan_diterima')->name('penjualan.diterima');
