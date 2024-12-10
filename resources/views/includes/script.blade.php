@@ -15,9 +15,9 @@
                 type: "GET",
                 url: "{{ route('barang.checkROP') }}",
                 success: function(response) {
-                    // console.log(response);
                     $("#count-notif").text(response.jumlah);
                     let html = '';
+                    // NOTIFIKASI
                     response.barangs.forEach(element => {
                         html +=
                             " <a href='{{ route('pemesanan.create') }}' class='text-reset notification-item'>" +
