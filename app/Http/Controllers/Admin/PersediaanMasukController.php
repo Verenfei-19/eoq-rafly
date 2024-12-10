@@ -91,13 +91,13 @@ class PersediaanMasukController extends Controller
         foreach ($data_pemesanan as $key => $value) {
             $barang_gudang = BarangGudang::where('barang_id', $value['id_barang'])->first('stok_masuk');
 
-            // Barang::where('barang_id',  $value['id_barang'])->update([
-            //     'ss' => $value['ss'],
-            //     'rop' => $value['rop'],
-            // ]);
+            Barang::where('barang_id',  $value['id_barang'])->update([
+                'ss' => $value['ss'],
+                'rop' => $value['rop'],
+            ]);
 
             BarangGudang::where('barang_id', $value['id_barang'])->update([
-                'stok_masuk' => $barang_gudang['stok_masuk'] - $value['jumlah_pemesanan']
+                'stok_masuk' => $barang_gudang['stok_masuk'] + $value['jumlah_pemesanan']
             ]);
         }
         return redirect()->route('persediaan-masuk');
