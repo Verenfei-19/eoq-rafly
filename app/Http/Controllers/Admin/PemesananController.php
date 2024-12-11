@@ -73,9 +73,11 @@ class PemesananController extends Controller
     public function create(Request $request)
     {
         $user = $this->userAuth();
+        $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
+        $endOfMonth = Carbon::now()->today()->translatedFormat('Y-m-d');
         if ($request->ajax()) {
 
-            $query = 'SELECT 
+            $query = "SELECT 
                         a.barang_id AS barang_id, 
                         b.slug, 
                         a.nama_barang, 
@@ -96,7 +98,7 @@ class PemesananController extends Controller
                         suppliers AS sp ON a.barang_id = sp.id_barang
                     LEFT JOIN 
                         penjualan_barang_details AS pbd ON a.barang_id = pbd.id_barang 
-                        AND pbd.tgl_pembelian BETWEEN "2024-10-01" AND "2024-10-31"
+                        AND pbd.tgl_pembelian BETWEEN '$startOfMonth' AND '$endOfMonth'
                     GROUP BY 
                         b.barang_gudang_id, 
                         b.slug, 
@@ -106,7 +108,7 @@ class PemesananController extends Controller
                         sp.waktu, 
                         supplier_id
                     ORDER BY 
-                        b.barang_gudang_id ASC';
+                        b.barang_gudang_id ASC";
 
             $barangs = DB::select($query);
 
