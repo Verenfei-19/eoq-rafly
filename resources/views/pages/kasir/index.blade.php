@@ -332,7 +332,7 @@
                         '_token': "{{ csrf_token() }}",
                         'keranjang': JSON.stringify(keranjang),
                         'grand_total': grandTotal,
-                        'nama_pembeli': $('#nama_pembeli').val(),
+                        'nama_pembeli': $('#name').val(),
                         'telepon_pembeli': $('#telepon_pembeli').val(),
                         'alamat_pembeli': $('#alamat_pembeli').val(),
                         'tanggal_pengiriman': $('#tanggal_pengiriman').val(),
@@ -391,7 +391,7 @@
                                 },
                             ]
                         });
-                        $('#nama_pembeli').val('');
+                        $('#name').val('');
                         $('#telepon_pembeli').val('');
                         $('#alamat_pembeli').val('');
                         $('#tanggal_pembelian').val('');
