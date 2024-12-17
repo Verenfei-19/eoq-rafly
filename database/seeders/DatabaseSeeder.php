@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             GudangSeeder::class,
             // CounterSeeder::class,
             BarangGudangSeeder::class,
+            SupplierSeeder::class
             // BarangCounterSeeder::class,
             // PenjualanSeeder::class,
         ]);
