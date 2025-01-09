@@ -168,8 +168,9 @@ class PemesananController extends Controller
         $details = json_decode($request->pemesanan);
         $biaya_pemesanan = $request->biaya;
 
-        $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
-        $endOfMonth = Carbon::now()->today()->translatedFormat('Y-m-d');
+        // $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
+        $startDate = Carbon::now()->subDays(30)->translatedFormat('Y-m-d'); // menghitung tgl sekarang mundur 30 hari, sesuai value 30
+        $currentDate = Carbon::now()->today()->translatedFormat('Y-m-d');
 
         DB::beginTransaction();
         $invoice_id = 'PMP-' . date('YmdHis');
@@ -180,14 +181,12 @@ class PemesananController extends Controller
 
             foreach ($details as $detail) {
                 $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)
-                    ->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->sum('quantity');
+                    ->whereBetween('tgl_pembelian', [$startDate, $currentDate])->sum('quantity');
                 $totalMaxBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)
-                    ->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->max('quantity');
+                    ->whereBetween('tgl_pembelian', [$startDate, $currentDate])->max('quantity');
 
-                // $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)
-                // ->whereBetween('tgl_pembelian', ['2024-10-01', '2024-10-31'])->sum('quantity');
-                // $totalMaxBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)
-                // ->whereBetween('tgl_pembelian', ['2024-10-01', '2024-10-31'])->max('quantity');
+                // $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)->whereBetween('tgl_pembelian', ['2024-10-01', '2024-10-31'])->sum('quantity');
+                // $totalMaxBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)->whereBetween('tgl_pembelian', ['2024-10-01', '2024-10-31'])->max('quantity');
 
                 $d = $totalBarangTerjualSebulan / 30;
 
