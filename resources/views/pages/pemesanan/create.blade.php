@@ -331,7 +331,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">List Pemesanan Persediaan</h4>
-                    <span class="fw-bold text-danger">Proses perhitungan dimulai dari mundur 30hari dari hari sekarang. Tanggal perhitungan {{ $haripertama }} sampai {{ $hariakhir }}</span>
+                    <span class="fw-bold text-danger">Proses perhitungan dimulai dari mundur 30hari dari hari sekarang. Tanggal perhitungan {{ $startDate }} sampai {{ $currentDate }}</span>
                     <div class="row mb-3 mt-1">
                         <div class="col-3">
                             <button class="btn btn-pink" data-bs-toggle="modal" data-bs-target="#biayaModal"
