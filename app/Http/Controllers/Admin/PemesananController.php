@@ -73,8 +73,10 @@ class PemesananController extends Controller
     public function create(Request $request)
     {
         $user = $this->userAuth();
-        $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
-        $endOfMonth = Carbon::now()->today()->translatedFormat('Y-m-d');
+        // $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
+        // $endOfMonth = Carbon::now()->today()->translatedFormat('Y-m-d');
+        $startDate = Carbon::now()->subDays(30)->translatedFormat('Y-m-d'); // menghitung tgl sekarang mundur 30 hari, sesuai value 30
+        $currentDate = Carbon::now()->today()->translatedFormat('Y-m-d');
         if ($request->ajax()) {
 
             $query = "SELECT 
@@ -98,7 +100,7 @@ class PemesananController extends Controller
                         suppliers AS sp ON a.barang_id = sp.id_barang
                     LEFT JOIN 
                         penjualan_barang_details AS pbd ON a.barang_id = pbd.id_barang 
-                        AND pbd.tgl_pembelian BETWEEN '$startOfMonth' AND '$endOfMonth'
+                        AND pbd.tgl_pembelian BETWEEN '$startDate' AND '$currentDate'
                     GROUP BY 
                         b.barang_gudang_id, 
                         b.slug, 
@@ -124,10 +126,10 @@ class PemesananController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $haripertama = Carbon::now()->subDays(30)->translatedFormat('Y-m-d');
-        $hariakhir = Carbon::now()->today()->translatedFormat('Y-m-d');
+        // $haripertama = Carbon::now()->subDays(30)->translatedFormat('Y-m-d');
+        // $hariakhir = Carbon::now()->today()->translatedFormat('Y-m-d');
 
-        return view('pages.pemesanan.create', compact('user', 'haripertama', 'hariakhir'));
+        return view('pages.pemesanan.create', compact('user', 'startDate', 'currentDate'));
     }
 
     public function hitungEOQ(Request $request)
@@ -136,14 +138,16 @@ class PemesananController extends Controller
         $no = 1;
         $biayaPemesanan = $request->biaya;
 
-        $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
-        $endOfMonth = Carbon::now()->today()->translatedFormat('Y-m-d');
+        $startDate = Carbon::now()->subDays(30)->translatedFormat('Y-m-d'); // menghitung tgl sekarang mundur 30 hari, sesuai value 30
+        $currentDate = Carbon::now()->today()->translatedFormat('Y-m-d');
+        // $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
+        // $endOfMonth = Carbon::now()->today()->translatedFormat('Y-m-d');
 
         $data_eoq = [];
         foreach ($pemesanans as $key) {
             $barangAll = Barang::where('barang_id', $key->id_barang)->get(['nama_barang', 'biaya_penyimpanan'])->first();
             $supplierAll = Supplier::where('id_barang', $key->id_barang)->get(['id', 'waktu'])->first();
-            $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', [$startOfMonth, $endOfMonth])->sum('quantity');
+            $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', [$startDate, $currentDate])->sum('quantity');
             // $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $key->id_barang)->whereBetween('tgl_pembelian', ['2024-10-01', '2024-10-31'])->sum('quantity');
             $rumusEOQ = round(sqrt((2 * $biayaPemesanan * $totalBarangTerjualSebulan) /  $barangAll->biaya_penyimpanan));
 
