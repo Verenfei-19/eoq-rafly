@@ -40,9 +40,6 @@
                 {
                     data: "invoice"
                 },
-                // {
-                //     data: "nama"
-                // },
                 {
                     data: "status_pemesanan",
                     render: function(data, type, row) {
@@ -78,9 +75,6 @@
                         return tanggal_pemesanan;
                     }
                 },
-                // {
-                //     data: "waktu_proses"
-                // },
                 {
                     data: "biaya_pemesanan",
                     render: function(data, type, row) {
