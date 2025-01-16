@@ -88,9 +88,6 @@ Route::middleware('user')->group(function () {
         Route::get('/pemesanan/detail/{slug}', 'detail')->name('pemesanan.detail');
         Route::post('/pemesanan/persetujuan', 'persetujuan')->name('pemesanan.persetujuan');
         Route::get('/pemesanan/dipesan/{slug}', 'dipesan')->name('pemesanan.dipesan');
-        Route::get('/pemesanan/history', 'indexHistory')->name('pemesanan.history');
-        Route::post('/pemesanan/history/detail', 'detailHistory')->name('pemesanan.detailHistory');
-        Route::get('/pemesanan/exportPDF/{slug}', 'exportPDF')->name('pemesanan.exportPDF');
     });
 
     Route::controller(PersediaanMasukController::class)->group(function () {
