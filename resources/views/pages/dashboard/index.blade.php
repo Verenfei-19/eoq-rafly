@@ -19,44 +19,43 @@
     <!-- Datatable init js -->
     <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
     <script>
-        $('#datatable').DataTable({
-            lengthMenu: [5, 10, 20, 50, 100],
-            ordering: false,
-            ajax: "{{ route('dashboard') }}",
-            columns: [{
-                    data: "barang_id"
-                },
-                {
-                    data: "nama_barang"
-                },
-                {
-                    data: "qty_total"
-                },
-                {
-                    data: "rop"
-                },
-                {
-                    data: "avg"
-                },
-                {
-                    data: "avg",
-                    render: function(data, type, row) {
-                        if (parseInt(row.qty_total) <= parseInt(row.rop)) {
-                            return '<div class="alert alert-danger d-flex align-items-center" role="alert">' +
-                                '</div>';
-                        } else if (parseInt(row.qty_total) <= parseInt(data)) {
-                            return '<div class="alert alert-warning d-flex align-items-center" role="alert">' +
-                                '</div>';
-                        } else {
-                            return '<div class="alert alert-success d-flex align-items-center" role="alert">' +
-                                '</div>';
-                        }
-                    }
-                }
-            ],
-        });
+        // $('#datatable').DataTable({
+        //     lengthMenu: [5, 10, 20, 50, 100],
+        //     ordering: false,
+        //     ajax: "{{ route('dashboard') }}",
+        //     columns: [{
+        //             data: "barang_id"
+        //         },
+        //         {
+        //             data: "nama_barang"
+        //         },
+        //         {
+        //             data: "qty_total"
+        //         },
+        //         {
+        //             data: "rop"
+        //         },
+        //         {
+        //             data: "avg"
+        //         },
+        //         {
+        //             data: "avg",
+        //             render: function(data, type, row) {
+        //                 if (parseInt(row.qty_total) <= parseInt(row.rop)) {
+        //                     return '<div class="alert alert-danger d-flex align-items-center" role="alert">' +
+        //                         '</div>';
+        //                 } else if (parseInt(row.qty_total) <= parseInt(data)) {
+        //                     return '<div class="alert alert-warning d-flex align-items-center" role="alert">' +
+        //                         '</div>';
+        //                 } else {
+        //                     return '<div class="alert alert-success d-flex align-items-center" role="alert">' +
+        //                         '</div>';
+        //                 }
+        //             }
+        //         }
+        //     ],
+        // });
         $('#stokPersediaan').DataTable({
-            // lengthMenu: [5, 10, 20, 50, 100],
             ordering: false,
             ajax: "{{ route('stoktersisa') }}",
             columns: [
