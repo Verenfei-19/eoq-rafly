@@ -24,25 +24,25 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $user = $this->userAuth();
-        if ($request->ajax()) {
-            $barangs = DB::table('barangs as b')
-                ->join('barang_gudangs as bg', 'b.barang_id', '=', 'bg.barang_id')
-                ->join('barang_counters as bc', 'b.barang_id', '=', 'bc.barang_id')
-                ->join('detail_penjualans as dp', 'bc.barang_counter_id', '=', 'dp.barang_counter_id')
-                ->selectRaw('b.barang_id, b.slug, b.nama_barang, b.harga_barang, b.biaya_penyimpanan, b.rop,((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = b.barang_id GROUP BY barang_id)) as qty_total, round(avg(dp.quantity)) as avg')
-                ->groupByRaw("b.barang_id, b.slug, b.nama_barang, b.harga_barang, b.biaya_penyimpanan, b.rop, ((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = b.barang_id GROUP BY barang_id))")
-                ->orderByRaw("((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = b.barang_id GROUP BY barang_id)) <= b.rop desc, b.barang_id asc")
-                ->get();
+        // if ($request->ajax()) {
+        //     $barangs = DB::table('barangs as b')
+        //         ->join('barang_gudangs as bg', 'b.barang_id', '=', 'bg.barang_id')
+        //         ->join('barang_counters as bc', 'b.barang_id', '=', 'bc.barang_id')
+        //         ->join('detail_penjualans as dp', 'bc.barang_counter_id', '=', 'dp.barang_counter_id')
+        //         ->selectRaw('b.barang_id, b.slug, b.nama_barang, b.harga_barang, b.biaya_penyimpanan, b.rop,((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = b.barang_id GROUP BY barang_id)) as qty_total, round(avg(dp.quantity)) as avg')
+        //         ->groupByRaw("b.barang_id, b.slug, b.nama_barang, b.harga_barang, b.biaya_penyimpanan, b.rop, ((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = b.barang_id GROUP BY barang_id))")
+        //         ->orderByRaw("((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = b.barang_id GROUP BY barang_id)) <= b.rop desc, b.barang_id asc")
+        //         ->get();
 
-            return DataTables::of($barangs)
-                ->addColumn('action', function ($object) {
-                    $html = ' <a href="' . route("pemesanan.create") . '" class="btn btn-success waves-effect waves-light">'
-                        . ' <i class="bx bx-edit align-middle me-2 font-size-18"></i>Edit</a>';
-                    return $html;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
+        //     return DataTables::of($barangs)
+        //         ->addColumn('action', function ($object) {
+        //             $html = ' <a href="' . route("pemesanan.create") . '" class="btn btn-success waves-effect waves-light">'
+        //                 . ' <i class="bx bx-edit align-middle me-2 font-size-18"></i>Edit</a>';
+        //             return $html;
+        //         })
+        //         ->rawColumns(['action'])
+        //         ->make(true);
+        // }
 
         $jumlah_jenis = DB::table('barangs')->count();
 
@@ -67,12 +67,13 @@ class DashboardController extends Controller
     public function stokPersediaan(Request $request)
     {
         if ($request->ajax()) {
-            $query = "SELECT bg.barang_id, b.nama_barang, b.harga_barang, bg.stok_masuk FROM `barangs` as b JOIN barang_gudangs AS bg ON bg.barang_id = b.barang_id";
+            $query = "SELECT bg.barang_id, b.nama_barang, b.harga_barang, b.ss, bg.stok_masuk FROM `barangs` as b JOIN barang_gudangs AS bg ON bg.barang_id = b.barang_id";
             $barangs = DB::select($query);
 
             return DataTables::of($barangs)
                 ->editColumn('stok_masuk', function ($object) {
-                    if ($object->stok_masuk < 100) {
+                    // if ($object->stok_masuk < 100) {
+                    if ($object->stok_masuk < $object->ss) {
                         $html = '<span class="btn btn-danger waves-effect waves-light"> Barang hampir habis (' . $object->stok_masuk . ')</span>';
                     } else {
                         $html = '<span class="btn btn-success waves-effect waves-light"> Stok aman</span>';
