@@ -30,10 +30,6 @@
             ordering: false,
             lengthMenu: [5, 10, 20, 50, 100],
             ajax: "{{ route('pemesanan.create') }}",
-            // "columnDefs": [{
-            //     className: "nama-barang",
-            //     "targets": [1]
-            // }],
             columns: [{
                     data: 'barang_id',
                     name: 'ID Barang'
@@ -50,10 +46,6 @@
                     data: 'qty_total',
                     name: 'Quantity'
                 },
-                // {
-                //     data: 'rop',
-                //     name: 'rop'
-                // },
                 {
                     data: 'action',
                     name: 'action',
@@ -274,6 +266,35 @@
                 });
             }
         });
+
+        $(document).ready(function(){
+            // checkROP()
+            // console.log('CREATE');
+            // console.log(dataNotification);
+            setTimeout(() => {
+                checkROP()
+                if (dataNotification.length > 0) {
+                    // console.log('ok');
+
+                    let textHtml = ''
+                    dataNotification.forEach(element => {
+                        textHtml += "<span class='fw-semibold'>"+element+"</span>, "
+                        $('#testing').html(textHtml)
+                        console.log(element);
+                    })
+                    $('#testing').prepend('<span>Barang yang dipesan : </span>')
+                }
+            }, 5000);
+            // setTimeout(() => {
+            //     let textHtml = ''
+            //     dataNotification.forEach(element => {
+            //         textHtml += "<span class='fw-semibold'>"+element+"</span>, "
+            //         $('#testing').html(textHtml)
+            //         console.log(element);
+            //     })
+            //     $('#testing').prepend('<span>Barang yang dipesan : </span>')
+            // }, 5000);
+        })
     </script>
 @endpush
 
@@ -306,7 +327,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-3">Barang</h4>
-
+                    <div id="testing" class="mb-2"></div>
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
                             <tr>
