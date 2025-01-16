@@ -35,38 +35,6 @@ class BarangController extends Controller
                                 barangs as b 
                             ON 
                                 b.barang_id = bg.barang_id;";
-                // $query = 'SELECT 
-                //             a.barang_id AS barang_id, 
-                //             a.slug, 
-                //             a.nama_barang, 
-                //             a.harga_barang, 
-                //             a.biaya_penyimpanan, 
-                //             pb.rop, 
-                //             pb.ss, 
-                //             sp.id AS supplier_id, 
-                //             b.stok_masuk AS qty_total,
-                //             IFNULL(SUM(pbd.quantity), 0) AS quantity_sum_total
-                //         FROM 
-                //             barangs AS a
-                //         JOIN 
-                //             barang_gudangs AS b ON a.barang_id = b.barang_id
-                //         JOIN
-                //             pemesanan_barangs AS pb ON a.barang_id = pb.id_barang
-                //         JOIN 
-                //             suppliers AS sp ON a.barang_id = sp.id_barang
-                //         LEFT JOIN 
-                //             penjualan_barang_details AS pbd ON a.barang_id = pbd.id_barang 
-                //             AND pbd.tgl_pembelian BETWEEN "2024-10-01" AND "2024-10-31"
-                //         GROUP BY 
-                //             b.barang_gudang_id, 
-                //             a.slug, 
-                //             a.nama_barang, 
-                //             a.harga_barang, 
-                //             pb.rop,
-                //             pb.ss,
-                //             supplier_id
-                //         ORDER BY 
-                //             b.barang_gudang_id ASC';
                 $barangs = DB::select($query);
 
                 return DataTables::of($barangs)
@@ -285,7 +253,7 @@ class BarangController extends Controller
         // NOTIFIKASI
         $barangs = DB::table('barang_gudangs as bg')
             ->join('barangs as b', 'b.barang_id', '=', 'bg.barang_id')
-            ->whereRaw('bg.stok_masuk <= b.rop')->get();
+            ->whereRaw('bg.stok_masuk <= b.ss')->get();
         $jumlah_barang = count($barangs);
 
         $result = [
