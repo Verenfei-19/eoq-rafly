@@ -3,14 +3,6 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                {{-- <a href="index.html" class="logo logo-dark">
-                    <span class="logo-sm">
-                        <img src="assets/images/logo.svg" alt="" height="22">
-                    </span>
-                    <span class="logo-lg">
-                        <img src="assets/images/logo-dark.png" alt="" height="17">
-                    </span>
-                </a> --}}
 
                 <a href="index.html" class="logo logo-light text-white">
                     CV. PRASETYA
@@ -35,12 +27,14 @@
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
                         aria-labelledby="page-header-notifications-dropdown">
                         <div class="p-3 out-simple">
+                            {{-- NOTIF ITEM --}}
                             <div class="row align-items-center">
                                 <div class="col">
                                     <h6 class="m-0" key="t-notifications"> Notifications </h6>
                                 </div>
                             </div>
                         </div>
+                        {{-- NOTIF --}}
                         <div data-simplebar style="max-height: 230px;" class="parentNotif">
                             <a href="javascript: void(0);" class="text-reset notification-item">
                                 <div class="d-flex">

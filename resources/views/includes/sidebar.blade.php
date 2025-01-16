@@ -93,7 +93,7 @@
                     </a>
                 </li>
 
-                @if ($user->role == 'gudang' || $user->role == 'owner')
+                {{-- @if ($user->role == 'gudang' || $user->role == 'owner')
                     <li>
                         <a href="{{ route('pemesanan.history') }}" class="waves-effect">
                             <i class="bx bx-detail"></i>
@@ -101,7 +101,7 @@
                         </a>
                     </li>
 
-                @endif
+                @endif --}}
 
             </ul>
         </div>
