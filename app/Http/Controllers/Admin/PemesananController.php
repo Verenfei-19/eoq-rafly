@@ -126,8 +126,6 @@ class PemesananController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        // $haripertama = Carbon::now()->subDays(30)->translatedFormat('Y-m-d');
-        // $hariakhir = Carbon::now()->today()->translatedFormat('Y-m-d');
 
         return view('pages.pemesanan.create', compact('user', 'startDate', 'currentDate'));
     }
