@@ -253,7 +253,7 @@ class BarangController extends Controller
         // NOTIFIKASI
         $barangs = DB::table('barang_gudangs as bg')
             ->join('barangs as b', 'b.barang_id', '=', 'bg.barang_id')
-            ->whereRaw('bg.stok_masuk <= b.ss')->get();
+            ->whereRaw('bg.stok_masuk <= b.rop')->get();
         $jumlah_barang = count($barangs);
 
         $result = [
