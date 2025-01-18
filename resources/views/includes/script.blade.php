@@ -7,7 +7,6 @@
 <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('assets/js/pages/sweet-alerts.init.js') }}"></script>
 <script>
-    var dataNotification = [];
     @if ($user->role == 'gudang')
 
         var checkROP = function() {
@@ -19,7 +18,6 @@
                     let html = '';
                     // NOTIFIKASI
                     response.barangs.forEach(element => {
-                        dataNotification.push(element.nama_barang)
                         html +=
                             " <a href='{{ route('pemesanan.create') }}' class='text-reset notification-item'>" +
                             "<div class='d-flex'>" +
@@ -51,8 +49,6 @@
         // setInterval(() => {
             checkROP();
         // }, 5000);
-        console.log('SCRIPT');
-        console.log(dataNotification);
         
     @endif
 </script>
