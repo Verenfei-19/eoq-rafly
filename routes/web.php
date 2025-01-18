@@ -55,8 +55,6 @@ Route::middleware('user')->group(function () {
         Route::get('/barang/destroy/{slug}', 'destroy')->name('barang.destroy');
 
         Route::post('/barang/biayapenyimpanan', 'biayaPenyimpanan')->name('barang.biayapenyimpanan');
-        Route::get('/barang/tesbiayapenyimpanan', 'tesbiayaPenyimpanan')->name('barang.tesbiayapenyimpanan');
-
         Route::post('/barang/detail', 'detailQuantity')->name('barang.detail');
         Route::get('/barang/checkrop', 'checkROP')->name('barang.checkROP');
     });
@@ -105,16 +103,10 @@ Route::middleware('user')->group(function () {
         Route::get('/penjualan-dikirim', 'penjualan_dikirim')->name('penjualan.dikirim');
         Route::get('/invoice-diterima/{penjualan:invoice_number}', 'invoice_diterima')->name('invoice.diterima');
         Route::get('/invoice-dikirim/{penjualan:invoice_number}', 'invoice_dikirim')->name('invoice.dikirim');
-        // Route::get('/penjualan?print_', 'penjualan')->name('penjualan');
-        // Route::get('/penjualan', 'index')->name('penjualan');
-        // Route::post('/penjualan/filter', 'filter')->name('penjualan.filter');
-        // Route::post('/penjualan/detail', 'detail')->name('penjualan.detail');
-        // Route::post('/penjualan/exportPDF', 'exportPDF')->name('penjualan.exportPDF');
     });
 
     Route::controller(KasirController::class)->group(function () {
         Route::get('/kasir', 'index')->name('kasir');
-        Route::get('/kasir/tes', 'tes')->name('kasir.tes');
         Route::post('/kasir/store', 'store')->name('kasir.store');
     });
 
@@ -131,10 +123,4 @@ Route::middleware('user')->group(function () {
     Route::controller(RekapPenjualanController::class)->group(function () {
         Route::get('/rekap', 'index')->name('rekap.index');
     });
-});
-Route::get('/aw', function () {
-    $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('d-m-Y');
-    $endOfMonth = Carbon::now()->today();
-    // $total = Penjualan::whereBetween('tanggal', [$startOfMonth, $endOfMonth])->sum('jumlah_item');
-    echo $startOfMonth . '<Br>' . $endOfMonth;
 });
