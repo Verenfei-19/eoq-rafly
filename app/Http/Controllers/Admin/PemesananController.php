@@ -76,75 +76,82 @@ class PemesananController extends Controller
         $startDate = Carbon::now()->subDays(30)->translatedFormat('Y-m-d'); // menghitung tgl sekarang mundur 30 hari, sesuai value 30
         $currentDate = Carbon::now()->today()->translatedFormat('Y-m-d');
         if ($request->ajax()) {
-
-            // $query = "SELECT 
-            //             a.barang_id AS barang_id, 
-            //             b.slug, 
-            //             a.nama_barang, 
-            //             a.harga_barang, 
-            //             a.biaya_penyimpanan, 
-            //             a.rop, 
-            //             a.ss, 
-            //             sp.id AS supplier_id, 
-            //             sp.nama, 
-            //             sp.waktu, 
-            //             -- b.stok_masuk AS qty_total,
-            //             IFNULL(SUM(pbd.quantity), 0) AS qty_total
-            //         FROM 
-            //             barangs AS a
-            //         JOIN 
-            //             barang_gudangs AS b ON a.barang_id = b.barang_id
-            //         JOIN 
-            //             suppliers AS sp ON a.barang_id = sp.id_barang
-            //         LEFT JOIN 
-            //             penjualan_barang_details AS pbd ON a.barang_id = pbd.id_barang 
-            //             AND pbd.tgl_pembelian BETWEEN '$startDate' AND '$currentDate'
-            //         GROUP BY 
-            //             b.barang_gudang_id, 
-            //             b.slug, 
-            //             a.nama_barang, 
-            //             a.harga_barang, 
-            //             sp.nama, 
-            //             sp.waktu, 
-            //             supplier_id
-            //         ORDER BY 
-            //             b.barang_gudang_id ASC";
             // QUERY UNTUK MENAMPILKAN DATA YANG MUNCUL DI NOTIF
-            $query = "
-                SELECT 
-                a.barang_id AS barang_id, 
-                b.slug, 
-                a.nama_barang, 
-                a.harga_barang, 
-                a.biaya_penyimpanan, 
-                a.rop, 
-                a.ss, 
-                b.stok_masuk,
-                sp.id AS supplier_id, 
-                sp.nama, 
-                sp.waktu, 
-                IFNULL(SUM(pbd.quantity), 0) AS qty_total
-            FROM 
-                barangs AS a
-            JOIN 
-                barang_gudangs AS b ON a.barang_id = b.barang_id
-            JOIN 
-                suppliers AS sp ON a.barang_id = sp.id_barang
-            LEFT JOIN 
-                penjualan_barang_details AS pbd ON a.barang_id = pbd.id_barang 
-                AND pbd.tgl_pembelian BETWEEN '$startDate' AND '$currentDate'
-            GROUP BY 
-                b.barang_gudang_id, 
-                b.slug, 
-                a.nama_barang, 
-                a.harga_barang, 
-                sp.nama, 
-                sp.waktu, 
-                supplier_id
-            HAVING 
-                b.stok_masuk <= a.rop 
-            ORDER BY 
-                b.barang_gudang_id ASC";
+            $data_barang = DB::table('barang_gudangs as bg')
+                ->join('barangs as b', 'b.barang_id', '=', 'bg.barang_id')
+                ->whereRaw('bg.stok_masuk <= b.rop')->get();
+            $jumlah_barang = count($data_barang);
+
+            if ($jumlah_barang > 0) {
+                $query = "SELECT 
+                            a.barang_id AS barang_id, 
+                            b.slug, 
+                            a.nama_barang, 
+                            a.harga_barang, 
+                            a.biaya_penyimpanan, 
+                            a.rop, 
+                            a.ss, 
+                            b.stok_masuk,
+                            sp.id AS supplier_id, 
+                            sp.nama, 
+                            sp.waktu, 
+                            IFNULL(SUM(pbd.quantity), 0) AS qty_total
+                        FROM 
+                            barangs AS a
+                        JOIN 
+                            barang_gudangs AS b ON a.barang_id = b.barang_id
+                        JOIN 
+                            suppliers AS sp ON a.barang_id = sp.id_barang
+                        LEFT JOIN 
+                            penjualan_barang_details AS pbd ON a.barang_id = pbd.id_barang 
+                            AND pbd.tgl_pembelian BETWEEN '$startDate' AND '$currentDate'
+                        GROUP BY 
+                            b.barang_gudang_id, 
+                            b.slug, 
+                            a.nama_barang, 
+                            a.harga_barang, 
+                            sp.nama, 
+                            sp.waktu, 
+                            supplier_id
+                        HAVING 
+                            b.stok_masuk <= a.rop 
+                        ORDER BY 
+                            b.barang_gudang_id ASC";
+            } else {
+                $query = "SELECT 
+                            a.barang_id AS barang_id, 
+                            b.slug, 
+                            a.nama_barang, 
+                            a.harga_barang, 
+                            a.biaya_penyimpanan, 
+                            a.rop, 
+                            a.ss, 
+                            sp.id AS supplier_id, 
+                            sp.nama, 
+                            sp.waktu, 
+                            -- b.stok_masuk AS qty_total,
+                            IFNULL(SUM(pbd.quantity), 0) AS qty_total
+                        FROM 
+                            barangs AS a
+                        JOIN 
+                            barang_gudangs AS b ON a.barang_id = b.barang_id
+                        JOIN 
+                            suppliers AS sp ON a.barang_id = sp.id_barang
+                        LEFT JOIN 
+                            penjualan_barang_details AS pbd ON a.barang_id = pbd.id_barang 
+                            AND pbd.tgl_pembelian BETWEEN '$startDate' AND '$currentDate'
+                        GROUP BY 
+                            b.barang_gudang_id, 
+                            b.slug, 
+                            a.nama_barang, 
+                            a.harga_barang, 
+                            sp.nama, 
+                            sp.waktu, 
+                            supplier_id
+                        ORDER BY 
+                            b.barang_gudang_id ASC";
+            }
+
             $barangs = DB::select($query);
 
             return DataTables::of($barangs)
@@ -301,5 +308,41 @@ class PemesananController extends Controller
         }
 
         return redirect()->route('pemesanan')->with("msg", "Berhasil merubah status pemesanan");
+    }
+
+    public function oldq()
+    {
+        // $query = "SELECT 
+        //             a.barang_id AS barang_id, 
+        //             b.slug, 
+        //             a.nama_barang, 
+        //             a.harga_barang, 
+        //             a.biaya_penyimpanan, 
+        //             a.rop, 
+        //             a.ss, 
+        //             sp.id AS supplier_id, 
+        //             sp.nama, 
+        //             sp.waktu, 
+        //             -- b.stok_masuk AS qty_total,
+        //             IFNULL(SUM(pbd.quantity), 0) AS qty_total
+        //         FROM 
+        //             barangs AS a
+        //         JOIN 
+        //             barang_gudangs AS b ON a.barang_id = b.barang_id
+        //         JOIN 
+        //             suppliers AS sp ON a.barang_id = sp.id_barang
+        //         LEFT JOIN 
+        //             penjualan_barang_details AS pbd ON a.barang_id = pbd.id_barang 
+        //             AND pbd.tgl_pembelian BETWEEN '$startDate' AND '$currentDate'
+        //         GROUP BY 
+        //             b.barang_gudang_id, 
+        //             b.slug, 
+        //             a.nama_barang, 
+        //             a.harga_barang, 
+        //             sp.nama, 
+        //             sp.waktu, 
+        //             supplier_id
+        //         ORDER BY 
+        //             b.barang_gudang_id ASC";
     }
 }
