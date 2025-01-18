@@ -16,6 +16,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class PengirimanCounterController extends Controller
 {
+    // GA DIPAKE
     public function userAuth()
     {
         $user = Auth::guard('user')->user();

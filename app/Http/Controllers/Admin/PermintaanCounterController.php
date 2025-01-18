@@ -19,7 +19,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class PermintaanCounterController extends Controller
 {
-
+    // GA DIPAKE
     public function userAuth()
     {
         $user = Auth::guard('user')->user();
