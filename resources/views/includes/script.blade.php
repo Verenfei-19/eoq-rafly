@@ -19,7 +19,7 @@
                     // NOTIFIKASI
                     response.barangs.forEach(element => {
                         html +=
-                            " <a href='{{ route('pemesanan.create') }}' class='text-reset notification-item'>" +
+                            " <a href='{{ route('pemesanan.createfromnotif') }}' class='text-reset notification-item'>" +
                             "<div class='d-flex'>" +
                             " <div class='avatar-xs me-3'>" +
                             " <span class='avatar-title bg-primary rounded-circle font-size-16'>" +
