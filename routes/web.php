@@ -77,8 +77,8 @@ Route::middleware('user')->group(function () {
 
     Route::controller(PemesananController::class)->group(function () {
         Route::get('/pemesanan', 'index')->name('pemesanan');
-        Route::get('/pemesanan/persediaan-baru', 'createNewPersediaan')->name('pemesanan.create.new-persediaan');
         Route::get('/pemesanan/create', 'create')->name('pemesanan.create');
+        Route::get('/pemesanan/create-persediaan', 'create_from_notif')->name('pemesanan.createfromnotif');
 
         Route::post('/pemesanan/store', 'store')->name('pemesanan.store');
         Route::post('/pemesanan/hitung', 'hitungEOQ')->name('pemesanan.hitung');
