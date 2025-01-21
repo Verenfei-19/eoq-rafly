@@ -46,12 +46,12 @@
                         <span key="t-barang">Barang</span>
                     </a>
                 </li>
-                @if ($user->role == 'counter' || $user->role == 'gudang')
+                {{-- @if ($user->role == 'counter' || $user->role == 'gudang') --}}
                     <li class="menu-title" key="t-pages">Utility</li>
-                @endif
+                {{-- @endif --}}
 
 
-                @if ($user->role == 'counter')
+                @if ($user->role == 'counter' || $user->role == 'owner')
                     <li>
                         <a href="{{ route('kasir') }}" class="waves-effect">
                             <i class="bx bxs-calculator"></i>
@@ -67,8 +67,8 @@
                             <span key="t-pemesanan">Pembelian Barang ke Supplier</span>
                         </a>
                     </li>
-                @endif
-                @if ($user->role == 'gudang')
+                {{-- @endif --}}
+                {{-- @if ($user->role == 'gudang') --}}
                     <li>
                         <a href="{{ route('persediaan-masuk') }}" class="waves-effect">
                             <i class="bx bxs-widget"></i>
