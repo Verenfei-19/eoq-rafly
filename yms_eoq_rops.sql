@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 22, 2025 at 04:01 AM
+-- Generation Time: Jan 22, 2025 at 08:57 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.22
 
@@ -44,57 +44,15 @@ CREATE TABLE `barangs` (
 --
 
 INSERT INTO `barangs` (`barang_id`, `slug`, `nama_barang`, `harga_barang`, `biaya_penyimpanan`, `rop`, `ss`, `created_at`, `updated_at`) VALUES
-('B00001', 'fAWj30rRNi5TKoLG', 'Oxford putih', 3750, 20000, 20, 17, '2024-12-01 05:11:40', '2025-01-07 22:38:56'),
-('B00002', '9lkjpWMs0dta2rpX', 'Oxford coklat', 4000, 20000, 0, 0, '2024-12-01 05:11:40', '2024-12-09 21:25:37'),
-('B00003', 'UT9eohlwBMoW5baD', 'Allino kopi susu', 3000, 20000, 0, 0, '2024-12-01 05:11:41', '2024-12-09 21:25:37'),
-('B00004', 'quQJatNHj6LatYDD', 'Cemani merah', 2700, 20000, 0, 0, '2024-12-01 05:11:41', '2024-12-09 21:25:37'),
-('B00005', 'stqCDAAw4Z1YvQA4', 'Cemani coklat', 2500, 20000, 0, 0, '2024-12-01 05:11:41', '2024-12-09 21:25:37'),
-('B00006', 'VyxAZCC57eOwSFgy', 'Cemani dongker', 1000, 20000, 0, 0, '2024-12-01 05:11:41', '2024-12-09 21:25:37'),
-('B00007', '0Baf0iTrSDAVUfxv', 'Cemani abu', 6000, 20000, 0, 0, '2024-12-01 05:11:41', '2024-12-09 21:25:37'),
-('B00008', 'daoTxY5AOELrENki', 'Cemani putih', 5500, 20000, 0, 0, '2024-12-01 05:11:42', '2024-12-09 21:25:37'),
-('B00009', 'FWzcm4X9c8VP0SSi', 'Cemani hijau', 5500, 20000, 0, 0, '2024-12-01 05:11:42', '2024-12-09 21:25:37');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `barang_counters`
---
-
-CREATE TABLE `barang_counters` (
-  `barang_counter_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `counter_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `barang_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `stok_awal` int NOT NULL DEFAULT '0',
-  `stok_masuk` int NOT NULL DEFAULT '0',
-  `stok_keluar` int NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `barang_counters`
---
-
-INSERT INTO `barang_counters` (`barang_counter_id`, `slug`, `counter_id`, `barang_id`, `stok_awal`, `stok_masuk`, `stok_keluar`, `created_at`, `updated_at`) VALUES
-('C00001B00001', 'nJyCnrfhJUxqMG9S', 'C00001', 'B00001', 0, 0, 0, '2024-12-04 04:46:53', '2024-12-04 04:46:53'),
-('C00001B00002', 'Kz2iJ0iTOmhSaKnN', 'C00001', 'B00002', 0, 0, 0, '2024-12-04 04:46:53', '2024-12-04 04:46:53'),
-('C00001B00003', 'YZ3X3diRMQ6aXzpJ', 'C00001', 'B00003', 0, 0, 0, '2024-12-04 04:46:53', '2024-12-04 04:46:53'),
-('C00001B00004', '1g40W05soF1bBeca', 'C00001', 'B00004', 0, 0, 0, '2024-12-04 04:46:53', '2024-12-04 04:46:53'),
-('C00001B00005', 'fDby3itUlTESYamH', 'C00001', 'B00005', 0, 0, 0, '2024-12-04 04:46:53', '2024-12-04 04:46:53'),
-('C00001B00006', '2fKKzqSKu9meyz74', 'C00001', 'B00006', 0, 0, 0, '2024-12-04 04:46:54', '2024-12-04 04:46:54'),
-('C00001B00007', 'X8fWCv2DnROtgZ1f', 'C00001', 'B00007', 0, 0, 0, '2024-12-04 04:46:54', '2024-12-04 04:46:54'),
-('C00001B00008', 'm3cHyosaEdMRCigk', 'C00001', 'B00008', 0, 0, 0, '2024-12-04 04:46:54', '2024-12-04 04:46:54'),
-('C00001B00009', 'IEvt1VJ7I4xYhV9n', 'C00001', 'B00009', 0, 0, 0, '2024-12-04 04:46:54', '2024-12-04 04:46:54'),
-('C00002B00001', 'beX2xDKk1oBwWs65', 'C00002', 'B00001', 0, 0, 0, '2024-12-04 04:47:23', '2024-12-04 04:47:23'),
-('C00002B00002', 'I0HpcFIyWqObCSmS', 'C00002', 'B00002', 0, 0, 0, '2024-12-04 04:47:23', '2024-12-04 04:47:23'),
-('C00002B00003', 'AQ97AYS1wSFRdoCQ', 'C00002', 'B00003', 0, 0, 0, '2024-12-04 04:47:23', '2024-12-04 04:47:23'),
-('C00002B00004', 'rju4dnNbi02j12Sg', 'C00002', 'B00004', 0, 0, 0, '2024-12-04 04:47:23', '2024-12-04 04:47:23'),
-('C00002B00005', 'UyTqwzcPfJYqKOyM', 'C00002', 'B00005', 0, 0, 0, '2024-12-04 04:47:23', '2024-12-04 04:47:23'),
-('C00002B00006', 'HBbMNqpWkh1wkuyU', 'C00002', 'B00006', 0, 0, 0, '2024-12-04 04:47:23', '2024-12-04 04:47:23'),
-('C00002B00007', 'FwPewrqUTVJs7iBd', 'C00002', 'B00007', 0, 0, 0, '2024-12-04 04:47:23', '2024-12-04 04:47:23'),
-('C00002B00008', '4giWoGX23vsiUNBB', 'C00002', 'B00008', 0, 0, 0, '2024-12-04 04:47:23', '2024-12-04 04:47:23'),
-('C00002B00009', 'FfAFPIHQVUkAwzUs', 'C00002', 'B00009', 0, 0, 0, '2024-12-04 04:47:23', '2024-12-04 04:47:23');
+('B00001', 'fAWj30rRNi5TKoLG', 'Oxford putih', 2250000, 20000, 20, 17, '2024-12-01 05:11:40', '2025-01-07 22:38:56'),
+('B00002', '9lkjpWMs0dta2rpX', 'Oxford coklat', 2100000, 20000, 0, 0, '2024-12-01 05:11:40', '2024-12-09 21:25:37'),
+('B00003', 'UT9eohlwBMoW5baD', 'Allino kopi susu', 2200000, 20000, 0, 0, '2024-12-01 05:11:41', '2024-12-09 21:25:37'),
+('B00004', 'quQJatNHj6LatYDD', 'Cemani merah', 1900000, 20000, 0, 0, '2024-12-01 05:11:41', '2024-12-09 21:25:37'),
+('B00005', 'stqCDAAw4Z1YvQA4', 'Cemani coklat', 1900000, 20000, 0, 0, '2024-12-01 05:11:41', '2024-12-09 21:25:37'),
+('B00006', 'VyxAZCC57eOwSFgy', 'Cemani dongker', 1900000, 20000, 0, 0, '2024-12-01 05:11:41', '2024-12-09 21:25:37'),
+('B00007', '0Baf0iTrSDAVUfxv', 'Cemani abu', 1900000, 20000, 0, 0, '2024-12-01 05:11:41', '2024-12-09 21:25:37'),
+('B00008', 'daoTxY5AOELrENki', 'Cemani putih', 1900000, 20000, 0, 0, '2024-12-01 05:11:42', '2024-12-09 21:25:37'),
+('B00009', 'FWzcm4X9c8VP0SSi', 'Cemani hijau', 1900000, 20000, 0, 0, '2024-12-01 05:11:42', '2024-12-09 21:25:37');
 
 -- --------------------------------------------------------
 
@@ -154,88 +112,6 @@ INSERT INTO `counters` (`counter_id`, `slug`, `user_id`, `created_at`, `updated_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detail_pemesanans`
---
-
-CREATE TABLE `detail_pemesanans` (
-  `id` bigint UNSIGNED NOT NULL,
-  `pemesanan_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `barang_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `eoq` int NOT NULL,
-  `jumlah_pemesanan` int NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `detail_pengiriman_counters`
---
-
-CREATE TABLE `detail_pengiriman_counters` (
-  `id` bigint UNSIGNED NOT NULL,
-  `pengiriman_counter_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `barang_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `persetujuan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jumlah_pengiriman` int DEFAULT NULL,
-  `gudang_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `counter_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `catatan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status_pengiriman` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `detail_penjualans`
---
-
-CREATE TABLE `detail_penjualans` (
-  `id` bigint UNSIGNED NOT NULL,
-  `penjualan_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `barang_counter_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `quantity` int NOT NULL,
-  `subtotal` int NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `detail_permintaan_counters`
---
-
-CREATE TABLE `detail_permintaan_counters` (
-  `id` bigint UNSIGNED NOT NULL,
-  `permintaan_counter_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `barang_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jumlah_permintaan` int NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `detail_persediaan_masuks`
---
-
-CREATE TABLE `detail_persediaan_masuks` (
-  `id` bigint UNSIGNED NOT NULL,
-  `persediaan_masuk_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `barang_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jumlah_persediaan_masuk` int NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `gudangs`
 --
 
@@ -253,18 +129,6 @@ CREATE TABLE `gudangs` (
 
 INSERT INTO `gudangs` (`gudang_id`, `slug`, `user_id`, `created_at`, `updated_at`) VALUES
 ('G00001', 'dItxBGuABrWI9Yf1', 'U00001', '2024-12-01 05:11:43', '2024-12-01 05:11:43');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `history_persediaans`
---
-
-CREATE TABLE `history_persediaans` (
-  `id` bigint UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -309,22 +173,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pemesanans`
---
-
-CREATE TABLE `pemesanans` (
-  `pemesanan_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status_pemesanan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tanggal_pemesanan` datetime NOT NULL,
-  `biaya_pemesanan` int NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `pemesanan_barangs`
 --
 
@@ -350,38 +198,6 @@ CREATE TABLE `pemesanan_barangs` (
 
 INSERT INTO `pemesanan_barangs` (`id`, `invoice`, `id_barang`, `id_supplier`, `tgl_datang`, `status_pemesanan`, `biaya_pemesanan`, `eoq`, `rop`, `ss`, `jumlah_pemesanan`, `created_at`, `updated_at`) VALUES
 (91, 'PMP-20250108050521', 'B00001', '7', '5', 'Disetujui', 100000, 14, 20, 17, 14, '2025-01-07 22:05:21', '2025-01-07 22:34:30');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pengiriman_counters`
---
-
-CREATE TABLE `pengiriman_counters` (
-  `pengiriman_counter_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `permintaan_counter_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tanggal_pengiriman` date NOT NULL,
-  `tanggal_penerimaan` date DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `penjualans`
---
-
-CREATE TABLE `penjualans` (
-  `penjualan_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `counter_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `grand_total` int NOT NULL,
-  `tanggal_penjualan` datetime DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -756,37 +572,6 @@ INSERT INTO `penjualan_barang_details` (`id`, `invoice_number`, `id_barang`, `na
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permintaan_counters`
---
-
-CREATE TABLE `permintaan_counters` (
-  `permintaan_counter_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `counter_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tanggal_permintaan` datetime NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `persediaan_masuks`
---
-
-CREATE TABLE `persediaan_masuks` (
-  `persediaan_masuk_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pemesanan_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tanggal_persediaan_masuk` datetime NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `personal_access_tokens`
 --
 
@@ -825,15 +610,15 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`id`, `nama`, `telepon`, `alamat`, `id_barang`, `waktu`, `created_at`, `updated_at`) VALUES
-(1, 'CITRA TEXTILE', '085501697174', 'MALANG', 'B00004', 5, '2024-11-08 05:03:15', '2024-11-08 05:03:15'),
-(2, 'CITRA TEXTILE', '085501697174', 'MALANG', 'B00005', 4, '2024-11-08 05:04:08', '2024-11-08 05:04:08'),
-(3, 'CITRA TEXTILE', '085501697174', 'MALANG', 'B00006', 4, '2024-11-08 05:04:32', '2024-11-08 05:04:32'),
-(4, 'CITRA TEXTILE', '085501697174', 'MALANG', 'B00007', 6, '2024-11-08 05:04:53', '2024-11-08 05:04:53'),
-(5, 'CITRA TEXTILE', '085501697174', 'MALANG', 'B00008', 2, '2024-11-08 05:05:17', '2024-11-08 05:05:17'),
-(6, 'CITRA TEXTILE', '085501697174', 'MALANG', 'B00009', 3, '2024-11-08 05:05:36', '2024-11-08 05:05:36'),
-(7, 'PT SRITEX', '089283655249', 'SOLO', 'B00001', 5, '2024-11-08 05:06:06', '2024-11-08 05:06:06'),
-(8, 'PT SRITEX', '089283655249', 'SOLO', 'B00002', 4, '2024-11-08 05:06:40', '2024-11-08 05:06:40'),
-(9, 'PT SRITEX', '089283655249', 'SOLO', 'B00003', 5, '2024-11-08 05:06:58', '2024-11-08 05:06:58');
+(1, 'CITRA TEXTILE', '085159511833', 'Jl. Syarif Al-Qodri No.12A, Kasin, Kec. Klojen, Kota Malang, Jawa Timur 65117', 'B00004', 5, '2024-11-08 05:03:15', '2024-11-08 05:03:15'),
+(2, 'CITRA TEXTILE', '085159511833', 'Jl. Syarif Al-Qodri No.12A, Kasin, Kec. Klojen, Kota Malang, Jawa Timur 65117', 'B00005', 4, '2024-11-08 05:04:08', '2024-11-08 05:04:08'),
+(3, 'CITRA TEXTILE', '085159511833', 'Jl. Syarif Al-Qodri No.12A, Kasin, Kec. Klojen, Kota Malang, Jawa Timur 65117', 'B00006', 4, '2024-11-08 05:04:32', '2024-11-08 05:04:32'),
+(4, 'CITRA TEXTILE', '085159511833', 'Jl. Syarif Al-Qodri No.12A, Kasin, Kec. Klojen, Kota Malang, Jawa Timur 65117', 'B00007', 6, '2024-11-08 05:04:53', '2024-11-08 05:04:53'),
+(5, 'CITRA TEXTILE', '085159511833', 'Jl. Syarif Al-Qodri No.12A, Kasin, Kec. Klojen, Kota Malang, Jawa Timur 65117', 'B00008', 2, '2024-11-08 05:05:17', '2024-11-08 05:05:17'),
+(6, 'CITRA TEXTILE', '085159511833', 'Jl. Syarif Al-Qodri No.12A, Kasin, Kec. Klojen, Kota Malang, Jawa Timur 65117', 'B00009', 3, '2024-11-08 05:05:36', '2024-11-08 05:05:36'),
+(7, 'PT SRITEX', '085808872454', 'Sawah, Banmati, Kec. Sukoharjo, Kabupaten Sukoharjo, Jawa Tengah 57551', 'B00001', 5, '2024-11-08 05:06:06', '2024-11-08 05:06:06'),
+(8, 'PT SRITEX', '085808872454', 'Sawah, Banmati, Kec. Sukoharjo, Kabupaten Sukoharjo, Jawa Tengah 57551', 'B00002', 4, '2024-11-08 05:06:40', '2024-11-08 05:06:40'),
+(9, 'PT SRITEX', '085808872454', 'Sawah, Banmati, Kec. Sukoharjo, Kabupaten Sukoharjo, Jawa Tengah 57551', 'B00003', 5, '2024-11-08 05:06:58', '2024-11-08 05:06:58');
 
 -- --------------------------------------------------------
 
@@ -881,15 +666,6 @@ ALTER TABLE `barangs`
   ADD KEY `barangs_barang_id_index` (`barang_id`);
 
 --
--- Indexes for table `barang_counters`
---
-ALTER TABLE `barang_counters`
-  ADD PRIMARY KEY (`barang_counter_id`),
-  ADD KEY `barang_counters_barang_id_foreign` (`barang_id`),
-  ADD KEY `barang_counters_counter_id_foreign` (`counter_id`),
-  ADD KEY `barang_counters_barang_counter_id_barang_id_counter_id_index` (`barang_counter_id`,`barang_id`,`counter_id`);
-
---
 -- Indexes for table `barang_gudangs`
 --
 ALTER TABLE `barang_gudangs`
@@ -906,59 +682,11 @@ ALTER TABLE `counters`
   ADD KEY `counters_user_id_foreign` (`user_id`);
 
 --
--- Indexes for table `detail_pemesanans`
---
-ALTER TABLE `detail_pemesanans`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `detail_pemesanans_pemesanan_id_foreign` (`pemesanan_id`),
-  ADD KEY `detail_pemesanans_barang_id_foreign` (`barang_id`);
-
---
--- Indexes for table `detail_pengiriman_counters`
---
-ALTER TABLE `detail_pengiriman_counters`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `detail_pengiriman_counters_pengiriman_counter_id_foreign` (`pengiriman_counter_id`),
-  ADD KEY `detail_pengiriman_counters_barang_id_foreign` (`barang_id`),
-  ADD KEY `detail_pengiriman_counters_gudang_id_foreign` (`gudang_id`),
-  ADD KEY `detail_pengiriman_counters_counter_id_foreign` (`counter_id`);
-
---
--- Indexes for table `detail_penjualans`
---
-ALTER TABLE `detail_penjualans`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `detail_penjualans_penjualan_id_index` (`penjualan_id`),
-  ADD KEY `detail_penjualans_barang_counter_id_index` (`barang_counter_id`);
-
---
--- Indexes for table `detail_permintaan_counters`
---
-ALTER TABLE `detail_permintaan_counters`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `detail_permintaan_counters_permintaan_counter_id_foreign` (`permintaan_counter_id`),
-  ADD KEY `detail_permintaan_counters_barang_id_foreign` (`barang_id`);
-
---
--- Indexes for table `detail_persediaan_masuks`
---
-ALTER TABLE `detail_persediaan_masuks`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `detail_persediaan_masuks_persediaan_masuk_id_foreign` (`persediaan_masuk_id`),
-  ADD KEY `detail_persediaan_masuks_barang_id_foreign` (`barang_id`);
-
---
 -- Indexes for table `gudangs`
 --
 ALTER TABLE `gudangs`
   ADD PRIMARY KEY (`gudang_id`),
   ADD KEY `gudangs_user_id_foreign` (`user_id`);
-
---
--- Indexes for table `history_persediaans`
---
-ALTER TABLE `history_persediaans`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -967,32 +695,10 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `pemesanans`
---
-ALTER TABLE `pemesanans`
-  ADD PRIMARY KEY (`pemesanan_id`);
-
---
 -- Indexes for table `pemesanan_barangs`
 --
 ALTER TABLE `pemesanan_barangs`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `pengiriman_counters`
---
-ALTER TABLE `pengiriman_counters`
-  ADD PRIMARY KEY (`pengiriman_counter_id`),
-  ADD KEY `pengiriman_counters_permintaan_counter_id_foreign` (`permintaan_counter_id`);
-
---
--- Indexes for table `penjualans`
---
-ALTER TABLE `penjualans`
-  ADD PRIMARY KEY (`penjualan_id`),
-  ADD KEY `penjualans_penjualan_id_index` (`penjualan_id`),
-  ADD KEY `penjualans_counter_id_index` (`counter_id`),
-  ADD KEY `penjualans_tanggal_penjualan_index` (`tanggal_penjualan`);
 
 --
 -- Indexes for table `penjualan_barangs`
@@ -1005,20 +711,6 @@ ALTER TABLE `penjualan_barangs`
 --
 ALTER TABLE `penjualan_barang_details`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `permintaan_counters`
---
-ALTER TABLE `permintaan_counters`
-  ADD PRIMARY KEY (`permintaan_counter_id`),
-  ADD KEY `permintaan_counters_counter_id_foreign` (`counter_id`);
-
---
--- Indexes for table `persediaan_masuks`
---
-ALTER TABLE `persediaan_masuks`
-  ADD PRIMARY KEY (`persediaan_masuk_id`),
-  ADD KEY `persediaan_masuks_pemesanan_id_foreign` (`pemesanan_id`);
 
 --
 -- Indexes for table `personal_access_tokens`
@@ -1047,42 +739,6 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `detail_pemesanans`
---
-ALTER TABLE `detail_pemesanans`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `detail_pengiriman_counters`
---
-ALTER TABLE `detail_pengiriman_counters`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `detail_penjualans`
---
-ALTER TABLE `detail_penjualans`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `detail_permintaan_counters`
---
-ALTER TABLE `detail_permintaan_counters`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `detail_persediaan_masuks`
---
-ALTER TABLE `detail_persediaan_masuks`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `history_persediaans`
---
-ALTER TABLE `history_persediaans`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -1092,7 +748,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pemesanan_barangs`
 --
 ALTER TABLE `pemesanan_barangs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `penjualan_barangs`
@@ -1123,13 +779,6 @@ ALTER TABLE `suppliers`
 --
 
 --
--- Constraints for table `barang_counters`
---
-ALTER TABLE `barang_counters`
-  ADD CONSTRAINT `barang_counters_barang_id_foreign` FOREIGN KEY (`barang_id`) REFERENCES `barangs` (`barang_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `barang_counters_counter_id_foreign` FOREIGN KEY (`counter_id`) REFERENCES `counters` (`counter_id`) ON DELETE CASCADE;
-
---
 -- Constraints for table `barang_gudangs`
 --
 ALTER TABLE `barang_gudangs`
@@ -1143,71 +792,10 @@ ALTER TABLE `counters`
   ADD CONSTRAINT `counters_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `detail_pemesanans`
---
-ALTER TABLE `detail_pemesanans`
-  ADD CONSTRAINT `detail_pemesanans_barang_id_foreign` FOREIGN KEY (`barang_id`) REFERENCES `barangs` (`barang_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `detail_pemesanans_pemesanan_id_foreign` FOREIGN KEY (`pemesanan_id`) REFERENCES `pemesanans` (`pemesanan_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `detail_pengiriman_counters`
---
-ALTER TABLE `detail_pengiriman_counters`
-  ADD CONSTRAINT `detail_pengiriman_counters_barang_id_foreign` FOREIGN KEY (`barang_id`) REFERENCES `barangs` (`barang_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `detail_pengiriman_counters_counter_id_foreign` FOREIGN KEY (`counter_id`) REFERENCES `counters` (`counter_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `detail_pengiriman_counters_gudang_id_foreign` FOREIGN KEY (`gudang_id`) REFERENCES `gudangs` (`gudang_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `detail_pengiriman_counters_pengiriman_counter_id_foreign` FOREIGN KEY (`pengiriman_counter_id`) REFERENCES `pengiriman_counters` (`pengiriman_counter_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `detail_penjualans`
---
-ALTER TABLE `detail_penjualans`
-  ADD CONSTRAINT `detail_penjualans_barang_counter_id_foreign` FOREIGN KEY (`barang_counter_id`) REFERENCES `barang_counters` (`barang_counter_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `detail_penjualans_penjualan_id_foreign` FOREIGN KEY (`penjualan_id`) REFERENCES `penjualans` (`penjualan_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `detail_permintaan_counters`
---
-ALTER TABLE `detail_permintaan_counters`
-  ADD CONSTRAINT `detail_permintaan_counters_barang_id_foreign` FOREIGN KEY (`barang_id`) REFERENCES `barangs` (`barang_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `detail_permintaan_counters_permintaan_counter_id_foreign` FOREIGN KEY (`permintaan_counter_id`) REFERENCES `permintaan_counters` (`permintaan_counter_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `detail_persediaan_masuks`
---
-ALTER TABLE `detail_persediaan_masuks`
-  ADD CONSTRAINT `detail_persediaan_masuks_barang_id_foreign` FOREIGN KEY (`barang_id`) REFERENCES `barangs` (`barang_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `detail_persediaan_masuks_persediaan_masuk_id_foreign` FOREIGN KEY (`persediaan_masuk_id`) REFERENCES `persediaan_masuks` (`persediaan_masuk_id`) ON DELETE CASCADE;
-
---
 -- Constraints for table `gudangs`
 --
 ALTER TABLE `gudangs`
   ADD CONSTRAINT `gudangs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `pengiriman_counters`
---
-ALTER TABLE `pengiriman_counters`
-  ADD CONSTRAINT `pengiriman_counters_permintaan_counter_id_foreign` FOREIGN KEY (`permintaan_counter_id`) REFERENCES `permintaan_counters` (`permintaan_counter_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `penjualans`
---
-ALTER TABLE `penjualans`
-  ADD CONSTRAINT `penjualans_counter_id_foreign` FOREIGN KEY (`counter_id`) REFERENCES `counters` (`counter_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `permintaan_counters`
---
-ALTER TABLE `permintaan_counters`
-  ADD CONSTRAINT `permintaan_counters_counter_id_foreign` FOREIGN KEY (`counter_id`) REFERENCES `counters` (`counter_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `persediaan_masuks`
---
-ALTER TABLE `persediaan_masuks`
-  ADD CONSTRAINT `persediaan_masuks_pemesanan_id_foreign` FOREIGN KEY (`pemesanan_id`) REFERENCES `pemesanans` (`pemesanan_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
