@@ -176,7 +176,7 @@
                         </div>
                         <div class="">
                             <label for="end_date">Tanggal Akhir</label>
-                            <input type="date" class="form-control" name="end_date" id="end_date">
+                            <input type="date" class="form-control" name="end_date" value="{{ date('Y-m-d') }}" id="end_date">
                         </div>
                         <div>
                             <button class="btn btn-primary waves-effect waves-light" id="filter_table">
