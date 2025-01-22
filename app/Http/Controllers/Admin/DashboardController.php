@@ -24,25 +24,6 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $user = $this->userAuth();
-        // if ($request->ajax()) {
-        //     $barangs = DB::table('barangs as b')
-        //         ->join('barang_gudangs as bg', 'b.barang_id', '=', 'bg.barang_id')
-        //         ->join('barang_counters as bc', 'b.barang_id', '=', 'bc.barang_id')
-        //         ->join('detail_penjualans as dp', 'bc.barang_counter_id', '=', 'dp.barang_counter_id')
-        //         ->selectRaw('b.barang_id, b.slug, b.nama_barang, b.harga_barang, b.biaya_penyimpanan, b.rop,((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = b.barang_id GROUP BY barang_id)) as qty_total, round(avg(dp.quantity)) as avg')
-        //         ->groupByRaw("b.barang_id, b.slug, b.nama_barang, b.harga_barang, b.biaya_penyimpanan, b.rop, ((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = b.barang_id GROUP BY barang_id))")
-        //         ->orderByRaw("((SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) + (SELECT SUM(stok_masuk)-SUM(stok_keluar) FROM barang_counters WHERE barang_id = b.barang_id GROUP BY barang_id)) <= b.rop desc, b.barang_id asc")
-        //         ->get();
-
-        //     return DataTables::of($barangs)
-        //         ->addColumn('action', function ($object) {
-        //             $html = ' <a href="' . route("pemesanan.create") . '" class="btn btn-success waves-effect waves-light">'
-        //                 . ' <i class="bx bx-edit align-middle me-2 font-size-18"></i>Edit</a>';
-        //             return $html;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
-        // }
 
         $jumlah_jenis = DB::table('barangs')->count();
 
@@ -61,7 +42,18 @@ class DashboardController extends Controller
         $bulan_tahun = strftime('%B %Y');
 
 
-        return view('pages.dashboard.index', compact('user', 'jumlah_jenis', 'total_transaksi', 'penjualan', 'jumlah_counter', 'bulan_tahun', 'total_item_terjual', 'total_supplier'));
+        // DATA CHART
+        $query = "SELECT SUM(quantity * harga_barang) AS total_harga, DATE_FORMAT(tgl_pembelian, '%M') AS bulan FROM penjualan_barang_details GROUP BY DATE_FORMAT(tgl_pembelian,'%M');";
+        $dataTransaksi = DB::select($query);
+        $dataJSON = ['bulan' => [], 'total_penjualan' => []];
+        foreach ($dataTransaksi as $key => $value) {
+            array_push($dataJSON['bulan'], [$value->bulan]);
+            array_push($dataJSON['total_penjualan'], [$value->total_harga]);
+        }
+        $dataPenjualan = array_column($dataJSON['total_penjualan'], 0);
+        $dataBulan = array_column($dataJSON['bulan'], 0);
+
+        return view('pages.dashboard.index', compact('dataBulan', 'dataPenjualan', 'user', 'jumlah_jenis', 'total_transaksi', 'penjualan', 'jumlah_counter', 'bulan_tahun', 'total_item_terjual', 'total_supplier'));
     }
 
     public function stokPersediaan(Request $request)
