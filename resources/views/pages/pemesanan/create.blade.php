@@ -267,20 +267,6 @@
             }
         });
 
-        // $(document).ready(function(){
-        //     setTimeout(() => {
-        //         checkROP()
-        //         if (dataNotification.length > 0) {
-        //             let textHtml = ''
-        //             dataNotification.forEach(element => {
-        //                 textHtml += "<span class='fw-semibold'>"+element+"</span>, "
-        //                 $('#testing').html(textHtml)
-        //                 console.log(element);
-        //             })
-        //             $('#testing').prepend('<span>Barang yang dipesan : </span>')
-        //         }
-        //     }, 5000);
-        // })
     </script>
 @endpush
 
