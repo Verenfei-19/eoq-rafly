@@ -6,7 +6,8 @@
 
 @push('after-app-script')
     <!-- apexcharts -->
-    <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- dashboard blog init -->
     <script src="{{ asset('assets/js/pages/dashboard-blog.init.js') }}"></script>
@@ -19,42 +20,6 @@
     <!-- Datatable init js -->
     <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
     <script>
-        // $('#datatable').DataTable({
-        //     lengthMenu: [5, 10, 20, 50, 100],
-        //     ordering: false,
-        //     ajax: "{{ route('dashboard') }}",
-        //     columns: [{
-        //             data: "barang_id"
-        //         },
-        //         {
-        //             data: "nama_barang"
-        //         },
-        //         {
-        //             data: "qty_total"
-        //         },
-        //         {
-        //             data: "rop"
-        //         },
-        //         {
-        //             data: "avg"
-        //         },
-        //         {
-        //             data: "avg",
-        //             render: function(data, type, row) {
-        //                 if (parseInt(row.qty_total) <= parseInt(row.rop)) {
-        //                     return '<div class="alert alert-danger d-flex align-items-center" role="alert">' +
-        //                         '</div>';
-        //                 } else if (parseInt(row.qty_total) <= parseInt(data)) {
-        //                     return '<div class="alert alert-warning d-flex align-items-center" role="alert">' +
-        //                         '</div>';
-        //                 } else {
-        //                     return '<div class="alert alert-success d-flex align-items-center" role="alert">' +
-        //                         '</div>';
-        //                 }
-        //             }
-        //         }
-        //     ],
-        // });
         $('#stokPersediaan').DataTable({
             ordering: false,
             ajax: "{{ route('stoktersisa') }}",
@@ -71,6 +36,28 @@
             ],
         });
     </script>
+    <script>
+        const ctx = document.getElementById('myChart');
+        
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: {{ Js::from($dataBulan) }},
+            datasets: [{
+              label: 'Total Transaksi Penjualan',
+              data: {{ Js::from($dataPenjualan) }},
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      </script>
 @endpush
 
 @section('content')
@@ -93,6 +80,18 @@
     <!-- end page title -->
 
     <div class="row">
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Total Transaksi Penjualan</h4>
+                    {{-- <span>{{ $dataJSON }}</span> --}}
+                    <div>
+                        <canvas id="myChart" width="400" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="col-xl">
             <div class="row">
