@@ -73,8 +73,10 @@ class PemesananController extends Controller
     public function create(Request $request)
     {
         $user = $this->userAuth();
-        $startDate = Carbon::now()->subDays(30)->translatedFormat('Y-m-d'); // menghitung tgl sekarang mundur 30 hari, sesuai value 30
-        $currentDate = Carbon::now()->today()->translatedFormat('Y-m-d');
+        //$startDate = Carbon::now()->subDays(30)->translatedFormat('Y-m-d'); // menghitung tgl sekarang mundur 30 hari, sesuai value 30
+        //$currentDate = Carbon::now()->today()->translatedFormat('Y-m-d');
+		$startDate = '2024-12-01';
+		$currentDate = '2024-12-31';
         if ($request->ajax()) {
             $query = "SELECT 
                         a.barang_id AS barang_id, 
@@ -130,8 +132,10 @@ class PemesananController extends Controller
     public function create_from_notif(Request $request)
     {
         $user = $this->userAuth();
-        $startDate = Carbon::now()->subDays(30)->translatedFormat('Y-m-d'); // menghitung tgl sekarang mundur 30 hari, sesuai value 30
-        $currentDate = Carbon::now()->today()->translatedFormat('Y-m-d');
+        //$startDate = Carbon::now()->subDays(30)->translatedFormat('Y-m-d'); // menghitung tgl sekarang mundur 30 hari, sesuai value 30
+        //$currentDate = Carbon::now()->today()->translatedFormat('Y-m-d');
+		$startDate = '2024-12-01';
+		$currentDate = '2024-12-31';
         if ($request->ajax()) {
             // QUERY UNTUK MENAMPILKAN DATA YANG MUNCUL DI NOTIF
             $query = "SELECT 
@@ -193,11 +197,12 @@ class PemesananController extends Controller
         $no = 1;
         $biayaPemesanan = $request->biaya;
 
-        $startDate = Carbon::now()->subDays(30)->translatedFormat('Y-m-d'); // menghitung tgl sekarang mundur 30 hari, sesuai value 30
-        $currentDate = Carbon::now()->today()->translatedFormat('Y-m-d');
+        //$startDate = Carbon::now()->subDays(30)->translatedFormat('Y-m-d'); // menghitung tgl sekarang mundur 30 hari, sesuai value 30
+        //$currentDate = Carbon::now()->today()->translatedFormat('Y-m-d');
         // $startOfMonth = Carbon::now()->startOfMonth()->translatedFormat('Y-m-d');
         // $endOfMonth = Carbon::now()->today()->translatedFormat('Y-m-d');
-
+		$startDate = '2024-12-01';
+		$currentDate = '2024-12-31';
         $data_eoq = [];
         foreach ($pemesanans as $key) {
             $barangAll = Barang::where('barang_id', $key->id_barang)->get(['nama_barang', 'biaya_penyimpanan'])->first();
@@ -241,13 +246,13 @@ class PemesananController extends Controller
             // SELECT MAX(quantity) FROM `penjualan_barang_details` WHERE id_barang = 'B00001' AND tgl_pembelian BETWEEN '2024-10-01' AND '2024-10-31';
 
             foreach ($details as $detail) {
-                $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)
-                    ->whereBetween('tgl_pembelian', [$startDate, $currentDate])->sum('quantity');
-                $totalMaxBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)
-                    ->whereBetween('tgl_pembelian', [$startDate, $currentDate])->max('quantity');
+                //$totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)
+                    //->whereBetween('tgl_pembelian', [$startDate, $currentDate])->sum('quantity');
+                //$totalMaxBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)
+                    //->whereBetween('tgl_pembelian', [$startDate, $currentDate])->max('quantity');
 
-                // $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)->whereBetween('tgl_pembelian', ['2024-10-01', '2024-10-31'])->sum('quantity');
-                // $totalMaxBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)->whereBetween('tgl_pembelian', ['2024-10-01', '2024-10-31'])->max('quantity');
+                 $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)->whereBetween('tgl_pembelian', ['2024-12-01', '2024-12-31'])->sum('quantity');
+                 $totalMaxBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)->whereBetween('tgl_pembelian', ['2024-12-01', '2024-12-31'])->max('quantity');
 
                 $d = $totalBarangTerjualSebulan / 30;
 
