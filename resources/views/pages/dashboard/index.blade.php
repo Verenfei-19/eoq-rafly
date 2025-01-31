@@ -194,6 +194,23 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-12">
+                    <div class="card blog-stats-wid">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <div class="me-3">
+                                    <p class="text-muted mb-2">Daftar Pemesanan Barang oleh Gudang</p>
+                                    @forelse ($pemesananbarang as $item)
+                                    <h4>{{ $loop->iteration }} <a href="{{ route('pemesanan.detail', $item->invoice) }}">{{ $item->invoice }}</a></h4>
+                                    @empty
+                                        <h4>Tidak ada pemesanan</h4>
+                                    @endforelse
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 @endif
 
             </div>
