@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\PemesananBarang;
 use App\Models\PenjualanBarang;
 use App\Models\PenjualanBarangDetail;
 use App\Models\Supplier;
@@ -53,7 +54,11 @@ class DashboardController extends Controller
         $dataPenjualan = array_column($dataJSON['total_penjualan'], 0);
         $dataBulan = array_column($dataJSON['bulan'], 0);
 
-        return view('pages.dashboard.index', compact('dataBulan', 'dataPenjualan', 'user', 'jumlah_jenis', 'total_transaksi', 'penjualan', 'jumlah_counter', 'bulan_tahun', 'total_item_terjual', 'total_supplier'));
+        // SELECT invoice, status_pemesanan FROM `pemesanan_barangs` WHERE status_pemesanan = 'Menunggu Persetujuan' GROUP by invoice, status_pemesanan;
+        $pemesananbarang = PemesananBarang::select('invoice', 'status_pemesanan')
+            ->where('status_pemesanan', 'Menunggu Persetujuan')->groupBy('invoice', 'status_pemesanan')->get();
+
+        return view('pages.dashboard.index', compact('dataBulan', 'pemesananbarang', 'dataPenjualan', 'user', 'jumlah_jenis', 'total_transaksi', 'penjualan', 'jumlah_counter', 'bulan_tahun', 'total_item_terjual', 'total_supplier'));
     }
 
     public function stokPersediaan(Request $request)
