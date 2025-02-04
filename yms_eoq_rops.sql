@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 03, 2025 at 02:46 AM
+-- Generation Time: Feb 04, 2025 at 11:30 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.22
 
@@ -768,7 +768,8 @@ INSERT INTO `users` (`user_id`, `slug`, `telepon`, `name`, `address`, `username`
 ('U00004', 'hpjWT40JHlCLgTRQ', '0822412412390', 'Toko 3', 'Jl. Rungkut Asri Tengah No.21, Kota Surabaya, Jawa Timur', 'toko3', '$2y$10$FvZYnU2KTq7rBwfgvfbU0uukYbBar/H5qky0vfvx33QzkJG0.TkSK', 'counter', 'Active', '2024-12-01 05:11:43', '2024-12-01 05:11:43'),
 ('U00005', 'JzPnwsagQCo217vx', '0812348728372', 'Owner', '-', 'owner', '$2y$10$5M86aASlib/n7lOEIPnkUOefpXKoh0N9MYSQhFhr5n3VGg6IQYfzy', 'owner', 'Active', '2024-12-01 05:11:43', '2024-12-01 05:11:43'),
 ('U00006', '5WoUmqRx4UvmcIuJ', NULL, 'Toko Sejahtera', 'Jln. Sejahtera', 'sejahtera', '$2y$10$HzGdMgkehb024i.8kMGNHeNNufPezLTexYxJGAgc7OYR1yB6eLq4G', 'counter', 'Active', '2024-12-04 04:46:53', '2024-12-04 04:46:53'),
-('U00007', 'DDsYqXoZvecEn4WI', NULL, 'Toko Abadi Manunggal', 'Jln. Abadi', 'abadi', '$2y$10$ongVsNU3eTkXL1qH/hghKugKkKqWFDVgzRH2O9FazkZ6kAm86yBvO', 'counter', 'Active', '2024-12-04 04:47:23', '2024-12-04 04:47:42');
+('U00007', 'DDsYqXoZvecEn4WI', NULL, 'Toko Abadi Manunggal', 'Jln. Abadi', 'abadi', '$2y$10$ongVsNU3eTkXL1qH/hghKugKkKqWFDVgzRH2O9FazkZ6kAm86yBvO', 'counter', 'Active', '2024-12-04 04:47:23', '2024-12-04 04:47:42'),
+('U00008', 'CYJKcMcuWoLiZra5', '082232534578', 'Admin User', 'Jalan Admin', 'admin', '$2y$10$DVDBkw93gFLofs/5BZjrf.i1XstsmVVpLgz.3BCNFvmUbD5GiQSfO', 'admin', 'Active', '2025-02-04 10:36:32', '2025-02-04 10:36:33');
 
 --
 -- Indexes for dumped tables
