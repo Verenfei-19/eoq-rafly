@@ -6,7 +6,7 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                {{-- @if ($user->role == 'gudang' || $user->role == 'owner') --}}
+
                     <li class="menu-title" key="t-menu">Menu</li>
 
                     <li>
@@ -15,10 +15,9 @@
                             <span key="t-dashboards">Dashboards</span>
                         </a>
                     </li>
-                {{-- @endif --}}
 
+                @if ($user->role == 'gudang' || $user->role == 'admin')
                 <li class="menu-title" key="t-apps">Master Data</li>
-                @if ($user->role == 'gudang' || $user->role == 'owner')
                     <li>
                         <a href="{{ route('gudang') }}" class="waves-effect">
                             <i class="bx bxs-building-house"></i>
@@ -39,19 +38,18 @@
                         </a>
                     </li>
                 @endif
-
+                @if ($user->role == 'counter' || $user->role == 'admin')
                 <li>
                     <a href="{{ route('barang') }}" class="waves-effect">
                         <i class="bx bxs-component"></i>
                         <span key="t-barang">Barang</span>
                     </a>
                 </li>
-                {{-- @if ($user->role == 'counter' || $user->role == 'gudang') --}}
-                    <li class="menu-title" key="t-pages">Utility</li>
-                {{-- @endif --}}
-
-
-                @if ($user->role == 'counter' || $user->role == 'owner')
+                @endif
+                
+                
+                @if ($user->role == 'counter' || $user->role == 'admin')
+                <li class="menu-title" key="t-pages">Utility</li>
                     <li>
                         <a href="{{ route('kasir') }}" class="waves-effect">
                             <i class="bx bxs-calculator"></i>
@@ -60,7 +58,7 @@
                     </li>
                 @endif
 
-                @if ($user->role == 'gudang' || $user->role == 'owner')
+                @if ($user->role == 'gudang' || $user->role == 'admin')
                     <li>
                         <a href="{{ route('pemesanan') }}" class="waves-effect">
                             <i class="bx bxs-package"></i>

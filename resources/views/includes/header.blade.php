@@ -16,7 +16,7 @@
         </div>
 
         <div class="d-flex">
-            @if ($user->role == 'gudang')
+            @if ($user->role == 'gudang' || $user->role == 'admin')
                 <div class="dropdown d-inline-block">
                     <button type="button" class="btn header-item noti-icon waves-effect"
                         id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"

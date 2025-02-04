@@ -7,7 +7,7 @@
 <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('assets/js/pages/sweet-alerts.init.js') }}"></script>
 <script>
-    @if ($user->role == 'gudang')
+    @if ($user->role == 'gudang' || $user->role == 'admin')
 
         var checkROP = function() {
             $.ajax({
