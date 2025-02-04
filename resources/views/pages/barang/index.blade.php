@@ -49,7 +49,7 @@
                         return rupiah(data);
                     }
                 },
-                @if ($user->role == 'gudang' || $user->role == 'owner')
+                @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                     {
                         data: "biaya_penyimpanan",
                         render: function(data, type, row) {
@@ -65,7 +65,7 @@
                         data: "qty_total",
                         name: "qty_total"
                     },
-                    @if ($user->role == 'gudang' || $user->role == 'owner')
+                    @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                         {
                             data: "action",
                             name: "action"
@@ -207,12 +207,12 @@
                                 <th>ID Barang</th>
                                 <th>Nama Barang</th>
                                 <th>Harga Barang</th>
-                                @if ($user->role == 'gudang' || $user->role == 'owner')
+                                @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                                     <th>Biaya Penyimpanan</th>
                                     <th>ROP</th>
                                     <th>SS</th>
                                     <th>Quantity Total</th>
-                                    @if ($user->role == 'gudang' || $user->role == 'owner')
+                                    @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                                         <th>Action</th>
                                     @endif
                                 @else
