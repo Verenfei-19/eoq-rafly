@@ -38,7 +38,7 @@
         $("#wrap-btn-cetak").css("visibility", "hidden");
 
         let changeButton = (param) => {
-            @if ($user->role == 'gudang' || $user->role == 'owner')
+            @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                 if (param == 'ungroup') {
                     $("#filter-month").css("visibility", "visible");
                     $("#btn-filter").css("visibility", "visible");
@@ -54,7 +54,7 @@
         let mainTable = $('#datatable').DataTable({
             "ordering": false,
             columnDefs: [
-                @if ($user->role == 'gudang' || $user->role == 'owner')
+                @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                     {
                         "visible": false,
                         "targets": 3
@@ -79,7 +79,7 @@
             columns: [{
                     data: "penjualan_id"
                 },
-                @if ($user->role == 'gudang' || $user->role == 'owner')
+                @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                     {
                         data: "name"
                     },
@@ -124,7 +124,7 @@
                     let mainTable = $('#datatable').DataTable({
                         "ordering": false,
                         columnDefs: [
-                            @if ($user->role == 'gudang' || $user->role == 'owner')
+                            @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                                 {
                                     "visible": false,
                                     "targets": 3
@@ -149,7 +149,7 @@
                         columns: [{
                                 data: "penjualan_id"
                             },
-                            @if ($user->role == 'gudang' || $user->role == 'owner')
+                            @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                                 {
                                     data: "name"
                                 },
@@ -187,7 +187,7 @@
                     mainTable = $('#datatable').DataTable({
                         "ordering": false,
                         columnDefs: [
-                            @if ($user->role == 'gudang' || $user->role == 'owner')
+                            @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                                 {
                                     "visible": false,
                                     "targets": 0
@@ -243,7 +243,7 @@
                         columns: [{
                                 data: null
                             },
-                            @if ($user->role == 'gudang' || $user->role == 'owner')
+                            @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                                 {
                                     data: null
                                 },
@@ -290,7 +290,7 @@
             mainTable = $('#datatable').DataTable({
                 "ordering": false,
                 columnDefs: [
-                    @if ($user->role == 'gudang' || $user->role == 'owner')
+                    @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                         {
                             "visible": false,
                             "targets": 0
@@ -346,7 +346,7 @@
                 columns: [{
                         data: null
                     },
-                    @if ($user->role == 'gudang' || $user->role == 'owner')
+                    @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                         {
                             data: null
                         },
@@ -498,7 +498,7 @@
                         <thead>
                             <tr>
                                 <th>ID Penjualan</th>
-                                @if ($user->role == 'gudang' || $user->role == 'owner')
+                                @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                                     <th>Nama Counter</th>
                                 @endif
                                 <th>Tanggal Penjualan</th>
