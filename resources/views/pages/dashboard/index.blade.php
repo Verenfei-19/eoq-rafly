@@ -162,7 +162,7 @@
                 @endif
 
                 {{-- OWNER --}}
-                @if ($user->role == 'owner')
+                @if ($user->role == 'owner' || $user->role == 'admin')
                 <div class="col-lg-6">
                     <div class="card blog-stats-wid">
                         <div class="card-body">
