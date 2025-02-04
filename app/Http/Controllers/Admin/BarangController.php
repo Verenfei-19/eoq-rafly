@@ -26,7 +26,7 @@ class BarangController extends Controller
         $user = $this->userAuth();
         $path = 'barang';
 
-        if ($user->role == 'gudang' || $user->role == 'owner') {
+        if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin') {
             // if ($request->ajax() && empty($request->target)) {
             if ($request->ajax()) {
                 $query = "SELECT b.barang_id,b.slug,b.nama_barang,b.harga_barang,b.biaya_penyimpanan,b.rop,b.ss,bg.stok_masuk  as qty_total
