@@ -49,7 +49,7 @@
                 {
                     data: "waktu"
                 },
-                @if ($user->role == 'gudang')
+                @if ($user->role == 'gudang' || $user->role == 'admin')
                     {
                         data: "action"
                     }
@@ -87,7 +87,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    @if ($user->role == 'gudang')
+                    @if ($user->role == 'gudang' || $user->role == 'admin')
                         <div class="d-flex justify-content-end mb-4">
                             <a href="{{ route('supplier.create') }}" class="btn btn-primary waves-effect waves-light">
                                 <i class="bx bx-list-plus align-middle me-2 font-size-18"></i>Tambah
@@ -103,7 +103,7 @@
                                 <th>Nomor Telepon</th>
                                 <th>Barang yang disupply</th>
                                 <th>Estimasi proses barang</th>
-                                @if ($user->role == 'gudang')
+                                @if ($user->role == 'gudang' || $user->role == 'admin')
                                     <th>Action</th>
                                 @endif
                             </tr>
