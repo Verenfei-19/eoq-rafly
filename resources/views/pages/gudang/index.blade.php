@@ -41,7 +41,7 @@
                 {
                     data: "username"
                 },
-                @if ($user->role == 'gudang')
+                @if ($user->role == 'gudang' || $user->role == 'admin')
                     {
                         data: "action"
                     }
@@ -86,7 +86,7 @@
                                 <th>Nama Gudang</th>
                                 <th>Alamat Gudang</th>
                                 <th>Username</th>
-                                @if ($user->role == 'gudang')
+                                @if ($user->role == 'gudang' || $user->role == 'admin')
                                     <th>Action</th>
                                 @endif
                             </tr>
