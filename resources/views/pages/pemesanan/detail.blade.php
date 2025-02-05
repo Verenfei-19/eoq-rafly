@@ -95,7 +95,7 @@
                                     <i class="bx bx-caret-left align-middle me-2 font-size-18"></i>Kembali
                                 </a>
                             </div>
-                            @if ($user->role == 'owner' && $pemesanan[0]->status_pemesanan == 'Menunggu Persetujuan')
+                            @if ($user->role == 'owner' || $user->role == 'admin' && $pemesanan[0]->status_pemesanan == 'Menunggu Persetujuan')
                                 <div class="col-5 d-flex justify-content-end">
                                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                         <input type="radio" class="btn-check" name="persetujuan" value="Disetujui" id="disetujui"
