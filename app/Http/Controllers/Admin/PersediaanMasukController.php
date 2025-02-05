@@ -64,24 +64,6 @@ class PersediaanMasukController extends Controller
         return view('pages.persediaan-masuk.detail', compact('user', 'pemesanan'));
     }
 
-    public function addDiterimaTemporary($slug, $id)
-    {
-        $detail = DB::table('detail_pemesanans as dp')
-            ->join('pemesanans as p', 'dp.pemesanan_id', '=', 'p.pemesanan_id')
-            ->join('barangs as b', 'dp.barang_id', '=', 'b.barang_id')
-            ->select('dp.id', 'p.pemesanan_id', 'p.slug', 'b.nama_barang', 'dp.jumlah_pemesanan', 'b.barang_id')
-            ->where(['p.slug' => $slug, 'dp.id' => $id])
-            ->first();
-
-        $temporary_masuk = session("temporary_masuk");
-        $temporary_masuk[$detail->pemesanan_id . "/" . $detail->barang_id] = [
-            "status" => "Selesai"
-        ];
-
-        session(["temporary_masuk" => $temporary_masuk]);
-        return redirect()->route('persediaan-masuk.detail', ["slug" => $detail->slug]);
-    }
-
     public function store(Request $request)
     {
         $pemesanan_id = $request->pemesanan_id;
