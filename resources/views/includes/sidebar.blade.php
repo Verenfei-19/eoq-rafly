@@ -58,15 +58,15 @@
                     </li>
                 @endif
 
-                @if ($user->role == 'gudang' || $user->role == 'admin')
+                @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                     <li>
                         <a href="{{ route('pemesanan') }}" class="waves-effect">
                             <i class="bx bxs-package"></i>
                             <span key="t-pemesanan">Pembelian Barang ke Supplier</span>
                         </a>
                     </li>
-                {{-- @endif --}}
-                {{-- @if ($user->role == 'gudang') --}}
+                @endif
+                @if ($user->role == 'gudang' || $user->role == 'admin')
                     <li>
                         <a href="{{ route('persediaan-masuk') }}" class="waves-effect">
                             <i class="bx bxs-widget"></i>
