@@ -44,6 +44,12 @@
                     name: "nama_barang"
                 },
                 {
+                    data: "harga_supplier",
+                    render: function(data, type, row) {
+                        return rupiah(data);
+                    }
+                },
+                {
                     data: "harga_barang",
                     render: function(data, type, row) {
                         return rupiah(data);
@@ -206,6 +212,7 @@
                             <tr>
                                 <th>ID Barang</th>
                                 <th>Nama Barang</th>
+                                <th>Harga Supplier</th>
                                 <th>Harga Barang</th>
                                 @if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin')
                                     <th>Biaya Penyimpanan</th>
