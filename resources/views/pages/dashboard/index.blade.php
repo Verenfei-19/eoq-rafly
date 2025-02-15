@@ -38,18 +38,38 @@
     </script>
     <script>
         const ctx = document.getElementById('myChart');
+        const kainno1 = document.getElementById('kainno1');
+        const kainno2 = document.getElementById('kainno2');
+        const kainno3 = document.getElementById('kainno3');
+        const kainno4 = document.getElementById('kainno4');
+        const kainno5 = document.getElementById('kainno5');
+        const kainno6 = document.getElementById('kainno6');
+        const kainno7 = document.getElementById('kainno7');
+        const kainno8 = document.getElementById('kainno8');
+        const kainno9 = document.getElementById('kainno9');
         
         new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: {{ Js::from($dataBulan) }},
+            // labels: {{ Js::from($dataBulan) }},
+            labels: {{ Js::from($listnamabarang) }},
             datasets: [{
-              label: 'Total Transaksi Penjualan',
-              data: {{ Js::from($dataPenjualan) }},
-              borderWidth: 1
-            }]
+                label : 'Stok Barang',
+                data: {{ Js::from($liststokbarang) }},
+                borderWidth: 1
+            }
+            ]
           },
           options: {
+            plugins: {
+                legend: {
+                position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Data Stok Barang'
+                }
+            },
             scales: {
               y: {
                 beginAtZero: true
@@ -57,6 +77,173 @@
             }
           }
         });
+        // 
+        const optionsChart = {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'OXFORD PUTIH'
+                }
+            },
+        }
+        new Chart(kainno1, {
+            type: 'bar',
+            data: {
+                labels: ['Stok Barang','EOQ','ROP','SS'],
+                datasets: [
+                    {
+                        label: `Data {{ $hasilchart[0]->nama_barang }}`,
+                        data: [{{$hasilchart[0]->stok_masuk }},{{ $hasilchart[0]->eoq }},{{ $hasilchart[0]->rop }},{{ $hasilchart[0]->ss }}],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                optionsChart
+            }
+        });
+        new Chart(kainno2, {
+            type: 'bar',
+            data: {
+                labels: ['Stok Barang','EOQ','ROP','SS'],
+                datasets: [
+                    {
+                        label: `Data {{ $hasilchart[1]->nama_barang }}`,
+                        data: [{{$hasilchart[1]->stok_masuk }},{{ $hasilchart[1]->eoq }},{{ $hasilchart[1]->rop }},{{ $hasilchart[1]->ss }}],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                optionsChart
+            }
+        });
+        new Chart(kainno3, {
+            type: 'bar',
+            data: {
+                labels: ['Stok Barang','EOQ','ROP','SS'],
+                datasets: [
+                    {
+                        label: `Data {{ $hasilchart[2]->nama_barang }}`,
+                        data: [{{$hasilchart[2]->stok_masuk }},{{ $hasilchart[2]->eoq }},{{ $hasilchart[2]->rop }},{{ $hasilchart[2]->ss }}],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                optionsChart
+            }
+        });
+        new Chart(kainno4, {
+            type: 'bar',
+            data: {
+                labels: ['Stok Barang','EOQ','ROP','SS'],
+                datasets: [
+                    {
+                        label: `Data {{ $hasilchart[3]->nama_barang }}`,
+                        data: [{{$hasilchart[3]->stok_masuk }},{{ $hasilchart[3]->eoq }},{{ $hasilchart[3]->rop }},{{ $hasilchart[3]->ss }}],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                optionsChart
+            }
+        });
+        new Chart(kainno5, {
+            type: 'bar',
+            data: {
+                labels: ['Stok Barang','EOQ','ROP','SS'],
+                datasets: [
+                    {
+                        label: `Data {{ $hasilchart[4]->nama_barang }}`,
+                        data: [{{$hasilchart[4]->stok_masuk }},{{ $hasilchart[4]->eoq }},{{ $hasilchart[4]->rop }},{{ $hasilchart[4]->ss }}],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                optionsChart
+            }
+        });
+        new Chart(kainno6, {
+            type: 'bar',
+            data: {
+                labels: ['Stok Barang','EOQ','ROP','SS'],
+                datasets: [
+                    {
+                        label: `Data {{ $hasilchart[5]->nama_barang }}`,
+                        data: [{{$hasilchart[5]->stok_masuk }},{{ $hasilchart[5]->eoq }},{{ $hasilchart[5]->rop }},{{ $hasilchart[5]->ss }}],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                optionsChart
+            }
+        });
+        new Chart(kainno7, {
+            type: 'bar',
+            data: {
+                labels: ['Stok Barang','EOQ','ROP','SS'],
+                datasets: [
+                    {
+                        label: `Data {{ $hasilchart[6]->nama_barang }}`,
+                        data: [{{$hasilchart[6]->stok_masuk }},{{ $hasilchart[6]->eoq }},{{ $hasilchart[6]->rop }},{{ $hasilchart[6]->ss }}],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                optionsChart
+            }
+        });
+        new Chart(kainno8, {
+            type: 'bar',
+            data: {
+                labels: ['Stok Barang','EOQ','ROP','SS'],
+                datasets: [
+                    {
+                        label: `Data {{ $hasilchart[7]->nama_barang }}`,
+                        data: [{{$hasilchart[7]->stok_masuk }},{{ $hasilchart[7]->eoq }},{{ $hasilchart[7]->rop }},{{ $hasilchart[7]->ss }}],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                optionsChart
+            }
+        });
+        new Chart(kainno9, {
+            type: 'bar',
+            data: {
+                labels: ['Stok Barang','EOQ','ROP','SS'],
+                datasets: [
+                    {
+                        label: `Data {{ $hasilchart[8]->nama_barang }}`,
+                        data: [{{$hasilchart[8]->stok_masuk }},{{ $hasilchart[8]->eoq }},{{ $hasilchart[8]->rop }},{{ $hasilchart[8]->ss }}],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                optionsChart
+            }
+        });
+        
       </script>
 @endpush
 
@@ -81,11 +268,10 @@
 
     <div class="row">
 
+        {{-- GRAFIK --}}
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4>Total Transaksi Penjualan</h4>
-                    {{-- <span>{{ $dataJSON }}</span> --}}
                     <div>
                         <canvas id="myChart" width="400" height="100"></canvas>
                     </div>
@@ -93,7 +279,90 @@
             </div>
         </div>
 
-        <div class="col-xl">
+        {{-- KAIN --}}
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <canvas id="kainno1" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <canvas id="kainno2" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <canvas id="kainno3" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <canvas id="kainno4" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <canvas id="kainno5" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <canvas id="kainno6" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <canvas id="kainno7" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <canvas id="kainno8" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <canvas id="kainno9" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-12">
             <div class="row">
 
                 @if ($user->role == 'counter')
