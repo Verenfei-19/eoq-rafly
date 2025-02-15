@@ -29,7 +29,7 @@ class BarangController extends Controller
         if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin') {
             // if ($request->ajax() && empty($request->target)) {
             if ($request->ajax()) {
-                $query = "SELECT b.barang_id,b.slug,b.nama_barang,b.harga_barang,b.biaya_penyimpanan,b.rop,b.ss,bg.stok_masuk  as qty_total
+                $query = "SELECT b.barang_id,b.slug,b.nama_barang,b.harga_barang,b.harga_supplier,b.biaya_penyimpanan,b.rop,b.ss,bg.stok_masuk  as qty_total
                             FROM `barang_gudangs` as bg 
                             JOIN 
                                 barangs as b 
