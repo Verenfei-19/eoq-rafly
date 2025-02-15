@@ -442,7 +442,7 @@
                                 <th>ID Barang</th>
                                 <th>Nama Barang</th>
                                 <th class="col-md-2">Harga barang</th>
-                                <th class="col-md-1">Quantity</th>
+                                <th class="col-md-1">Stok/pcs</th>
                                 <th class="col-md-1">Action</th>
                             </tr>
                         </thead>
