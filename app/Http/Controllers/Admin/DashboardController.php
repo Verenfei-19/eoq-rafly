@@ -70,7 +70,6 @@ class DashboardController extends Controller
                         GROUP BY b.nama_barang, bg.stok_masuk;";
         $hasilchart = DB::select($datachart);
 
-
         return view('pages.dashboard.index', compact('dataBulan', 'hasilchart', 'listnamabarang', 'liststokbarang', 'pemesananbarang', 'dataPenjualan', 'user', 'jumlah_jenis', 'total_transaksi', 'penjualan', 'jumlah_counter', 'bulan_tahun', 'total_item_terjual', 'total_supplier'));
     }
 
