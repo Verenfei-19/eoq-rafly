@@ -39,14 +39,6 @@
     <script>
         const ctx = document.getElementById('myChart');
         const kainno1 = document.getElementById('kainno1');
-        const kainno2 = document.getElementById('kainno2');
-        const kainno3 = document.getElementById('kainno3');
-        const kainno4 = document.getElementById('kainno4');
-        const kainno5 = document.getElementById('kainno5');
-        const kainno6 = document.getElementById('kainno6');
-        const kainno7 = document.getElementById('kainno7');
-        const kainno8 = document.getElementById('kainno8');
-        const kainno9 = document.getElementById('kainno9');
         
         new Chart(ctx, {
           type: 'bar',
@@ -90,7 +82,7 @@
                 }
             },
         }
-        new Chart(kainno1, {
+        const chartkain = new Chart(kainno1, {
             type: 'bar',
             data: {
                 labels: ['Stok Barang','EOQ','ROP','SS'],
@@ -107,143 +99,27 @@
                 optionsChart
             }
         });
-        new Chart(kainno2, {
-            type: 'bar',
-            data: {
-                labels: ['Stok Barang','EOQ','ROP','SS'],
-                datasets: [
-                    {
-                        label: `Data {{ $hasilchart[1]->nama_barang }}`,
-                        data: [{{$hasilchart[1]->stok_masuk }},{{ $hasilchart[1]->eoq }},{{ $hasilchart[1]->rop }},{{ $hasilchart[1]->ss }}],
-                        borderWidth: 1
-                    },
-                ]
-            },
-            options: {
-                indexAxis: 'y',
-                optionsChart
-            }
-        });
-        new Chart(kainno3, {
-            type: 'bar',
-            data: {
-                labels: ['Stok Barang','EOQ','ROP','SS'],
-                datasets: [
-                    {
-                        label: `Data {{ $hasilchart[2]->nama_barang }}`,
-                        data: [{{$hasilchart[2]->stok_masuk }},{{ $hasilchart[2]->eoq }},{{ $hasilchart[2]->rop }},{{ $hasilchart[2]->ss }}],
-                        borderWidth: 1
-                    },
-                ]
-            },
-            options: {
-                indexAxis: 'y',
-                optionsChart
-            }
-        });
-        new Chart(kainno4, {
-            type: 'bar',
-            data: {
-                labels: ['Stok Barang','EOQ','ROP','SS'],
-                datasets: [
-                    {
-                        label: `Data {{ $hasilchart[3]->nama_barang }}`,
-                        data: [{{$hasilchart[3]->stok_masuk }},{{ $hasilchart[3]->eoq }},{{ $hasilchart[3]->rop }},{{ $hasilchart[3]->ss }}],
-                        borderWidth: 1
-                    },
-                ]
-            },
-            options: {
-                indexAxis: 'y',
-                optionsChart
-            }
-        });
-        new Chart(kainno5, {
-            type: 'bar',
-            data: {
-                labels: ['Stok Barang','EOQ','ROP','SS'],
-                datasets: [
-                    {
-                        label: `Data {{ $hasilchart[4]->nama_barang }}`,
-                        data: [{{$hasilchart[4]->stok_masuk }},{{ $hasilchart[4]->eoq }},{{ $hasilchart[4]->rop }},{{ $hasilchart[4]->ss }}],
-                        borderWidth: 1
-                    },
-                ]
-            },
-            options: {
-                indexAxis: 'y',
-                optionsChart
-            }
-        });
-        new Chart(kainno6, {
-            type: 'bar',
-            data: {
-                labels: ['Stok Barang','EOQ','ROP','SS'],
-                datasets: [
-                    {
-                        label: `Data {{ $hasilchart[5]->nama_barang }}`,
-                        data: [{{$hasilchart[5]->stok_masuk }},{{ $hasilchart[5]->eoq }},{{ $hasilchart[5]->rop }},{{ $hasilchart[5]->ss }}],
-                        borderWidth: 1
-                    },
-                ]
-            },
-            options: {
-                indexAxis: 'y',
-                optionsChart
-            }
-        });
-        new Chart(kainno7, {
-            type: 'bar',
-            data: {
-                labels: ['Stok Barang','EOQ','ROP','SS'],
-                datasets: [
-                    {
-                        label: `Data {{ $hasilchart[6]->nama_barang }}`,
-                        data: [{{$hasilchart[6]->stok_masuk }},{{ $hasilchart[6]->eoq }},{{ $hasilchart[6]->rop }},{{ $hasilchart[6]->ss }}],
-                        borderWidth: 1
-                    },
-                ]
-            },
-            options: {
-                indexAxis: 'y',
-                optionsChart
-            }
-        });
-        new Chart(kainno8, {
-            type: 'bar',
-            data: {
-                labels: ['Stok Barang','EOQ','ROP','SS'],
-                datasets: [
-                    {
-                        label: `Data {{ $hasilchart[7]->nama_barang }}`,
-                        data: [{{$hasilchart[7]->stok_masuk }},{{ $hasilchart[7]->eoq }},{{ $hasilchart[7]->rop }},{{ $hasilchart[7]->ss }}],
-                        borderWidth: 1
-                    },
-                ]
-            },
-            options: {
-                indexAxis: 'y',
-                optionsChart
-            }
-        });
-        new Chart(kainno9, {
-            type: 'bar',
-            data: {
-                labels: ['Stok Barang','EOQ','ROP','SS'],
-                datasets: [
-                    {
-                        label: `Data {{ $hasilchart[8]->nama_barang }}`,
-                        data: [{{$hasilchart[8]->stok_masuk }},{{ $hasilchart[8]->eoq }},{{ $hasilchart[8]->rop }},{{ $hasilchart[8]->ss }}],
-                        borderWidth: 1
-                    },
-                ]
-            },
-            options: {
-                indexAxis: 'y',
-                optionsChart
-            }
-        });
-        
+
+        $('#pilihbarang').on('change', function(e){
+            // console.log(e.target.value);
+            $.ajax({
+                type: "get",
+                url: "{{ route('dashboard') }}",
+                data: {
+                    'barang_id': e.target.value,
+                },
+                success: function(response) {
+                    console.log(response[0].nama_barang);
+                    chartkain.data.datasets[0].label = `Data ${response[0].nama_barang}`
+                    chartkain.data.datasets[0].data[0] = response[0].stok_masuk; // Would update the first dataset's value of 'March' to be 50
+                    chartkain.data.datasets[0].data[1] = response[0].eoq; // Would update the first dataset's value of 'March' to be 50
+                    chartkain.data.datasets[0].data[2] = response[0].rop; // Would update the first dataset's value of 'March' to be 50
+                    chartkain.data.datasets[0].data[3] = response[0].ss; // Would update the first dataset's value of 'March' to be 50
+                    chartkain.update();
+                }
+            })
+            
+        })
       </script>
 @endpush
 
@@ -280,16 +156,21 @@
         </div>
 
         {{-- KAIN --}}
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
+                    <select class="form-control form-select" name="pilihbarang" id="pilihbarang">
+                        @foreach ($listbarang as $item)
+                            <option value="{{ $item->barang_id }}">{{ $item->nama_barang }}</option>
+                        @endforeach
+                    </select>
                     <div>
                         <canvas id="kainno1" width="400" height="200"></canvas>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        {{-- <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
                     <div>
@@ -360,7 +241,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <div class="col-xl-12">
             <div class="row">
