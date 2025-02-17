@@ -85,7 +85,7 @@
         const chartkain = new Chart(kainno1, {
             type: 'bar',
             data: {
-                labels: ['Stok Barang','EOQ','ROP','SS'],
+                labels: ['Barang','EOQ','ROP','SS'],
                 datasets: [
                     {
                         label: `Data {{ $hasilchart[0]->nama_barang }}`,
