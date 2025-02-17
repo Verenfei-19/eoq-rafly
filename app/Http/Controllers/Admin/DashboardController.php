@@ -4,14 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PemesananBarang;
-use App\Models\PenjualanBarang;
 use App\Models\PenjualanBarangDetail;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
-use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
 use Yajra\DataTables\DataTables;
 
 class DashboardController extends Controller
@@ -54,23 +52,36 @@ class DashboardController extends Controller
         $dataPenjualan = array_column($dataJSON['total_penjualan'], 0);
         $dataBulan = array_column($dataJSON['bulan'], 0);
 
-        // SELECT invoice, status_pemesanan FROM `pemesanan_barangs` WHERE status_pemesanan = 'Menunggu Persetujuan' GROUP by invoice, status_pemesanan;
         $pemesananbarang = PemesananBarang::select('invoice', 'status_pemesanan')
             ->where('status_pemesanan', 'Menunggu Persetujuan')->groupBy('invoice', 'status_pemesanan')->get();
 
         $listnamabarang = DB::table('barangs')->join('barang_gudangs as bg', 'bg.barang_id', '=', 'barangs.barang_id')->pluck('barangs.nama_barang');
+        $listbarang = DB::table('barangs')->join('barang_gudangs as bg', 'bg.barang_id', '=', 'barangs.barang_id')->get(['barangs.barang_id', 'barangs.nama_barang']);
         $liststokbarang = DB::table('barangs')->join('barang_gudangs as bg', 'bg.barang_id', '=', 'barangs.barang_id')->pluck('bg.stok_masuk');
 
         // CHART
-        $datachart = "SELECT b.nama_barang,bg.stok_masuk, SUM(pb.eoq) as eoq,SUM(pb.rop) as rop,SUM(pb.ss) as ss
-                        FROM `pemesanan_barangs` as pb 
-                        JOIN barang_gudangs as bg ON bg.barang_id = pb.id_barang 
-                        JOIN barangs as b ON b.barang_id = pb.id_barang 
-                        WHERE pb.created_at BETWEEN '2024-12-01' AND '2024-12-31' -- setting tanggal
-                        GROUP BY b.nama_barang, bg.stok_masuk;";
-        $hasilchart = DB::select($datachart);
+        if (request()->get('barang_id')) {
+            $id = request()->get('barang_id');
+            $datachart = "SELECT b.nama_barang,bg.stok_masuk, SUM(pb.eoq) as eoq,SUM(pb.rop) as rop,SUM(pb.ss) as ss
+                            FROM `pemesanan_barangs` as pb 
+                            JOIN barang_gudangs as bg ON bg.barang_id = pb.id_barang 
+                            JOIN barangs as b ON b.barang_id = pb.id_barang 
+                            WHERE b.barang_id = '$id' 
+                            AND pb.created_at BETWEEN '2024-12-01' AND '2024-12-31' -- setting tanggal
+                            GROUP BY b.nama_barang, bg.stok_masuk;";
+            $hasilchart = DB::select($datachart);
+            return response()->json($hasilchart);
+        } else {
+            $datachart = "SELECT b.nama_barang,bg.stok_masuk, SUM(pb.eoq) as eoq,SUM(pb.rop) as rop,SUM(pb.ss) as ss
+                            FROM `pemesanan_barangs` as pb 
+                            JOIN barang_gudangs as bg ON bg.barang_id = pb.id_barang 
+                            JOIN barangs as b ON b.barang_id = pb.id_barang 
+                            WHERE pb.created_at BETWEEN '2024-12-01' AND '2024-12-31' -- setting tanggal
+                            GROUP BY b.nama_barang, bg.stok_masuk;";
+            $hasilchart = DB::select($datachart);
+        }
 
-        return view('pages.dashboard.index', compact('dataBulan', 'hasilchart', 'listnamabarang', 'liststokbarang', 'pemesananbarang', 'dataPenjualan', 'user', 'jumlah_jenis', 'total_transaksi', 'penjualan', 'jumlah_counter', 'bulan_tahun', 'total_item_terjual', 'total_supplier'));
+        return view('pages.dashboard.index', compact('dataBulan', 'hasilchart', 'listnamabarang', 'liststokbarang', 'listbarang', 'pemesananbarang', 'dataPenjualan', 'user', 'jumlah_jenis', 'total_transaksi', 'penjualan', 'jumlah_counter', 'bulan_tahun', 'total_item_terjual', 'total_supplier'));
     }
 
     public function stokPersediaan(Request $request)
