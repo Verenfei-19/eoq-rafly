@@ -87,9 +87,26 @@
             data: {
                 labels: ['Pesanan','EOQ','ROP','SS'],
                 datasets: [
+                    // {
+                    //     label: `Data {{ $hasilchart[0]->nama_barang }}`,
+                    //     data: [{{$hasilchart[0]->stok_masuk }},{{ $hasilchart[0]->eoq }},{{ $hasilchart[0]->rop }},{{ $hasilchart[0]->ss }}],
+                    //     borderWidth: 1
+                    // },
                     {
                         label: `Data {{ $hasilchart[0]->nama_barang }}`,
-                        data: [{{$hasilchart[0]->stok_masuk }},{{ $hasilchart[0]->eoq }},{{ $hasilchart[0]->rop }},{{ $hasilchart[0]->ss }}],
+                        data: [{{$hasilchart[0]->stok_masuk }}, {{$hasilchart[0]->eoq }}, {{$hasilchart[0]->rop }}, {{$hasilchart[0]->ss }}],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 159, 64)',
+                            'rgb(75, 192, 192)',
+                            'rgb(54, 162, 235)',
+                        ],
                         borderWidth: 1
                     },
                 ]
