@@ -25,33 +25,6 @@
 
     <!-- Datatable init js -->
     <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
-    <script>
-        $('#datatable').DataTable(
-                {
-                    searching:false,
-                    // lengthMenu: false,
-            //     ajax: "{{ route('gudang') }}",
-            //     columns: [{
-            //             data: "gudang_id"
-            //         },
-            //         {
-            //             data: "name"
-            //         },
-            //         {
-            //             data: "address"
-            //         },
-            //         {
-            //             data: "username"
-            //         },
-            //         @if ($user->role == 'gudang')
-            //             {
-            //                 data: "action"
-            //             }
-            //         @endif
-            //     ],
-            }
-        );
-    </script>
 @endpush
 
 @section('content')
@@ -101,56 +74,6 @@
                                 </div>
                         </div>
                     </form>
-                    {{-- <div class="row mb-4 mt-2">
-                        <div class="col d-flex justify-content-start ">
-                            <a href="{{ route('pemesanan') }}" class="btn btn-secondary waves-effect waves-light">
-                                <i class="bx bx-caret-left align-middle me-2 font-size-18"></i>Kembali
-                            </a>
-                        </div>
-                        <div class="col d-flex justify-content-end ">
-                            @if ($count_tmp == $count_detail)
-                                <a href="{{ route('persediaan-masuk.store', ['slug' => $pemesanan->slug]) }}"
-                                    class="btn btn-primary waves-effect waves-light">
-                                    <i class="bx bx-save align-middle me-2 font-size-18"></i>Simpan
-                                </a>
-                            @endif
-                        </div>
-                    </div> --}}
-                    {{-- <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
-                        <thead>
-                            <tr>
-                                <th>Nama Barang</th>
-                                <th>Jumlah Pemesanan</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($details as $detail)
-                                <tr>
-                                    <td>
-                                        {{ $detail->nama_barang }}
-                                    </td>
-                                    <td>
-                                        {{ $detail->jumlah_pemesanan }}
-                                    </td>
-                                    <td>
-                                        @if (!empty($temporary_masuk))
-                                            @if (array_key_exists($detail->pemesanan_id . '/' . $detail->barang_id, $temporary_masuk))
-                                                <span
-                                                    class="badge rounded-pill badge-soft-success font-size-14">Selesai</span>
-                                            @else
-                                                <a href="{{ route('persediaan-masuk.add', ['slug' => $detail->slug, 'id' => $detail->id]) }}"
-                                                    class="btn btn-primary">Diterima</a>
-                                            @endif
-                                        @else
-                                            <a href="{{ route('persediaan-masuk.add', ['slug' => $detail->slug, 'id' => $detail->id]) }}"
-                                                class="btn btn-primary">Diterima</a>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table> --}}
                     <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                         <thead>
                             <tr>
@@ -158,9 +81,6 @@
                                 <th>Nama Supplier</th>
                                 <th>Tanggal Datang</th>
                                 <th>Stok Sekarang</th>
-                                {{-- <th>EOQ</th> --}}
-                                {{-- <th>SS</th> --}}
-                                {{-- <th>ROP</th> --}}
                                 <th>Jumlah Pemesanan</th>
                             </tr>
                         </thead>
@@ -171,9 +91,6 @@
                                     <td>{{ $data->nama }}</td>
                                     <td>{{ \Carbon\Carbon::parse($data->created_at)->addDays($data->tgl_datang)->translatedFormat('d F Y') }}</td>
                                     <td>{{ $data->stok_masuk }}</td>
-                                    {{-- <td>{{ $data->eoq }}</td> --}}
-                                    {{-- <td>{{ $data->ss }}</td> --}}
-                                    {{-- <td>{{ $data->rop }}</td> --}}
                                     <td>{{ $data->jumlah_pemesanan }}</td>
                                 </tr>
                             @endforeach
