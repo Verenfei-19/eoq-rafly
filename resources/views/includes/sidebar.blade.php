@@ -38,16 +38,12 @@
                         </a>
                     </li>
                 @endif
-                {{-- @if ($user->role == 'counter' || $user->role == 'admin') --}}
                 <li>
                     <a href="{{ route('barang') }}" class="waves-effect">
                         <i class="bx bxs-component"></i>
                         <span key="t-barang">Barang</span>
                     </a>
-                </li>
-                {{-- @endif --}}
-                
-                
+                </li>                
                 @if ($user->role == 'counter' || $user->role == 'admin')
                 <li class="menu-title" key="t-pages">Utility</li>
                     <li>
