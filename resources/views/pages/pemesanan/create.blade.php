@@ -307,7 +307,6 @@
                                 <th>Nama Barang</th>
                                 <th>Supplier & Estimasi barang</th>
                                 <th class="col-md-1">Total Penjualan/bulan</th>
-                                {{-- <th class="col-md-1">ROP</th> --}}
                                 <th class="col-md-1">Action</th>
                             </tr>
                         </thead>
@@ -347,7 +346,6 @@
                                 <th>Nama Barang</th>
                                 <th>EOQ</th>
                                 <th>Jumlah Pemesanan</th>
-                                {{-- <th>Supplier</th> --}}
                                 <th>Action</th>
                             </tr>
                         </thead>
