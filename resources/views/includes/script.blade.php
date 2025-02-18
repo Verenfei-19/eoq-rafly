@@ -46,9 +46,7 @@
             });
         }
 
-        // setInterval(() => {
-            checkROP();
-        // }, 5000);
+        checkROP();
         
     @endif
 </script>
