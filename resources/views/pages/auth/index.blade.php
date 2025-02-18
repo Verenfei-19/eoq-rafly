@@ -1,9 +1,6 @@
 <!doctype html>
 <html lang="en">
 
-
-<!-- Mirrored from themesbrand.com/skote/layouts/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Mar 2023 07:01:29 GMT -->
-
 <head>
 
     <meta charset="utf-8" />
@@ -89,47 +86,11 @@
                                         </div>
                                     </div>
 
-                                    {{-- <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="remember-check">
-                                        <label class="form-check-label" for="remember-check">
-                                            Remember me
-                                        </label>
-                                    </div> --}}
-
                                     <div class="mt-3 d-grid">
                                         <button class="btn btn-primary waves-effect waves-light" type="submit">Log
                                             In</button>
                                     </div>
 
-                                    {{-- <div class="mt-4 text-center">
-                                        <h5 class="font-size-14 mb-3">Sign in with</h5>
-
-                                        <ul class="list-inline">
-                                            <li class="list-inline-item">
-                                                <a href="javascript::void()"
-                                                    class="social-list-item bg-primary text-white border-primary">
-                                                    <i class="mdi mdi-facebook"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="javascript::void()"
-                                                    class="social-list-item bg-info text-white border-info">
-                                                    <i class="mdi mdi-twitter"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="javascript::void()"
-                                                    class="social-list-item bg-danger text-white border-danger">
-                                                    <i class="mdi mdi-google"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="mt-4 text-center">
-                                        <a href="auth-recoverpw.html" class="text-muted"><i
-                                                class="mdi mdi-lock me-1"></i> Forgot your password?</a>
-                                    </div> --}}
                                 </form>
                             </div>
 
@@ -138,8 +99,6 @@
                     <div class="mt-5 text-center">
 
                         <div>
-                            {{-- <p>Don't have an account ? <a href="auth-register.html" class="fw-medium text-primary">
-                                    Signup now </a> </p> --}}
                             <p>©
                                 <script>
                                     document.write(new Date().getFullYear())
@@ -165,7 +124,5 @@
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
 </body>
-
-<!-- Mirrored from themesbrand.com/skote/layouts/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Mar 2023 07:01:29 GMT -->
 
 </html>
