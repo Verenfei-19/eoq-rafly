@@ -9,8 +9,6 @@ use App\Http\Controllers\Admin\KasirController;
 use App\Http\Controllers\Admin\UserAuthController;
 use App\Http\Controllers\Admin\PemesananController;
 use App\Http\Controllers\Admin\PersediaanMasukController;
-use App\Http\Controllers\Admin\PermintaanCounterController;
-use App\Http\Controllers\Admin\PengirimanCounterController;
 use App\Http\Controllers\Admin\PenjualanController;
 use App\Http\Controllers\Admin\RekapPenjualanController;
 use App\Http\Controllers\SupplierController;
@@ -26,10 +24,6 @@ use Carbon\Carbon;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('pages.dashboard.index');
-// });
 
 Route::controller(UserAuthController::class)->group(function () {
     Route::get('/auth', 'index')->name('auth');
@@ -48,9 +42,7 @@ Route::middleware('user')->group(function () {
 
     Route::controller(BarangController::class)->group(function () {
         Route::get('/barang', 'index')->name('barang');
-        Route::get('/barang/create', 'create')->name('barang.create');
         Route::get('/barang/edit/{slug}', 'edit')->name('barang.edit');
-        Route::post('/barang/store', 'store')->name('barang.store');
         Route::post('/barang/update/{slug}', 'update')->name('barang.update');
         Route::get('/barang/destroy/{slug}', 'destroy')->name('barang.destroy');
 
@@ -66,7 +58,6 @@ Route::middleware('user')->group(function () {
     });
 
     Route::controller(CounterController::class)->group(function () {
-        // change default routes /counter to /toko
         Route::get('/toko', 'index')->name('counter');
         Route::get('/toko/create', 'create')->name('counter.create');
         Route::post('/toko/store', 'store')->name('counter.store');
@@ -110,7 +101,6 @@ Route::middleware('user')->group(function () {
         Route::post('/kasir/store', 'store')->name('kasir.store');
     });
 
-    // NEWROUTE
     Route::controller(SupplierController::class)->group(function () {
         Route::get('/supplier', 'index')->name('supplier');
         Route::get('/supplier/create', 'create')->name('supplier.create');
