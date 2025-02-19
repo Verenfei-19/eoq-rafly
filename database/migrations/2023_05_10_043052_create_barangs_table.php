@@ -20,9 +20,7 @@ return new class extends Migration
             $table->integer('biaya_penyimpanan')->default(0);
             $table->integer('rop')->default(0);
             $table->integer('ss')->default(0);
-
             $table->timestamps();
-
             $table->index(['barang_id']);
         });
     }
