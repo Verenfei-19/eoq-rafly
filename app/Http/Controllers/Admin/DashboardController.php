@@ -79,9 +79,25 @@ class DashboardController extends Controller
                             WHERE pb.created_at BETWEEN '2024-12-01' AND '2024-12-31' -- setting tanggal
                             GROUP BY b.nama_barang, bg.stok_masuk;";
             $hasilchart = DB::select($datachart);
+            $arrayChart = [
+                'nama' => [],
+                'stok_masuk' => [],
+                'eoq' => [],
+                'rop' => [],
+                'ss' => [],
+            ];
+            foreach ($hasilchart as $key => $value) {
+                array_push($arrayChart['nama'], $value->nama_barang);
+                array_push($arrayChart['stok_masuk'], $value->stok_masuk);
+                array_push($arrayChart['eoq'], $value->eoq);
+                array_push($arrayChart['rop'], $value->rop);
+                array_push($arrayChart['ss'], $value->ss);
+            }
+            // dump($hasilchart);
+            // dump($arrayChart);
         }
 
-        return view('pages.dashboard.index', compact('dataBulan', 'hasilchart', 'listnamabarang', 'liststokbarang', 'listbarang', 'pemesananbarang', 'dataPenjualan', 'user', 'jumlah_jenis', 'total_transaksi', 'penjualan', 'jumlah_counter', 'bulan_tahun', 'total_item_terjual', 'total_supplier'));
+        return view('pages.dashboard.index', compact('dataBulan', 'arrayChart', 'hasilchart', 'listnamabarang', 'liststokbarang', 'listbarang', 'pemesananbarang', 'dataPenjualan', 'user', 'jumlah_jenis', 'total_transaksi', 'penjualan', 'jumlah_counter', 'bulan_tahun', 'total_item_terjual', 'total_supplier'));
     }
 
     public function stokPersediaan(Request $request)
