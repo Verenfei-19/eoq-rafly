@@ -16,7 +16,12 @@ class Barang extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'barang_id', 'slug', 'nama_barang', 'harga_barang', 'biaya_penyimpanan', 'rop'
+        'barang_id',
+        'slug',
+        'nama_barang',
+        'harga_barang',
+        'biaya_penyimpanan',
+        'rop'
     ];
 
     public static function generateBarangId()
