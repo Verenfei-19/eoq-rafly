@@ -20,28 +20,6 @@ class CounterController extends Controller
         return $user;
     }
 
-    public function storeBarangCounter($counter_id)
-    {
-        $barangs = DB::table('barangs')->get();
-        foreach ($barangs as $barang) {
-            DB::beginTransaction();
-            try {
-                $barang_counters = new BarangCounter;
-                $barang_counter_id = BarangCounter::generateBarangCounterId($counter_id, $barang->barang_id);
-                $barang_counters->barang_counter_id = $barang_counter_id;
-                $barang_counters->slug = Str::random(16);
-                $barang_counters->counter_id = $counter_id;
-                $barang_counters->barang_id = $barang->barang_id;
-                $barang_counters->save();
-                DB::commit();
-            } catch (\Exception $ex) {
-                //throw $th;
-                echo $ex->getMessage();
-                DB::rollBack();
-            }
-        }
-    }
-
     public function index(Request $request)
     {
         $user = $this->userAuth();
