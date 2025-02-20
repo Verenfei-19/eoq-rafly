@@ -87,53 +87,20 @@
             {
                 label: ['Stok'],
                 data: {{ Js::from($arrayChart['stok_masuk']) }},
-                // borderWidth: 1
             },
             {
                 label: ['EOQ'],
                 data: {{ Js::from($arrayChart['eoq']) }},
-                // borderWidth: 1
             },
             {
                 label: ['ROP'],
                 data: {{ Js::from($arrayChart['rop']) }},
-                // borderWidth: 1
             },
             {
                 label: ['SS'],
                 data: {{ Js::from($arrayChart['ss']) }},
-                // borderWidth: 1
             }
         ];
-        // const chartkainfilter = new Chart(kainno1, {
-        //     type: 'bar',
-        //     data: {
-        //         labels: ['Pesanan','EOQ','ROP','SS'],
-        //         datasets: [
-        //             {
-        //                 label: `Data {{ $hasilchart[0]->nama_barang }}`,
-        //                 data: [{{$hasilchart[0]->stok_masuk }}, {{$hasilchart[0]->eoq }}, {{$hasilchart[0]->rop }}, {{$hasilchart[0]->ss }}],
-        //                 backgroundColor: [
-        //                     'rgba(255, 99, 132, 0.2)',
-        //                     'rgba(255, 159, 64, 0.2)',
-        //                     'rgba(75, 192, 192, 0.2)',
-        //                     'rgba(54, 162, 235, 0.2)',
-        //                 ],
-        //                 borderColor: [
-        //                     'rgb(255, 99, 132)',
-        //                     'rgb(255, 159, 64)',
-        //                     'rgb(75, 192, 192)',
-        //                     'rgb(54, 162, 235)',
-        //                 ],
-        //                 borderWidth: 1
-        //             },
-        //         ]
-        //     },
-        //     options: {
-        //         // indexAxis: 'y',
-        //         optionsChart
-        //     }
-        // });
 
         const chartkainold = new Chart(kainno2, {
             type: 'bar',
@@ -156,13 +123,13 @@
                 },
                 success: function(response) {
                     console.log(response[0]);
-                    chartkainold.data.datasets = [datasets[0]]; // Would update the first dataset's value of 'March' to be 50
+                    chartkainold.data.datasets = [datasets[0]]; 
                     chartkainold.data.labels = ['Pesanan','EOQ','ROP','SS']
                     chartkainold.data.datasets[0].label = `Data ${response[0].nama_barang}`
-                    chartkainold.data.datasets[0].data[0] = response[0].stok_masuk; // Would update the first dataset's value of 'March' to be 50
-                    chartkainold.data.datasets[0].data[1] = response[0].eoq; // Would update the first dataset's value of 'March' to be 50
-                    chartkainold.data.datasets[0].data[2] = response[0].rop; // Would update the first dataset's value of 'March' to be 50
-                    chartkainold.data.datasets[0].data[3] = response[0].ss; // Would update the first dataset's value of 'March' to be 50
+                    chartkainold.data.datasets[0].data[0] = response[0].stok_masuk; 
+                    chartkainold.data.datasets[0].data[1] = response[0].eoq; 
+                    chartkainold.data.datasets[0].data[2] = response[0].rop; 
+                    chartkainold.data.datasets[0].data[3] = response[0].ss; 
 
                     // BG
                     chartkainold.data.datasets[0].backgroundColor = [
@@ -219,20 +186,6 @@
         </div>
 
         {{-- KAIN --}}
-        {{-- <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
-                    <select class="form-control form-select" name="pilihbarang" id="pilihbarang">
-                        @foreach ($listbarang as $item)
-                            <option value="{{ $item->barang_id }}">{{ $item->nama_barang }}</option>
-                        @endforeach
-                    </select>
-                    <div>
-                        <canvas id="kainno1" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
@@ -247,69 +200,6 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div>
-                        <canvas id="kainno3" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div>
-                        <canvas id="kainno4" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div>
-                        <canvas id="kainno5" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div>
-                        <canvas id="kainno6" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div>
-                        <canvas id="kainno7" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div>
-                        <canvas id="kainno8" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div>
-                        <canvas id="kainno9" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
 
         <div class="col-xl-12">
             <div class="row">
