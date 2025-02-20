@@ -3,17 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\BarangCounter;
 use App\Models\Admin\BarangGudang;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
-use App\Models\Admin\Penjualan;
-use App\Models\Admin\DetailPenjualan;
 use App\Models\PenjualanBarang;
 use App\Models\PenjualanBarangDetail;
-use Carbon\Carbon;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
 class KasirController extends Controller
