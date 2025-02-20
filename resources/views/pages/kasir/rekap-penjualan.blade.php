@@ -193,8 +193,6 @@
                                 <th>ID Barang</th>
                                 <th>Nama Barang</th>
                                 <th>Total Item Terjual</th>
-                                {{-- <th>Harga Item</th> --}}
-                                {{-- <th>Tanggal Pembelian</th> --}}
                                 <th>Total Penjualan</th>
                             </tr>
                         </thead>
@@ -202,10 +200,6 @@
                         </tbody>
                     </table>
                     <div class="mt-5 vstack gap-3">
-                        {{-- <div class="d-flex justify-content-between">
-                            <h3>Total Harga Item</h3>
-                            <span class="fs-3" id="total_harga_item"></span>
-                        </div> --}}
                         <div class="d-flex justify-content-between">
                             <h3>Total Harga Penjualan</h3>
                             <span class="fs-3" id="total_penjualan"></span>
