@@ -6,10 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Barang;
 use App\Models\Admin\BarangGudang;
-use App\Models\Admin\BarangCounter;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
 class BarangController extends Controller
@@ -27,7 +25,6 @@ class BarangController extends Controller
         $path = 'barang';
 
         if ($user->role == 'gudang' || $user->role == 'owner' || $user->role == 'admin') {
-            // if ($request->ajax() && empty($request->target)) {
             if ($request->ajax()) {
                 $query = "SELECT b.barang_id,b.slug,b.nama_barang,b.harga_barang,b.harga_supplier,b.biaya_penyimpanan,b.rop,b.ss,bg.stok_masuk  as qty_total
                             FROM `barang_gudangs` as bg 
@@ -40,7 +37,6 @@ class BarangController extends Controller
                 return DataTables::of($barangs)
                     ->addColumn('action', function ($object) use ($path, $user) {
                         $html = '';
-                        // if ($user->role == 'gudang') {
                         $html .= ' <a href="' . route($path . ".edit", ["slug" => $object->slug]) . '" class="btn btn-success waves-effect waves-light">'
                             . ' <i class="bx bx-edit align-middle me-2 font-size-18"></i></a>';
                         $html .= ' <a href="' . route($path . ".destroy", ["slug" => $object->slug]) . '" class="btn btn-danger waves-effect waves-light">'
@@ -52,10 +48,8 @@ class BarangController extends Controller
             }
         } elseif ($user->role == 'counter') {
             if ($request->ajax()) {
-
                 // GET DATA BARANG GUDANG BY LOGIN COUNTER/TOKO
                 $query = "SELECT a.barang_id as barang_id, b.slug,a.nama_barang, a.harga_barang, b.stok_masuk as quantity
-                -- (SELECT (SUM(stok_masuk) - SUM(stok_keluar)) FROM barang_gudangs WHERE barang_id = b.barang_id GROUP BY barang_id) as quantity
                 FROM barangs as a
                 JOIN barang_gudangs as b on a.barang_id = b.barang_id
                 GROUP BY b.barang_gudang_id, b.slug, a.nama_barang, a.harga_barang
@@ -66,13 +60,6 @@ class BarangController extends Controller
         }
 
         return view('pages.barang.index', compact('user'));
-    }
-
-    public function create()
-    {
-        $user = $this->userAuth();
-        $barang_id = Barang::generateBarangId();
-        return view('pages.barang.create', compact('barang_id', 'user'));
     }
 
     public function validatorHelper($request, $slug = null)
@@ -112,52 +99,6 @@ class BarangController extends Controller
                 ];
                 return $msg;
             }
-        }
-    }
-
-    public function store(Request $request)
-    {
-        $validator = $this->validatorHelper($request->all());
-        $user = $this->userAuth();
-        if (!empty($validator)) {
-            return redirect()->back()->with(['msg' => $validator->message]);
-        }
-
-        $counters = DB::table('counters')->get();
-        DB::beginTransaction();
-        try {
-            $barang_id = Barang::generateBarangId();
-            $barangs = new Barang;
-            $barangs->barang_id = $barang_id;
-            $barangs->slug = Str::random(16);
-            $barangs->nama_barang = $request->nama_barang;
-            $barangs->harga_barang = $request->harga_barang;
-            $barangs->save();
-
-            $barang_gudang_id = BarangGudang::generateBarangGudangId($barang_id);
-            $barang_gudangs = new BarangGudang;
-            $barang_gudangs->barang_gudang_id = $barang_gudang_id;
-            $barang_gudangs->slug = Str::random(16);
-            $barang_gudangs->gudang_id = 'G00001';
-            $barang_gudangs->barang_id = $barang_id;
-            $barang_gudangs->save();
-
-            foreach ($counters as $counter) {
-                $barang_counter_id = BarangCounter::generateBarangCounterId($counter->counter_id, $barang_id);
-                $barang_counters = new BarangCounter;
-                $barang_counters->barang_counter_id = $barang_counter_id;
-                $barang_counters->slug = Str::random(16);
-                $barang_counters->counter_id = $counter->counter_id;
-                $barang_counters->barang_id = $barang_id;
-                $barang_counters->save();
-            }
-
-            DB::commit();
-            return redirect()->route('barang')->with('msg', 'Data barang baru berhasil ditambahkan');
-        } catch (\Exception $ex) {
-            //throw $th;
-            echo $ex->getMessage();
-            DB::rollBack();
         }
     }
 
@@ -225,7 +166,6 @@ class BarangController extends Controller
     public function detailQuantity(Request $request)
     {
         $slug = $request->slug;
-        // $slug = "R4NY4vMU1nXKkgAe";
         $gudang = DB::table('users')
             ->where('role', 'gudang')
             ->first();
@@ -243,8 +183,6 @@ class BarangController extends Controller
         LEFT JOIN counters as c on bc.counter_id = c.counter_id
         LEFT JOIN users as u on g.user_id = u.user_id OR c.user_id = u.user_id WHERE b.slug = "' . $slug . '"';
         $details = DB::select($query);
-
-        // dd($details);
         return DataTables::of($details)->make(true);
     }
 
@@ -262,7 +200,6 @@ class BarangController extends Controller
         ];
 
         $result = (object) $result;
-
         return response()->json($result, 200);
     }
 }
