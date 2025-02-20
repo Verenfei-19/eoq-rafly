@@ -29,9 +29,6 @@
         $('#datatable').DataTable({
             ajax: "{{ route('counter') }}",
             columns: [
-                // {
-                //     data: "counter_id"
-                // },
                 {
                     data: "name"
                 },
@@ -90,7 +87,6 @@
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
                             <tr>
-                                {{-- <th>ID Toko</th> --}}
                                 <th>Nama Toko</th>
                                 <th>Alamat Toko</th>
                                 <th>Username</th>
