@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Barang;
-use App\Models\PenjualanBarang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +20,6 @@ class RekapPenjualanController extends Controller
     {
         $user = $this->userAuth();
         if ($request->ajax()) {
-
 
             if ($request->filled('start_date') && $request->filled('end_date')) {
                 $startdate = $request->start_date;
@@ -46,13 +43,10 @@ class RekapPenjualanController extends Controller
                 ";
                 $data = DB::select($query);
             }
-            // SELECT nama_barang, SUM(quantity) as item_terjual, harga_barang, tgl_pembelian, SUM(quantity*harga_barang) as total_penjualan FROM `penjualan_barangs` WHERE MONTH(tgl_pembelian) = 8 AND YEAR(tgl_pembelian) = 2024 GROUP BY nama_barang,harga_barang,tgl_pembelian;
             $total_harga_item = 0;
             $total_harga_penjualan = 0;
             foreach ($data as $key => $value) {
-                // $total_harga_item += $value['harga_barang'];
                 $total_harga_item += $value->total_harga;
-                // $total_harga_penjualan += $value['harga_barang'] * $value['quantity'];
                 $total_harga_penjualan += $value->total_harga * $value->total_quantity;
             }
 
