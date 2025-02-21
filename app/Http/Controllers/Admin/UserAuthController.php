@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Admin\UserAuth;
 use Illuminate\Support\Facades\Auth;
 
 class UserAuthController extends Controller
@@ -28,14 +27,11 @@ class UserAuthController extends Controller
     public function login(Request $request)
     {
         $validator = $this->validatorHelper($request->all());
-
         if (!empty($validator)) {
             return redirect()->back()->with(['msg' => $validator->message]);
         }
-
         if (Auth::guard('user')->attempt(['username' => $request->username, 'password' => $request->password])) {
             if (Auth::guard('user')->user()->role == 'counter') {
-                // return redirect()->route('barang');
                 return redirect()->intended('/');
             } else {
                 return redirect()->intended('/');
@@ -48,9 +44,7 @@ class UserAuthController extends Controller
     public function logout(Request $request)
     {
         Auth::guard('user')->logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
         return redirect(route('auth'));
     }
