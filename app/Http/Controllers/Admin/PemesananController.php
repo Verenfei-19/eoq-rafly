@@ -87,7 +87,6 @@ class PemesananController extends Controller
                         sp.id AS supplier_id, 
                         sp.nama, 
                         sp.waktu, 
-                        -- b.stok_masuk AS qty_total,
                         IFNULL(SUM(pbd.quantity), 0) AS qty_total
                     FROM 
                         barangs AS a
@@ -210,9 +209,7 @@ class PemesananController extends Controller
                 'eoq' => $rumusEOQ,
                 'id_supplier' => $supplierAll->id,
                 'waktu_proses' => $supplierAll->waktu,
-                'jumlah' => 0,
-                // 'penjualan_tertinggi' => $totalMaxBarangTerjualSebulan,
-                // 'total_terjual' => $totalBarangTerjualSebulan
+                'jumlah' => 0
             ];
             array_push($data_eoq, $hasil_eoq);
         }
@@ -233,10 +230,7 @@ class PemesananController extends Controller
         DB::beginTransaction();
         $invoice_id = 'PMP-' . date('YmdHis');
         try {
-
             // QUERY MENCARI TOTAL ITEM PENJUALAN TERTINGGI PERIODE TERTENTU
-            // SELECT MAX(quantity) FROM `penjualan_barang_details` WHERE id_barang = 'B00001' AND tgl_pembelian BETWEEN '2024-10-01' AND '2024-10-31';
-
             foreach ($details as $detail) {
                 $totalBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)->whereBetween('tgl_pembelian', [$startDate, $currentDate])->sum('quantity');
                 $totalMaxBarangTerjualSebulan = PenjualanBarangDetail::where('id_barang', $detail->id_barang)->whereBetween('tgl_pembelian', [$startDate, $currentDate])->max('quantity');
@@ -245,11 +239,6 @@ class PemesananController extends Controller
 
                 $hasil_ss = round(($totalMaxBarangTerjualSebulan - $d) * $detail->waktu_proses);
                 $hasil_rop = ($d * $detail->waktu_proses) + $hasil_ss;
-
-                // Barang::where('barang_id',  $detail->id_barang)->update([
-                //     'ss' => $hasil_ss,
-                //     'rop' => $hasil_rop,
-                // ]);
 
                 PemesananBarang::create([
                     'invoice' => $invoice_id,
@@ -298,24 +287,6 @@ class PemesananController extends Controller
         ]);
         return redirect()->route('pemesanan');
         DB::beginTransaction();
-
         return response()->json([], 200);
-    }
-
-    public function dipesan($slug)
-    {
-        DB::beginTransaction();
-        try {
-            $pemesanan = Pemesanan::where('slug', $slug)->first();
-            $pemesanan->status_pemesanan = 'Dipesan';
-            $pemesanan->save();
-            DB::commit();
-        } catch (\Exception $ex) {
-            //throw $th;
-            echo $ex->getMessage();
-            DB::rollBack();
-        }
-
-        return redirect()->route('pemesanan')->with("msg", "Berhasil merubah status pemesanan");
     }
 }
