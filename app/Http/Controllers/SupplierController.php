@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin\Barang;
-use App\Models\Admin\Counter;
-use App\Models\Admin\UserAuth;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Str;
 
 class SupplierController extends Controller
 {
