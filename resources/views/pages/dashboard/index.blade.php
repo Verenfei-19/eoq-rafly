@@ -85,7 +85,7 @@
         }
         let datasets = [
             {
-                label: ['Stok'],
+                label: ['Pesanan'],
                 data: {{ Js::from($arrayChart['stok_masuk']) }},
             },
             {
