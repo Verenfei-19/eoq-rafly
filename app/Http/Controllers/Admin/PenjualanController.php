@@ -4,13 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PenjualanBarang;
-use App\Models\PenjualanBarangDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Carbon;
 
 class PenjualanController extends Controller
 {
@@ -89,7 +86,6 @@ class PenjualanController extends Controller
             }
 
             return DataTables::of($data)
-
                 ->addColumn('action', function ($object) {
                     $html = '<a data-bs-toggle="modal" data-bs-target="#lihatdetail" class="btn btn-primary waves-effect waves-light btn-detail">
                     <i class="bx bx-detail align-middle font-size-18"></i> Detail Invoice</a>';
