@@ -4,15 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Barang;
-use App\Models\Admin\DetailPersediaanMasuk;
-use App\Models\Admin\Pemesanan;
 use Illuminate\Http\Request;
-use App\Models\Admin\PersediaanMasuk;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
-use Illuminate\Support\Str;
 use App\Models\Admin\BarangGudang;
 use App\Models\PemesananBarang;
 
@@ -47,7 +42,6 @@ class PersediaanMasukController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-
         return view('pages.persediaan-masuk.index', compact('user'));
     }
 
@@ -60,24 +54,20 @@ class PersediaanMasukController extends Controller
             ->join('barangs as b', 'b.barang_id', '=', 'pb.id_barang')
             ->join('suppliers as sp', 'sp.id', '=', 'pb.id_supplier')
             ->selectRaw('pb.id,pb.invoice,sp.nama,b.nama_barang,pb.tgl_datang,pb.status_pemesanan, bg.stok_masuk,pb.eoq,pb.rop,pb.ss,pb.jumlah_pemesanan,pb.created_at')->get();
-
         return view('pages.persediaan-masuk.detail', compact('user', 'pemesanan'));
     }
 
     public function store(Request $request)
     {
         $pemesanan_id = $request->pemesanan_id;
-
         $data_pemesanan = PemesananBarang::where('invoice', $pemesanan_id)->get();
 
         foreach ($data_pemesanan as $key => $value) {
             $barang_gudang = BarangGudang::where('barang_id', $value['id_barang'])->first('stok_masuk');
-
             Barang::where('barang_id',  $value['id_barang'])->update([
                 'ss' => $value['ss'],
                 'rop' => $value['rop'],
             ]);
-
             BarangGudang::where('barang_id', $value['id_barang'])->update([
                 'stok_masuk' => $barang_gudang['stok_masuk'] + $value['jumlah_pemesanan']
             ]);
