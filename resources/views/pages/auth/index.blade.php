@@ -102,8 +102,8 @@
                             <p>©
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script> Jufer. Crafted with <i class="mdi mdi-heart text-danger"></i>
-                                by CV.PRASETYA
+                                </script> Rafly Ardiansyah. Crafted with <i class="mdi mdi-heart text-danger"></i>
+                                by STAR PURNAMA ID
                             </p>
                         </div>
                     </div>
