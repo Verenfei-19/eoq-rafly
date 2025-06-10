@@ -35,7 +35,7 @@
             <tr>
                 <td style="padding-right: 4rem;">
                     <center>
-                        <font size="6"><b>CV. PRASETYA</b></font><br>
+                        <font size="6"><b>STAR PURNAMA ID</b></font><br>
                         <font size="3">Jl. Kyai Tambak Deres No.229, Bulak, Kec. Bulak, Surabaya, Jawa Timur 60124
                         </font>
                     </center>
