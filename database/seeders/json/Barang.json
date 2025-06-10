@@ -1,38 +1,994 @@
 [
     {
-        "nama_barang": "Oxford putih",
-        "harga_barang": "3750"
+        "nama_barang": "HEM PUTIH PENDEK [2]",
+        "harga_barang": "32000"
     },
     {
-        "nama_barang": "Oxford coklat",
-        "harga_barang": "4000"
+        "nama_barang": "HEM PUTIH PENDEK [3]",
+        "harga_barang": "34000"
     },
     {
-        "nama_barang": "Allino kopi susu",
-        "harga_barang": "3000"
+        "nama_barang": "HEM PUTIH PENDEK [4]",
+        "harga_barang": "36000"
     },
     {
-        "nama_barang": "Cemani merah",
-        "harga_barang": "2700"
+        "nama_barang": "HEM PUTIH PENDEK [5]",
+        "harga_barang": "38000"
     },
     {
-        "nama_barang": "Cemani coklat",
-        "harga_barang": "2500"
+        "nama_barang": "HEM PUTIH PENDEK [6]",
+        "harga_barang": "40000"
     },
     {
-        "nama_barang": "Cemani dongker",
-        "harga_barang": "1000"
+        "nama_barang": "HEM PUTIH PENDEK [7]",
+        "harga_barang": "42000"
     },
     {
-        "nama_barang": "Cemani abu",
-        "harga_barang": "6000"
+        "nama_barang": "HEM PUTIH PENDEK [8]",
+        "harga_barang": "44000"
     },
     {
-        "nama_barang": "Cemani putih",
-        "harga_barang": "5500"
+        "nama_barang": "HEM PUTIH PENDEK [9]",
+        "harga_barang": "46000"
     },
     {
-        "nama_barang": "Cemani hijau",
-        "harga_barang": "5500"
+        "nama_barang": "HEM PUTIH PENDEK [10]",
+        "harga_barang": "48000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PENDEK [11]",
+        "harga_barang": "50000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PENDEK [12]",
+        "harga_barang": "52000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PENDEK [13]",
+        "harga_barang": "58000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PENDEK BED BORDIR [2]",
+        "harga_barang": "33500"
+    },
+    {
+        "nama_barang": "HEM PUTIH PENDEK BED BORDIR [3]",
+        "harga_barang": "35500"
+    },
+    {
+        "nama_barang": "HEM PUTIH PENDEK BED BORDIR [4]",
+        "harga_barang": "37500"
+    },
+    {
+        "nama_barang": "HEM PUTIH PENDEK BED BORDIR [5]",
+        "harga_barang": "39500"
+    },
+    {
+        "nama_barang": "HEM PUTIH PENDEK BED BORDIR [6]",
+        "harga_barang": "41500"
+    },
+    {
+        "nama_barang": "HEM PUTIH PENDEK BED BORDIR [7]",
+        "harga_barang": "44000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PENDEK BED BORDIR [8]",
+        "harga_barang": "46000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PENDEK BED BORDIR [9]",
+        "harga_barang": "48000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PENDEK BED BORDIR [10]",
+        "harga_barang": "50000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PENDEK BED BORDIR [11]",
+        "harga_barang": "52000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PENDEK BED BORDIR [12]",
+        "harga_barang": "54000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PENDEK BED BORDIR [13]",
+        "harga_barang": "60000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PANJANG [2]",
+        "harga_barang": "35000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PANJANG [3]",
+        "harga_barang": "37000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PANJANG [4]",
+        "harga_barang": "39000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PANJANG [5]",
+        "harga_barang": "41000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PANJANG [6]",
+        "harga_barang": "44000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PANJANG [7]",
+        "harga_barang": "46000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PANJANG [8]",
+        "harga_barang": "48000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PANJANG [9]",
+        "harga_barang": "52000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PANJANG [10]",
+        "harga_barang": "54000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PANJANG [11]",
+        "harga_barang": "56000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PANJANG [12]",
+        "harga_barang": "58000"
+    },
+    {
+        "nama_barang": "HEM PUTIH PANJANG [13]",
+        "harga_barang": "64000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PENDEK [2]",
+        "harga_barang": "35000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PENDEK [3]",
+        "harga_barang": "37000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PENDEK [4]",
+        "harga_barang": "39000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PENDEK [5]",
+        "harga_barang": "41000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PENDEK [6]",
+        "harga_barang": "44000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PENDEK [7]",
+        "harga_barang": "46000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PENDEK [8]",
+        "harga_barang": "48000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PENDEK [9]",
+        "harga_barang": "52000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PENDEK [10]",
+        "harga_barang": "54000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PENDEK [11]",
+        "harga_barang": "56000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PENDEK [12]",
+        "harga_barang": "58000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PENDEK [13]",
+        "harga_barang": "64000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG [2]",
+        "harga_barang": "43000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG [3]",
+        "harga_barang": "45000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG [4]",
+        "harga_barang": "47000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG [5]",
+        "harga_barang": "49000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG [6]",
+        "harga_barang": "51000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG [7]",
+        "harga_barang": "54000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG [8]",
+        "harga_barang": "56000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG [9]",
+        "harga_barang": "59000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG [10]",
+        "harga_barang": "61000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG [11]",
+        "harga_barang": "64000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG [12]",
+        "harga_barang": "66000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG [13]",
+        "harga_barang": "72000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG SAKU I [2]",
+        "harga_barang": "38000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG SAKU I [3]",
+        "harga_barang": "40000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG SAKU I [4]",
+        "harga_barang": "42000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG SAKU I [5]",
+        "harga_barang": "46000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG SAKU I [6]",
+        "harga_barang": "48000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG SAKU I [7]",
+        "harga_barang": "50000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG SAKU I [8]",
+        "harga_barang": "52000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG SAKU I [9]",
+        "harga_barang": "56000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG SAKU I [10]",
+        "harga_barang": "58000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG SAKU I [11]",
+        "harga_barang": "60000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG SAKU I [12]",
+        "harga_barang": "62000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA PANJANG SAKU I [13]",
+        "harga_barang": "68000"
+    },
+    {
+        "nama_barang": "HEM GESPER PENDEK PRAMUKA [6]",
+        "harga_barang": "51500"
+    },
+    {
+        "nama_barang": "HEM GESPER PENDEK PRAMUKA [7]",
+        "harga_barang": "53500"
+    },
+    {
+        "nama_barang": "HEM GESPER PENDEK PRAMUKA [8]",
+        "harga_barang": "55500"
+    },
+    {
+        "nama_barang": "HEM GESPER PENDEK PRAMUKA [9]",
+        "harga_barang": "57500"
+    },
+    {
+        "nama_barang": "HEM GESPER PENDEK PRAMUKA [10]",
+        "harga_barang": "59500"
+    },
+    {
+        "nama_barang": "HEM GESPER PENDEK PRAMUKA [11]",
+        "harga_barang": "61500"
+    },
+    {
+        "nama_barang": "HEM GESPER PENDEK PRAMUKA [12]",
+        "harga_barang": "63500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PRAMUKA [2]",
+        "harga_barang": "47500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PRAMUKA [3]",
+        "harga_barang": "49500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PRAMUKA [4]",
+        "harga_barang": "51500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PRAMUKA [5]",
+        "harga_barang": "53500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PRAMUKA [6]",
+        "harga_barang": "55500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PRAMUKA [7]",
+        "harga_barang": "57500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PRAMUKA [8]",
+        "harga_barang": "59500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PRAMUKA [9]",
+        "harga_barang": "62500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PRAMUKA [10]",
+        "harga_barang": "64500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PRAMUKA [11]",
+        "harga_barang": "67500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PRAMUKA [12]",
+        "harga_barang": "69500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PUTIH [2]",
+        "harga_barang": "43500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PUTIH [3]",
+        "harga_barang": "45500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PUTIH [4]",
+        "harga_barang": "47500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PUTIH [5]",
+        "harga_barang": "495000"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PUTIH [6]",
+        "harga_barang": "51500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PUTIH [7]",
+        "harga_barang": "53500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PUTIH [8]",
+        "harga_barang": "55500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PUTIH [9]",
+        "harga_barang": "57500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PUTIH [10]",
+        "harga_barang": "60500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PUTIH [11]",
+        "harga_barang": "62500"
+    },
+    {
+        "nama_barang": "HEM GESPER PANJANG PUTIH [12]",
+        "harga_barang": "64500"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PENDEK [2]",
+        "harga_barang": "40000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PENDEK [3]",
+        "harga_barang": "42000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PENDEK [4]",
+        "harga_barang": "44000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PENDEK [5]",
+        "harga_barang": "46000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PENDEK [6]",
+        "harga_barang": "48000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PENDEK [7]",
+        "harga_barang": "50000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PENDEK [8]",
+        "harga_barang": "52000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PENDEK [9]",
+        "harga_barang": "56000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PENDEK [10]",
+        "harga_barang": "59000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PENDEK [11]",
+        "harga_barang": "61000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PENDEK [12]",
+        "harga_barang": "63000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PANJANG [2]",
+        "harga_barang": "47000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PANJANG [3]",
+        "harga_barang": "49000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PANJANG [4]",
+        "harga_barang": "51000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PANJANG [5]",
+        "harga_barang": "53000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PANJANG [6]",
+        "harga_barang": "55000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PANJANG [7]",
+        "harga_barang": "58000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PANJANG [8]",
+        "harga_barang": "60000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PANJANG [9]",
+        "harga_barang": "63000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PANJANG [10]",
+        "harga_barang": "65000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PANJANG [11]",
+        "harga_barang": "68000"
+    },
+    {
+        "nama_barang": "HEM PRAMUKA SIAGA PANJANG [12]",
+        "harga_barang": "70000"
+    },
+    {
+        "nama_barang": "SPAN PANJANG MAXI [6]",
+        "harga_barang": "64000"
+    },
+    {
+        "nama_barang": "SPAN PANJANG MAXI [7]",
+        "harga_barang": "65000"
+    },
+    {
+        "nama_barang": "SPAN PANJANG MAXI [8]",
+        "harga_barang": "67000"
+    },
+    {
+        "nama_barang": "SPAN PANJANG MAXI [9]",
+        "harga_barang": "69000"
+    },
+    {
+        "nama_barang": "SPAN PANJANG MAXI [10]",
+        "harga_barang": "70000"
+    },
+    {
+        "nama_barang": "SPAN PANJANG MAXI [11]",
+        "harga_barang": "72000"
+    },
+    {
+        "nama_barang": "SPAN PANJANG MAXI [12]",
+        "harga_barang": "74000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET SD [2]",
+        "harga_barang": "54000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET SD [3]",
+        "harga_barang": "56000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET SD [4]",
+        "harga_barang": "58000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET SD [5]",
+        "harga_barang": "60000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET SD [6]",
+        "harga_barang": "62000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET SD [7]",
+        "harga_barang": "64000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET SD [8]",
+        "harga_barang": "66000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET SD [9]",
+        "harga_barang": "68000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET SD [10]",
+        "harga_barang": "70000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [2]",
+        "harga_barang": "69500"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [3]",
+        "harga_barang": "71500"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [4]",
+        "harga_barang": "73500"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [5]",
+        "harga_barang": "75500"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [6]",
+        "harga_barang": "77500"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [7]",
+        "harga_barang": "79500"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [8]",
+        "harga_barang": "81500"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [9]",
+        "harga_barang": "83500"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [10]",
+        "harga_barang": "85500"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET [26]",
+        "harga_barang": "69000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET [27]",
+        "harga_barang": "71000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET [28]",
+        "harga_barang": "73000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET [29]",
+        "harga_barang": "75000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET [30]",
+        "harga_barang": "77000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET [31]",
+        "harga_barang": "79000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET [32]",
+        "harga_barang": "81000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET [33]",
+        "harga_barang": "83000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET [34]",
+        "harga_barang": "85000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET [35]",
+        "harga_barang": "87000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET [36]",
+        "harga_barang": "89000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [26]",
+        "harga_barang": "83000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [27]",
+        "harga_barang": "85000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [28]",
+        "harga_barang": "87000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [29]",
+        "harga_barang": "89000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [30]",
+        "harga_barang": "91000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [31]",
+        "harga_barang": "93000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [32]",
+        "harga_barang": "95000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [33]",
+        "harga_barang": "97000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [34]",
+        "harga_barang": "99000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [35]",
+        "harga_barang": "101000"
+    },
+    {
+        "nama_barang": "CELANA PANJANG KARET KEMPOL [36]",
+        "harga_barang": "103000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KARET [2]",
+        "harga_barang": "45000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KARET [3]",
+        "harga_barang": "46000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KARET [4]",
+        "harga_barang": "47000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KARET [5]",
+        "harga_barang": "48000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KARET [6]",
+        "harga_barang": "50000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KARET [7]",
+        "harga_barang": "52000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KARET [8]",
+        "harga_barang": "54000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KARET [9]",
+        "harga_barang": "56000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KARET [10]",
+        "harga_barang": "59000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KARET [11]",
+        "harga_barang": "61000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KARET [12]",
+        "harga_barang": "64000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KEMPOL [2]",
+        "harga_barang": "59000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KEMPOL [3]",
+        "harga_barang": "60000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KEMPOL [4]",
+        "harga_barang": "61000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KEMPOL [5]",
+        "harga_barang": "62000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KEMPOL [6]",
+        "harga_barang": "64000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KEMPOL [7]",
+        "harga_barang": "66000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KEMPOL [8]",
+        "harga_barang": "68000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KEMPOL [9]",
+        "harga_barang": "70000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KEMPOL [10]",
+        "harga_barang": "72000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KEMPOL [11]",
+        "harga_barang": "74000"
+    },
+    {
+        "nama_barang": "CELANA 3/4 KEMPOL [12]",
+        "harga_barang": "76000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PENDEK [3]",
+        "harga_barang": "41000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PENDEK [4]",
+        "harga_barang": "43000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PENDEK [5]",
+        "harga_barang": "45000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PENDEK [6]",
+        "harga_barang": "47000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PENDEK [7]",
+        "harga_barang": "53000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PENDEK [8]",
+        "harga_barang": "55000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PENDEK [9]",
+        "harga_barang": "57000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PENDEK [10]",
+        "harga_barang": "60000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PANJANG [12]",
+        "harga_barang": "49000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PANJANG [13]",
+        "harga_barang": "51000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PANJANG [14]",
+        "harga_barang": "54000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PANJANG [15]",
+        "harga_barang": "60000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PANJANG [16]",
+        "harga_barang": "64000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PANJANG [17]",
+        "harga_barang": "70000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PANJANG [18]",
+        "harga_barang": "75000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PANJANG [19]",
+        "harga_barang": "77000"
+    },
+    {
+        "nama_barang": "ROK PLISIR PANJANG [20]",
+        "harga_barang": "79000"
+    },
+    {
+        "nama_barang": "ROK TURUN PINGGANG [2]",
+        "harga_barang": "51000"
+    },
+    {
+        "nama_barang": "ROK TURUN PINGGANG [3]",
+        "harga_barang": "53000"
+    },
+    {
+        "nama_barang": "ROK TURUN PINGGANG [4]",
+        "harga_barang": "55000"
+    },
+    {
+        "nama_barang": "ROK TURUN PINGGANG [5]",
+        "harga_barang": "57000"
+    },
+    {
+        "nama_barang": "ROK TURUN PINGGANG [6]",
+        "harga_barang": "63000"
+    },
+    {
+        "nama_barang": "ROK TURUN PINGGANG [7]",
+        "harga_barang": "65000"
+    },
+    {
+        "nama_barang": "ROK TURUN PINGGANG [8]",
+        "harga_barang": "69000"
+    },
+    {
+        "nama_barang": "ROK TURUN PINGGANG [9]",
+        "harga_barang": "71000"
+    },
+    {
+        "nama_barang": "ROK TURUN PINGGANG [10]",
+        "harga_barang": "74000"
+    },
+    {
+        "nama_barang": "ROK TURUN PINGGANG [11]",
+        "harga_barang": "85000"
+    },
+    {
+        "nama_barang": "ROK TURUN PINGGANG [12]",
+        "harga_barang": "88000"
+    },
+    {
+        "nama_barang": "ROK KULOT [3]",
+        "harga_barang": "61000"
+    },
+    {
+        "nama_barang": "ROK KULOT [4]",
+        "harga_barang": "62000"
+    },
+    {
+        "nama_barang": "ROK KULOT [5]",
+        "harga_barang": "63000"
+    },
+    {
+        "nama_barang": "ROK KULOT [6]",
+        "harga_barang": "64000"
+    },
+    {
+        "nama_barang": "ROK KULOT [7]",
+        "harga_barang": "65000"
+    },
+    {
+        "nama_barang": "ROK KULOT [8]",
+        "harga_barang": "66000"
+    },
+    {
+        "nama_barang": "ROK KULOT [9]",
+        "harga_barang": "67000"
+    },
+    {
+        "nama_barang": "ROK KULOT [10]",
+        "harga_barang": "68000"
+    },
+    {
+        "nama_barang": "ROK KULOT [11]",
+        "harga_barang": "69000"
+    },
+    {
+        "nama_barang": "ROK KULOT [12]",
+        "harga_barang": "71000"
+    },
+    {
+        "nama_barang": "SPAN TUTUP PANJANG [6]",
+        "harga_barang": "70000"
+    },
+    {
+        "nama_barang": "SPAN TUTUP PANJANG [7]",
+        "harga_barang": "72000"
+    },
+    {
+        "nama_barang": "SPAN TUTUP PANJANG [8]",
+        "harga_barang": "74000"
+    },
+    {
+        "nama_barang": "SPAN TUTUP PANJANG [9]",
+        "harga_barang": "76000"
+    },
+    {
+        "nama_barang": "SPAN TUTUP PANJANG [10]",
+        "harga_barang": "78000"
+    },
+    {
+        "nama_barang": "SPAN TUTUP PANJANG [11]",
+        "harga_barang": "80000"
+    },
+    {
+        "nama_barang": "SPAN TUTUP PANJANG [12]",
+        "harga_barang": "82000"
+    },
+    {
+        "nama_barang": "HEM PUTIH MUSLIM [2]",
+        "harga_barang": "43000"
+    },
+    {
+        "nama_barang": "HEM PUTIH MUSLIM [3]",
+        "harga_barang": "45000"
+    },
+    {
+        "nama_barang": "HEM PUTIH MUSLIM [4]",
+        "harga_barang": "47000"
+    },
+    {
+        "nama_barang": "HEM PUTIH MUSLIM [5]",
+        "harga_barang": "49000"
+    },
+    {
+        "nama_barang": "HEM PUTIH MUSLIM [6]",
+        "harga_barang": "51000"
+    },
+    {
+        "nama_barang": "HEM PUTIH MUSLIM [7]",
+        "harga_barang": "53000"
+    },
+    {
+        "nama_barang": "HEM PUTIH MUSLIM [8]",
+        "harga_barang": "55000"
+    },
+    {
+        "nama_barang": "HEM PUTIH MUSLIM [9]",
+        "harga_barang": "59000"
+    },
+    {
+        "nama_barang": "HEM PUTIH MUSLIM [10]",
+        "harga_barang": "61000"
+    },
+    {
+        "nama_barang": "HEM PUTIH MUSLIM [11]",
+        "harga_barang": "63000"
+    },
+    {
+        "nama_barang": "HEM PUTIH MUSLIM [12]",
+        "harga_barang": "65000"
     }
 ]
