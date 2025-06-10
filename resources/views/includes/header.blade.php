@@ -5,7 +5,7 @@
             <div class="navbar-brand-box">
 
                 <a href="index.html" class="logo logo-light text-white">
-                    CV. PRASETYA
+                    STAR PURNAMA ID
                 </a>
             </div>
 

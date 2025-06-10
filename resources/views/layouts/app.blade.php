@@ -3,7 +3,7 @@
 
 <head>
     @include('includes.meta')
-    <title>CV. PRASETYA - @yield('title')</title>
+    <title>STAR PURNAMA ID - @yield('title')</title>
 
     @stack('before-app-style')
     @include('includes.style')
