@@ -137,7 +137,7 @@ class CounterController extends Controller
             $counters->save();
             DB::commit();
 
-            $this->storeBarangCounter($request->counter_id);
+            // $this->storeBarangCounter($request->counter_id);
 
             return redirect()->route('counter')->with('msg', 'Data counter baru berhasil ditambahkan');
         } catch (\Exception $ex) {
