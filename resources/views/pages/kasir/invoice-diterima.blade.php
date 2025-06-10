@@ -45,8 +45,8 @@ function penyebut($nilai) {
     <title>invoice-{{ $data[0]['invoice_number'] }}</title>
 </head>
 <body>
-    <h1 style="text-align: center">CV. PRASETYA</h1>
-    <h3 style="text-align: center">Jalan Slompretan No 57, Bongkaaran, Surabaya</h3>
+    <h1 style="text-align: center">STAR PURNAMA ID</h1>
+    <h3 style="text-align: center">Jln. Bulak Banteng Kidul No 23</h3>
     <hr>
     <h2 style="text-align: center; text-transform: uppercase">Invoice Tagihan</h2>
     <br>

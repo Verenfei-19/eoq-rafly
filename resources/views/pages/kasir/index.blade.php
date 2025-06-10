@@ -30,7 +30,7 @@
             lengthMenu: [10, 20, 50, 100],
             // lengthMenu: false,
             ordering: false,
-            searching: false,
+            // searching: false,
             ajax: "{{ route('kasir') }}",
             "columnDefs": [{
                     className: "nama-barang",
